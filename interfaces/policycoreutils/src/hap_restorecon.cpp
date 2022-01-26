@@ -255,7 +255,7 @@ int HapContext::RestoreconSb(const std::string &pathname, const struct stat *sb,
     if (lgetfilecon(pathname.c_str(), &oldSecontext) < 0) {
         freecon(secontext);
         freecon(oldSecontext);
-        return -SELINUX_CONTEXTS_NOT_FOUND;
+        return -SELINUX_GET_CONTEXTS_ERROR;
     }
 
     int res = HapLabelLookup(apl, packageName, &secontext);
@@ -269,7 +269,7 @@ int HapContext::RestoreconSb(const std::string &pathname, const struct stat *sb,
         if (lsetfilecon(pathname.c_str(), secontext) < 0) {
             freecon(secontext);
             freecon(oldSecontext);
-            return -SELINUX_CONTEXTS_NOT_FOUND;
+            return -SELINUX_SET_CONTEXTS_ERROR;
         }
     }
 
