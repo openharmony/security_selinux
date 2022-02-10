@@ -13,28 +13,15 @@
  * limitations under the License.
  */
 
-#ifndef SELINUX_ERROE_H
-#define SELINUX_ERROE_H
+#ifndef PARAPERM_CHECKER_H
+#define PARAPERM_CHECKER_H
 
-namespace Selinux {
-enum Errno {
-    SELINUX_SUCC,
-    SELINUX_ARG_INVALID,
-    SELINUX_TYPE_SET_ERR,
-    SELINUX_TYPE_INVALID,
-    SELINUX_KEY_NOT_FOUND,
-    SELINUX_GET_CONTEXTS_ERROR,
-    SELINUX_SET_CONTEXTS_ERROR,
-    SELINUX_CONTEXTS_LOAD_ERR,
-    SELINUX_PTR_NULL,
-    SELINUX_PATH_INVAILD,
-    SELINUX_FILE_INVAILD,
-    SELINUX_FILE_ERR,
-    SELINUX_FTS_ELOOP,
-    SELINUX_SETCON_ERR,
-    SELINUX_GETCON_ERR,
-    SELINUX_PERMISSION_DENY,
-};
-} // namespace Selinux
+#include <iostream>
+#include "selinux_parameter.h"
 
-#endif // SELINUX_ERROE_H
+typedef struct ParameterInfo {
+    std::string paraName;
+    std::string paraContext;
+} ParameterInfo;
+
+#endif // PARAPERM_CHECKER_H

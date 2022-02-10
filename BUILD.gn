@@ -135,6 +135,52 @@ ohos_shared_library("libhap_restorecon") {
   subsystem_name = "security"
 }
 
+ohos_static_library("libselinux_klog") {
+  output_name = "libselinux_klog"
+  sources =
+      [ "$SELINUX_ROOT_DIR/interfaces/policycoreutils/src/selinux_klog.c" ]
+  include_dirs = [ "$SELINUX_ROOT_DIR/interfaces/policycoreutils/include" ]
+
+  deps = [ "//third_party/bounds_checking_function:libsec_static" ]
+
+  cflags = [
+    "-D_GNU_SOURCE",
+    "-w",
+  ]
+
+  part_name = "selinux"
+  subsystem_name = "security"
+}
+
+ohos_static_library("libparaperm_checker_static") {
+  output_name = "libparaperm_checker_static"
+  sources = [
+    "$SELINUX_ROOT_DIR/interfaces/policycoreutils/src/paraperm_checker.cpp",
+  ]
+  include_dirs = [
+    "$SELINUX_ROOT_DIR/interfaces/policycoreutils/include",
+    "$LIBSELINUX_ROOT_DIR/include",
+    "$LIBSELINUX_ROOT_DIR/src",
+    "//third_party/FreeBSD",
+    "//third_party/bounds_checking_function/include",
+  ]
+
+  public_configs = [ ":selinux_core_config" ]
+  deps = [
+    ":libselinux_klog",
+    "$THIRD_PARTY_SELINUX_DIR:libselinux",
+    "//third_party/bounds_checking_function:libsec_static",
+  ]
+
+  cflags = [
+    "-D_GNU_SOURCE",
+    "-w",
+  ]
+
+  part_name = "selinux"
+  subsystem_name = "security"
+}
+
 ohos_executable("load_policy") {
   install_enable = true
   sources = [ "$SELINUX_ROOT_DIR/interfaces/tools/load_policy/load_policy.c" ]
@@ -187,6 +233,27 @@ ohos_executable("hap_restorecon") {
     "$LIBSELINUX_ROOT_DIR/include",
   ]
   deps = [ ":libhap_restorecon" ]
+
+  cflags = [
+    "-D_GNU_SOURCE",
+    "-w",
+  ]
+  license_file = "$SELINUX_ROOT_DIR/LICENSE"
+  part_name = "selinux"
+  subsystem_name = "security"
+}
+
+ohos_executable("param_check") {
+  install_enable = true
+  sources = [ "$SELINUX_ROOT_DIR/interfaces/tools/param_check/test.cpp" ]
+  include_dirs = [
+    "$SELINUX_ROOT_DIR/interfaces/policycoreutils/include",
+    "$LIBSELINUX_ROOT_DIR/include",
+  ]
+  deps = [
+    ":libparaperm_checker_static",
+    "$THIRD_PARTY_SELINUX_DIR:libselinux",
+  ]
 
   cflags = [
     "-D_GNU_SOURCE",
@@ -285,6 +352,13 @@ ohos_prebuilt_etc("sehap_contexts") {
   relative_install_dir = "selinux/targeted/contexts/"
 }
 
+ohos_prebuilt_etc("parameter_contexts") {
+  source = "$SELINUX_ROOT_DIR/sepolicy/parameter_contexts"
+  license_file = "$SELINUX_ROOT_DIR/LICENSE"
+  part_name = "selinux"
+  relative_install_dir = "selinux/targeted/contexts/"
+}
+
 ohos_prebuilt_etc("file_contexts") {
   deps = [ ":build_file_contexts_bin" ]
   source = target_out_dir + "/file_contexts"
@@ -307,6 +381,8 @@ group("selinux_group") {
       "//base/security/selinux:file_contexts",
       "//base/security/selinux:hap_restorecon",
       "//base/security/selinux:load_policy",
+      "//base/security/selinux:param_check",
+      "//base/security/selinux:parameter_contexts",
       "//base/security/selinux:restorecon",
       "//base/security/selinux:sehap_contexts",
       "//base/security/selinux:selinux_test",
