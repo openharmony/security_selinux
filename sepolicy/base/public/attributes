@@ -57,6 +57,10 @@ attribute data_file_type;
 # i.e. /sys/firmware
 attribute sysfs_type;
 
+# All types of parameters.
+# i.e. ohos_param
+attribute parameter_type;
+
 # Type of all processes in the hap format.
 # i.e. com.ohos.setting
 attribute hapdomain;
