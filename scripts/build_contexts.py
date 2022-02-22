@@ -32,6 +32,8 @@ def parse_args():
         '--dst-file', help='the file_contexts.bin dest path', required=True)
     parser.add_argument('--tool-path',
                         help='the sefcontext_compile bin path', required=True)
+    parser.add_argument('--policy-file',
+                        help='the policy.31 file', required=True)
     args = parser.parse_args()
     return args
 
@@ -60,6 +62,7 @@ def build_file_contexts_bin(args, input_file_contexts_tmp):
     """build file_contexts.bin."""
     build_bin_cmd = [args.tool_path + "/sefcontext_compile",
                      "-o", args.dst_file,
+                     "-p", args.policy_file,
                      input_file_contexts_tmp]
     run_command(build_bin_cmd)
 

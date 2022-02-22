@@ -393,8 +393,13 @@ action("build_file_contexts_bin") {
     rebase_path(target_out_dir + "/file_contexts.bin"),
     "--tool-path",
     rebase_path(root_build_dir + "/clang_x64/security/selinux/"),
+    "--policy-file",
+    rebase_path(target_out_dir + "/policy.31"),
   ]
-  deps = [ "$THIRD_PARTY_SELINUX_DIR:sefcontext_compile($host_toolchain)" ]
+  deps = [
+    ":build_policy",
+    "$THIRD_PARTY_SELINUX_DIR:sefcontext_compile($host_toolchain)",
+  ]
   outputs = [ target_out_dir + "/file_contexts.bin" ]
   outputs += [ target_out_dir + "/file_contexts" ]
 }
