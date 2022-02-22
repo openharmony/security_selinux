@@ -16,7 +16,7 @@
 #ifndef __POLICYCOREUTILS_H__
 #define __POLICYCOREUTILS_H__
 
-int load_policy(void);
-int restorecon(void);
-
+int LoadPolicy(void);
+int Restorecon(const char *path);
+int RestoreconRecurse(const char *path);
 #endif                          // __POLICYCOREUTILS_H__

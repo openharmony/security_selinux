@@ -18,7 +18,7 @@
 #include <sepol/sepol.h>
 #include <stdio.h>
 
-int load_policy(void)
+int LoadPolicy(void)
 {
     int ret, enforce = 0;
 

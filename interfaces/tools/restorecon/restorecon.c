@@ -15,7 +15,15 @@
 
 #include <policycoreutils.h>
 
+#define ARG_NUM 2
+
 int main(int argc, char **argv)
 {
-    return restorecon();
+    if (argc != ARG_NUM) {
+        printf("invalid args!\n");
+        return -1;
+    }
+
+    printf("args : %s\n", argv[1]);
+    return RestoreconRecurse(argv[1]);
 }
