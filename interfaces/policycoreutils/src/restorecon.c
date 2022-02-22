@@ -15,7 +15,6 @@
 
 #include <selinux/label.h>
 #include <selinux/restorecon.h>
-#include <selinux/selinux.h>
 
 int Restorecon(const char *path)
 {

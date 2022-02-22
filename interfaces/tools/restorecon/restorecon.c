@@ -14,6 +14,7 @@
  */
 
 #include <policycoreutils.h>
+#include <stdio.h>
 
 #define ARG_NUM 2
 

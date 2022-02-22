@@ -17,9 +17,7 @@ import("//build/ohos.gni")
 SELINUX_ROOT_DIR = "//base/security/selinux"
 
 THIRD_PARTY_SELINUX_DIR = "//third_party/selinux"
-THIRD_PARTY_PCRE2_DIR = "//third_party/pcre2"
 LIBSELINUX_ROOT_DIR = "$THIRD_PARTY_SELINUX_DIR/libselinux"
-LIBSEPOL_ROOT_DIR = "$THIRD_PARTY_SELINUX_DIR/libsepol"
 
 config("selinux_core_config") {
   include_dirs = [
@@ -30,28 +28,15 @@ config("selinux_core_config") {
 
 ohos_shared_library("libload_policy") {
   output_name = "libload_policy"
-  sources = [
-    "$SELINUX_ROOT_DIR/interfaces/policycoreutils/src/load_policy.c",
-    "$SELINUX_ROOT_DIR/interfaces/tools/load_policy/load_policy.c",
-  ]
+  sources = [ "$SELINUX_ROOT_DIR/interfaces/policycoreutils/src/load_policy.c" ]
   include_dirs = [
     "$LIBSELINUX_ROOT_DIR/include",
-    "$LIBSELINUX_ROOT_DIR/include",
-    "$LIBSELINUX_ROOT_DIR/src",
-    "$LIBSEPOL_ROOT_DIR/cil/src",
-    "$LIBSEPOL_ROOT_DIR/src",
-    "$LIBSEPOL_ROOT_DIR/cil/include",
-    "$LIBSEPOL_ROOT_DIR/include",
     "$SELINUX_ROOT_DIR/interfaces/policycoreutils/include",
   ]
-  deps = [
-    "$THIRD_PARTY_PCRE2_DIR:libpcre2",
-    "$THIRD_PARTY_SELINUX_DIR:libselinux",
-    "$THIRD_PARTY_SELINUX_DIR:libsepol",
-  ]
+  deps = [ "$THIRD_PARTY_SELINUX_DIR:libselinux" ]
   cflags = [
     "-D_GNU_SOURCE",
-    "-DUSE_PCRE2",
+
     "-Wall",
     "-Werror",
   ]
@@ -71,28 +56,14 @@ ohos_shared_library("librestorecon") {
   sources = [ "$SELINUX_ROOT_DIR/interfaces/policycoreutils/src/restorecon.c" ]
   include_dirs = [
     "$LIBSELINUX_ROOT_DIR/include",
-    "$LIBSELINUX_ROOT_DIR/include",
-    "$LIBSELINUX_ROOT_DIR/src",
-    "$LIBSEPOL_ROOT_DIR/cil/src",
-    "$LIBSEPOL_ROOT_DIR/src",
-    "$LIBSEPOL_ROOT_DIR/cil/include",
-    "$LIBSEPOL_ROOT_DIR/include",
-    "$THIRD_PARTY_PCRE2_DIR/include_internal",
-    "$THIRD_PARTY_PCRE2_DIR/include",
     "$SELINUX_ROOT_DIR/interfaces/policycoreutils/include",
-    "//third_party/bounds_checking_function/include",
   ]
 
   public_configs = [ ":selinux_core_config" ]
-  deps = [
-    "$THIRD_PARTY_PCRE2_DIR:libpcre2",
-    "$THIRD_PARTY_SELINUX_DIR:libselinux",
-    "$THIRD_PARTY_SELINUX_DIR:libsepol",
-    "//third_party/bounds_checking_function:libsec_static",
-  ]
+  deps = [ "$THIRD_PARTY_SELINUX_DIR:libselinux" ]
   cflags = [
     "-D_GNU_SOURCE",
-    "-DUSE_PCRE2",
+
     "-Wall",
     "-Werror",
   ]
@@ -181,9 +152,7 @@ ohos_static_library("libparaperm_checker_static") {
   ]
   include_dirs = [
     "$SELINUX_ROOT_DIR/interfaces/policycoreutils/include",
-    "$LIBSELINUX_ROOT_DIR/include",
     "$LIBSELINUX_ROOT_DIR/src",
-    "//third_party/FreeBSD",
     "//third_party/bounds_checking_function/include",
   ]
 
@@ -212,7 +181,6 @@ ohos_static_library("libservice_checker_static") {
     "$SELINUX_ROOT_DIR/interfaces/policycoreutils/include",
     "$LIBSELINUX_ROOT_DIR/include",
     "$LIBSELINUX_ROOT_DIR/src",
-    "//third_party/FreeBSD",
     "//third_party/bounds_checking_function/include",
   ]
 
@@ -240,13 +208,11 @@ ohos_executable("load_policy") {
   include_dirs = [ "$SELINUX_ROOT_DIR/interfaces/policycoreutils/include" ]
   deps = [
     ":libload_policy",
-    "$THIRD_PARTY_PCRE2_DIR:libpcre2",
     "$THIRD_PARTY_SELINUX_DIR:libselinux",
-    "$THIRD_PARTY_SELINUX_DIR:libsepol",
   ]
   cflags = [
     "-D_GNU_SOURCE",
-    "-DUSE_PCRE2",
+
     "-Wall",
     "-Werror",
   ]
@@ -264,14 +230,11 @@ ohos_executable("restorecon") {
   ]
   deps = [
     ":librestorecon",
-    "$THIRD_PARTY_PCRE2_DIR:libpcre2",
-    "$THIRD_PARTY_SELINUX_DIR:libselinux",
-    "$THIRD_PARTY_SELINUX_DIR:libsepol",
     "//third_party/bounds_checking_function:libsec_static",
   ]
   cflags = [
     "-D_GNU_SOURCE",
-    "-DUSE_PCRE2",
+
     "-Wall",
     "-Werror",
   ]
@@ -283,10 +246,7 @@ ohos_executable("restorecon") {
 ohos_executable("hap_restorecon") {
   install_enable = true
   sources = [ "$SELINUX_ROOT_DIR/interfaces/tools/hap_restorecon/test.cpp" ]
-  include_dirs = [
-    "$SELINUX_ROOT_DIR/interfaces/policycoreutils/include",
-    "$LIBSELINUX_ROOT_DIR/include",
-  ]
+  include_dirs = [ "$SELINUX_ROOT_DIR/interfaces/policycoreutils/include" ]
   deps = [
     ":libhap_restorecon",
     ":libselinux_error_static",
@@ -328,14 +288,10 @@ ohos_executable("param_check") {
 ohos_executable("service_check") {
   install_enable = true
   sources = [ "$SELINUX_ROOT_DIR/interfaces/tools/service_check/test.cpp" ]
-  include_dirs = [
-    "$SELINUX_ROOT_DIR/interfaces/policycoreutils/include",
-    "$LIBSELINUX_ROOT_DIR/include",
-  ]
+  include_dirs = [ "$SELINUX_ROOT_DIR/interfaces/policycoreutils/include" ]
   deps = [
     ":libselinux_error_static",
     ":libservice_checker_static",
-    "$THIRD_PARTY_SELINUX_DIR:libselinux",
   ]
 
   cflags = [
@@ -356,13 +312,12 @@ ohos_executable("selinux_test") {
     "//third_party/bounds_checking_function/include",
   ]
   deps = [
-    "$THIRD_PARTY_PCRE2_DIR:libpcre2",
     "$THIRD_PARTY_SELINUX_DIR:libselinux",
     "//third_party/bounds_checking_function:libsec_static",
   ]
   cflags = [
     "-D_GNU_SOURCE",
-    "-DUSE_PCRE2",
+
     "-Wall",
     "-Werror",
   ]

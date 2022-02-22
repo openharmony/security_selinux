@@ -15,8 +15,8 @@
 
 #include <errno.h>
 #include <selinux/selinux.h>
-#include <sepol/sepol.h>
 #include <string.h>
+#include <stdio.h>
 
 int LoadPolicy(void)
 {
