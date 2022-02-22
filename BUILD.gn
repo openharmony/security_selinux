@@ -81,6 +81,8 @@ ohos_shared_library("librestorecon") {
     "$SELINUX_ROOT_DIR/interfaces/policycoreutils/include",
     "//third_party/bounds_checking_function/include",
   ]
+
+  public_configs = [ ":selinux_core_config" ]
   deps = [
     "$THIRD_PARTY_PCRE2_DIR:libpcre2",
     "$THIRD_PARTY_SELINUX_DIR:libselinux",
