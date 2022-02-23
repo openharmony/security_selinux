@@ -22,7 +22,10 @@ import argparse
 
 SCRIPT_PATH = os.path.abspath(os.path.dirname(__file__))
 LOCAL_PATH = os.path.abspath(os.path.join(SCRIPT_PATH, "../"))
-FILE_CONTEXTS_PATH = LOCAL_PATH + "/sepolicy"
+POLICY_PATH = LOCAL_PATH + "/sepolicy"
+SERVICE_CONTEXTS_PATH = LOCAL_PATH + "/sepolicy/service_contexts"
+HDF_SERVICE_CONTEXTS_PATH = LOCAL_PATH + "/sepolicy/hdf_service_contexts"
+PARAMETER_CONTEXTS_PATH = LOCAL_PATH + "/sepolicy/parameter_contexts"
 
 
 def parse_args():
@@ -92,12 +95,22 @@ def combine_file_contexts(file_contexts_list, combined_file_contexts):
     run_command(grep_cmd)
 
 
+def check_contexts_file(args, contexts_file):
+    """check whether context used in contexts_file is defined in policy.31."""
+    check_cmd = [args.tool_path + "/sefcontext_compile",
+                 "-p", args.policy_file,
+                 contexts_file]
+    run_command(check_cmd)
+    if os.path.exists(contexts_file + ".bin"):
+        os.unlink(contexts_file + ".bin")
+
+
 def main(args):
     """build file_contexts.bin form all file_contexts files."""
     output_path = os.path.abspath(os.path.dirname(args.dst_file))
 
     file_contexts_list = traverse_folder_in_type(
-        FILE_CONTEXTS_PATH, "file_contexts")
+        POLICY_PATH, "file_contexts")
 
     combined_file_contexts = output_path + "/file_contexts"
     combine_file_contexts(file_contexts_list, combined_file_contexts)
@@ -106,6 +119,10 @@ def main(args):
     build_file_contexts_tmp(file_contexts_tmp, combined_file_contexts)
 
     build_file_contexts_bin(args, file_contexts_tmp)
+
+    check_contexts_file(args, SERVICE_CONTEXTS_PATH)
+    check_contexts_file(args, HDF_SERVICE_CONTEXTS_PATH)
+    check_contexts_file(args, PARAMETER_CONTEXTS_PATH)
 
 
 if __name__ == "__main__":
