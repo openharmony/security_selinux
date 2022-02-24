@@ -13,15 +13,14 @@
  * limitations under the License.
  */
 
-#include <cstdio>
-#include <cstdlib>
 #include <getopt.h>
 #include <iostream>
-#include <sstream>
+#include <selinux/selinux.h>
 #include <sys/time.h>
-#include <unistd.h>
-#include <vector>
 #include "selinux_parameter.h"
+#include "selinux_error.h"
+
+using namespace Selinux;
 
 const static long USEC_PER_SEC = 1000000L;
 struct testInput {
@@ -114,7 +113,6 @@ static void PrintUsage()
 
 static void SetOptions(int argc, char *argv[], const option *options, testInput &input)
 {
-    const char *command = argv[1];
     int index = 0;
     const char *optStr = "lhrwn:p:g:";
     int para = 0;
@@ -181,14 +179,14 @@ int main(int argc, char *argv[])
     gettimeofday(&start, nullptr);
     if (testCmd.read) {
         res = ReadParamCheck(testCmd.paraName.c_str());
-        std::cout << "ReadParamCheck res: " << res << std::endl;
+        std::cout << GetErrStr(res) << std::endl;
     } else {
         struct ucred uc;
         uc.pid = atoi(testCmd.pid.c_str());
         uc.uid = 0;
         uc.gid = 0;
         res = SetParamCheck(testCmd.paraName.c_str(), &uc);
-        std::cout << "SetParamCheck res: " << res << std::endl;
+        std::cout << GetErrStr(res) << std::endl;
     }
     gettimeofday(&end, nullptr);
     timersub(&end, &start, &diff);

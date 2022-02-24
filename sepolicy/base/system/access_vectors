@@ -493,5 +493,18 @@ class xdp_socket
 inherits socket
 class parameter_service
 {
-	set
+    set
+}
+class samgr_class
+{
+    add
+    get
+    get_remote
+    list
+}
+class hdf_devmgr_class
+{
+    add
+    get
+    list
 }

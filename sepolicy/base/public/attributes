@@ -61,6 +61,14 @@ attribute sysfs_type;
 # i.e. ohos_param
 attribute parameter_type;
 
+# All types of services.
+# i.e. bms_service
+attribute samgr_type;
+
+# All types of hdf_services.
+# i.e. camera_service
+attribute hdf_devmgr_type;
+
 # Type of all processes in the hap format.
 # i.e. com.ohos.setting
 attribute hapdomain;

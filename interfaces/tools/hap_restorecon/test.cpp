@@ -13,14 +13,15 @@
  * limitations under the License.
  */
 
-#include "hap_restorecon.h"
-
-#include <cstdio>
-#include <cstdlib>
 #include <getopt.h>
+#include <iostream>
 #include <sstream>
 #include <unistd.h>
 #include <vector>
+#include "hap_restorecon.h"
+#include "selinux_error.h"
+
+using namespace Selinux;
 
 static const int ALARM_TIME_S = 5;
 struct testInput {
@@ -35,24 +36,25 @@ struct testInput {
 static void PrintUsage()
 {
     printf("Usage:\n");
-    printf("hap_restorecon -p /data/app/test -n com.ohos.test -a normal -r 0\n");
+    printf("hap_restorecon -p /data/app/el1/100/base/com.ohos.test -n com.ohos.test -a normal -r 0\n");
     printf("hap_restorecon -d -n com.ohos.test -a normal\n");
     printf("\n");
     printf("Options:\n");
-    printf(" -h (--help)                Show the help information.              [eg: hap_restorecon -h]\n");
-    printf(" -p (--path)                path to restorecon.                     [eg: -p /data/app/test]\n");
+    printf(" -h (--help)                show the help information.              [eg: hap_restorecon -h]\n");
+    printf(" -p (--path)                path to restorecon.                     [eg: -p "
+           "/data/app/el1/100/base/com.ohos.test]\n");
     printf(" -r (--recurse)             recurse?                                [eg: -r 0]\n");
     printf(" -a (--apl)                 apl info.                               [eg: -a normal]\n");
     printf(" -n (--name)                package name.                           [eg: -n com.ohos.test]\n");
     printf(" -d (--domain)              setcon domian.                          [eg: -d]\n");
-    printf(" -m (--multipath)           paths to restorecon.                    [eg: -m /data/app/test1 "
-           "/data/app/tes2]\n");
+    printf(" -m (--multipath)           paths to restorecon.                    [eg: -m "
+           "/data/app/el1/100/base/com.ohos.test1 "
+           "/data/app/el1/100/base/com.ohos.test2]\n");
     printf("\n");
 }
 
 static void SetOptions(int argc, char *argv[], const option *options, testInput &input)
 {
-    const char *command = argv[1];
     int index = 0;
     const char *optStr = "hda:p:n:r:m:";
     int para = 0;
@@ -121,10 +123,10 @@ int main(int argc, char *argv[])
         } else {
             res = test.HapFileRestorecon(testCmd.multiPath, testCmd.apl, testCmd.name, atoi(testCmd.recurse.c_str()));
         }
-        std::cout << "restorecon res: " << res << std::endl;
+        std::cout << GetErrStr(res) << std::endl;
     } else {
         res = test.HapDomainSetcontext(testCmd.apl, testCmd.name);
-        std::cout << "setcon res: " << res << std::endl;
+        std::cout << GetErrStr(res) << std::endl;
         sleep(ALARM_TIME_S);
     }
     exit(0);

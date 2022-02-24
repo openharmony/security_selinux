@@ -46,6 +46,8 @@ type fontconfig_file, system_file_type, file_type;
 type fonts_file, system_file_type, file_type;
 type vendor_file, vendor_file_type, file_type;
 
+type vendor_etc_file, vendor_file_type, file_type;
+
 type sysfs_rtc, fs_type, sysfs_type;
 type system_file, file_type;
 type lib_file, file_type;
