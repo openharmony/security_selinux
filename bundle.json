@@ -60,10 +60,10 @@
           }
         },
         {
-          "name": "//base/security/selinux:libparaperm_checker_static",
+          "name": "//base/security/selinux:libparaperm_checker",
           "header": {
             "header_files": [
-              "parameter_selinux.h"
+              "selinux_parameter.h"
             ],
             "header_base": "//base/security/selinux/interfaces/policycoreutils/include"
           }

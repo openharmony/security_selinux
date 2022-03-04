@@ -40,7 +40,7 @@ ohos_unittest("selinux_unittest") {
     "//utils/native/base:utils",
   ]
 
-  external_deps = [ "selinux:libparaperm_checker_static" ]
+  external_deps = [ "selinux:libparaperm_checker" ]
 }
 
 group("unittest") {

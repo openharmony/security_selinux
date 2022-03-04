@@ -132,8 +132,8 @@ ohos_static_library("libselinux_klog_static") {
   subsystem_name = "security"
 }
 
-ohos_static_library("libparaperm_checker_static") {
-  output_name = "libparaperm_checker_static"
+ohos_shared_library("libparaperm_checker") {
+  output_name = "libparaperm_checker"
   sources = [
     "$SELINUX_ROOT_DIR/interfaces/policycoreutils/src/paraperm_checker.cpp",
   ]
@@ -248,7 +248,7 @@ ohos_executable("param_check") {
     "$LIBSELINUX_ROOT_DIR/include",
   ]
   deps = [
-    ":libparaperm_checker_static",
+    ":libparaperm_checker",
     ":libselinux_error_static",
     "$THIRD_PARTY_SELINUX_DIR:libselinux",
   ]
