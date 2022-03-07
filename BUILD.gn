@@ -135,6 +135,7 @@ ohos_static_library("libselinux_klog_static") {
 ohos_shared_library("libparaperm_checker") {
   output_name = "libparaperm_checker"
   sources = [
+    "$SELINUX_ROOT_DIR/interfaces/policycoreutils/src/contexts_trie.cpp",
     "$SELINUX_ROOT_DIR/interfaces/policycoreutils/src/paraperm_checker.cpp",
   ]
   include_dirs = [
@@ -254,6 +255,7 @@ ohos_executable("param_check") {
   ]
   cflags = [
     "-D_GNU_SOURCE",
+    "-DTIME_DISPLAY",
     "-Wall",
     "-Werror",
   ]

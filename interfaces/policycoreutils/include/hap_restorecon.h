@@ -23,8 +23,8 @@
 
 #define SELINUX_HAP_RESTORECON_RECURSE 1
 
-// parameters of each SehapContext in file sehap_contexts
-struct SehapContext {
+// parameters of each SehapInfo in file sehap_contexts
+struct SehapInfo {
     std::string apl = "";
     std::string name = "";
     std::string domain = "";
@@ -42,7 +42,7 @@ public:
     int HapDomainSetcontext(const std::string &apl, const std::string &packageName);
 
 protected:
-    static std::unordered_map<std::string, struct SehapContext> sehapContextsBuff;
+    static std::unordered_map<std::string, struct SehapInfo> sehapContextsBuff;
     static struct selabel_handle *fileContextsHandle;
 
 private:
@@ -50,7 +50,7 @@ private:
                      const std::string &packageName);
     int HapContextsLookup(bool isDomain, const std::string &apl, const std::string &packageName, context_t con);
     int HapLabelLookup(const std::string &apl, const std::string &packageName, char **secontextPtr);
-    int TypeSet(std::unordered_map<std::string, SehapContext>::iterator &iter, bool isDomain, context_t con);
+    int TypeSet(std::unordered_map<std::string, SehapInfo>::iterator &iter, bool isDomain, context_t con);
 
     static void RestoreconInit();
     static bool HapContextsLoad();

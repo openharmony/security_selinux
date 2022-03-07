@@ -57,7 +57,7 @@ const static std::string PARAM_CONTEXTS_FILE = "/system/etc/selinux/targeted/con
 const static std::string TEST_PARA_NAME = "test.para";
 const static std::string TEST_NOT_EXIST_PARA_NAME = "test.not.exist";
 const static std::string TEST_PARA_CONTEXT = "u:object_r:testpara:s0";
-const static std::string DEFAULT_PARA_CONTEXT = "u:object_r:default_para:s0";
+const static std::string DEFAULT_PARA_CONTEXT = "u:object_r:default_param:s0";
 
 const static std::vector<std::string> TEST_INVALID_PARA = {{".test"}, {"test."}, {"test..test"}, {""}, {"test+test"}};
 
@@ -656,10 +656,10 @@ HWTEST_F(SelinuxUnitTest, HapDomainSetcontext003, TestSize.Level1)
  */
 HWTEST_F(SelinuxUnitTest, GetParamList001, TestSize.Level1)
 {
-    ParameterInfoList *buff = nullptr;
+    ParamContextsList *buff = nullptr;
     buff = GetParamList();
     ASSERT_NE(nullptr, buff);
-    ParameterInfoList *head = buff;
+    ParamContextsList *head = buff;
     bool find = false;
     while (buff != nullptr) {
         if (std::string(buff->info.paraName) == TEST_PARA_NAME &&
@@ -696,7 +696,7 @@ HWTEST_F(SelinuxUnitTest, DestroyParamList001, TestSize.Level1)
  */
 HWTEST_F(SelinuxUnitTest, GetParamLabel001, TestSize.Level1)
 {
-    const char *context = nullptr;
+    char *context = nullptr;
     ASSERT_EQ(-SELINUX_PTR_NULL, GetParamLabel(nullptr, &context));
 
     ASSERT_EQ(-SELINUX_PTR_NULL, GetParamLabel(TEST_PARA_NAME.c_str(), nullptr));
@@ -706,6 +706,9 @@ HWTEST_F(SelinuxUnitTest, GetParamLabel001, TestSize.Level1)
     }
 
     ASSERT_EQ(-SELINUX_KEY_NOT_FOUND, GetParamLabel(TEST_NOT_EXIST_PARA_NAME.c_str(), &context));
+    if (!context) {
+        free(context);
+    }
 }
 
 /**
@@ -716,9 +719,12 @@ HWTEST_F(SelinuxUnitTest, GetParamLabel001, TestSize.Level1)
  */
 HWTEST_F(SelinuxUnitTest, GetParamLabel002, TestSize.Level1)
 {
-    const char *context = nullptr;
+    char *context = nullptr;
     ASSERT_EQ(SELINUX_SUCC, GetParamLabel(TEST_PARA_NAME.c_str(), &context));
     ASSERT_EQ(TEST_PARA_CONTEXT, std::string(context));
+    if (!context) {
+        free(context);
+    }
 }
 
 /**

@@ -30,6 +30,7 @@ static const std::string SERVICE_CONTEXTS_FILE = "/system/etc/selinux/targeted/c
 static const std::string HDF_SERVICE_CONTEXTS_FILE = "/system/etc/selinux/targeted/contexts/hdf_service_contexts";
 static const std::string OBJECT_PREFIX = "u:object_r:";
 static const int CONTEXTS_LENGTH_MIN = 16; // sizeof("x u:object_r:x:s0")
+static const int CONTEXTS_LENGTH_MAX = 1024;
 static pthread_once_t FC_ONCE = PTHREAD_ONCE_INIT;
 } // namespace
 
@@ -65,12 +66,13 @@ static void SelinuxSetCallback()
 
 static bool CouldSkip(const std::string &line)
 {
-    if (line.size() < CONTEXTS_LENGTH_MIN) {
+    if (line.size() < CONTEXTS_LENGTH_MIN || line.size() > CONTEXTS_LENGTH_MAX) {
         return true;
     }
     int i = 0;
-    while (isspace(line[i++]))
-        ;
+    while (isspace(line[i])) {
+        i++;
+    }
     if (line[i] == '#') {
         return true;
     }
@@ -134,9 +136,9 @@ bool ServiceChecker::ServiceContextsLoad()
             lineNum++;
             if (CouldSkip(line))
                 continue;
-            struct ServiceInfo tmpContext = DecodeString(line);
-            if (!tmpContext.serviceContext.empty() && !tmpContext.serviceName.empty()) {
-                serviceMap.emplace(tmpContext.serviceName, tmpContext);
+            struct ServiceInfo tmpInfo = DecodeString(line);
+            if (!tmpInfo.serviceContext.empty() && !tmpInfo.serviceName.empty()) {
+                serviceMap.emplace(tmpInfo.serviceName, tmpInfo);
             } else {
                 selinux_log(SELINUX_ERROR, "service_contexts read fail in line %d\n", lineNum);
             }
