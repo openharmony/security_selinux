@@ -29,10 +29,10 @@ typedef struct ParameterNode {
     char *paraContext;
 } ParameterNode;
 
-typedef struct ParameterInfoList {
+typedef struct ParamContextsList {
     struct ParameterNode info;
-    struct ParameterInfoList *next;
-} ParameterInfoList;
+    struct ParamContextsList *next;
+} ParamContextsList;
 
 /**
  * @brief set selinux log print to dmesg
@@ -45,24 +45,24 @@ void SetSelinuxLogCallback(void);
  *
  * @return head of param context list
  */
-ParameterInfoList *GetParamList(void);
+ParamContextsList *GetParamList(void);
 
 /**
  * @brief destroy param list get from GetParamList
  *
  * @param list the head of contexts list
  */
-void DestroyParamList(ParameterInfoList **list);
+void DestroyParamList(ParamContextsList **list);
 
 /**
  * @brief for a particular paraName, get its context
  *
  * @param paraName the name of param
- * @param context the selinux context of param
+ * @param context the selinux context of param, must free it after use
  *
  * @return 0 for success, or an error code
  */
-int GetParamLabel(const char *paraName, const char **context);
+int GetParamLabel(const char *paraName, char **context);
 
 /**
  * @brief for read particular paraName, check its selinux permmisson

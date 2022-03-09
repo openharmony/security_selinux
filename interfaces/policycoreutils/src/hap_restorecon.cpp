@@ -35,12 +35,13 @@ static const std::string NAME_PREFIX = "name=";
 static const std::string DOMAIN_PREFIX = "domain=";
 static const std::string TYPE_PREFIX = "type=";
 static const int CONTEXTS_LENGTH_MIN = 20; // sizeof("apl=x domain= type=")
+static const int CONTEXTS_LENGTH_MAX = 1024;
 
 static pthread_once_t FC_ONCE = PTHREAD_ONCE_INIT;
 } // namespace
 
 struct selabel_handle *HapContext::fileContextsHandle = nullptr;
-std::unordered_map<std::string, struct SehapContext> HapContext::sehapContextsBuff;
+std::unordered_map<std::string, struct SehapInfo> HapContext::sehapContextsBuff;
 
 HapContext::HapContext() {}
 
@@ -57,12 +58,13 @@ struct selabel_handle *SelinuxRestoreconHandle()
 
 static bool CouldSkip(const std::string &line)
 {
-    if (line.size() <= CONTEXTS_LENGTH_MIN) {
+    if (line.size() <= CONTEXTS_LENGTH_MIN || line.size() > CONTEXTS_LENGTH_MAX) {
         return true;
     }
     int i = 0;
-    while (isspace(line[i++]))
-        ;
+    while (isspace(line[i])) {
+        i++;
+    }
     if (line[i] == '#') {
         return true;
     }
@@ -72,11 +74,11 @@ static bool CouldSkip(const std::string &line)
     return false;
 }
 
-static struct SehapContext DecodeString(std::string &line)
+static struct SehapInfo DecodeString(std::string &line)
 {
     std::stringstream input(line);
     std::string tmp;
-    struct SehapContext contextBuff;
+    struct SehapInfo contextBuff;
     bool aplVisit = false;
     bool nameVisit = false;
     bool domainVisit = false;
@@ -136,9 +138,9 @@ bool HapContext::HapContextsLoad()
             lineNum++;
             if (CouldSkip(line))
                 continue;
-            struct SehapContext tmpContext = DecodeString(line);
-            if (!tmpContext.apl.empty()) {
-                sehapContextsBuff.emplace(tmpContext.apl + tmpContext.name, tmpContext);
+            struct SehapInfo tmpInfo = DecodeString(line);
+            if (!tmpInfo.apl.empty()) {
+                sehapContextsBuff.emplace(tmpInfo.apl + tmpInfo.name, tmpInfo);
             } else {
                 SELINUX_LOG_INFO(LABEL, "hap_contexts read fail in line %{public}d", lineNum);
             }
@@ -152,7 +154,7 @@ bool HapContext::HapContextsLoad()
     return true;
 }
 
-int HapContext::TypeSet(std::unordered_map<std::string, SehapContext>::iterator &iter, bool isDomain, context_t con)
+int HapContext::TypeSet(std::unordered_map<std::string, SehapInfo>::iterator &iter, bool isDomain, context_t con)
 {
     std::string type = "";
     if (isDomain) {
