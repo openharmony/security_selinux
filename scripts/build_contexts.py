@@ -21,6 +21,7 @@ import os
 import argparse
 import re
 import shutil
+from collections import defaultdict
 
 SCRIPT_PATH = os.path.abspath(os.path.dirname(__file__))
 LOCAL_PATH = os.path.abspath(os.path.join(SCRIPT_PATH, "../"))
@@ -39,8 +40,7 @@ def parse_args():
                         help='the sefcontext_compile bin path', required=True)
     parser.add_argument('--policy-file',
                         help='the policy.31 file', required=True)
-    args = parser.parse_args()
-    return args
+    return parser.parse_args()
 
 
 def run_command(in_cmd):
@@ -48,21 +48,6 @@ def run_command(in_cmd):
     rc = os.system(cmdstr)
     if rc:
         raise Exception(rc)
-
-
-def build_file_contexts_tmp(output_tmp, input_file_contexts_list):
-    build_tmp_cmd = ["m4",
-                     "--fatal-warnings",
-                     "-s", input_file_contexts_list, ">", output_tmp]
-    run_command(build_tmp_cmd)
-
-
-def build_file_contexts_bin(args, input_file_contexts_tmp):
-    build_bin_cmd = [args.tool_path + "/sefcontext_compile",
-                     "-o", args.dst_file,
-                     "-p", args.policy_file,
-                     input_file_contexts_tmp]
-    run_command(build_bin_cmd)
 
 
 def traverse_folder_in_type(search_dir, file_suffix):
@@ -94,6 +79,44 @@ def combine_file_contexts(file_contexts_list, combined_file_contexts):
     run_command(grep_cmd)
 
 
+def check_redefinition(contexts_file):
+    type_hash = defaultdict(list)
+    err = 0
+    with open(contexts_file, 'r') as contexts_read:
+        pattern = re.compile(r'(\S+)\s+u:object_r:\S+:s0')
+        line_index = 0
+        for line in contexts_read:
+            line_ = line.lstrip()
+            line_index += 1
+            if line_.startswith('#') or line_.strip() == '':
+                continue
+            match = pattern.match(line_)
+            if match:
+                type_hash[match.group(1)].append(line_index)
+            else:
+                print(contexts_file + ":" +
+                      str(line_index) + " format check fail")
+                err = 1
+        contexts_read.close()
+    if err:
+        print("***********************************************************")
+        print("please check whether the format meets the following rules:")
+        print("[required format]: * u:object_r:*:s0")
+        print("***********************************************************")
+        raise Exception(err)
+    err = 0
+    for type_key in type_hash.keys():
+        if len(type_hash[type_key]) > 1:
+            err = 1
+            err_msg = contexts_file + ":"
+            for linenum in type_hash[type_key]:
+                err_msg += str(linenum) + " "
+            err_msg += "'type " + str(type_key) + " is redefinition'"
+            print(err_msg)
+    if err:
+        raise Exception(err)
+
+
 def check_contexts_file(args, contexts_file):
     """
     check whether context used in contexts_file is defined in policy.31.
@@ -101,7 +124,10 @@ def check_contexts_file(args, contexts_file):
     :param contexts_file: path of contexts file
     :return:
     """
+    check_redefinition(contexts_file)
+
     check_cmd = [args.tool_path + "/sefcontext_compile",
+                 "-o", contexts_file + ".bin",
                  "-p", args.policy_file,
                  contexts_file]
     run_command(check_cmd)
@@ -123,7 +149,7 @@ def check_sehap_contexts(args, contexts_file, domain):
     err = 0
     with open(contexts_file + "_bk", 'r') as contexts_read, open(contexts_file, 'w') as contexts_write:
         pattern = re.compile(
-            r'apl=(system_core|system_basic|normal)[ \t]+(name=[\w\.-]+[ \t]+)?domain=([\w-]+)[ \t]+type=([\w-]+)[ \t]*\n')
+            r'apl=(system_core|system_basic|normal)\s+(name=\S+\s+)?domain=(\S+)\s+type=(\S+)\s*\n')
         line_index = 0
         for line in contexts_read:
             line_ = line.lstrip()
@@ -134,13 +160,14 @@ def check_sehap_contexts(args, contexts_file, domain):
             match = pattern.match(line_)
             if match:
                 if domain:
-                    line = match[1] + " u:r:" + match[3] + ":s0\n"
+                    line = match.group(1) + " u:r:" + match.group(3) + ":s0\n"
                 else:
-                    line = match[4] + " u:object_r:" + match[4] + ":s0\n"
+                    line = match.group(1) + " u:object_r:" + \
+                        match.group(4) + ":s0\n"
                 contexts_write.write(line)
             else:
-                print(contexts_file +
-                      ":" + str(line_index) + " format check fail")
+                print(contexts_file + ":" +
+                      str(line_index) + " format check fail")
                 err = 1
         contexts_read.close()
         contexts_write.close()
@@ -156,6 +183,7 @@ def check_sehap_contexts(args, contexts_file, domain):
         print("***********************************************************")
         raise Exception(err)
     check_cmd = [args.tool_path + "/sefcontext_compile",
+                 "-o", contexts_file + ".bin",
                  "-p", args.policy_file,
                  contexts_file]
     rc = os.system(" ".join(check_cmd))
@@ -167,19 +195,29 @@ def check_sehap_contexts(args, contexts_file, domain):
         os.unlink(contexts_file + ".bin")
 
 
-def main(args):
-    output_path = os.path.abspath(os.path.dirname(args.dst_file))
-
+def build_file_contetxs(args, output_path):
     file_contexts_list = traverse_folder_in_type(
         POLICY_PATH, "file_contexts")
 
     combined_file_contexts = output_path + "/file_contexts"
     combine_file_contexts(file_contexts_list, combined_file_contexts)
 
-    file_contexts_tmp = output_path + "/file_contexts.tmp"
-    build_file_contexts_tmp(file_contexts_tmp, combined_file_contexts)
+    build_tmp_cmd = ["m4",
+                     "--fatal-warnings",
+                     "-s", combined_file_contexts, ">", output_path + "/file_contexts.tmp"]
+    run_command(build_tmp_cmd)
 
-    build_file_contexts_bin(args, file_contexts_tmp)
+    build_bin_cmd = [args.tool_path + "/sefcontext_compile",
+                     "-o", args.dst_file,
+                     "-p", args.policy_file,
+                     output_path + "/file_contexts.tmp"]
+    run_command(build_bin_cmd)
+
+
+def main(args):
+    output_path = os.path.abspath(os.path.dirname(args.dst_file))
+
+    build_file_contetxs(args, output_path)
 
     check_contexts_file(args, SERVICE_CONTEXTS_PATH)
     check_contexts_file(args, HDF_SERVICE_CONTEXTS_PATH)

@@ -13,30 +13,26 @@
  * limitations under the License.
  */
 
-#ifndef SELINUX_ERROE_H
-#define SELINUX_ERROE_H
+#ifndef CONTEXTS_TRIE_H
+#define CONTEXTS_TRIE_H
 
-namespace Selinux {
-enum Errno {
-    SELINUX_SUCC,
-    SELINUX_ARG_INVALID,
-    SELINUX_PATH_INVAILD,
-    SELINUX_STAT_INVAILD,
-    SELINUX_PTR_NULL,
-    SELINUX_KEY_NOT_FOUND,
-    SELINUX_GET_CONTEXT_ERROR,
-    SELINUX_SET_CONTEXT_ERROR,
-    SELINUX_SET_CONTEXT_TYPE_ERROR,
-    SELINUX_CHECK_CONTEXT_ERROR,
-    SELINUX_CONTEXTS_FILE_LOAD_ERROR,
-    SELINUX_FTS_OPEN_ERROR,
-    SELINUX_FTS_ELOOP,
-    SELINUX_UNKNOWN_ERROR,
-    SELINUX_PERMISSION_DENY,
-    SELINUX_ERROR_MAX,
+#include <string>
+#include <unordered_map>
+
+class ParamContextsTrie {
+public:
+    ParamContextsTrie() {}
+    ~ParamContextsTrie() {}
+
+    ParamContextsTrie *FindChild(std::string element);
+    bool Insert(const std::string &paramPrefix, const std::string &contexts);
+    bool Search(const std::string &paraName, char **context);
+    void Clear();
+
+private:
+    std::string prefixLabel = "";
+    std::string matchLabel = "";
+    std::unordered_map<std::string, ParamContextsTrie *> childen;
 };
 
-const char *GetErrStr(int errNo);
-} // namespace Selinux
-
-#endif // SELINUX_ERROE_H
+#endif // CONTEXTS_TRIE_H

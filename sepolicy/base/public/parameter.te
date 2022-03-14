@@ -1,4 +1,4 @@
-# Copyright (c) 2021 Huawei Device Co., Ltd.
+# Copyright (c) 2022 Huawei Device Co., Ltd.
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -34,5 +34,6 @@ type hilog_param, parameter_type;
 type persist_param, parameter_type;
 type persist_sys_param, parameter_type;
 type debug_param, parameter_type;
+type default_param, parameter_type;
 
 type build_version_param, parameter_type;
