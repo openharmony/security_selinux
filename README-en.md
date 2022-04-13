@@ -72,7 +72,7 @@ Currently, SELinux supports only the RK3568 device. Run the following command to
 Independent build command of this module:
 ./build.sh --product-name=rk3568 -T selinux --ccache
 ```
-### Running the Image
+### Verifying Basic Functions
 
 Burn the image to the development board, start the board, run **shell** through the serial port, and run the following commands:
 
