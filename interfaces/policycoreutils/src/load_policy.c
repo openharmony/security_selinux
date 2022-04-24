@@ -18,9 +18,16 @@
 #include <errno.h>
 #include <selinux/selinux.h>
 #include <policycoreutils.h>
+#include "selinux_klog.h"
 
 int LoadPolicy(void)
 {
+    // set selinux log callback
+    SetSelinuKLogLevel(SELINUX_KERROR);
+    union selinux_callback cb;
+    cb.func_log = SelinuKLog;
+    selinux_set_callback(SELINUX_CB_LOG, cb);
+
     int enforce = 0;
     int ret = selinux_init_load_policy(&enforce);
     if (ret && enforce > 0) {
