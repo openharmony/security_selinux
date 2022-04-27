@@ -14,3 +14,4 @@
 policycap network_peer_controls;
 policycap open_perms;
 policycap extended_socket_class;
+policycap nnp_nosuid_transition;

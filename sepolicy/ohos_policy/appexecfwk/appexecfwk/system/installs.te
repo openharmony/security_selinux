@@ -12,6 +12,6 @@
 # limitations under the License.
 
 type installs, sadomain, domain;
-type installs_exec, system_file_type, exec_type, file_type;
+type installs_exec, system_file_attr, exec_attr, file_attr;
 
 init_daemon_domain(installs);

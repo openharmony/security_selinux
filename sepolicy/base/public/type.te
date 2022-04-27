@@ -62,48 +62,48 @@ type nwebspawn, sadomain, domain;
 type upms, sadomain, domain;
 
 type watchdog_service, sadomain, domain;
-type watchdog_service_exec, exec_type, file_type, system_file_type;
+type watchdog_service_exec, exec_attr, file_attr, system_file_attr;
 #domain_auto_transition_pattern(init, watchdog_service_exec, watchdog_service);
 
 type uinput_inject, sadomain,  domain;
-type uinput_inject_exec, exec_type, file_type, system_file_type;
+type uinput_inject_exec, exec_attr, file_attr, system_file_attr;
 #domain_auto_transition_pattern(init, uinput_inject_exec, uinput_inject);
 
 type lmks, sadomain, domain;
-type lmks_exec, exec_type, file_type, system_file_type;
+type lmks_exec, exec_attr, file_attr, system_file_attr;
 #domain_auto_transition_pattern(init, lmks_exec, lmks);
 
 type wifi_hal_service, sadomain,  domain;
-type wifi_hal_service_exec, exec_type, file_type, system_file_type;
+type wifi_hal_service_exec, exec_attr, file_attr, system_file_attr;
 #domain_auto_transition_pattern(init, wifi_hal_service_exec, wifi_hal_service);
 
 type hilogd, sadomain, domain;
-type hilogd_exec, exec_type, file_type, system_file_type;
+type hilogd_exec, exec_attr, file_attr, system_file_attr;
 #domain_auto_transition_pattern(init, hilogd_exec, hilogd);
 
 type faultloggerd, sadomain, domain;
-type faultloggerd_exec, exec_type, file_type, system_file_type;
+type faultloggerd_exec, exec_attr, file_attr, system_file_attr;
 #domain_auto_transition_pattern(init, faultloggerd_exec, faultloggerd);
 
-type hiview_exec, exec_type, file_type, system_file_type;
+type hiview_exec, exec_attr, file_attr, system_file_attr;
 #domain_auto_transition_pattern(init, hiview_exec, hiview);
 
 type ispserver, sadomain, domain;
-type ispserver_exec, exec_type, file_type, system_file_type;
+type ispserver_exec, exec_attr, file_attr, system_file_attr;
 #domain_auto_transition_pattern(init, ispserver_exec, ispserver);
 
 type storage_daemon, sadomain, domain;
-type storage_daemon_exec, exec_type, file_type, system_file_type;
+type storage_daemon_exec, exec_attr, file_attr, system_file_attr;
 #domain_auto_transition_pattern(init, storage_daemon_exec, storage_daemon);
 
 type thermal_protector, sadomain, domain;
-type thermal_protector_exec, exec_type, file_type, system_file_type;
+type thermal_protector_exec, exec_attr, file_attr, system_file_attr;
 #domain_auto_transition_pattern(init, thermal_protector_exec, thermal_protector);
 
 type sh, nativedomain, domain;
-type sh_exec, exec_type, file_type, system_file_type;
+type sh_exec, exec_attr, file_attr, system_file_attr;
 #domain_auto_transition_pattern(init, sh_exec, sh);
 
 type hdcd, nativedomain, domain;
-type hdcd_exec, exec_type, file_type, system_file_type;
+type hdcd_exec, exec_attr, file_attr, system_file_attr;
 #domain_auto_transition_pattern(init, hdcd_exec, hdcd);

@@ -11,10 +11,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-type dev_null_file,dev_type;
-type param_device,dev_type;
-type param_info,dev_type;
-type param_storage,dev_type;
-type socket_device,dev_type;
-type binder_device,dev_type;
-type device,dev_type,fs_type;
+type dev_null_file,dev_attr;
+type param_device,dev_attr;
+type param_info,dev_attr;
+type param_storage,dev_attr;
+type socket_device,dev_attr;
+type binder_device,dev_attr;
+type device,dev_attr,fs_attr;

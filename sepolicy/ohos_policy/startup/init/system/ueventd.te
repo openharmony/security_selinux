@@ -12,7 +12,7 @@
 # limitations under the License.
 
 type ueventd, domain, nativedomain;
-type ueventd_exec, system_file_type, exec_type, file_type;
+type ueventd_exec, system_file_attr, exec_attr, file_attr;
 
 init_daemon_domain(ueventd);
 
