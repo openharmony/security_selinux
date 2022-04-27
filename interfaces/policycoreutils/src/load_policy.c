@@ -23,9 +23,9 @@
 int LoadPolicy(void)
 {
     // set selinux log callback
-    SetSelinuKLogLevel(SELINUX_KERROR);
+    SetSelinuxKmsgLevel(SELINUX_KERROR);
     union selinux_callback cb;
-    cb.func_log = SelinuKLog;
+    cb.func_log = SelinuxKmsg;
     selinux_set_callback(SELINUX_CB_LOG, cb);
 
     int enforce = 0;

@@ -18,6 +18,8 @@
 #include <unistd.h>
 #include "securec.h"
 
+#define MAX_LOG_SIZE 1024
+
 static int g_logLevel = SELINUX_KERROR;
 static const char *LOG_LEVEL_STR[] = {"ERROR", "WARNING", "INFO", "AVC"};
 
@@ -25,7 +27,7 @@ static const char *LOG_LEVEL_STR[] = {"ERROR", "WARNING", "INFO", "AVC"};
 #define UNLIKELY(x) __builtin_expect(!!(x), 0)
 #endif
 
-void SetSelinuKLogLevel(int logLevel)
+void SetSelinuxKmsgLevel(int logLevel)
 {
     g_logLevel = logLevel;
 }
@@ -40,7 +42,7 @@ static void SelinuxOpenLogDevice(void)
     return;
 }
 
-int SelinuKLog(int logLevel, const char *fmt, ...)
+int SelinuxKmsg(int logLevel, const char *fmt, ...)
 {
     if (logLevel != SELINUX_KAVC && logLevel > g_logLevel) {
         return -1;

@@ -66,7 +66,7 @@ static int SelinuxAuditCallback(void *data, security_class_t cls, char *buf, siz
 static void SelinuxSetCallback()
 {
     union selinux_callback cb;
-    cb.func_log = SelinuKLog;
+    cb.func_log = SelinuxKmsg;
     selinux_set_callback(SELINUX_CB_LOG, cb);
     cb.func_audit = SelinuxAuditCallback;
     selinux_set_callback(SELINUX_CB_AUDIT, cb);

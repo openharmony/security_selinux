@@ -28,32 +28,22 @@
 using namespace Selinux;
 
 namespace {
-static constexpr OHOS::HiviewDFX::HiLogLabel LABEL = {LOG_CORE, SECURITY_DOMAIN, "Selinux"};
 static const std::string SEHAP_CONTEXTS_FILE = "/system/etc/selinux/targeted/contexts/sehap_contexts";
 static const std::string APL_PREFIX = "apl=";
 static const std::string NAME_PREFIX = "name=";
 static const std::string DOMAIN_PREFIX = "domain=";
 static const std::string TYPE_PREFIX = "type=";
+static const char *DEFAULT_CONTEXT = "u:object_r:unlabeled:s0";
 static const int CONTEXTS_LENGTH_MIN = 20; // sizeof("apl=x domain= type=")
 static const int CONTEXTS_LENGTH_MAX = 1024;
-
 static pthread_once_t FC_ONCE = PTHREAD_ONCE_INIT;
 } // namespace
 
-struct selabel_handle *HapContext::fileContextsHandle = nullptr;
-std::unordered_map<std::string, struct SehapInfo> HapContext::sehapContextsBuff;
-
-HapContext::HapContext() {}
-
-HapContext::~HapContext() {}
-
-struct selabel_handle *SelinuxRestoreconHandle()
+static void SelinuxSetCallback()
 {
-    struct selinux_opt selinuxOpts[] = {
-        {SELABEL_OPT_VALIDATE, (char *)1},
-    };
-
-    return selabel_open(SELABEL_CTX_FILE, selinuxOpts, sizeof(selinuxOpts) / sizeof(selinuxOpts[0]));
+    union selinux_callback cb;
+    cb.func_log = SelinuxHilog;
+    selinux_set_callback(SELINUX_CB_LOG, cb);
 }
 
 static bool CouldSkip(const std::string &line)
@@ -121,11 +111,18 @@ static bool CheckApl(const std::string &apl)
     return false;
 }
 
-void HapContext::RestoreconInit()
+HapContext::HapContext()
 {
-    if (fileContextsHandle == nullptr) {
-        fileContextsHandle = SelinuxRestoreconHandle();
-    }
+    SetSelinuxLogCallback();
+}
+
+HapContext::~HapContext() {}
+
+void HapContext::SetSelinuxLogCallback()
+{
+    SetSelinuxHilogLevel(SELINUX_HILOG_ERROR);
+    __selinux_once(FC_ONCE, SelinuxSetCallback);
+    return;
 }
 
 void HapContext::HapContextsClear()
@@ -150,14 +147,14 @@ bool HapContext::HapContextsLoad()
             if (!tmpInfo.apl.empty()) {
                 sehapContextsBuff.emplace(tmpInfo.apl + tmpInfo.name, tmpInfo);
             } else {
-                SELINUX_LOG_INFO(LABEL, "hap_contexts read fail in line %{public}d", lineNum);
+                selinux_log(SELINUX_INFO, "hap_contexts read fail in line %d\n", lineNum);
             }
         }
     } else {
-        SELINUX_LOG_ERROR(LABEL, "Load hap_contexts fail, no such file: %{public}s", SEHAP_CONTEXTS_FILE.c_str());
+        selinux_log(SELINUX_ERROR, "Load hap_contexts fail, no such file: %s\n", SEHAP_CONTEXTS_FILE.c_str());
         return false;
     }
-    SELINUX_LOG_INFO(LABEL, "Load hap_contexts succes: %{public}s", SEHAP_CONTEXTS_FILE.c_str());
+    selinux_log(SELINUX_INFO, "Load hap_contexts succes: %s\n", SEHAP_CONTEXTS_FILE.c_str());
     contextsFile.close();
     return true;
 }
@@ -171,11 +168,11 @@ int HapContext::TypeSet(std::unordered_map<std::string, SehapInfo>::iterator &it
         type = iter->second.type;
     }
     if (type.size() == 0) {
-        SELINUX_LOG_ERROR(LABEL, "type is empty in contexts file");
+        selinux_log(SELINUX_ERROR, "type is empty in contexts file");
         return -SELINUX_ARG_INVALID;
     }
     if (context_type_set(con, type.c_str())) {
-        SELINUX_LOG_ERROR(LABEL, "%{public}s %{public}s", GetErrStr(SELINUX_SET_CONTEXT_TYPE_ERROR), type.c_str());
+        selinux_log(SELINUX_ERROR, "%s %s\n", GetErrStr(SELINUX_SET_CONTEXT_TYPE_ERROR), type.c_str());
         return -SELINUX_SET_CONTEXT_TYPE_ERROR;
     }
     return SELINUX_SUCC;
@@ -203,9 +200,10 @@ int HapContext::HapContextsLookup(bool isDomain, const std::string &apl, const s
 
 int HapContext::HapLabelLookup(const std::string &apl, const std::string &packageName, char **secontextPtr)
 {
-    if (apl.empty() || secontextPtr == nullptr) {
+    if (apl.empty()) {
         return -SELINUX_ARG_INVALID;
     }
+    *secontextPtr = strdup(DEFAULT_CONTEXT);
     char *secontext = *secontextPtr;
     context_t con = context_new(secontext);
     if (con == nullptr) {
@@ -233,7 +231,7 @@ int HapContext::HapLabelLookup(const std::string &apl, const std::string &packag
     // check whether the context is valid
     if (security_check_context(secontext) < 0) {
         context_free(con);
-        SELINUX_LOG_ERROR(LABEL, "context: %{public}s, %{public}s", secontext, GetErrStr(SELINUX_CHECK_CONTEXT_ERROR));
+        selinux_log(SELINUX_ERROR, "context: %s, %s\n", secontext, GetErrStr(SELINUX_CHECK_CONTEXT_ERROR));
         return -SELINUX_CHECK_CONTEXT_ERROR;
     }
 
@@ -253,10 +251,6 @@ int HapContext::RestoreconSb(const std::string &pathname, const struct stat *sb,
 {
     char *secontext = nullptr;
     char *oldSecontext = nullptr;
-
-    if (selabel_lookup(fileContextsHandle, &secontext, pathname.c_str(), sb->st_mode) < 0) {
-        return SELINUX_SUCC;
-    }
 
     if (lgetfilecon(pathname.c_str(), &oldSecontext) < 0) {
         freecon(secontext);
@@ -295,8 +289,7 @@ int HapContext::HapFileRestorecon(std::vector<std::string> &pathNameOrig, const 
         int res = HapFileRestorecon(pathname.c_str(), apl, packageName, flags);
         if (res != SELINUX_SUCC) {
             failFlag = true;
-            SELINUX_LOG_ERROR(LABEL, "HapFileRestorecon fail for path: %{public}s, errorNo: %{public}d",
-                              pathname.c_str(), res);
+            selinux_log(SELINUX_ERROR, "HapFileRestorecon fail for path: %s, errorNo: %d", pathname.c_str(), res);
         }
     }
     return failFlag ? -SELINUX_RESTORECON_ERROR : SELINUX_SUCC;
@@ -309,15 +302,8 @@ int HapContext::HapFileRestorecon(const std::string &pathNameOrig, const std::st
         return -SELINUX_ARG_INVALID;
     }
     if (is_selinux_enabled() < 1) {
-        SELINUX_LOG_INFO(LABEL, "Selinux not enbaled");
+        selinux_log(SELINUX_INFO, "Selinux not enbaled");
         return SELINUX_SUCC;
-    }
-
-    // get file_contexts handle
-    __selinux_once(FC_ONCE, RestoreconInit);
-    if (fileContextsHandle == nullptr) {
-        SELINUX_LOG_ERROR(LABEL, "Cannot get file context handle: %{public}s", strerror(errno));
-        return -SELINUX_PTR_NULL;
     }
 
     struct stat sb;
@@ -338,7 +324,7 @@ int HapContext::HapFileRestorecon(const std::string &pathNameOrig, const std::st
 
         int res = RestoreconSb(realPath, &sb, apl, packageName);
         if (res < 0) {
-            SELINUX_LOG_ERROR(LABEL, "RestoreconSb failed");
+            selinux_log(SELINUX_ERROR, "RestoreconSb failed");
         }
         return res;
     }
@@ -348,8 +334,7 @@ int HapContext::HapFileRestorecon(const std::string &pathNameOrig, const std::st
     int ftsFlags = FTS_PHYSICAL | FTS_NOCHDIR;
     FTS *fts = fts_open(paths, ftsFlags, NULL);
     if (fts == nullptr) {
-        SELINUX_LOG_ERROR(LABEL, "%{public}s on %{public}s: %{public}s", GetErrStr(SELINUX_FTS_OPEN_ERROR), paths[0],
-                          strerror(errno));
+        selinux_log(SELINUX_ERROR, "%s on %s: %s\n", GetErrStr(SELINUX_FTS_OPEN_ERROR), paths[0], strerror(errno));
         return -SELINUX_FTS_OPEN_ERROR;
     }
 
@@ -358,23 +343,21 @@ int HapContext::HapFileRestorecon(const std::string &pathNameOrig, const std::st
     while ((ftsent = fts_read(fts)) != NULL) {
         switch (ftsent->fts_info) {
             case FTS_DC:
-                SELINUX_LOG_ERROR(LABEL, "%{public}s on %{public}s", GetErrStr(SELINUX_FTS_ELOOP), ftsent->fts_path);
+                selinux_log(SELINUX_ERROR, "%s on %s\n", GetErrStr(SELINUX_FTS_ELOOP), ftsent->fts_path);
                 (void)fts_close(fts);
                 return -SELINUX_FTS_ELOOP;
             case FTS_DP:
                 continue;
             case FTS_DNR:
-                SELINUX_LOG_ERROR(LABEL, "Read error on %{public}s, errorno: %{public}s", ftsent->fts_path,
-                                  strerror(errno));
+                selinux_log(SELINUX_ERROR, "Read error on %s, errorno: %s\n", ftsent->fts_path, strerror(errno));
                 fts_set(fts, ftsent, FTS_SKIP);
                 continue;
             case FTS_ERR:
-                SELINUX_LOG_ERROR(LABEL, "Error on %{public}s, errorno: %{public}s", ftsent->fts_path, strerror(errno));
+                selinux_log(SELINUX_ERROR, "Error on %s, errorno: %s\n", ftsent->fts_path, strerror(errno));
                 fts_set(fts, ftsent, FTS_SKIP);
                 continue;
             case FTS_NS:
-                SELINUX_LOG_ERROR(LABEL, "stat error on %{public}s, errorno: %{public}s", ftsent->fts_path,
-                                  strerror(errno));
+                selinux_log(SELINUX_ERROR, "stat error on %s, errorno: %s\n", ftsent->fts_path, strerror(errno));
                 fts_set(fts, ftsent, FTS_SKIP);
                 continue;
             case FTS_D:
@@ -394,7 +377,7 @@ int HapContext::HapDomainSetcontext(const std::string &apl, const std::string &p
     }
 
     if (is_selinux_enabled() < 1) {
-        SELINUX_LOG_INFO(LABEL, "Selinux not enbaled");
+        selinux_log(SELINUX_INFO, "Selinux not enbaled");
         return SELINUX_SUCC;
     }
 
@@ -424,14 +407,13 @@ int HapContext::HapDomainSetcontext(const std::string &apl, const std::string &p
         return -SELINUX_PTR_NULL;
     }
 
-    SELINUX_LOG_INFO(LABEL, "Hap type for %{public}s is changing from %{public}s to %{public}s", packageName.c_str(),
-                     oldTypeContext, typeContext);
+    selinux_log(SELINUX_INFO, "Hap type for %s is changing from %s to %s\n", packageName.c_str(), oldTypeContext,
+                typeContext);
 
     if (security_check_context(typeContext) < 0) {
         freecon(oldTypeContext);
         context_free(con);
-        SELINUX_LOG_ERROR(LABEL, "context: %{public}s, %{public}s", typeContext,
-                          GetErrStr(SELINUX_CHECK_CONTEXT_ERROR));
+        selinux_log(SELINUX_ERROR, "context: %s, %s\n", typeContext, GetErrStr(SELINUX_CHECK_CONTEXT_ERROR));
         return -SELINUX_CHECK_CONTEXT_ERROR;
     }
 
@@ -442,7 +424,7 @@ int HapContext::HapDomainSetcontext(const std::string &apl, const std::string &p
             return -SELINUX_SET_CONTEXT_ERROR;
         }
     }
-    SELINUX_LOG_INFO(LABEL, "Hap setcon finish for %{public}s", packageName.c_str());
+    selinux_log(SELINUX_INFO, "Hap setcon finish for %s\n", packageName.c_str());
 
     freecon(oldTypeContext);
     context_free(con);

@@ -18,7 +18,7 @@
 #include <selinux_internal.h>
 #include <sstream>
 #include <fstream>
-#include "selinux_klog.h"
+#include "selinux_log.h"
 #include "selinux_error.h"
 #include "callbacks.h"
 #include "securec.h"
@@ -81,7 +81,7 @@ static int SelinuxAuditCallback(void *data, security_class_t cls, char *buf, siz
 static void SelinuxSetCallback()
 {
     union selinux_callback cb;
-    cb.func_log = SelinuKLog;
+    cb.func_log = SelinuxHilog;
     selinux_set_callback(SELINUX_CB_LOG, cb);
     cb.func_audit = SelinuxAuditCallback;
     selinux_set_callback(SELINUX_CB_AUDIT, cb);
@@ -137,7 +137,7 @@ static int CheckServiceNameValid(const std::string &serviceName)
 
 void ServiceChecker::SetSelinuxLogCallback()
 {
-    SetSelinuKLogLevel(SELINUX_KERROR);
+    SetSelinuxHilogLevel(SELINUX_HILOG_ERROR);
     __selinux_once(FC_ONCE, SelinuxSetCallback);
     return;
 }
@@ -198,7 +198,7 @@ int ServiceChecker::GetServiceContext(const std::string &serviceName, std::strin
     return SELINUX_SUCC;
 }
 
-static int GetCallingContext(const pid_t &pid, std::string &context)
+static int GetCallingContext(const pid_t pid, std::string &context)
 {
     char *srcContext = nullptr;
     int rc = getpidcon(pid, &srcContext);
@@ -224,7 +224,7 @@ static int GetThisContext(std::string &context)
     return SELINUX_SUCC;
 }
 
-int ServiceChecker::CheckPerm(const pid_t &callingPid, const std::string &serviceName, std::string action)
+int ServiceChecker::CheckPerm(const pid_t callingPid, const std::string &serviceName, std::string action)
 {
     std::string srcContext = "";
     int ret = GetCallingContext(callingPid, srcContext);
@@ -259,17 +259,17 @@ int ServiceChecker::CheckPerm(const pid_t &callingPid, const std::string &servic
     return res == 0 ? SELINUX_SUCC : -SELINUX_PERMISSION_DENY;
 }
 
-int ServiceChecker::ListServiceCheck(const pid_t &callingPid)
+int ServiceChecker::ListServiceCheck(const pid_t callingPid)
 {
     return CheckPerm(callingPid, serviceClass_, "list");
 }
 
-int ServiceChecker::GetServiceCheck(const pid_t &callingPid, const std::string &serviceName)
+int ServiceChecker::GetServiceCheck(const pid_t callingPid, const std::string &serviceName)
 {
     return CheckPerm(callingPid, serviceName, "get");
 }
 
-int ServiceChecker::GetRemoteServiceCheck(const pid_t &callingPid, const std::string &remoteServiceName)
+int ServiceChecker::GetRemoteServiceCheck(const pid_t callingPid, const std::string &remoteServiceName)
 {
     if (isHdf_) {
         selinux_log(SELINUX_ERROR, "hdf service has no permission to get remote!\n");
@@ -278,7 +278,7 @@ int ServiceChecker::GetRemoteServiceCheck(const pid_t &callingPid, const std::st
     return CheckPerm(callingPid, remoteServiceName, "get_remote");
 }
 
-int ServiceChecker::AddServiceCheck(const pid_t &callingPid, const std::string &serviceName)
+int ServiceChecker::AddServiceCheck(const pid_t callingPid, const std::string &serviceName)
 {
     return CheckPerm(callingPid, serviceName, "add");
 }
