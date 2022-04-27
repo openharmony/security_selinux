@@ -11,6 +11,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-allow fs_type self:filesystem associate;
-allow file_type labeledfs:filesystem associate;
-allow dev_type tmpfs:filesystem associate;
+allow fs_attr self:filesystem associate;
+allow file_attr labeledfs:filesystem associate;
+allow dev_attr tmpfs:filesystem associate;

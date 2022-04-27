@@ -15,9 +15,9 @@ type system_core_hap, hap_domain, domain;
 type system_basic_hap, hap_domain, domain;
 type normal_hap, hap_domain, domain;
 
-type system_core_hap_data_file, hap_data_file, data_file_type, file_type;
-type system_basic_hap_data_file, hap_data_file, data_file_type, file_type;
-type normal_hap_data_file, hap_data_file, data_file_type, file_type;
+type system_core_hap_data_file, hap_file_attr, data_file_attr, file_attr;
+type system_basic_hap_data_file, hap_file_attr, data_file_attr, file_attr;
+type normal_hap_data_file, hap_file_attr, data_file_attr, file_attr;
 
 
 allow hap_domain appspawn:fd use;
@@ -51,13 +51,13 @@ neverallow hap_domain self:{ capability capability2 } *;
 neverallow hap_domain { domain -hap_domain }:file { append create link unlink relabelfrom rename setattr write };
 
 #limit hap file access.
-neverallow hap_domain vendor_file_type:dir_file_class_set *;
+neverallow hap_domain vendor_file_attr:dir_file_class_set *;
 
 #hap never access blk_file.
-neverallow hap_domain dev_type:blk_file { read write };
+neverallow hap_domain dev_attr:blk_file { read write };
 
 #limit hap access dev file.
-neverallow hap_domain { dev_type -dev_ashmem_file -dev_at_file -dev_binder_file -dev_dri_file -dev_file -dev_null_file -dev_random_file -dev_zero_file 
+neverallow hap_domain { dev_attr -dev_ashmem_file -dev_at_file -dev_binder_file -dev_dri_file -dev_file -dev_null_file -dev_random_file -dev_zero_file 
                       -dev_unix_socket_file }:chr_file { open ioctl read write};
 
 #limit hap use kobject netlink.
@@ -74,15 +74,15 @@ neverallow hap_domain { domain -hap_domain }:process { sigkill sigstop signal };
 neverallow hap_domain rootfs:dir_file_class_set { create write setattr relabelfrom relabelto append unlink link rename };
 neverallow hap_domain system_file:dir_file_class_set { create write setattr relabelfrom relabelto append unlink link rename };
 
-neverallow hap_domain { file_type -data_file_type -dev_type }:dir_file_class_set { create write setattr relabelfrom relabelto append unlink link rename };
+neverallow hap_domain { file_attr -data_file_attr -dev_attr }:dir_file_class_set { create write setattr relabelfrom relabelto append unlink link rename };
 
 neverallow { hap_domain -system_core_hap } system_core_hap_data_file:dir_file_class_set { create write setattr relabelfrom relabelto append unlink link rename };
 
 neverallow { hap_domain -system_basic_hap } system_basic_hap_data_file:dir_file_class_set { create write setattr relabelfrom relabelto append unlink link rename };
 
-neverallow hap_domain { sysfs_type proc_type }:dir_file_class_set write;
+neverallow hap_domain { sysfs_attr proc_attr }:dir_file_class_set write;
 
-neverallow hap_domain exec_type:file { create write setattr relabelfrom relabelto append unlink link rename };
+neverallow hap_domain exec_attr:file { create write setattr relabelfrom relabelto append unlink link rename };
 
 #Access /proc/kmsg
 neverallow hap_domain kernel:system { syslog_read syslog_mod syslog_console };
@@ -91,5 +91,5 @@ neverallow hap_domain kernel:system { syslog_read syslog_mod syslog_console };
 neverallow { hap_domain } *:security { compute_av check_context };
 
 #Ability to perform any filesystem operation other than statfs(2).
-neverallow hap_domain fs_type:filesystem ~getattr;
+neverallow hap_domain fs_attr:filesystem ~getattr;
 

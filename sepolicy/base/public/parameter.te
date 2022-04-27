@@ -11,29 +11,29 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-type ohos_param, parameter_type;
-type ohos_boot_param, parameter_type;
-type sys_param, parameter_type;
-type sys_usb_param, parameter_type;
-type net_param, parameter_type;
-type net_tcp_param, parameter_type;
-type hw_sc_param, parameter_type;
-type hw_sc_build_param, parameter_type;
-type hw_sc_build_os_param, parameter_type;
-type init_param, parameter_type;
-type init_svc_param, parameter_type;
-type const_param, parameter_type;
-type const_postinstall_param, parameter_type;
-type const_postinstall_fstab_param, parameter_type;
-type const_allow_param, parameter_type;
-type const_allow_mock_param, parameter_type;
-type const_build_param, parameter_type;
-type const_product_param, parameter_type;
-type security_param, parameter_type;
-type hilog_param, parameter_type;
-type persist_param, parameter_type;
-type persist_sys_param, parameter_type;
-type debug_param, parameter_type;
-type default_param, parameter_type;
+type ohos_param, parameter_attr;
+type ohos_boot_param, parameter_attr;
+type sys_param, parameter_attr;
+type sys_usb_param, parameter_attr;
+type net_param, parameter_attr;
+type net_tcp_param, parameter_attr;
+type hw_sc_param, parameter_attr;
+type hw_sc_build_param, parameter_attr;
+type hw_sc_build_os_param, parameter_attr;
+type init_param, parameter_attr;
+type init_svc_param, parameter_attr;
+type const_param, parameter_attr;
+type const_postinstall_param, parameter_attr;
+type const_postinstall_fstab_param, parameter_attr;
+type const_allow_param, parameter_attr;
+type const_allow_mock_param, parameter_attr;
+type const_build_param, parameter_attr;
+type const_product_param, parameter_attr;
+type security_param, parameter_attr;
+type hilog_param, parameter_attr;
+type persist_param, parameter_attr;
+type persist_sys_param, parameter_attr;
+type debug_param, parameter_attr;
+type default_param, parameter_attr;
 
-type build_version_param, parameter_type;
+type build_version_param, parameter_attr;

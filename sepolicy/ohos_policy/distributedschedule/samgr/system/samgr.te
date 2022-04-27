@@ -12,7 +12,7 @@
 # limitations under the License.
 
 type samgr, sadomain, domain;
-type samgr_exec, exec_type, file_type, system_file_type;
+type samgr_exec, exec_attr, file_attr, system_file_attr;
 
 init_daemon_domain(samgr);
 

@@ -12,7 +12,7 @@
 # limitations under the License.
 
 type appspawn, domain, nativedomain;
-type appspawn_exec, system_file_type, exec_type, file_type;
+type appspawn_exec, system_file_attr, exec_attr, file_attr;
 
 init_daemon_domain(appspawn);
 

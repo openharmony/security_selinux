@@ -13,8 +13,8 @@
 
 type udevd, domain, nativedomain;
 
-type udevd_exec, exec_type, file_type, system_file_type;
-type udevd_socket, file_type, data_file_type;
-type udevd_file, file_type, data_file_type;
+type udevd_exec, exec_attr, file_attr, system_file_attr;
+type udevd_socket, file_attr, data_file_attr;
+type udevd_file, file_attr, data_file_attr;
 
 init_daemon_domain(udevd);

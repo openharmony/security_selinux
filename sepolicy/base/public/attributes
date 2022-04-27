@@ -14,7 +14,7 @@
 
 # Type of all devices.
 # i.e. /dev/camera_dev
-attribute dev_type;
+attribute dev_attr;
 
 # Type of all processes, including the hap process and native process.
 # i.e. hdbd, media
@@ -25,49 +25,49 @@ attribute domain;
 #      /sys/bus,
 #      /proc/mtd,
 #      /dev/camera_dev
-attribute fs_type;
+attribute fs_attr;
 
 # Type of all proc files.
 # i.e. /proc/mtd
-attribute proc_type;
+attribute proc_attr;
 
 # Type of all common files.
 # i.e. /data/user,
 #      /system/bin
-attribute file_type;
+attribute file_attr;
 
 # Type of all system files.
 # i.e. /system/*
-attribute system_file_type;
+attribute system_file_attr;
 
 # Type of all vendor files.
 # i.e. /vendor/*
-attribute vendor_file_type;
+attribute vendor_file_attr;
 
 # Type of all domain access points, which is used in domain trasition.
 # i.e. vold_exec,
 #      appspawn_exec
-attribute exec_type;
+attribute exec_attr;
 
 # Types of all files in the /data directory.
 # i.e. /data/user
-attribute data_file_type;
+attribute data_file_attr;
 
 # All types in the sysfs file system.
 # i.e. /sys/firmware
-attribute sysfs_type;
+attribute sysfs_attr;
 
 # All types of parameters.
 # i.e. ohos_param
-attribute parameter_type;
+attribute parameter_attr;
 
 # All types of services.
 # i.e. bms_service
-attribute samgr_type;
+attribute sa_service_attr;
 
 # All types of hdf_services.
 # i.e. camera_service
-attribute hdf_devmgr_type;
+attribute hdf_service_attr;
 
 # Type of all processes in the hap format.
 # i.e. com.ohos.setting
@@ -75,7 +75,7 @@ attribute hap_domain;
 
 # File type of all processes in the hap format.
 # i.e. com.ohos.setting
-attribute hap_data_file;
+attribute hap_file_attr;
 
 # Type of hdf processes.
 # i.e. hdv_devmgr,

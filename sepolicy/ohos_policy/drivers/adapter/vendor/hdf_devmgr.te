@@ -12,7 +12,7 @@
 # limitations under the License.
 
 type hdf_devmgr, sadomain, domain;
-type hdf_devmgr_exec, exec_type, file_type, system_file_type;
+type hdf_devmgr_exec, exec_attr, file_attr, system_file_attr;
 
 init_daemon_domain(hdf_devmgr);
 

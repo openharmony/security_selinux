@@ -12,7 +12,7 @@
 # limitations under the License.
 
 type render_service, sadomain, domain;
-type render_service_exec, exec_type, file_type, system_file_type;
+type render_service_exec, exec_attr, file_attr, system_file_attr;
 
 init_daemon_domain(render_service);
 

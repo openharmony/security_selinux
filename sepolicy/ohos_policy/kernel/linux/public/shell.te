@@ -12,5 +12,5 @@
 # limitations under the License.
 
 type shell, domain;
-type shell_exec, system_file_type, exec_type, file_type;
+type shell_exec, system_file_attr, exec_attr, file_attr;
 
