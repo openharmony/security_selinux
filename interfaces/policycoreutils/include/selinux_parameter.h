@@ -58,11 +58,10 @@ void DestroyParamList(ParamContextsList **list);
  * @brief for a particular paraName, get its context
  *
  * @param paraName the name of param
- * @param context the selinux context of param, must free it after use
  *
- * @return 0 for success, or an error code
+ * @return context for given paraName
  */
-int GetParamLabel(const char *paraName, char **context);
+const char *GetParamLabel(const char *paraName);
 
 /**
  * @brief for read particular paraName, check its selinux permmisson

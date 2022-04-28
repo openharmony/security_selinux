@@ -18,6 +18,10 @@
 #include "callbacks.h"
 #include "contexts_trie.h"
 
+namespace {
+static const char *DEFAULT_CONTEXT = "u:object_r:default_param:s0";
+} // namespace
+
 static std::vector<std::string> StringSplit(std::string paraName, std::string split = ".")
 {
     size_t pos;
@@ -74,46 +78,42 @@ bool ParamContextsTrie::Insert(const std::string &paramPrefix, const std::string
         root = root->childen[element];
     }
     if (paramPrefix.back() == '.') {
-        root->prefixLabel = contexts;
+        root->prefixLabel = strdup(contexts.c_str());
     } else {
-        root->matchLabel = contexts;
+        root->matchLabel = strdup(contexts.c_str());
     }
     return true;
 }
 
-bool ParamContextsTrie::Search(const std::string &paraName, char **context)
+const char *ParamContextsTrie::Search(const std::string &paraName)
 {
     ParamContextsTrie *root = this;
     std::string tmpString = paraName;
     std::string element = GetFirstElement(tmpString);
-    const char *updataCurLabel = "";
+    const char *updataCurLabel = nullptr;
     while (!element.empty()) {
         auto child = root->FindChild(element);
         if (child == nullptr) {
-            if (!root->prefixLabel.empty()) {
-                *context = strdup(root->prefixLabel.c_str());
-                return true;
-            } else if (strcmp(updataCurLabel, "")) {
-                *context = strdup(updataCurLabel);
-                return true;
+            if (root->prefixLabel) {
+                return root->prefixLabel;
+            } else if (updataCurLabel) {
+                return updataCurLabel;
             } else {
-                return false;
+                return DEFAULT_CONTEXT;
             }
         }
-        if (!root->prefixLabel.empty())
-            updataCurLabel = root->prefixLabel.c_str();
+        if (root->prefixLabel)
+            updataCurLabel = root->prefixLabel;
         root = child;
         element = GetFirstElement(tmpString);
     }
 
-    if (!root->matchLabel.empty()) {
-        *context = strdup(root->matchLabel.c_str());
-        return true;
-    } else if (strcmp(updataCurLabel, "")) {
-        *context = strdup(updataCurLabel);
-        return true;
+    if (root->matchLabel) {
+        return root->matchLabel;
+    } else if (updataCurLabel) {
+        return updataCurLabel;
     } else {
-        return false;
+        return DEFAULT_CONTEXT;
     }
 }
 
@@ -128,6 +128,12 @@ void ParamContextsTrie::Clear()
         root = nodeDeque.front();
         nodeDeque.pop_front();
         if (root != nullptr) {
+            if (root->prefixLabel) {
+                free(root->prefixLabel);
+            }
+            if (root->matchLabel) {
+                free(root->matchLabel);
+            }
             for (auto child : root->childen) {
                 nodeDeque.emplace_back(child.second);
             }

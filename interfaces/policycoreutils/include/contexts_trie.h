@@ -26,12 +26,12 @@ public:
 
     ParamContextsTrie *FindChild(std::string element);
     bool Insert(const std::string &paramPrefix, const std::string &contexts);
-    bool Search(const std::string &paraName, char **context);
+    const char *Search(const std::string &paraName);
     void Clear();
 
 private:
-    std::string prefixLabel = "";
-    std::string matchLabel = "";
+    char *prefixLabel = nullptr;
+    char *matchLabel = nullptr;
     std::unordered_map<std::string, ParamContextsTrie *> childen;
 };
 

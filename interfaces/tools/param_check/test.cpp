@@ -88,26 +88,18 @@ static void TestLoadList()
 
 static void TestGetContext(std::string &paraName)
 {
-    char *context = nullptr;
 #ifdef TIME_DISPLAY
     struct timeval start, end, diff;
     gettimeofday(&start, nullptr);
 #endif
-    int res = GetParamLabel(paraName.c_str(), &context);
+    const char *context = GetParamLabel(paraName.c_str());
 #ifdef TIME_DISPLAY
     gettimeofday(&end, nullptr);
     timersub(&end, &start, &diff);
     int runtime_us = diff.tv_sec * USEC_PER_SEC + diff.tv_usec;
     std::cout << "time use: " << runtime_us << std::endl;
 #endif
-    if (res == 0) {
-        std::cout << "para " << paraName.c_str() << "'s context is " << context << std::endl;
-    } else {
-        std::cout << "para " << paraName.c_str() << "'s context get fail, " << GetErrStr(res) << std::endl;
-    }
-    if (!context) {
-        free(context);
-    }
+    std::cout << "para " << paraName.c_str() << "'s context is " << context << std::endl;
 }
 
 static void TestReadPara(std::string &paraName)

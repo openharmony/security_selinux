@@ -81,22 +81,6 @@ static void ReleaseMem()
     }
 }
 
-static int CheckParaNameValid(const char *paraName)
-{
-    if (paraName == nullptr) {
-        return -SELINUX_PTR_NULL;
-    }
-    std::string para = paraName;
-    if (para.empty() || para[0] == '.' || para[para.size() - 1] == '.' || para.find("..") != std::string::npos) {
-        return -SELINUX_ARG_INVALID;
-    }
-    std::regex paraReg("^[a-zA-Z0-9_\\-@:](([\\.]{0,1})[a-zA-Z0-9_\\-@:])*");
-    if (std::regex_match(para, paraReg)) {
-        return SELINUX_SUCC;
-    }
-    return -SELINUX_ARG_INVALID;
-}
-
 static bool CouldSkip(const std::string &line)
 {
     if (line.size() < CONTEXTS_LENGTH_MIN || line.size() > CONTEXTS_LENGTH_MAX) {
@@ -203,7 +187,7 @@ static bool ParameterContextsLoad()
 static int CheckPerm(const std::string &paraName, const char *srcContext, const char *destContext, const ucred &uc)
 {
     if (srcContext == nullptr || destContext == nullptr) {
-        selinux_log(SELINUX_INFO, "context empty!\n");
+        selinux_log(SELINUX_ERROR, "context empty!\n");
         return -SELINUX_PTR_NULL;
     }
     selinux_log(SELINUX_INFO, "srcContext[%s] is setting param[%s] destContext[%s]\n", srcContext, paraName.c_str(),
@@ -251,37 +235,27 @@ ParamContextsList *GetParamList()
     return g_contextsList;
 }
 
-int GetParamLabel(const char *paraName, char **context)
+const char *GetParamLabel(const char *paraName)
 {
-    if (paraName == nullptr || context == nullptr) {
-        return -SELINUX_PTR_NULL;
-    }
-
-    int ret = CheckParaNameValid(paraName);
-    if (ret != 0) {
-        selinux_log(SELINUX_ERROR, "paraName invalid!\n");
-        return ret;
+    if (paraName == nullptr) {
+        selinux_log(SELINUX_ERROR, "paraName is null!\n");
+        return DEFAULT_CONTEXT;
     }
 
     if (g_contextsTrie == nullptr) {
         if (!ParameterContextsLoad()) {
-            return -SELINUX_CONTEXTS_FILE_LOAD_ERROR;
+            return DEFAULT_CONTEXT;
         }
     }
 
-    if (!g_contextsTrie->Search(std::string(paraName), context)) {
-        *context = strdup(DEFAULT_CONTEXT);
-    }
-    selinux_log(SELINUX_INFO, "find context: %s\n", *context);
-    return SELINUX_SUCC;
+    return g_contextsTrie->Search(std::string(paraName));
 }
 
 int ReadParamCheck(const char *paraName)
 {
-    int ret = CheckParaNameValid(paraName);
-    if (ret != 0) {
-        selinux_log(SELINUX_ERROR, "paraName invalid!\n");
-        return ret;
+    if (paraName == nullptr) {
+        selinux_log(SELINUX_ERROR, "paraName is null!\n");
+        return -SELINUX_PTR_NULL;
     }
 
     char *srcContext = nullptr;
@@ -295,51 +269,33 @@ int ReadParamCheck(const char *paraName)
     msg.name = paraName;
     ucred uc = {.pid = getpid(), .uid = getuid(), .gid = getgid()};
     msg.ucred = &uc;
-    char *destContext = nullptr;
-    int res = GetParamLabel(paraName, &destContext);
-    if (res != SELINUX_SUCC) {
-        freecon(srcContext);
-        return res;
-    }
+    const char *destContext = GetParamLabel(paraName);
     if (srcContext == nullptr || destContext == nullptr) {
         freecon(srcContext);
         return -SELINUX_PTR_NULL;
     }
     selinux_log(SELINUX_INFO, "srcContext[%s] is reading param[%s] destContext[%s]\n", srcContext, paraName,
                 destContext);
-    res = selinux_check_access(srcContext, destContext, "file", "read", &msg);
+    int res = selinux_check_access(srcContext, destContext, "file", "read", &msg);
     freecon(srcContext);
-    free(destContext);
     return res == 0 ? SELINUX_SUCC : -SELINUX_PERMISSION_DENY;
 }
 
 int SetParamCheck(const char *paraName, struct ucred *uc)
 {
     if (paraName == nullptr || uc == nullptr) {
+        selinux_log(SELINUX_ERROR, "input param is null!\n");
         return -SELINUX_PTR_NULL;
     }
 
-    int ret = CheckParaNameValid(paraName);
-    if (ret != 0) {
-        selinux_log(SELINUX_ERROR, "paraName invalid!\n");
-        return ret;
-    }
-
     char *srcContext = nullptr;
-
     int rc = getpidcon(uc->pid, &srcContext);
     if (rc < 0) {
         selinux_log(SELINUX_ERROR, "getpidcon failed: %s\n", strerror(errno));
         return -SELINUX_GET_CONTEXT_ERROR;
     }
-    char *destContext = nullptr;
-    int res = GetParamLabel(paraName, &destContext);
-    if (res != SELINUX_SUCC) {
-        freecon(srcContext);
-        return res;
-    }
-    res = CheckPerm(std::string(paraName), srcContext, destContext, *uc);
+    const char *destContext = GetParamLabel(paraName);
+    int res = CheckPerm(std::string(paraName), srcContext, destContext, *uc);
     freecon(srcContext);
-    free(destContext);
     return res;
 }
