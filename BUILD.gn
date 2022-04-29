@@ -86,16 +86,14 @@ ohos_shared_library("libhap_restorecon") {
     "$LIBSELINUX_ROOT_DIR/include",
     "$LIBSELINUX_ROOT_DIR/src",
     "//third_party/FreeBSD",
-    "//utils/native/base/include",
   ]
   public_configs = [ ":selinux_core_config" ]
   deps = [
     ":libselinux_error_static",
+    ":libselinux_hilog_static",
     "$THIRD_PARTY_SELINUX_DIR:libselinux",
-    "//utils/native/base:utils",
   ]
-  external_deps = [ "hiviewdfx_hilog_native:libhilog" ]
-  cflags_cc = [ "-DHILOG_ENABLE" ]
+
   cflags = [
     "-D_GNU_SOURCE",
     "-Wall",
@@ -126,6 +124,21 @@ ohos_static_library("libselinux_klog_static") {
       [ "$SELINUX_ROOT_DIR/interfaces/policycoreutils/src/selinux_klog.c" ]
   include_dirs = [ "$SELINUX_ROOT_DIR/interfaces/policycoreutils/include" ]
   deps = [ "//third_party/bounds_checking_function:libsec_static" ]
+  cflags = [
+    "-D_GNU_SOURCE",
+    "-Wall",
+    "-Werror",
+  ]
+  part_name = "selinux"
+  subsystem_name = "security"
+}
+
+ohos_static_library("libselinux_hilog_static") {
+  output_name = "libselinux_hilog_static"
+  sources = [ "$SELINUX_ROOT_DIR/interfaces/policycoreutils/src/selinux_log.c" ]
+  include_dirs = [ "$SELINUX_ROOT_DIR/interfaces/policycoreutils/include" ]
+  deps = [ "//third_party/bounds_checking_function:libsec_static" ]
+  external_deps = [ "hilog_native:libhilog" ]
   cflags = [
     "-D_GNU_SOURCE",
     "-Wall",
@@ -178,7 +191,7 @@ ohos_shared_library("libservice_checker") {
   public_configs = [ ":selinux_core_config" ]
   deps = [
     ":libselinux_error_static",
-    ":libselinux_klog_static",
+    ":libselinux_hilog_static",
     "$THIRD_PARTY_SELINUX_DIR:libselinux",
     "//third_party/bounds_checking_function:libsec_static",
   ]

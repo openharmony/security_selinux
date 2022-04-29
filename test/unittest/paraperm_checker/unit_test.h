@@ -13,26 +13,27 @@
  * limitations under the License.
  */
 
-#ifndef CONTEXTS_TRIE_H
-#define CONTEXTS_TRIE_H
+#ifndef PARAPERM_CHECKER_SELINUX_UNIT_TEST_H
+#define PARAPERM_CHECKER_SELINUX_UNIT_TEST_H
 
-#include <string>
-#include <unordered_map>
+#include <gtest/gtest.h>
 
-class ParamContextsTrie {
+namespace OHOS {
+namespace Security {
+namespace SelinuxUnitTest {
+class SelinuxUnitTest : public testing::Test {
 public:
-    ParamContextsTrie() {}
-    ~ParamContextsTrie() {}
+    static void SetUpTestCase();
 
-    ParamContextsTrie *FindChild(std::string element);
-    bool Insert(const std::string &paramPrefix, const std::string &contexts);
-    const char *Search(const std::string &paraName);
-    void Clear();
+    static void TearDownTestCase();
 
-private:
-    char *prefixLabel = nullptr;
-    char *matchLabel = nullptr;
-    std::unordered_map<std::string, ParamContextsTrie *> childen;
+    void SetUp();
+
+    void TearDown();
+
+    void CreateDataFile() const;
 };
-
-#endif // CONTEXTS_TRIE_H
+} // namespace Selinux
+} // namespace Security
+} // namespace OHOS
+#endif // PARAPERM_CHECKER_SELINUX_UNIT_TEST_H

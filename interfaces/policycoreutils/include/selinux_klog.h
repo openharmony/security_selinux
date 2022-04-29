@@ -21,8 +21,6 @@ extern "C" {
 #endif
 #endif
 
-#define MAX_LOG_SIZE 1024
-
 typedef enum SelinuxKLogLevel {
     SELINUX_KERROR = 0,
     SELINUX_KWARN,
@@ -30,8 +28,8 @@ typedef enum SelinuxKLogLevel {
     SELINUX_KAVC
 } SelinuxKLogLevel;
 
-void SetSelinuKLogLevel(int logLevel);
-int SelinuKLog(int logLevel, const char *fmt, ...);
+void SetSelinuxKmsgLevel(int logLevel);
+int SelinuxKmsg(int logLevel, const char *fmt, ...);
 
 #ifdef __cplusplus
 #if __cplusplus
