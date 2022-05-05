@@ -109,10 +109,12 @@ neverallow * ~{ dev_attr fs_attr } :devfile_class_set *;
 neverallow * ~parameter_attr:parameter_service *;
 
 # keep every service join service_type
-neverallow * ~sa_service_attr:samgr_class *;
+neverallow * ~sa_service_attr:samgr_class ~list;
+neverallow * ~samgr:samgr_class list;
 
 # keep every hdf service join hdf_service_attr
-neverallow * ~hdf_service_attr:hdf_devmgr_class *;
+neverallow * ~hdf_service_attr:hdf_devmgr_class ~list;
+neverallow * ~hdf_devmgr:hdf_devmgr_class list;
 
 neverallow domain default_param:parameter_service *;
 neverallow domain default_service:samgr_class *;
