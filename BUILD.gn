@@ -161,6 +161,7 @@ ohos_shared_library("libparaperm_checker") {
   ]
   public_configs = [ ":selinux_core_config" ]
   deps = [
+    ":libselinux_hilog_static",
     ":libselinux_klog_static",
     "$THIRD_PARTY_SELINUX_DIR:libselinux",
     "//third_party/bounds_checking_function:libsec_static",
