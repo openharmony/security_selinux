@@ -18,5 +18,4 @@
 /data/udev/control u:object_r:udevd_socket:s0
 
 # for uinput_inject
-/system/bin/uinput_inject        u:object_r:uinput_inject_exec:s0
-
+/system/bin/uinput_inject u:object_r:uinput_inject_exec:s0
