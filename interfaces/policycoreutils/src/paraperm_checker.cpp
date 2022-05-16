@@ -19,12 +19,14 @@
 #include <securec.h>
 #include <selinux_internal.h>
 #include <sstream>
+#include <mutex>
 #include <string>
 #include <sys/socket.h>
 #include <unistd.h>
 #include "callbacks.h"
 #include "selinux_error.h"
 #include "selinux_klog.h"
+#include "selinux_log.h"
 #include "contexts_trie.h"
 
 using namespace Selinux;
@@ -34,10 +36,12 @@ static const std::string PARAMETER_CONTEXTS_FILE = "/system/etc/selinux/targeted
 static const std::string TYPE_PREFIX = "u:object_r:";
 static const char *DEFAULT_CONTEXT = "u:object_r:default_param:s0";
 static pthread_once_t FC_ONCE = PTHREAD_ONCE_INIT;
+static pthread_once_t HILOG_ONCE = PTHREAD_ONCE_INIT;
 static std::unique_ptr<ParamContextsTrie> g_contextsTrie = nullptr;
 static ParamContextsList *g_contextsList = nullptr;
 static const int CONTEXTS_LENGTH_MIN = 16; // sizeof("x u:object_r:x:s0")
 static const int CONTEXTS_LENGTH_MAX = 1024;
+std::mutex g_loadContextsLock;
 } // namespace
 
 struct AuditMsg {
@@ -70,6 +74,16 @@ static void SelinuxSetCallback()
     selinux_set_callback(SELINUX_CB_LOG, cb);
     cb.func_audit = SelinuxAuditCallback;
     selinux_set_callback(SELINUX_CB_AUDIT, cb);
+}
+
+static void SelinuxSetHilogCallback()
+{
+    if (getpid() != 1) {
+        union selinux_callback cb;
+        SetSelinuxHilogLevel(SELINUX_HILOG_ERROR);
+        cb.func_log = SelinuxHilog;
+        selinux_set_callback(SELINUX_CB_LOG, cb);
+    }
 }
 
 static void ReleaseMem()
@@ -236,14 +250,18 @@ ParamContextsList *GetParamList()
 
 const char *GetParamLabel(const char *paraName)
 {
+    __selinux_once(HILOG_ONCE, SelinuxSetHilogCallback);
+
     if (paraName == nullptr) {
         selinux_log(SELINUX_ERROR, "paraName is null!\n");
         return DEFAULT_CONTEXT;
     }
-
-    if (g_contextsTrie == nullptr) {
-        if (!ParameterContextsLoad()) {
-            return DEFAULT_CONTEXT;
+    {
+        std::lock_guard<std::mutex> lock(g_loadContextsLock);
+        if (g_contextsTrie == nullptr) {
+            if (!ParameterContextsLoad()) {
+                return DEFAULT_CONTEXT;
+            }
         }
     }
 
