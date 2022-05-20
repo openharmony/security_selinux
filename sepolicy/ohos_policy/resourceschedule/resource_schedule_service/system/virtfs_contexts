@@ -11,4 +11,4 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-genfscon sysfs /sys/kernel/debug/tracing/trace_marker u:object_r:sys_kernel_debug_tracing_trace_marker_file:s0
+genfscon tracefs /trace_marker u:object_r:tracefs_trace_marker_file:s0
