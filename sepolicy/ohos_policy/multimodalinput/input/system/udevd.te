@@ -18,3 +18,6 @@ type udevd_socket, file_attr, data_file_attr;
 type udevd_file, file_attr, data_file_attr;
 
 init_daemon_domain(udevd);
+
+allow udevd data_file:dir { search getattr };
+allow udevd udevd:netlink_kobject_uevent_socket { read create bind };
