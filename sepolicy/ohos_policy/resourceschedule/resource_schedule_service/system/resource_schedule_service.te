@@ -1,0 +1,55 @@
+# Copyright (c) 2022 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+type resource_schedule_service, sadomain, domain;
+
+#service_binder
+allow resource_schedule_service accesstoken_service:binder { call };
+allow resource_schedule_service foundation:binder { call transfer };
+allow resource_schedule_service hiview:binder { call transfer };
+allow resource_schedule_service param_watcher:binder { call transfer };
+allow resource_schedule_service bgtaskmgr_service:binder { call transfer };
+#vendor
+allow resource_schedule_service vendor_lib_file:dir { search };
+allow resource_schedule_service vendor_lib_file:file { execute getattr map open read };
+#system
+allow resource_schedule_service system_basic_hap:process { setsched };
+allow resource_schedule_service system_bin_file:dir { search };
+allow resource_schedule_service system_core_hap:process { setsched };
+allow resource_schedule_service system_usr_file:dir { search map };
+allow resource_schedule_service system_usr_file:file { getattr read };
+#tracefs
+allow resource_schedule_service tracefs:dir { search };
+allow resource_schedule_service tracefs_trace_marker_file:file { open write };
+#dev
+allow resource_schedule_service dev_unix_socket:dir { search };
+allow resource_schedule_service dev_unix_socket:sock_file { write };
+#normal_hap
+allow resource_schedule_service normal_hap:process { setsched };
+#data
+allow resource_schedule_service data_file:dir { search };
+allow resource_schedule_service data_init_agent:dir { search };
+allow resource_schedule_service data_init_agent:file { ioctl open read append };
+#lib_file
+allow resource_schedule_service lib_file:lnk_file { read };
+#sys_file
+allow resource_schedule_service sys_file:file { getattr write open ioctl };
+#frame_aware_scha
+allow resource_schedule_service dev_sched_rtg_ctrl:chr_file { ioctl open read write };
+#allowxperm
+allowxperm resource_schedule_service data_init_agent:file ioctl { 0x5413 };
+allowxperm resource_schedule_service dev_sched_rtg_ctrl:chr_file ioctl { 0xab01 0xab02 };
+
+#conflict
+#allow resource_schedule_service resource_schedule_service:capability { dac_override dac_read_search };
+
