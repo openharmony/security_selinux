@@ -16,5 +16,5 @@
 
 /dev/unix/socket/hisysevent     u:object_r:hisysevent_socket:s0
 
-/data/log/LogService(/.*)?      u:object_r:hiview_file:s0
+/data/log/hiview(/.*)?          u:object_r:hiview_file:s0
 /data/system/hiview(/.*)?       u:object_r:hiview_file:s0
