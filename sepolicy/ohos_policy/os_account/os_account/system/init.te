@@ -14,8 +14,6 @@
 allow init accountmgr:process { rlimitinh siginh transition };
 dontaudit init accountmgr:process { noatsecure };
 
-allow init accountmgr:process { transition };
-
 #allow init accountmgr:binder { call transfer };
 
 allow accountmgr init:binder { call transfer };

@@ -13,3 +13,4 @@
 
 ams                                  u:object_r:ams_service:s0
 bms                                  u:object_r:bms_service:s0
+200                                  u:object_r:said_200_service:s0
