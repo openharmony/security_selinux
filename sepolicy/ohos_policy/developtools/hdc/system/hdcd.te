@@ -35,7 +35,6 @@ allow hdcd system_bin_file:dir { search };
 allow hdcd lib_file:lnk_file { read };
 allow hdcd dev_kmsg_file:chr_file { read open };
 allow hdcd data_local:dir { search };
-allow hdcd sh_exec:file { getattr execute read open map };
 allow hdcd vendor_lib_file:file { open map execute };
 
 allow hdcd dev_unix_socket:dir { search };
