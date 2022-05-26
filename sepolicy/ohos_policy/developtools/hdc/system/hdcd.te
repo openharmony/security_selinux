@@ -35,7 +35,7 @@ allow hdcd system_bin_file:dir { search };
 allow hdcd lib_file:lnk_file { read };
 allow hdcd dev_kmsg_file:chr_file { read open };
 allow hdcd data_local:dir { search };
-allow hdcd sh_exec:file { getattr execute read open execute_no_trans map };
+allow hdcd sh_exec:file { getattr execute read open map };
 allow hdcd vendor_lib_file:file { open map execute };
 
 allow hdcd dev_unix_socket:dir { search };
@@ -54,3 +54,6 @@ allow hdcd dev_block_file:lnk_file { read };
 allow hdcd dev_block_file:blk_file { ioctl };
 
 allow hdcd labeledfs:filesystem { remount };
+
+domain_auto_transition_pattern(hdcd, shell_exec, shell);
+domain_auto_transition_pattern(hdcd, sh_exec, sh);
