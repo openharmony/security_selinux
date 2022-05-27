@@ -93,16 +93,9 @@ type wifi_hal_service, sadomain,  domain;
 type wifi_hal_service_exec, exec_attr, file_attr, system_file_attr;
 #domain_auto_transition_pattern(init, wifi_hal_service_exec, wifi_hal_service);
 
-type hilogd, sadomain, domain;
-type hilogd_exec, exec_attr, file_attr, system_file_attr;
-#domain_auto_transition_pattern(init, hilogd_exec, hilogd);
-
 type faultloggerd, sadomain, domain;
 type faultloggerd_exec, exec_attr, file_attr, system_file_attr;
 #domain_auto_transition_pattern(init, faultloggerd_exec, faultloggerd);
-
-type hiview_exec, exec_attr, file_attr, system_file_attr;
-#domain_auto_transition_pattern(init, hiview_exec, hiview);
 
 type ispserver, sadomain, domain;
 type ispserver_exec, exec_attr, file_attr, system_file_attr;
