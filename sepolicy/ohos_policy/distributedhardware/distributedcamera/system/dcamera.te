@@ -11,8 +11,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-neverallow hdcd self:perf_event ~{ open read write kernel };
+type dcamera, sadomain, domain;
+type dcamera_exec, exec_attr, file_attr, system_file_attr;
 
-neverallow hdcd dev_input_file:chr_file never_write_file;
+init_daemon_domain(dcamera);
 
-neverallow hdcd { dev_fuse_file dev_port }:chr_file ~getattr;

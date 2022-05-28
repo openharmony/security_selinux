@@ -11,8 +11,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-neverallow hdcd self:perf_event ~{ open read write kernel };
+/system/bin/hilogd              u:object_r:hilogd_exec:s0
+/system/bin/hilog               u:object_r:hilog_exec:s0
 
-neverallow hdcd dev_input_file:chr_file never_write_file;
+/dev/unix/socket/hilogControl   u:object_r:hilog_control_socket:s0
+/dev/unix/socket/hilogInput     u:object_r:hilog_input_socket:s0
 
-neverallow hdcd { dev_fuse_file dev_port }:chr_file ~getattr;
+/data/log/hilog(/.*)?           u:object_r:data_hilogd_file:s0
+

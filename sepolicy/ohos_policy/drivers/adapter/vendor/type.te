@@ -12,6 +12,7 @@
 # limitations under the License.
 
 type blue_host, hdfdomain, domain;
+type a2dp_host, hdfdomain, domain;
 type sample_host, hdfdomain, domain;
 type usb_host, hdfdomain, domain;
 type usbfnMaster_host, hdfdomain, domain;
@@ -26,9 +27,10 @@ type riladapter_host, hdfdomain, domain;
 type sensor_dal_host, hdfdomain, domain;
 type vibrator_dal_host, hdfdomain, domain;
 type light_dal_host, hdfdomain, domain;
-type wifi_c_host, hdfdomain, domain;
 type disp_gralloc_host, hdfdomain, domain;
 type dcamera_host, hdfdomain, domain;
-type faceauth_host, hdfdomain, domain;
-type pinauth_host, hdfdomain, domain;
+type face_auth_host, hdfdomain, domain;
+type pin_auth_host, hdfdomain, domain;
 type user_auth_host, hdfdomain, domain;
+type fingerprint_auth_host, hdfdomain, domain;
+

@@ -15,7 +15,6 @@
 type multimodalinput, sadomain, domain;
 type accesstoken_service, sadomain, domain;
 type faceauth, sadomain, domain;
-type huks_service, sadomain, domain;
 type socperf_service, sadomain, domain;
 type distributedsche, sadomain, domain;
 type storage_manager, sadomain, domain;
@@ -74,9 +73,8 @@ type distributedfileservice, sadomain, domain;
 type distributedfiledaemon, sadomain, domain;
 type limit_domain, domain;
 type device_usage_statistics_service, sadomain, domain;
-type face_service, sadomain, domain;
 type thermal_sa, sadomain, domain;
-type pinauth_service,  sadomain, domain;
+type fingerprintauth, sadomain, domain;
 
 type watchdog_service, sadomain, domain;
 type watchdog_service_exec, exec_attr, file_attr, system_file_attr;
@@ -94,16 +92,9 @@ type wifi_hal_service, sadomain,  domain;
 type wifi_hal_service_exec, exec_attr, file_attr, system_file_attr;
 #domain_auto_transition_pattern(init, wifi_hal_service_exec, wifi_hal_service);
 
-type hilogd, sadomain, domain;
-type hilogd_exec, exec_attr, file_attr, system_file_attr;
-#domain_auto_transition_pattern(init, hilogd_exec, hilogd);
-
 type faultloggerd, sadomain, domain;
 type faultloggerd_exec, exec_attr, file_attr, system_file_attr;
 #domain_auto_transition_pattern(init, faultloggerd_exec, faultloggerd);
-
-type hiview_exec, exec_attr, file_attr, system_file_attr;
-#domain_auto_transition_pattern(init, hiview_exec, hiview);
 
 type ispserver, sadomain, domain;
 type ispserver_exec, exec_attr, file_attr, system_file_attr;
