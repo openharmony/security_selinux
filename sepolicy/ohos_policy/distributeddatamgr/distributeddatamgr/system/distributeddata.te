@@ -31,6 +31,10 @@ allow distributeddata data_misc_de:file { create getattr ioctl lock map open rea
 allow distributeddata data_service_el1_file:dir { add_name getattr open read search write };
 allow distributeddata data_service_el1_file:file { create getattr ioctl lock map open read write };
 allow distributeddata data_service_file:dir { search };
+
+#[冲突]avc:  denied  { get } for service=3510 pid=400 scontext=u:r:distributeddata:s0 tcontext=u:object_r:default_service:s0 tclass=samgr_class permissive=1
+#allow distributeddata default_service:samgr_class { get };
+
 allow distributeddata deviceauth_service:binder { call };
 allow distributeddata dev_ashmem_file:chr_file { open };
 allow distributeddata dev_unix_socket:dir { search };
@@ -59,6 +63,10 @@ allow distributeddata normal_hap:file { open read };
 
 allow distributeddata normal_hap_data_file:file { getattr lock };
 allow distributeddata proc_file:file { open read };
+allow distributeddata sa_accesstoken_manager_service:samgr_class { get };
+allow distributeddata sa_accountmgr:samgr_class { get };
+allow distributeddata sa_distributeddata_service:samgr_class { add get };
+allow distributeddata sa_param_watcher:samgr_class { get };
 allow distributeddata samain_exec:file { entrypoint execute read };
 allow distributeddata samgr:binder { call transfer };
 allow distributeddata sh:binder { call transfer };
