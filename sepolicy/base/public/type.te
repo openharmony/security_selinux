@@ -24,7 +24,6 @@ type ui_service, sadomain, domain;
 type d_bms, sadomain, domain;
 type wifi_manager_service, sadomain, domain;
 type softbus_server, sadomain, domain;
-type distributeddata, sadomain, domain;
 type usb_service, sadomain, domain;
 type medialibrary_service, sadomain, domain;
 type netdnative, domain;
