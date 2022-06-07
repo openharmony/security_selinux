@@ -50,9 +50,6 @@ allow dcamera hdf_hdi_display_gralloc_service:hdf_devmgr_class { get };
 #avc:  denied  { call } for  pid=2040 comm="DHEventbusHandl" scontext=u:r:dcamera:s0 tcontext=u:r:hdf_devmgr:s0 tclass=binder permissive=1
 allow dcamera hdf_devmgr:binder { call };
 
-#avc:  denied  { call } for  pid=2040 comm="dcamera" scontext=u:r:dcamera:s0 tcontext=u:r:limit_domain:s0 tclass=binder permissive=1
-#allow dcamera limit_domain:binder { call };
-
 #avc:  denied  { call } for  pid=2061 comm="ohos.dhardware." scontext=u:r:dcamera:s0 tcontext=u:r:media_service:s0 tclass=binder permissive=1
 #avc:  denied  { transfer } for  pid=2061 comm="ohos.dhardware." scontext=u:r:dcamera:s0 tcontext=u:r:media_service:s0 tclass=binder permissive=1
 allow dcamera media_service:binder { call transfer };
