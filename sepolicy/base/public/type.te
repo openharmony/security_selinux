@@ -33,7 +33,6 @@ type telephony_sa, sadomain, domain;
 type updater_sa, sadomain, domain;
 type camera_service, sadomain, domain;
 type media_service, sadomain, domain;
-type work_scheduler_service, sadomain, domain;
 type param_watcher, sadomain, domain;
 type useriam, sadomain, domain;
 type pinauth, sadomain, domain;
