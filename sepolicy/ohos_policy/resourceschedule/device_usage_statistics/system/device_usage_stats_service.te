@@ -11,6 +11,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+type device_usage_stats_service, sadomain, domain;
+
 allow device_usage_stats_service accesstoken_service:binder { call };
 allow device_usage_stats_service accountmgr:binder { call };
 allow device_usage_stats_service data_file:dir { search };

@@ -11,6 +11,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+type work_scheduler_service, sadomain, domain;
+
 allow work_scheduler_service accountmgr:binder { call };
 allow work_scheduler_service data_file:dir { search };
 allow work_scheduler_service data_service_el1_file:dir { search };
