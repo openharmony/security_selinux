@@ -47,6 +47,7 @@
 3503                                   u:object_r:sa_accesstoken_manager_service:s0
 3504                                   u:object_r:sa_token_sync_manager_service:s0
 3601                                   u:object_r:sa_sensor_service:s0
+3602                                   u:object_r:sa_miscdevice_service:s0
 3702                                   u:object_r:sa_time_service:s0
 3703                                   u:object_r:sa_inputmethod_service:s0
 3901                                   u:object_r:sa_param_watcher:s0
