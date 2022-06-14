@@ -11,8 +11,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+type bgtaskmgr_service, sadomain, domain;
+
+allow bgtaskmgr_service accountmgr:binder { call };
 allow bgtaskmgr_service accesstoken_service:binder { call };
 allow bgtaskmgr_service data_app_el1_file:file { getattr read };
+allow bgtaskmgr_service data_app_file:dir { search };
 allow bgtaskmgr_service data_file:dir { search };
 allow bgtaskmgr_service data_service_el1_file:dir { search };
 allow bgtaskmgr_service data_service_el1_file:file { getattr ioctl open write };
