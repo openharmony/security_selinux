@@ -40,3 +40,4 @@ allow dhardware sa_softbus_service:samgr_class { get };
 
 #avc:  denied  { search } for  pid=1966 comm="dhardware" name="socket" dev="tmpfs" ino=40 scontext=u:r:dhardware:s0 tcontext=u:object_r:dev_unix_socket:s0 tclass=dir permissive=1
 allow dhardware dev_unix_socket:dir { search };
+
