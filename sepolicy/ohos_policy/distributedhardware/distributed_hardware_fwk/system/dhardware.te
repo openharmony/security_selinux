@@ -14,6 +14,18 @@
 type dhardware, sadomain, domain;
 type sa_dhardware_service, sa_service_attr;
 
+#avc:  denied  { get_remote } for service=4801 pid=1966 scontext=u:r:dhardware:s0 tcontext=u:object_r:sa_dhardware_service:s0 tclass=samgr_class permissive=1
+allow dhardware sa_dhardware_service:samgr_class { get_remote };
+
+#avc:  denied  { get } for service=4607 pid=1966 scontext=u:r:dhardware:s0 tcontext=u:object_r:sa_foundation_dms:s0 tclass=samgr_class permissive=1
+allow dhardware sa_foundation_dms:samgr_class { get };
+
+#avc:  denied  { get } for service=4803 pid=1966 scontext=u:r:dhardware:s0 tcontext=u:object_r:sa_dcamera_source_service:s0 tclass=samgr_class permissive=1
+allow dhardware sa_dcamera_source_service:samgr_class { get };
+
+#avc:  denied  { get } for service=4804 pid=1966 scontext=u:r:dhardware:s0 tcontext=u:object_r:sa_dcamera_sink_service:s0 tclass=samgr_class permissive=1
+allow dhardware sa_dcamera_sink_service:samgr_class { get };
+
 #avc:  denied  { get } for service=3901 pid=1881 scontext=u:r:dhardware:s0 tcontext=u:object_r:sa_param_watcher:s0 tclass=samgr_class permissive=1
 allow dhardware sa_param_watcher:samgr_class { get };
 
@@ -25,3 +37,6 @@ allow dhardware sa_foundation_devicemanager_service:samgr_class { get };
 
 #avc:  denied  { get } for service=4700 pid=1915 scontext=u:r:dhardware:s0 tcontext=u:object_r:sa_softbus_service:s0 tclass=samgr_class permissive=1
 allow dhardware sa_softbus_service:samgr_class { get };
+
+#avc:  denied  { search } for  pid=1966 comm="dhardware" name="socket" dev="tmpfs" ino=40 scontext=u:r:dhardware:s0 tcontext=u:object_r:dev_unix_socket:s0 tclass=dir permissive=1
+allow dhardware dev_unix_socket:dir { search };
