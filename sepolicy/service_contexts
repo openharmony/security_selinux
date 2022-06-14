@@ -61,5 +61,7 @@
 4802                                   u:object_r:sa_foundation_devicemanager_service:s0
 4803                                   u:object_r:sa_dcamera_source_service:s0
 4804                                   u:object_r:sa_dcamera_sink_service:s0
+4807                                   u:object_r:sa_dscreen_source_service:s0
+4808                                   u:object_r:sa_dscreen_sink_service:s0
 5003                                   u:object_r:sa_storage_manager_service:s0
 5100                                   u:object_r:sa_device_service_manager:s0
