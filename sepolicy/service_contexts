@@ -16,7 +16,12 @@
 401                                    u:object_r:sa_foundation_bms:s0
 501                                    u:object_r:sa_foundation_appms:s0
 801                                    u:object_r:sa_accessibleabilityms:s0
-931                                    u:object_r:sa_useriam_userauth_service:s0
+901                                    u:object_r:sa_useriam_useridm_service:s0
+921                                    u:object_r:sa_useriam_userauth_service:s0
+931                                    u:object_r:sa_useriam_authexecutormgr_service:s0
+941                                    u:object_r:sa_useriam_pinauth_service:s0
+942                                    u:object_r:sa_useriam_faceauth_service:s0
+943                                    u:object_r:sa_useriam_fingerprintauth_service:s0
 1120                                   u:object_r:sa_wifi_device_ability:s0
 1121                                   u:object_r:sa_wifi_hotspot_ability:s0
 1123                                   u:object_r:sa_wifi_p2p_ability:s0
