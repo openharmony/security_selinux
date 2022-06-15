@@ -59,6 +59,7 @@
 4606                                   u:object_r:sa_foundation_wms:s0
 4607                                   u:object_r:sa_foundation_dms:s0
 4700                                   u:object_r:sa_softbus_service:s0
+4801                                   u:object_r:sa_dhardware_service:s0
 4802                                   u:object_r:sa_foundation_devicemanager_service:s0
 4803                                   u:object_r:sa_dcamera_source_service:s0
 4804                                   u:object_r:sa_dcamera_sink_service:s0
