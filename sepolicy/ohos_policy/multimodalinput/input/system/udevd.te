@@ -20,10 +20,10 @@ type udevd_file, file_attr, data_file_attr;
 init_daemon_domain(udevd);
 
 allow udevd data_file:dir { search getattr };
-allow udevd udevd:netlink_kobject_uevent_socket { read create bind };
 allow udevd dev_ptmx:chr_file { write getattr };
-allow udevd system_bin_file:dir search;
 allow udevd sh_exec:file { read open execute execute_no_trans map };
-allow udevd vendor_lib_file:dir search;
+allow udevd system_bin_file:dir { search };
 allow udevd tty_device:chr_file { open read write };
+allow udevd udevd:netlink_kobject_uevent_socket { read create bind };
 allow udevd udevd:unix_dgram_socket { sendto read };
+allow udevd vendor_lib_file:dir { search };
