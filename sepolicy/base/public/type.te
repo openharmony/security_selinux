@@ -14,7 +14,6 @@
 #type samgr, domain;
 type multimodalinput, sadomain, domain;
 type accesstoken_service, sadomain, domain;
-type faceauth, sadomain, domain;
 type socperf_service, sadomain, domain;
 type distributedsche, sadomain, domain;
 type storage_manager, sadomain, domain;
@@ -34,8 +33,6 @@ type updater_sa, sadomain, domain;
 type camera_service, sadomain, domain;
 type media_service, sadomain, domain;
 type param_watcher, sadomain, domain;
-type useriam, sadomain, domain;
-type pinauth, sadomain, domain;
 #type foundation, domain;
 type battery_stats, sadomain, domain;
 type token_sync_service, sadomain, domain;
@@ -65,7 +62,6 @@ type distributedfiledaemon, sadomain, domain;
 type limit_domain, domain;
 type device_usage_statistics_service, sadomain, domain;
 type thermal_sa, sadomain, domain;
-type fingerprintauth, sadomain, domain;
 
 type watchdog_service, sadomain, domain;
 type watchdog_service_exec, exec_attr, file_attr, system_file_attr;
