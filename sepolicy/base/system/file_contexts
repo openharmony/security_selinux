@@ -225,8 +225,6 @@
 
 /system/bin/watchdog_service        u:object_r:watchdog_service_exec:s0
 
-/system/bin/uinput_inject        u:object_r:uinput_inject_exec:s0
-
 /system/bin/lmks        u:object_r:lmks_exec:s0
 
 /vendor/bin/hdf_devmgr        u:object_r:hdf_devmgr_exec:s0
