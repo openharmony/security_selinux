@@ -12,6 +12,9 @@
 # limitations under the License.
 
 allow sh data_file:dir { search };
+allow sh data_init_agent:dir { search };
+allow sh data_init_agent:file { open };
+allow sh data_init_agent:file { read append };
 allow sh dev_unix_socket:dir { search };
 allow sh multimodalinput:binder { call };
 allow sh samgr:binder { call };
