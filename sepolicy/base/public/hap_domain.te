@@ -69,7 +69,7 @@ neverallow hap_domain domain:netlink_kobject_uevent_socket { write append };
 
 #no use ptrace
 neverallow hap_domain { domain -hap_domain }:process ptrace;
-neverallow { domain -hap_domain } hap_domain:process ptrace;
+neverallow { domain -hap_domain -processdump } hap_domain:process ptrace;
 
 #hap don't bother other domain.
 neverallow hap_domain { domain -hap_domain }:process { sigkill sigstop signal };
@@ -105,7 +105,7 @@ neverallow { domain -hdcd -hap_domain -appspawn -installs -foundation } data_app
 
 neverallow { domain -hap_domain -installs } hap_file_attr:dir ~read_dir_perms;
 
-neverallow hap_domain { domain -hap_domain }:process transition;
+neverallow hap_domain { domain -hap_domain -processdump }:process transition;
 neverallow hap_domain { domain -hap_domain }:process dyntransition;
 
 neverallow hap_domain domain:{ netlink_tcpdiag_socket netlink_nflog_socket netlink_xfrm_socket netlink_audit_socket netlink_dnrt_socket } *;

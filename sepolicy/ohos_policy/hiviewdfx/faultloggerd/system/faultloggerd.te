@@ -30,23 +30,21 @@ define(`use_faultloggerd_file', `
 ##########################################
 ## Read/Use/Control faultloggerd rules: ##
 ##########################################
-use_faultloggerd(hap_domain)
-use_faultloggerd(sadomain)
 use_faultloggerd({ domain -limit_domain })
-use_faultloggerd_file(hiview)
+use_faultloggerd(normal_hap)
 
 #########################
 ## faultloggerd rules: ##
 #########################
+allow faultloggerd self:capability dac_override;
+
 allow faultloggerd data_file:dir search;
 allow faultloggerd data_init_agent:dir search;
 allow faultloggerd dev_unix_socket:dir search;
 allow faultloggerd data_log:dir search;
 
 allow faultloggerd data_init_agent:file { append ioctl open read };
-allow faultloggerd faultloggerd_temp_file:dir { add_name write open read search };
-allow faultloggerd faultloggerd_temp_file:file { create setattr write open read };
+allow faultloggerd faultloggerd_temp_file:dir { add_name remove_name write open read search };
+allow faultloggerd faultloggerd_temp_file:file { create getattr setattr write open read unlink };
 
-# conflict with neverallow
-# allow faultloggerd unlabeled:dir search;
-# allow faultloggerd self:capability dac_override;
+allow faultloggerd_temp_file labeledfs:filesystem { associate };

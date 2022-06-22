@@ -18,8 +18,19 @@ define(`use_processdump', `
     allow $1 processdump_exec:file { execute execute_no_trans getattr map open read };
 ')
 
-# use_processdump({ shell hiview })
 use_processdump({ domain -limit_domain -init })
+
+########################
+## processdump rules: ##
+########################
+#============= domain =================
+allow domain processdump:process { share };
+allow domain self:fifo_file { write };
+allow processdump { domain -processdump }:process ptrace;
+allow processdump domain:fd use;
+allow processdump domain:fifo_file { read write };
+allow processdump domain:dir { getattr open read search };
+allow processdump domain:file { getattr open read };
 
 #============= write event to hiview =========
 allow processdump hiview:binder { call transfer };
@@ -30,9 +41,9 @@ allow processdump faultloggerd_temp_file:file { getattr open read write };
 allow processdump faultloggerd:fd { use };
 allow processdump faultloggerd:unix_stream_socket { connectto };
 allow processdump faultloggerd_socket:sock_file write;
-allow faultloggerd_temp_file labeledfs:filesystem { associate };
 
 #============= processdump ==============
+allow processdump self:capability { dac_read_search sys_ptrace };
 allow processdump processdump_exec:file { entrypoint };
 allow processdump processdump:process { fork };
 allow processdump processdump:dir { search };
@@ -68,11 +79,12 @@ allow processdump system_etc_file:file { getattr open read };
 allow processdump vendor_file:file { getattr map open read };
 allow processdump vendor_file:dir { getattr open read search };
 
-#============ proc_xxx & tmpfs ===================
+#============ proc_xxx & tmpfs & debugfs ===================
 allow processdump proc_file:dir { search };
 allow processdump proc_file:lnk_file { read };
 allow processdump tmpfs:dir { search };
 allow processdump tmpfs:lnk_file { read };
+allow processdump debugfs:dir { search };
 
 #============ normal_hap =================
 allow processdump normal_hap:dir { getattr open read search };
@@ -96,24 +108,14 @@ allow processdump init:netlink_kobject_uevent_socket { read write };
 allow processdump init:unix_dgram_socket { sendto };
 allow processdump init:unix_stream_socket { read write };
 
-#============= domain =================
-allow domain processdump:process { share };
-allow domain self:fifo_file { write };
-allow processdump domain:fd use;
-allow processdump domain:fifo_file { read write };
-allow processdump debugfs:dir { search };
-allow processdump domain:dir { getattr open read search };
-allow processdump domain:file { getattr open read };
-
 #============ sh & appspawn_exec & foundation ===========
-allow processdump sh:process ptrace;
 allow processdump sh:fd use;
 allow processdump appspawn_exec:file { getattr map open read };
 allow processdump foundation:dir { getattr open read search };
 allow processdump foundation:file { getattr open read };
-allow processdump foundation:process ptrace;
+allow processdump samain_exec:file { getattr map open read };
 
-# conflict with neverallow
-# allow processdump normal_hap:process ptrace;
-# allow processdump self:capability { dac_read_search sys_ptrace };
-# allow processdump unlabeled:dir search;
+############################
+## neverallow assertions: ##
+############################
+neverallow processdump self:process ptrace;
