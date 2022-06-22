@@ -43,3 +43,4 @@ allow dhardware dev_unix_socket:dir { search };
 
 #avc:  denied  { add } for service=4801 pid=2409 scontext=u:r:dhardware:s0 tcontext=u:object_r:sa_dhardware_service:s0 tclass=samgr_class permissive=1
 allow dhardware sa_dhardware_service:samgr_class { add };
+
