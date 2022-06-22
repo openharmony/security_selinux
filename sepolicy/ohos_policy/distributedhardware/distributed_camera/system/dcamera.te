@@ -43,7 +43,7 @@ allow dcamera dcamera_host:binder { call };
 #avc:  denied  { write } for  pid=2166 comm="dcamera" scontext=u:r:dcamera:s0 tcontext=u:r:dcamera:s0 tclass=netlink_route_socket permissive=1
 #avc:  denied  { nlmsg_read } for  pid=2166 comm="dcamera" scontext=u:r:dcamera:s0 tcontext=u:r:dcamera:s0 tclass=netlink_route_socket permissive=1
 #avc:  denied  { read } for  pid=2166 comm="dcamera" scontext=u:r:dcamera:s0 tcontext=u:r:dcamera:s0 tclass=netlink_route_socket permissive=1
-allow dcamera dcamera:netlink_route_socket { create nlmsg_read read write }
+allow dcamera dcamera:netlink_route_socket { create nlmsg_read read write };
 
 #avc:  denied  { search } for  pid=2047 comm="dcamera" name="socket" dev="tmpfs" ino=38 scontext=u:r:dcamera:s0 tcontext=u:object_r:dev_unix_socket:s0 tclass=dir permissive=1
 allow dcamera dev_unix_socket:dir { search };
@@ -102,5 +102,5 @@ allow dcamera softbus_server:binder { call transfer };
 allow dcamera softbus_server:fd { use };
 
 #avc:  denied  { node_bind } for  pid=2166 comm="Fillp_core_210" scontext=u:r:dcamera:s0 tcontext=u:object_r:node:s0 tclass=udp_socket permissive=1
-allow dcamera node:udp_socket { node_bind }
+allow dcamera node:udp_socket { node_bind };
 
