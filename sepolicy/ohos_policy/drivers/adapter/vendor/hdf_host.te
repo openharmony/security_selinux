@@ -209,3 +209,20 @@ allow fingerprint_auth_host sa_device_service_manager:samgr_class { get };
 #avc:  denied  { add } for service=motion_interface_service pid=346 scontext=u:r:motion_dal_host:s0 tcontext=u:object_r:hdf_motion_interface_service:s0 tclass=hdf_devmgr_class
 allow motion_dal_host hdf_device_manager:hdf_devmgr_class { get };
 allow motion_dal_host hdf_motion_interface_service:hdf_devmgr_class { add };
+
+allow sh hdf_sensor_interface_service:hdf_devmgr_class { get };
+allow sh sa_device_service_manager:samgr_class { get };
+
+allow sensor_dal_host sa_device_service_manager:samgr_class { get };
+
+allow sensors sa_miscdevice_service:samgr_class { add };
+allow sensors sa_param_watcher:samgr_class { get };
+
+allow light_dal_host sa_device_service_manager:samgr_class { get };
+
+allow vibrator_dal_host sa_device_service_manager:samgr_class { get };
+
+allow motion_dal_host sa_device_service_manager:samgr_class { get };
+
+allow sh hdf_light_interface_service:hdf_devmgr_class { get };
+allow sh hdf_vibrator_interface_service:hdf_devmgr_class { get };
