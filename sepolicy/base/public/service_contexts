@@ -74,3 +74,4 @@
 4808                                   u:object_r:sa_dscreen_sink_service:s0
 5003                                   u:object_r:sa_storage_manager_service:s0
 5100                                   u:object_r:sa_device_service_manager:s0
+6001                                   u:object_r:sa_device_profile_service:s0
