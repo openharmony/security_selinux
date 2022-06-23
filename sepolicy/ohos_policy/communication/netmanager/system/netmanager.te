@@ -1,0 +1,43 @@
+# Copyright (c) 2022 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+allow netmanager accesstoken_service:binder { call };
+allow netmanager data_data_file:dir { search };
+allow netmanager data_data_file:file { open read };
+allow netmanager data_dhcp:dir { add_name remove_name search write };
+allow netmanager data_dhcp:file { create getattr ioctl lock open read setattr unlink write write open };
+allow netmanager data_file:dir { search };
+allow netmanager data_init_agent:dir { search };
+allow netmanager data_init_agent:file { ioctl open read append };
+allow netmanager data_system:dir { add_name search write };
+allow netmanager dev_unix_socket:dir { search };
+allow netmanager download_server:binder { call };
+allow netmanager foundation:binder { call transfer };
+allow netmanager netmanager:netlink_route_socket { create nlmsg_read read write };
+allow netmanager netmanager:packet_socket { bind create read write };
+allow netmanager netmanager:tcp_socket { connect create getattr getopt read setopt write };
+allow netmanager netmanager:udp_socket { bind connect create getattr ioctl read write };
+allow netmanager netmanager:unix_dgram_socket { ioctl };
+allow netmanager netsysnative:binder { call };
+allow netmanager node:udp_socket { node_bind };
+allow netmanager port:tcp_socket { name_connect };
+allow netmanager system_bin_file:dir { search };
+allow netmanager system_bin_file:file { execute execute_no_trans map read open };
+allow netmanager system_core_hap:binder { call };
+allow netmanager telephony_sa:binder { call };
+allow netmanager time_service:binder { call };
+allow netmanager wifi_manager_service:binder { call };
+allowxperm netmanager data_dhcp:file ioctl { 0x5413 };
+allowxperm netmanager data_init_agent:file ioctl { 0x5413 };
+allowxperm netmanager netmanager:udp_socket ioctl { 0x8916 0x891c 0x8933 };
+allowxperm netmanager netmanager:unix_dgram_socket ioctl { 0x8910 };
