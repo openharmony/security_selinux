@@ -13,3 +13,9 @@
 
 #avc:  denied  { get } for service=3601 pid=1720 scontext=u:r:normal_hap:s0 tcontext=u:object_r:sa_sensor_service:s0 tclass=samgr_class permissive=1
 allow normal_hap sa_sensor_service:samgr_class { get };
+
+#avc:  denied  { call } for  pid=2335 comm="jsThread-1" scontext=u:r:normal_hap:s0 tcontext=u:r:sensors:s0 tclass=binder permissive=1
+allow normal_hap sensors:binder { call };
+
+#avc:  denied  { transfer } for  pid=2335 comm="jsThread-1" scontext=u:r:normal_hap:s0 tcontext=u:r:sensors:s0 tclass=binder permissive=1
+allow normal_hap sensors:binder { transfer };
