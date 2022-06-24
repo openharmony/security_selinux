@@ -12,3 +12,4 @@
 # limitations under the License.
 
 allow wifi_manager_service netmanager:binder { call };
+

@@ -13,3 +13,4 @@
 
 allow system_core_hap netmanager:binder { call };
 allow system_core_hap netmanager:binder { transfer };
+
