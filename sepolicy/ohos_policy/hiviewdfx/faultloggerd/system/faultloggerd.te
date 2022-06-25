@@ -36,7 +36,7 @@ use_faultloggerd(normal_hap)
 #########################
 ## faultloggerd rules: ##
 #########################
-allow faultloggerd self:capability dac_override;
+# allow faultloggerd self:capability dac_override; # conflict with neverallow
 
 allow faultloggerd data_file:dir search;
 allow faultloggerd data_init_agent:dir search;
