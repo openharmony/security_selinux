@@ -11,14 +11,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-allow sh bgtaskmgr_service:dir { getattr search };
-allow sh bgtaskmgr_service:file { open read };
-allow sh bgtaskmgr_service:process { sigkill };
+type hdf_cellular_radio1, hdf_service_attr;
+type hdf_cellular_radio_ext, hdf_service_attr;
 
-allow sh device_usage_stats_service:dir { getattr search };
-allow sh device_usage_stats_service:file { open read };
-allow sh device_usage_stats_service:process { sigkill };
+allow riladapter_host hdf_cellular_radio1:hdf_devmgr_class add;
+allow riladapter_host hdf_device_manager:hdf_devmgr_class get;
+allow riladapter_host sa_device_service_manager:samgr_class get;
+allow riladapter_host sa_foundation_powermgr_service:samgr_class get;
 
-allow sh work_scheduler_service:dir { getattr search };
-allow sh work_scheduler_service:file { open read };
-allow sh work_scheduler_service:process { sigkill };

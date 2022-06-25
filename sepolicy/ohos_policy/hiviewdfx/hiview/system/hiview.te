@@ -86,6 +86,9 @@ allow hiview tracefs_trace_marker_file:file { write open };
 allow hiview vendor_lib_file:dir { search };
 allow hiview vendor_lib_file:file { read open getattr map execute };
 
+allow hiview bgtaskmgr_service:dir { search };
+allow hiview bgtaskmgr_service:file { open read };
+
 #avc:  denied  { get } for service=3304 pid=618 scontext=u:r:hiview:s0 tcontext=u:object_r:sa_batterystats_service:s0 tclass=samgr_class permissive=1
 allow hiview sa_batterystats_service:samgr_class { get };
 
@@ -93,4 +96,8 @@ allow hiview sa_batterystats_service:samgr_class { get };
 allow hiview sa_foundation_powermgr_service:samgr_class { get };
 
 allowxperm hiview data_init_agent:file ioctl { 0x5413 };
+
+allow hiview sa_sys_event_service:samgr_class { add get };
+allow hiview sa_hiview_service:samgr_class { add get };
+allow hiview sa_hiview_faultlogger_service:samgr_class  { add get };
 
