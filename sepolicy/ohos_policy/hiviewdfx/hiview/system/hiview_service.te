@@ -11,6 +11,4 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-type sa_sys_event_service, sa_service_attr;
-type sa_hiview_service, sa_service_attr;
-type sa_hiview_faultlogger_service, sa_service_attr;
+allow sh sa_hiview_service:samgr_class get;
