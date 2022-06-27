@@ -20,14 +20,33 @@ allow sensors hdf_vibrator_interface_service:hdf_devmgr_class { get };
 #avc:  denied  { get } for service=sensor_interface_service pid=655 scontext=u:r:sensors:s0 tcontext=u:object_r:hdf_sensor_interface_service:s0 tclass=hdf_devmgr_class permissive=1
 allow sensors hdf_sensor_interface_service:hdf_devmgr_class { get };
 
-#avc:  denied  { get } for service=vibrator_interface_service pid=655 scontext=u:r:sensors:s0 tcontext=u:object_r:hdf_vibrator_interface_service:s0 tclass=hdf_devmgr_class permissive=1
-allow sensors hdf_vibrator_interface_service:hdf_devmgr_class { get };
-
-#avc:  denied  { get } for service=3503 pid=620 scontext=u:r:sensors:s0 tcontext=u:object_r:sa_accesstoken_manager_service:s0 tclass=samgr_class permissive=1
-allow sensors sa_accesstoken_manager_service:samgr_class { get };
-
 #avc:  denied  { get } for service=5100 pid=546 scontext=u:r:sensors:s0 tcontext=u:object_r:sa_device_service_manager:s0 tclass=samgr_class permissive=1
 allow sensors sa_device_service_manager:samgr_class { get };
 
 #avc:  denied  { add } for service=3601 pid=572 scontext=u:r:sensors:s0 tcontext=u:object_r:sa_sensor_service:s0 tclass=samgr_class permissive=1
 allow sensors sa_sensor_service:samgr_class { add };
+
+#avc:  denied  { call } for  pid=2061 comm="sensor_host" scontext=u:r:sensor_host:s0 tcontext=u:r:sensors:s0 tclass=binder permissive=1
+allow sensors sensor_host:binder { call };
+
+#avc:  denied  { call } for  pid=2043 comm="sensors" scontext=u:r:sensors:s0 tcontext=u:r:accesstoken_service:s0 tclass=binder permissive=1
+allow sensors accesstoken_service:binder { call };
+
+#avc:  denied  { use } for  pid=1963 comm="jsThread-1" path="socket:[26923]" dev="sockfs" ino=26923 scontext=u:r:sensors:s0 tcontext=u:r:normal_hap:s0 tclass=fd permissive=1
+allow sensors normal_hap:fd { use };
+
+#avc:  denied  { read write } for  pid=1963 comm="jsThread-1" path="socket:[26923]" dev="sockfs" ino=26923 scontext=u:r:sensors:s0 tcontext=u:r:normal_hap:s0 tclass=unix_stream_socket permissive=1
+allow sensors normal_hap:unix_stream_socket { read write };
+
+#avc:  denied  { call } for  pid=645 comm="sensors" scontext=u:r:sensors:s0 tcontext=u:r:normal_hap:s0 tclass=binder permissive=1
+allow sensors normal_hap:binder { call };
+
+#avc:  denied  { setopt } for  pid=650 comm="sensors" scontext=u:r:sensors:s0 tcontext=u:r:sensors:s0 tclass=unix_dgram_socket permissive=1
+#avc:  denied  { getopt } for  pid=645 comm="sensors" scontext=u:r:sensors:s0 tcontext=u:r:sensors:s0 tclass=unix_dgram_socket permissive=1
+allow sensors sensors:unix_dgram_socket { getopt setopt };
+
+#avc:  denied  { search } for  pid=645 comm="sensors" name="socket" dev="tmpfs" ino=40 scontext=u:r:sensors:s0 tcontext=u:object_r:dev_unix_socket:s0 tclass=dir permissive=1
+allow sensors dev_unix_socket:dir { search };
+
+#avc:  denied  { call } for  pid=645 comm="sensors" scontext=u:r:sensors:s0 tcontext=u:r:vibrator_host:s0 tclass=binder permissive=1
+allow sensors vibrator_host:binder { call };
