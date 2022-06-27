@@ -24,7 +24,7 @@ allow udevd data_file:file { create unlink open write };
 allow udevd dev_dri_file:chr_file { getattr write };
 allow udevd dev_dri_file:dir { add_name search write };
 allow udevd dev_file:dir { add_name create write };
-allow udevd dev_file:lnk_file { create };
+allow udevd dev_file:lnk_file { create getattr };
 allow udevd dev_ptmx:chr_file { write getattr };
 allow udevd sh_exec:file { read open execute execute_no_trans map };
 allow udevd system_bin_file:dir { search };
