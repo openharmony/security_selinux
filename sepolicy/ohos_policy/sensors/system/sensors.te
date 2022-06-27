@@ -50,3 +50,10 @@ allow sensors dev_unix_socket:dir { search };
 
 #avc:  denied  { call } for  pid=645 comm="sensors" scontext=u:r:sensors:s0 tcontext=u:r:vibrator_host:s0 tclass=binder permissive=1
 allow sensors vibrator_host:binder { call };
+
+#avc:  denied  { search } for  pid=451 comm="sensors" name="/" dev="tracefs" ino=1 scontext=u:r:sensors:s0 tcontext=u:object_r:tracefs:s0 tclass=dir permissive=1
+allow sensors tracefs:dir { search };
+
+#avc:  denied  { write } for  pid=451 comm="sensors" name="trace_marker" dev="tracefs" ino=15134 scontext=u:r:sensors:s0 tcontext=u:object_r:tracefs_trace_marker_file:s0 tclass=file permissive=1
+#avc:  denied  { open } for  pid=451 comm="sensors" path="/sys/kernel/debug/tracing/trace_marker" dev="tracefs" ino=15134 scontext=u:r:sensors:s0 tcontext=u:object_r:tracefs_trace_marker_file:s0 tclass=file permissive=1
+allow sensors tracefs_trace_marker_file:file { write open };
