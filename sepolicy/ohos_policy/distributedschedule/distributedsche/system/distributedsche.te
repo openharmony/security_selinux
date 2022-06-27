@@ -12,5 +12,24 @@
 # limitations under the License.
 
 #avc:  denied  { add } for service=1401 pid=406 scontext=u:r:distributedsche:s0 tcontext=u:object_r:sa_1401_service:s0 tclass=samgr_class permissive=1
-allow distributedsche sa_distributeschedule:samgr_class { add };
-
+allow distributedsche sa_distributeschedule:samgr_class { add get_remote };
+allow distributedsche sa_distributeddata_service:samgr_class { get };
+allow distributedsche sa_softbus_service:samgr_class { get };
+allow distributedsche sa_param_watcher:samgr_class { get };
+allow distributedsche sa_accesstoken_manager_service:samgr_class { get };
+allow distributedsche sa_foundation_bms:samgr_class { get };
+allow distributedsche sa_accountmgr:samgr_class { get };
+allow distributedsche sa_foundation_abilityms:samgr_class { get };
+allow distributedsche accesstoken_service:binder { call };
+allow distributedsche accountmgr:binder { call };
+allow distributedsche deviceauth_service:binder { call };
+allow distributedsche dev_ashmem_file:chr_file { open };
+allow distributedsche dev_unix_socket:dir { search };
+allow distributedsche distributeddata:binder { call };
+allow distributedsche foundation:binder { call transfer };
+allow distributedsche normal_hap:binder { call };
+allow distributedsche proc_cpuinfo_file:file { read };
+allow distributedsche proc_file:file { open read };
+allow distributedsche softbus_server:binder { call };
+allow distributedsche softbus_server:fd { use };
+allow distributedsche softbus_server:tcp_socket { read setopt write };

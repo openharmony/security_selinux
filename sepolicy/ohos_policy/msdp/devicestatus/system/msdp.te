@@ -13,3 +13,4 @@
 
 allow msdp_sa dev_unix_socket:dir search;
 allow msdp_sa sh:binder call;
+allow msdp_sa accesstoken_service:binder call;

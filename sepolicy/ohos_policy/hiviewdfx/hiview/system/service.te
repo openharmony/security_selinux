@@ -12,4 +12,5 @@
 # limitations under the License.
 
 type sa_sys_event_service, sa_service_attr;
-
+type sa_hiview_service, sa_service_attr;
+type sa_hiview_faultlogger_service, sa_service_attr;

@@ -11,4 +11,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-/system/etc/param/display.para           u:object_r:system_etc_param_display_para_file:s0
+allow sh hdf_cellular_radio1:hdf_devmgr_class get;
+allow sh sa_foundation_tel_call_manager:samgr_class get;
+allow sh sa_foundation_tel_state_registry:samgr_class get;
+allow sh sa_telephony_tel_cellular_call:samgr_class get;
+allow sh sa_telephony_tel_cellular_data:samgr_class get;
+allow sh sa_telephony_tel_core_service:samgr_class get;
+allow sh sa_telephony_tel_ims:samgr_class get;
+allow sh sa_telephony_tel_sms_mms:samgr_class get;
+
