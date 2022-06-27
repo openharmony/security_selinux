@@ -34,7 +34,7 @@ neverallow {
 
 neverallow {
     domain
-#    -storage_daemon
+    -storage_daemon
 } data_user_file:file {
     never_execute_file
 };

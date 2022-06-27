@@ -11,8 +11,5 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-#installs
-/system/bin/installs u:object_r:installs_exec:s0
+type foundation_data_file, file_attr, data_file_attr;
 
-# for sa_main Service
-/system/bin/sa_main u:object_r:samain_exec:s0

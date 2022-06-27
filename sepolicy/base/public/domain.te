@@ -177,7 +177,7 @@ neverallow * self:process { execstack execheap };
 #/dev/v4l
 #neverallow { domain -ueventd } dev_file:{ file chr_file blk_file } *;
 
-neverallow { domain -kernel -init -misc -updater_sa } dev_attr:blk_file { open read write };
+neverallow { domain -kernel -init -misc -updater_sa -storage_daemon } dev_attr:blk_file { open read write };
 # only init can operate fs
 neverallow { domain -init -storage_daemon -hdcd -hap_domain } *:filesystem ~{ getattr };
 
@@ -255,7 +255,7 @@ neverallow * self:{ capability cap_userns } ipc_owner;
 neverallow { domain -netsysnative } self:{ capability cap_userns } sys_module;
 neverallow { domain -init } self:{ capability cap_userns } sys_rawio;
 neverallow { domain -init } self:{ capability cap_userns } sys_chroot;
-neverallow { domain -hidumper_service -init -memmgrservice } self:{ capability cap_userns } sys_ptrace;
+neverallow { domain -hidumper_service -init -memmgrservice -storage_daemon } self:{ capability cap_userns } sys_ptrace;
 neverallow * self:{ capability cap_userns } sys_pacct;
 neverallow { domain -init -normal_hap -system_basic_hap -storage_daemon } self:{ capability cap_userns } sys_admin;
 neverallow { domain -init } self:{ capability cap_userns } sys_boot;
@@ -263,7 +263,7 @@ neverallow { domain -render_service } self:{ capability cap_userns } sys_nice;
 neverallow { domain -init -memmgrservice } self:{ capability cap_userns } sys_resource;
 neverallow { domain -time_service } self:{ capability cap_userns } sys_time;
 neverallow * self:{ capability cap_userns } sys_tty_config;
-neverallow { domain -ueventd -kernel } self:{ capability cap_userns } mknod;
+neverallow { domain -ueventd -kernel -storage_daemon } self:{ capability cap_userns } mknod;
 neverallow * self:{ capability cap_userns } lease;
 neverallow * self:{ capability cap_userns } audit_write;
 neverallow * self:{ capability cap_userns } audit_control;
@@ -276,3 +276,4 @@ neverallow { domain -power_host } self:{ capability2 cap2_userns } block_suspend
 neverallow * self:{ capability2 cap2_userns } audit_read;
 neverallow { domain -hdcd } self:{ capability2 cap2_userns } checkpoint_restore;
 neverallow * self:{ capability2 cap2_userns } perfmon;
+neverallow { domain -storage_manager -hidumper_service -samgr } storage_daemon:{ binder } call;
