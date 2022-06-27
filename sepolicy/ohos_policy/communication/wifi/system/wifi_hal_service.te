@@ -48,3 +48,4 @@ allow wifi_hal_service wifi_manager_service:process { signal };
 allowxperm wifi_hal_service wifi_hal_service:packet_socket ioctl { 0x8927 0x8933 };
 allowxperm wifi_hal_service wifi_hal_service:udp_socket ioctl { 0x8913 0x8914 0x8915 0x8927 };
 allowxperm wifi_hal_service wifi_hal_service:unix_dgram_socket ioctl { 0x8933 };
+
