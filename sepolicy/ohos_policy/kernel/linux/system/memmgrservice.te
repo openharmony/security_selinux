@@ -25,7 +25,8 @@ allow memmgrservice foundation:binder { call transfer };
 allow memmgrservice memmgrservice:capability { kill sys_resource dac_override };
 allow memmgrservice normal_hap:file { write };
 allow memmgrservice normal_hap:process { sigkill };
-allow memmgrservice proc_file:file { write open };
+# denied  { read } for  pid=274 comm="event_runner#9" name="enable" dev="proc" ino=305072 scontext=u:r:memmgrservice:s0 tcontext=u:object_r:proc_file:s0 tclass=file permissive=1
+allow memmgrservice proc_file:file { write open read };
 allow memmgrservice proc_meminfo_file:file { open read};
 allow memmgrservice system_basic_hap:file { write };
 allow memmgrservice system_basic_hap:process { sigkill };
