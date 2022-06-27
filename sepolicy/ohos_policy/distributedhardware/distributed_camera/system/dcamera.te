@@ -104,6 +104,9 @@ allow dcamera sa_dcamera_sink_service:samgr_class { add get_remote };
 #avc:  denied  { get } for service=5100 pid=2068 scontext=u:r:dcamera:s0 tcontext=u:object_r:sa_device_service_manager:s0 tclass=samgr_class permissive=1
 allow dcamera sa_device_service_manager:samgr_class { get };
 
+#avc:  denied  { get } for service=3008 pid=2475 scontext=u:r:dcamera:s0 tcontext=u:object_r:sa_camera_service:s0 tclass=samgr_class permissive=1
+allow dcamera sa_camera_service:samgr_class { get };
+
 #avc:  denied  { get } for service=401 pid=2490 scontext=u:r:dcamera:s0 tcontext=u:object_r:sa_foundation_bms:s0 tclass=samgr_class permissive=1
 allow dcamera sa_foundation_bms:samgr_class { get };
 
