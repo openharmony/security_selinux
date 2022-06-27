@@ -11,9 +11,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-type updater_sa, sadomain, domain;
-
-allow updater_sa dev_unix_socket:dir { search };
-allow updater_sa port:tcp_socket { name_connect };
-allow updater_sa updater_sa:tcp_socket { connect create read setopt write };
-allow updater_sa updater_sa:unix_dgram_socket { getopt setopt }
+allow normal_hap dev_unix_socket:dir { search };
+allow normal_hap system_bin_file:dir { search };
+allow normal_hap system_bin_file:file { execute read };
