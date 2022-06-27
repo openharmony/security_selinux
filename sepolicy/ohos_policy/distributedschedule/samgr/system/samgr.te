@@ -77,5 +77,9 @@ allow samgr system_file:file { getattr map open read };
 
 allow samgr system_profile_file:dir { open read };
 
+#avc:  denied  { getopt } for  pid=245 comm="samgr" scontext=u:r:samgr:s0 tcontext=u:r:samgr:s0 tclass=unix_dgram_socket permissive=1
+#avc:  denied  { setopt } for  pid=245 comm="samgr" scontext=u:r:samgr:s0 tcontext=u:r:samgr:s0 tclass=unix_dgram_socket permissive=1
+allow samgr samgr:unix_dgram_socket { getopt setopt };
+
 allowxperm samgr dev_binder_file:chr_file ioctl { 0x6207 };
 
