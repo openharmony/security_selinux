@@ -1,0 +1,54 @@
+# Copyright (c) 2022 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+allow normal_hap configfs:dir { mounton };
+allow normal_hap data_app_el1_file:dir { mounton };
+allow normal_hap data_app_el1_file:file { execute };
+allow normal_hap data_service_el2_file:dir { read open search };
+allow normal_hap data_service_el2_hmdfs:dir { getattr read open search };
+allow normal_hap data_user_file:dir { getattr read open search };
+allow normal_hap dev_ashmem_file:chr_file { open };
+allow normal_hap dev_file:dir { mounton };
+allow normal_hap dev_unix_socket:dir { search };
+allow normal_hap distributeddata:binder { call transfer };
+allow normal_hap dslm_service:binder { call transfer };
+allow normal_hap hmdfs:dir { mounton };
+allow normal_hap huks_service:binder { call };
+allow normal_hap labeledfs:filesystem { unmount };
+allow normal_hap normal_hap:capability { setgid setuid sys_admin };
+allow normal_hap normal_hap_data_file:dir { mounton open read remove_name search };
+allow normal_hap normal_hap_data_file:file { getattr ioctl lock map read write open unlink };
+allow normal_hap normal_hap:unix_dgram_socket { getopt setopt };
+allow normal_hap proc_file:dir { mounton };
+allow normal_hap sa_device_security_level_manager_service:samgr_class { get };
+allow normal_hap sa_distributeddata_service:samgr_class { get };
+allow normal_hap sa_foundation_abilityms:samgr_class { get };
+allow normal_hap sa_foundation_appms:samgr_class { get };
+allow normal_hap sa_foundation_bms:samgr_class { get };
+allow normal_hap sa_foundation_cesfwk_service:samgr_class { get };
+allow normal_hap sa_foundation_devicemanager_service:samgr_class { get };
+allow normal_hap sa_huks_service:samgr_class { get };
+allow normal_hap sa_param_watcher:samgr_class { get };
+allow normal_hap sys_file:dir { mounton };
+allow normal_hap system_bin_file:dir { mounton };
+allow normal_hap system_etc_file:dir { mounton };
+allow normal_hap system_file:dir { mounton };
+allow normal_hap system_fonts_file:dir { mounton };
+allow normal_hap system_lib_file:dir { mounton open read };
+allow normal_hap system_profile_file:dir { mounton };
+allow normal_hap system_usr_file:dir { mounton };
+allow normal_hap tmpfs:lnk_file { create };
+allow normal_hap tracefs:dir { search };
+allow normal_hap tracefs_trace_marker_file:file { open write };
+allow normal_hap vendor_lib_file:dir { mounton };
+allowxperm normal_hap normal_hap_data_file:file ioctl { 0xf50c };
