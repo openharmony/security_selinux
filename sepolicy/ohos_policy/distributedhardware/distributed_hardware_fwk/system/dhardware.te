@@ -56,3 +56,15 @@ allow dhardware dcamera:binder { call };
 #avc:  denied  { transfer } for  pid=2315 comm="dhardware" scontext=u:r:dhardware:s0 tcontext=u:r:dcamera:s0 tclass=binder permissive=1
 allow dhardware dcamera:binder { transfer };
 
+#avc:  denied  { get } for service=3002 pid=2447 scontext=u:r:dhardware:s0 tcontext=u:object_r:sa_media_service:s0 tclass=samgr_class permissive=1
+allow dhardware sa_media_service:samgr_class { get };
+
+#avc:  denied  { use } for  pid=535 comm="THREAD_POOL" scontext=u:r:dhardware:s0 tcontext=u:r:softbus_server:s0 tclass=fd permissive=1
+allow dhardware softbus_server:fd { use };
+
+#avc:  denied  { read write } for  pid=535 comm="THREAD_POOL" scontext=u:r:dhardware:s0 tcontext=u:r:softbus_server:s0 tclass=tcp_socket permissive=1
+allow dhardware softbus_server:tcp_socket { read write };
+
+#avc:  denied  { setopt } for  pid=2338 comm="dhardware"  scontext=u:r:dhardware:s0 tcontext=u:r:softbus_server:s0 tclass=tcp_socket permissive=1
+allow dhardware softbus_server:tcp_socket { setopt };
+
