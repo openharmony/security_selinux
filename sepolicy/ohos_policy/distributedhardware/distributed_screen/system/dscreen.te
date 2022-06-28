@@ -131,3 +131,17 @@ allow dscreen multimodalinput:binder { call };
 #avc:  denied  { use } for  pid=251 comm="multimodalinput" path="socket:[32377]" dev="sockfs" ino=32377 scontext=u:r:dscreen:s0 tcontext=u:r:multimodalinput:s0 tclass=fd permissive=1
 allow dscreen multimodalinput:fd { use };
 
+#avc:  denied  { nlmsg_read } for  pid=2417 comm="dscreen" scontext=u:r:dscreen:s0 tcontext=u:r:dscreen:s0 tclass=netlink_route_socket permissive=1
+#avc:  denied  { read } for  pid=2417 comm="dscreen" scontext=u:r:dscreen:s0 tcontext=u:r:dscreen:s0 tclass=netlink_route_socket permissive=1
+allow dscreen dscreen:netlink_route_socket { nlmsg_read read };
+
+#avc:  denied  { connect } for  pid=2417 comm="Fillp_core_0" scontext=u:r:dscreen:s0 tcontext=u:r:dscreen:s0 tclass=udp_socket permissive=1
+allow dscreen dscreen:udp_socket { connect };
+
+#avc:  denied  { read write } for  pid=253 comm="multimodalinput" scontext=u:r:dscreen:s0 tcontext=u:r:multimodalinput:s0 tclass=unix_stream_socket permissive=1
+allow dscreen multimodalinput:unix_stream_socket { read write };
+
+#avc:  denied  { getopt } for  pid=2404 comm="dscreen" scontext=u:r:dscreen:s0 tcontext=u:r:dscreen:s0 tclass=unix_dgram_socket permissive=1
+#avc:  denied  { setopt } for  pid=2404 comm="dscreen" scontext=u:r:dscreen:s0 tcontext=u:r:dscreen:s0 tclass=unix_dgram_socket permissive=1
+allow dscreen dscreen:unix_dgram_socket { getopt setopt };
+
