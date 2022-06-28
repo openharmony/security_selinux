@@ -11,4 +11,4 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-input.pointer.device.               u:object_r:input_pointer_device_param:s0
+input.pointer.device               u:object_r:input_pointer_device_param:s0
