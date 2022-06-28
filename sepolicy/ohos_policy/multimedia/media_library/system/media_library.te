@@ -17,6 +17,10 @@ allow normal_hap hmdfs:{file lnk_file} create_file_perms;
 neverallow {
     domain
     -storage_daemon
+    -normal_hap
+    -system_basic_hap
+    -system_core_hap
+    -media_service
 } data_user_file:dir {
     create_dir_perms
     never_write_dir
@@ -25,6 +29,10 @@ neverallow {
 neverallow {
     domain
     -storage_daemon
+    -normal_hap
+    -system_basic_hap
+    -system_core_hap
+    -media_service
 } data_user_file:{ file lnk_file } {
     create_file_perms
     never_rw_file
