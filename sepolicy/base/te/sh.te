@@ -1,0 +1,104 @@
+# Copyright (c) 2022 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+allow sh bootevent_param:file { map open read };
+allow sh bootevent_samgr_param:file { map open read };
+allow sh build_version_param:file { map open read };
+allow sh const_allow_mock_param:file { map open read };
+allow sh const_allow_param:file { map open read };
+allow sh const_build_param:file { map open read };
+allow sh const_display_brightness_param:file { map open read };
+allow sh const_param:file { map open read };
+allow sh const_postinstall_fstab_param:file { map open read };
+allow sh const_postinstall_param:file { map open read };
+allow sh const_product_param:file { map open read };
+allow sh data_appasec:dir { getattr };
+allow sh data_appephemeral:dir { getattr };
+allow sh data_app_file:dir { getattr };
+allow sh data_applib:dir { getattr };
+allow sh data_appprivate:dir { getattr };
+allow sh data_appstaging:dir { getattr };
+allow sh data_backup:dir { getattr };
+allow sh data_bluetooth:dir { getattr };
+allow sh data_bootchart:dir { getattr };
+allow sh data_cache:dir { getattr };
+allow sh data_chipset_file:dir { getattr };
+allow sh data_data_file:dir { getattr };
+allow sh data_dhcp:dir { getattr };
+allow sh data_drm:dir { getattr };
+allow sh data_file:dir { getattr };
+allow sh data_local:dir { getattr search };
+allow sh data_local_tmp:dir { search };
+allow sh data_local_tmp:file { getattr open read };
+allow sh data_log:dir { getattr };
+allow sh data_media:dir { getattr };
+allow sh data_misc_ce:dir { getattr };
+allow sh data_misc_de:dir { getattr };
+allow sh data_misc:dir { getattr };
+allow sh data_nfc:dir { getattr };
+allow sh data_ota:dir { getattr };
+allow sh data_ota_package:dir { getattr };
+allow sh data_preloads:dir { getattr };
+allow sh data_resourcecache:dir { getattr };
+allow sh data_service_el1_file:file { read write };
+allow sh data_service_file:dir { getattr };
+allow sh data_ss:dir { getattr };
+allow sh data_system_ce:dir { getattr };
+allow sh data_system_de:dir { getattr };
+allow sh data_system:dir { getattr };
+allow sh data_updater_file:dir { getattr };
+allow sh data_user_de:dir { getattr };
+allow sh data_user:dir { getattr };
+allow sh data_vendor_ce:dir { getattr };
+allow sh data_vendor_de:dir { getattr };
+allow sh data_vendor:dir { getattr };
+allow sh debug_param:file { map open read };
+allow sh default_param:file { map open read };
+allow sh dev_file:dir { getattr };
+allow sh devpts:chr_file { getattr ioctl read };
+allow sh dev_pts_file:dir { getattr };
+allow sh dev_usb_ffs:dir { search };
+allow sh foundation:binder { call transfer };
+allow sh hdcd:fd { use };
+allow sh hdcd:fifo_file { ioctl write };
+allow sh hdcd:unix_stream_socket { read write };
+allow sh hidumper_file:dir { getattr };
+allow sh hilog_param:file { map open read };
+allow sh hw_sc_build_os_param:file { map open read };
+allow sh hw_sc_build_param:file { map open read };
+allow sh hw_sc_param:file { map open read };
+allow sh init_param:file { map open read };
+allow sh init_svc_param:file { map open read };
+allow sh input_pointer_device_param:file { map open read };
+allow sh net_param:file { map open read };
+allow sh net_tcp_param:file { map open read };
+allow sh ohos_boot_param:file { map open read };
+allow sh ohos_param:file { map open read };
+allow sh param_watcher:binder { call transfer };
+allow sh persist_param:file { map open read };
+allow sh persist_sys_param:file { map open read };
+allow sh sa_foundation_bms:samgr_class { get };
+allow sh sa_param_watcher:samgr_class { get };
+allow sh security_param:file { map open read };
+allow sh startup_param:file { map open read };
+allow sh sys_param:file { map open read };
+allow sh system_bin_file:dir { search };
+allow sh system_bin_file:lnk_file { read };
+allow sh sys_usb_param:file { map open read };
+allow sh tracefs:dir { search };
+allow sh tracefs_trace_marker_file:file { open write };
+allow sh tty_device:chr_file { ioctl open read write };
+allow sh vendor_file:dir { getattr };
+allowxperm sh devpts:chr_file ioctl { 0x5413 };
+allowxperm sh hdcd:fifo_file ioctl { 0x5413 };
+allowxperm sh tty_device:chr_file ioctl { 0x5401 0x5403 0x540f 0x5413 };
