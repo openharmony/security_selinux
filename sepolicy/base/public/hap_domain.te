@@ -114,7 +114,7 @@ neverallow { domain -hdcd -hap_domain -appspawn -installs -foundation -distribut
 neverallow { domain -init -hdcd -hap_domain -appspawn -installs -foundation
              -bgtaskmgr_service -nwebspawn -storage_daemon -accessibility } data_app_el1_file:dir *;
 neverallow { domain -init -hdcd -hap_domain -appspawn -installs -foundation
-             -distributeddata -storage_daemon } data_app_el2_file:dir *;
+             -distributeddata -storage_daemon -nwebspawn } data_app_el2_file:dir *;
 neverallow { domain -init -hdcd -hap_domain -appspawn -installs -foundation } data_app_el3_file:dir *;
 neverallow { domain -init -hdcd -hap_domain -appspawn -installs -foundation } data_app_el4_file:dir *;
 
@@ -122,9 +122,9 @@ neverallow { domain -hap_domain -bgtaskmgr_service -distributeddata -foundation 
              -accessibility } hap_file_attr:file open;
 
 # service can't modify hap sandbox
-neverallow { domain -hap_domain -installs -init -storage_daemon } hap_file_attr:dir_file_class_set { create unlink };
+neverallow { domain -hap_domain -installs -init -storage_daemon -appspawn } hap_file_attr:dir_file_class_set { create unlink };
 
-neverallow { domain -init -hap_domain -installs -storage_daemon } hap_file_attr:dir ~read_dir_perms;
+neverallow { domain -init -hap_domain -installs -storage_daemon -appspawn -nwebspawn } hap_file_attr:dir ~read_dir_perms;
 
 neverallow hap_domain { domain -hap_domain }:process transition;
 neverallow hap_domain { domain -hap_domain }:process dyntransition;
