@@ -79,5 +79,5 @@ allow dhardware camera_service:binder { transfer call };
 allow dhardware dhardware:unix_dgram_socket { setopt getopt };
 
 #avc:  denied  { call } for  pid=2343 comm="DHEventbusHandl" scontext=u:r:dhardware:s0 tcontext=u:r:distributeddata:s0 tclass=binder permissive=1
-allow dhardware dhardware:binder { call };
+allow dhardware distributeddata:binder { call };
 
