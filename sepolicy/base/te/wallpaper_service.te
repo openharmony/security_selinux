@@ -1,0 +1,30 @@
+# Copyright (c) 2022 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+allow wallpaper_service accesstoken_service:binder { call };
+allow wallpaper_service data_file:dir { search };
+allow wallpaper_service data_service_el1_file:dir { add_name search write };
+allow wallpaper_service data_service_el1_file:file { create ioctl open read write open };
+allow wallpaper_service data_service_file:dir { search };
+allow wallpaper_service dev_unix_socket:dir { search };
+allow wallpaper_service foundation:binder { call transfer };
+allow wallpaper_service param_watcher:binder { call transfer };
+allow wallpaper_service sa_accesstoken_manager_service:samgr_class { get };
+allow wallpaper_service sa_foundation_abilityms:samgr_class { get };
+allow wallpaper_service sa_foundation_cesfwk_service:samgr_class { get };
+allow wallpaper_service sa_param_watcher:samgr_class { get };
+allow wallpaper_service sa_wallpaper_manager_service:samgr_class { add };
+allow wallpaper_service system_bin_file:dir { search };
+allow wallpaper_service tracefs:dir { search };
+allow wallpaper_service tracefs_trace_marker_file:file { open write };
+allowxperm wallpaper_service data_service_el1_file:file ioctl { 0x5413 };

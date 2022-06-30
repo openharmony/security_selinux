@@ -12,3 +12,4 @@
 # limitations under the License.
 
 genfscon tracefs /trace_marker u:object_r:tracefs_trace_marker_file:s0
+

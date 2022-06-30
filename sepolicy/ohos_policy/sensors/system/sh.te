@@ -1,0 +1,26 @@
+# Copyright (c) 2022 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+#avc:  denied  { signal } for  pid=2026 comm="sh" scontext=u:r:sh:s0 tcontext=u:r:sensors:s0 tclass=process permissive=1
+allow sh sensors:process { signal };
+
+#avc:  denied  { get } for service=3601 pid=1930 scontext=u:r:sh:s0 tcontext=u:object_r:sa_sensor_service:s0 tclass=samgr_class permissive=1
+allow sh sa_sensor_service:samgr_class { get };
+
+#avc:  denied  { unlink } for  pid=2268 comm="rm" name="SensorAgentFuzzTest" dev="mmcblk0p11" ino=913935 scontext=u:r:sh:s0 tcontext=u:object_r:data_file:s0 tclass=file permissive=1
+#avc:  denied  { getattr } for  pid=2268 comm="rm" path="/data/test/SensorAgentFuzzTest" dev="mmcblk0p11" ino=913935 scontext=u:r:sh:s0 tcontext=u:object_r:data_file:s0 tclass=file permissive=1
+allow sh data_file:file { unlink getattr };
+
+#avc:  denied  { getattr } for  pid=2148 comm="ps" path="/proc/571" dev="proc" ino=30549 scontext=u:r:sh:s0 tcontext=u:r:sensors:s0 tclass=dir permissive=1
+#avc:  denied  { search } for  pid=2148 comm="ps" name="571" dev="proc" ino=30549 scontext=u:r:sh:s0 tcontext=u:r:sensors:s0 tclass=dir permissive=1
+allow sh sensors:dir { search getattr };

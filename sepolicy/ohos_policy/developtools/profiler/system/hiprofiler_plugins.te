@@ -17,12 +17,36 @@ allow hiprofiler_plugins data_init_agent:file { append ioctl open read };
 allow hiprofiler_plugins dev_unix_socket:sock_file write;
 allow hiprofiler_plugins devpts:chr_file { read write };
 allow hiprofiler_plugins hdcd:unix_stream_socket { read write };
+allow hiprofiler_plugins hdcd:fifo_file write;
 allow hiprofiler_plugins sh:fd use;
 allow hiprofiler_plugins tty_device:chr_file { read write };
-allow hiprofiler_plugins hdcd:fd use;
 allow hiprofiler_plugins dev_unix_socket:dir search;
 allow hiprofiler_plugins proc_cpuinfo_file:file { open read };
 allow hiprofiler_plugins system_bin_file:dir search;
 allow hiprofiler_plugins data_local:dir search;
 allow hiprofiler_plugins data_local_tmp:dir { getattr read watch watch_reads };
 allow hiprofiler_plugins hiprofilerd:unix_stream_socket connectto;
+allow hiprofiler_plugins hiprofilerd:fd { use };
+
+allow hiprofiler_plugins battery_stats:dir { search };
+allow hiprofiler_plugins battery_stats:file { getattr open read };
+
+allow hiprofiler_plugins hilogd:dir { search };
+allow hiprofiler_plugins hilogd:file { getattr open read };
+
+allow hiprofiler_plugins normal_hap:dir { open read search };
+allow hiprofiler_plugins normal_hap:file { open read getattr };
+
+allow hiprofiler_plugins proc_file:file { open read getattr };
+
+allow hiprofiler_plugins sh:dir { search };
+allow hiprofiler_plugins sh:file { read };
+
+allow hiprofiler_plugins system_bin_file:file { execute };
+
+allow hiprofiler_plugins tracefs:dir { search };
+allow hiprofiler_plugins tracefs:file { getattr open read };
+
+allow hiprofiler_plugins system_file:file { open read getattr };
+
+allow hiprofiler_plugins tmpfs:file { map read };

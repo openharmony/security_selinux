@@ -11,11 +11,26 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-allow work_scheduler_service accountmgr:binder { call };
+type work_scheduler_service, sadomain, domain;
+
 allow work_scheduler_service data_file:dir { search };
-allow work_scheduler_service data_service_el1_file:file { getattr ioctl open read write };
+allow work_scheduler_service data_service_el1_file:dir { add_name write search };
+allow work_scheduler_service data_service_el1_file:file { create getattr ioctl open read write };
 allow work_scheduler_service data_service_file:dir { search };
 allow work_scheduler_service dev_unix_socket:dir { search };
 allow work_scheduler_service dev_unix_socket:sock_file { write };
-allow work_scheduler_service foundation:binder { call transfer };
+allow work_scheduler_service proc_meminfo_file:file { open read };
+allow work_scheduler_service tracefs:dir { search };
+allow work_scheduler_service tracefs_trace_marker_file:file { open write };
+allow work_scheduler_service work_scheduler_service:unix_dgram_socket { getopt setopt };
 allowxperm work_scheduler_service data_service_el1_file:file ioctl 0x5413;
+
+binder_call(work_scheduler_service, accountmgr);
+binder_call(work_scheduler_service, foundation);
+binder_call(work_scheduler_service, normal_hap);
+binder_call(work_scheduler_service, param_watcher);
+binder_call(work_scheduler_service, sh);
+binder_call(work_scheduler_service, thermal);
+binder_call(param_watcher, work_scheduler_service);
+binder_call(foundation, work_scheduler_service);
+binder_call(normal_hap, work_scheduler_service);

@@ -12,12 +12,9 @@
 # limitations under the License.
 
 #type samgr, domain;
-type multimodalinput, sadomain, domain;
 type accesstoken_service, sadomain, domain;
-type faceauth, sadomain, domain;
 type socperf_service, sadomain, domain;
 type distributedsche, sadomain, domain;
-type storage_manager, sadomain, domain;
 type bluetooth_service, sadomain, domain;
 type accountmgr, sadomain, domain;
 type ui_service, sadomain, domain;
@@ -30,14 +27,9 @@ type netdnative, domain;
 type netmanager, sadomain, domain;
 type sensors, sadomain, domain;
 type telephony_sa, sadomain, domain;
-type updater_sa, sadomain, domain;
-type bgtaskmgr_service, sadomain, domain;
 type camera_service, sadomain, domain;
 type media_service, sadomain, domain;
-type work_scheduler_service, sadomain, domain;
 type param_watcher, sadomain, domain;
-type useriam, sadomain, domain;
-type pinauth, sadomain, domain;
 #type foundation, domain;
 type battery_stats, sadomain, domain;
 type token_sync_service, sadomain, domain;
@@ -46,13 +38,11 @@ type accessibility, sadomain, domain;
 type distributedsched, sadomain, domain;
 type distributedfile, sadomain, domain;
 type fms_service, sadomain, domain;
-type device_usage_stats_service, sadomain, domain;
 type deviceinfoservice, sadomain, domain;
 type distributedhardware_fwk, sadomain, domain;
 type nwebspawn, sadomain, domain;
 type upms, sadomain, domain;
 type mmi_uinput_service, sadomain, domain;
-type locationhub, sadomain, domain;
 type edm_sa, sadomain, domain;
 type wallpaper_service, sadomain, domain;
 type download_server, sadomain, domain;
@@ -63,20 +53,13 @@ type hidumper_service, sadomain, domain;
 type console, sadomain, domain;
 type bootanimation, sadomain, domain;
 type thermal, sadomain, domain;
-type distributedfileservice, sadomain, domain;
-type distributedfiledaemon, sadomain, domain;
 type limit_domain, domain;
 type device_usage_statistics_service, sadomain, domain;
 type thermal_sa, sadomain, domain;
-type fingerprintauth, sadomain, domain;
 
 type watchdog_service, sadomain, domain;
 type watchdog_service_exec, exec_attr, file_attr, system_file_attr;
 #domain_auto_transition_pattern(init, watchdog_service_exec, watchdog_service);
-
-type uinput_inject, sadomain,  domain;
-type uinput_inject_exec, exec_attr, file_attr, system_file_attr;
-#domain_auto_transition_pattern(init, uinput_inject_exec, uinput_inject);
 
 type lmks, sadomain, domain;
 type lmks_exec, exec_attr, file_attr, system_file_attr;
@@ -94,8 +77,6 @@ type ispserver, sadomain, domain;
 type ispserver_exec, exec_attr, file_attr, system_file_attr;
 #domain_auto_transition_pattern(init, ispserver_exec, ispserver);
 
-type storage_daemon, sadomain, domain;
-type storage_daemon_exec, exec_attr, file_attr, system_file_attr;
 #domain_auto_transition_pattern(init, storage_daemon_exec, storage_daemon);
 
 type thermal_protector, sadomain, domain;

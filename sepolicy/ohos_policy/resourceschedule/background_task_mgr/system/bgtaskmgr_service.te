@@ -11,13 +11,40 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-allow bgtaskmgr_service accesstoken_service:binder { call };
+type bgtaskmgr_service, sadomain, domain;
+
+allow bgtaskmgr_service app_el1_bundle_public:dir { search };
+allow bgtaskmgr_service app_el1_bundle_public:file { open };
+allow bgtaskmgr_service data_app_el1_file:file { getattr read };
+allow bgtaskmgr_service data_app_file:dir { search };
 allow bgtaskmgr_service data_file:dir { search };
+allow bgtaskmgr_service data_service_el1_file:dir { add_name write search };
+allow bgtaskmgr_service data_service_el1_file:file { create getattr ioctl open read write };
 allow bgtaskmgr_service data_service_file:dir { search };
 allow bgtaskmgr_service dev_unix_socket:dir { search };
 allow bgtaskmgr_service dev_unix_socket:sock_file { write };
-allow bgtaskmgr_service device_usage_stats_service:binder { call };
-allow bgtaskmgr_service foundation:binder { call transfer };
-allow bgtaskmgr_service memmgrservice:binder { call };
-allow bgtaskmgr_service normal_hap:binder { call };
-allow bgtaskmgr_service resource_schedule_service:binder { call };
+allow bgtaskmgr_service faultloggerd_socket:sock_file { write };
+allow bgtaskmgr_service proc_meminfo_file:file { open read };
+allow bgtaskmgr_service sys_file:dir { open read };
+allow bgtaskmgr_service system_bin_file:dir { search };
+allow bgtaskmgr_service system_bin_file:file { execute execute_no_trans map open read };
+allow bgtaskmgr_service tracefs:dir { search };
+allow bgtaskmgr_service tracefs_trace_marker_file:file { open write };
+allow bgtaskmgr_service bgtaskmgr_service:unix_dgram_socket { getopt setopt };
+allowxperm bgtaskmgr_service data_service_el1_file:file ioctl 0x5413;
+
+binder_call(bgtaskmgr_service, accountmgr);
+binder_call(bgtaskmgr_service, accesstoken_service);
+binder_call(bgtaskmgr_service, device_usage_stats_service);
+binder_call(bgtaskmgr_service, foundation);
+binder_call(bgtaskmgr_service, memmgrservice);
+binder_call(bgtaskmgr_service, normal_hap);
+binder_call(bgtaskmgr_service, param_watcher);
+binder_call(bgtaskmgr_service, resource_schedule_service);
+binder_call(bgtaskmgr_service, sh);
+binder_call(bgtaskmgr_service, system_core_hap);
+binder_call(bgtaskmgr_service, thermal);
+binder_call(normal_hap, bgtaskmgr_service);
+binder_call(system_core_hap, bgtaskmgr_service);
+binder_call(param_watcher, bgtaskmgr_service);
+binder_call(foundation, bgtaskmgr_service);
