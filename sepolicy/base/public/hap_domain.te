@@ -112,7 +112,7 @@ neverallow { hap_domain } *:security { compute_av check_context };
 
 neverallow { domain -hdcd -hap_domain -appspawn -installs -foundation -distributeddata } data_hap_file:dir *;
 neverallow { domain -init -hdcd -hap_domain -appspawn -installs -foundation
-             -bgtaskmgr_service -nwebspawn -storage_daemon -accessibility -sh } data_app_el1_file:dir *;
+             -bgtaskmgr_service -nwebspawn -storage_daemon -accessibility } data_app_el1_file:dir *;
 neverallow { domain -init -hdcd -hap_domain -appspawn -installs -foundation
              -distributeddata -storage_daemon -nwebspawn } data_app_el2_file:dir *;
 neverallow { domain -init -hdcd -hap_domain -appspawn -installs -foundation } data_app_el3_file:dir *;

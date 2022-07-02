@@ -273,7 +273,6 @@ neverallow { domain -power_host } self:{ capability2 cap2_userns } block_suspend
 neverallow * self:{ capability2 cap2_userns } audit_read;
 neverallow { domain -hdcd } self:{ capability2 cap2_userns } checkpoint_restore;
 neverallow * self:{ capability2 cap2_userns } perfmon;
-neverallow { domain -storage_manager -hidumper_service -samgr -sh} storage_daemon:{ binder } call;
 
 #tmp policy
 dontaudit hap_domain dev_kmsg_file:chr_file { open write };

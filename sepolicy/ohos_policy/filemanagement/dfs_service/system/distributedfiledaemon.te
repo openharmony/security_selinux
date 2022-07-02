@@ -12,9 +12,10 @@
 # limitations under the License.
 
 type distributedfiledaemon, sadomain, domain;
+type data_service_el2_hmdfs, file_attr, data_file_attr;
 
 allow distributedfiledaemon sys_fs_hmdfs:dir { read search setattr getattr };
-type data_service_el2_hmdfs, file_attr, data_file_attr;
+allow distributedfiledaemon sys_fs_hmdfs:file { setattr getattr open read write };
 
 #avc:  denied  { transfer } for  pid=604 comm="distributedfile" scontext=u:r:distributedfiledaemon:s0 tcontext=u:r:foundation:s0 tclass=binder permissive=1
 #avc:  denied  { call } for  pid=556 comm="foundation" scontext=u:r:foundation:s0 tcontext=u:r:distributedfiledaemon:s0 tclass=binder permissive=1

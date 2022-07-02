@@ -11,11 +11,5 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-type inputmethod_service, sadomain, domain;
-
-allow inputmethod_service vendor_lib_file:file { open read getattr };
-allow inputmethod_service dev_unix_socket:dir { search };
-allow inputmethod_service dev_unix_socket:sock_file { write };
-allow inputmethod_service normal_hap:binder { call };
-allow inputmethod_service system_basic_hap:binder { call };
-allow inputmethod_service system_core_hap:binder { call };
+allow sh sa_storage_manager_daemon:samgr_class { get };
+allow sh sa_storage_manager_service:samgr_class { get };
