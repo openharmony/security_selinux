@@ -11,10 +11,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-type hidumper_file, file_attr, data_file_attr;
-
-type hidumper_exec, exec_attr, file_attr, system_file_attr;
-
-type hidumper, nativedomain, domain;
-
-domain_auto_transition_pattern({ nativedomain sadomain }, hidumper_exec, hidumper);
+allow samgr hidumper:binder transfer;
+allow samgr hidumper:dir search;
+allow samgr hidumper:file { open read };
+allow samgr hidumper:process getattr;
