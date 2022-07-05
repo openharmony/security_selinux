@@ -35,6 +35,7 @@ allow installs data_service_file:dir { search };
 allow installs debug_param:file { map open read };
 allow installs default_param:file { map open read };
 allow installs dev_unix_socket:dir { search };
+allow installs distributedsche_param:file { map open read };
 allow installs hilog_param:file { map open read };
 allow installs hw_sc_build_os_param:file { map open read };
 allow installs hw_sc_build_param:file { map open read };

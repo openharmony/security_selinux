@@ -27,6 +27,7 @@ allow thermal data_file:file { create ioctl open read write read write open };
 allow thermal debug_param:file { map open read };
 allow thermal default_param:file { map open read };
 allow thermal dev_unix_socket:dir { search };
+allow thermal distributedsche_param:file { map open read };
 allow thermal foundation:binder { call transfer };
 allow thermal hdf_devmgr:binder { call transfer };
 allow thermal hilog_param:file { map open read };

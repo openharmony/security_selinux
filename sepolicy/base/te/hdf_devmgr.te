@@ -67,6 +67,7 @@ allow hdf_devmgr disp_gralloc_host:binder { call transfer };
 allow hdf_devmgr disp_gralloc_host:dir { search };
 allow hdf_devmgr disp_gralloc_host:file { open read };
 allow hdf_devmgr disp_gralloc_host:process { getattr };
+allow hdf_devmgr distributedsche_param:file { map open read };
 allow hdf_devmgr faceauth:binder { call transfer };
 allow hdf_devmgr faceauth:dir { search };
 allow hdf_devmgr faceauth:file { open read };

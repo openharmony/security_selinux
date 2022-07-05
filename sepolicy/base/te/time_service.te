@@ -30,6 +30,7 @@ allow time_service data_service_file:dir { search };
 allow time_service debug_param:file { map open read };
 allow time_service default_param:file { map open read };
 allow time_service dev_file:sock_file { write };
+allow time_service distributedsche_param:file { map read read open };
 allow time_service hilog_param:file { map open read };
 allow time_service hiview:binder { call };
 allow time_service hw_sc_build_os_param:file { map open read };

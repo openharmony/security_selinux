@@ -29,6 +29,7 @@ allow battery_stats data_system:dir { search };
 allow battery_stats debug_param:file { map open read };
 allow battery_stats default_param:file { map open read };
 allow battery_stats dev_unix_socket:dir { search };
+allow battery_stats distributedsche_param:file { map open read };
 allow battery_stats foundation:binder { call transfer };
 allow battery_stats hilog_param:file { map open read };
 allow battery_stats hiview:binder { call transfer };

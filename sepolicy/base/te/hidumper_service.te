@@ -24,6 +24,7 @@ allow hidumper_service const_postinstall_param:file { map open read };
 allow hidumper_service const_product_param:file { map open read };
 allow hidumper_service debug_param:file { map open read };
 allow hidumper_service default_param:file { map open read };
+allow hidumper_service distributedsche_param:file { map open read };
 allow hidumper_service hidumper_file:dir { create rmdir };
 allow hidumper_service hidumper_service:capability { dac_read_search sys_ptrace };
 allow hidumper_service hilog_param:file { map open read };
