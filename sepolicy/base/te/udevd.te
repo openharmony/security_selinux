@@ -87,6 +87,7 @@ allow udevd dev_vhci_file:chr_file { getattr write };
 allow udevd dev_video_file:chr_file { getattr write };
 allow udevd dev_vndbinder_file:chr_file { getattr write };
 allow udevd dev_watchdog_file:chr_file { getattr write };
+allow udevd distributedsche_param:file { map open read };
 allow udevd hilog_param:file { map open read };
 allow udevd hw_sc_build_os_param:file { map open read };
 allow udevd hw_sc_build_param:file { map open read };

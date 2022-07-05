@@ -32,6 +32,7 @@ allow render_service dev_graphics_file:chr_file { open read write };
 allow render_service dev_graphics_file:dir { search };
 allow render_service dev_mali:chr_file { getattr ioctl map open read write };
 allow render_service dev_rga:chr_file { ioctl open read write };
+allow render_service distributedsche_param:file { map open read };
 allow render_service hilog_param:file { map open read };
 allow render_service hw_sc_build_os_param:file { map open read };
 allow render_service hw_sc_build_param:file { map open read };

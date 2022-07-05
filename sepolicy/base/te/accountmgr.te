@@ -28,6 +28,7 @@ allow accountmgr default_param:file { map open read };
 allow accountmgr deviceauth_service:binder { transfer };
 allow accountmgr distributeddata:binder { transfer };
 allow accountmgr distributedfiledaemon:binder { call transfer };
+allow accountmgr distributedsche_param:file { map open read };
 allow accountmgr hilog_param:file { map open read };
 allow accountmgr hiview:binder { transfer };
 allow accountmgr hw_sc_build_os_param:file { map open read };

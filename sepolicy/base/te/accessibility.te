@@ -12,6 +12,7 @@
 # limitations under the License.
 
 allow accessibility accountmgr:binder { call };
+allow accessibility accessibility:unix_dgram_socket { getopt setopt };
 allow accessibility bootevent_param:file { map open read };
 allow accessibility bootevent_samgr_param:file { map open read };
 allow accessibility build_version_param:file { map open read };
@@ -30,6 +31,7 @@ allow accessibility data_service_file:dir { search };
 allow accessibility debug_param:file { map open read };
 allow accessibility default_param:file { map open read };
 allow accessibility dev_unix_socket:dir { search };
+allow accessibility distributedsche_param:file { map open read };
 allow accessibility foundation:binder { call transfer };
 allow accessibility hilog_param:file { map open read };
 allow accessibility hw_sc_build_os_param:file { map open read };

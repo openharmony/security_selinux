@@ -28,6 +28,7 @@ allow blue_host debug_param:file { map open read };
 allow blue_host default_param:file { map open read };
 allow blue_host dev_hdf_kevent:chr_file { getattr ioctl open read write };
 allow blue_host dev_unix_socket:dir { search };
+allow blue_host distributedsche_param:file { map open read };
 allow blue_host hdf_devmgr:binder { call transfer };
 allow blue_host hilog_param:file { map open read };
 allow blue_host hw_sc_build_os_param:file { map open read };
