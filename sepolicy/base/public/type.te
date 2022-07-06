@@ -44,7 +44,6 @@ type nwebspawn, sadomain, domain;
 type upms, sadomain, domain;
 type mmi_uinput_service, sadomain, domain;
 type edm_sa, sadomain, domain;
-type wallpaper_service, sadomain, domain;
 type download_server, sadomain, domain;
 type msdp_sa, sadomain, domain;
 type misc, sadomain, domain;
