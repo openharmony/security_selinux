@@ -29,7 +29,7 @@ allow sh sensors:dir { search getattr };
 #avc: denied { read } for pid=1963 comm="SensorAgentFuzz" name="u:object_r:sys_param:s0" dev="tmpfs" ino=48 scontext=u:r:sh:s0 tcontext=u:object_r:sys_param:s0 tclass=file permissive=1
 #avc: denied { open } for pid=1963 comm="SensorAgentFuzz" path="/dev/parameters/u:object_r:sys_param:s0" dev="tmpfs" ino=48 scontext=u:r:sh:s0 tcontext=u:object_r:sys_param:s0 tclass=file permissive=1
 #avc: denied { map } for pid=1963 comm="SensorAgentFuzz" path="/dev/parameters/u:object_r:sys_param:s0" dev="tmpfs" ino=48 scontext=u:r:sh:s0 tcontext=u:object_r:sys_param:s0 tclass=file permissive=1
-allow sh data_file:file { setattr open  read map  };
+allow sh data_file:file { setattr open read map };
 
 #avc: denied { remove_name } for pid=2050 comm="rm" name="SensorJsTest.hap" dev="mmcblk0p11" ino=255 scontext=u:r:sh:s0 tcontext=u:object_r:data_file:s0 tclass=dir permissive=1
 allow sh data_file:dir { remove_name };
