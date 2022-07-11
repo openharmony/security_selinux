@@ -11,6 +11,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-/system/bin/hidumper       u:object_r:hidumper_exec:s0
+allow hdcd dev_block_volfile:dir { search };
+allow hdcd tmpfs:dir { open read };
+allow hdcd tmpfs:file { getattr open read };
+allow hdcd vendor_file:dir { getattr };
 
-/data/log/hidumper(/.*)?       u:object_r:hidumper_file:s0
