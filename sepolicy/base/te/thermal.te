@@ -67,3 +67,4 @@ allow thermal tracefs_trace_marker_file:file { open write };
 allow thermal vendor_etc_file:dir { search };
 allowxperm thermal data_file:file ioctl { 0x5413 };
 allowxperm thermal data_service_el0_file:file ioctl { 0x5413 };
+allow thermal hdf_battery_interface_service:hdf_devmgr_class { get };
