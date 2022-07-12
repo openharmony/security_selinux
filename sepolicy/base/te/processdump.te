@@ -43,6 +43,7 @@ allow processdump ohos_param:file { map open read };
 allow processdump persist_param:file { map open read };
 allow processdump persist_sys_param:file { map open read };
 allow processdump security_param:file { map open read };
+allow processdump sh:process { ptrace };
 allow processdump softbus_server:process { ptrace };
 allow processdump startup_param:file { map open read };
 allow processdump sys_param:file { map open read };

@@ -14,4 +14,4 @@
 # limitations under the License.
 #
 
-SELINUX=enforcing
+SELINUX=permissive

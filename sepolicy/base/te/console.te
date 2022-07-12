@@ -14,6 +14,7 @@
 allow console bootevent_param:file { map open read };
 allow console bootevent_samgr_param:file { map open read };
 allow console build_version_param:file { map open read };
+dontaudit console console:capability { dac_read_search };
 allow console const_allow_mock_param:file { map open read };
 allow console const_allow_param:file { map open read };
 allow console const_build_param:file { map open read };
