@@ -11,25 +11,4 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-type accesstoken_data_file, file_attr, data_file_attr;
-
-allow accesstoken_service accesstoken_data_file:file { getattr ioctl lock relabelto write };
-
-allow accesstoken_service data_file:dir { search };
-
-allow accesstoken_service data_system:dir { add_name getattr open read remove_name search write };
-allow accesstoken_service data_system:file { create getattr open read unlink write };
-
-allow accesstoken_service dev_unix_socket:dir { search };
-
-allow accesstoken_service sa_softbus_service:samgr_class { get };
-
-allow accesstoken_service sa_token_sync_manager_service:samgr_class { get };
-
-allow accesstoken_service system_bin_file:dir { search };
-
-allow accesstoken_service token_sync_service:binder { call };
-
-binder_call(accesstoken_service, foundation);
-binder_call(accesstoken_service, sh);
-binder_call(accesstoken_service, softbus_server);
+type privacy_service, sadomain, domain;
