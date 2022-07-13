@@ -60,5 +60,8 @@ allow privacy_service tracefs:dir { search };
 allow privacy_service tracefs_trace_marker_file:file { open write };
 allow privacy_service param_watcher:binder { call transfer };
 
+allow init privacy_service:process { rlimitinh siginh transition };
+allow param_watcher privacy_service:binder { call transfer };
+
 binder_call(privacy_service, sh);
 binder_call(privacy_service, accesstoken_service);
