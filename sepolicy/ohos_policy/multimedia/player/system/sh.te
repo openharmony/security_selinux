@@ -21,3 +21,33 @@ allow sh sa_foundation_wms:samgr_class { get };
 allow sh sa_foundation_dms:samgr_class {get};
 #avc:  denied  { get } for service=3101 pid=2396 scontext=u:r:sh:s0 tcontext=u:object_r:sa_multimodalinput_service:s0 tclass=samgr_class permissive=1
 allow sh sa_multimodalinput_service:samgr_class { get };
+#avc:  denied  { write } for  pid=1946 comm="media_demo" name="kmsg" dev="tmpfs" ino=6 scontext=u:r:sh:s0 tcontext=u:object_r:dev_kmsg_file:s0 tclass=chr_file permissive=1
+allow sh dev_kmsg_file:chr_file { write };
+#avc:  denied  { call } for  pid=1946 comm="media_demo" scontext=u:r:sh:s0 tcontext=u:r:media_service:s0 tclass=binder permissive=1
+allow sh media_service:binder { call };
+#avc:  denied  { transfer } for  pid=1946 comm="media_demo" scontext=u:r:sh:s0 tcontext=u:r:media_service:s0 tclass=binder permissive=1
+allow sh media_service:binder { transfer };
+#avc:  denied  { use } for  pid=252 comm="multimodalinput" path="socket:[38427]" dev="sockfs" ino=38427 scontext=u:r:sh:s0 tcontext=u:r:multimodalinput:s0 tclass=fd permissive=1
+allow sh multimodalinput:fd { use };
+#avc:  denied  { read write } for  pid=252 comm="multimodalinput" path="socket:[38427]" dev="sockfs" ino=38427 scontext=u:r:sh:s0 tcontext=u:r:multimodalinput:s0 tclass=unix_stream_socket permissive=1
+allow sh multimodalinput:unix_stream_socket { read write };
+#avc:  denied  { call } for  pid=1946 comm="media_demo" scontext=u:r:sh:s0 tcontext=u:r:render_service:s0 tclass=binder permissive=1
+allow sh render_service:binder { call };
+#avc:  denied  { transfer } for  pid=1946 comm="media_demo" scontext=u:r:sh:s0 tcontext=u:r:render_service:s0 tclass=binder permissive=1
+allow sh render_service:binder { transfer };
+#avc:  denied  { dac_override } for  pid=1983 comm="hilog" capability=1  scontext=u:r:sh:s0 tcontext=u:r:sh:s0 tclass=capability permissive=1
+allow sh sh:capability { dac_override };
+#avc:  denied  { open } for  pid=1940 comm="sh" path="/system/bin" dev="mmcblk0p6" ino=106 scontext=u:r:sh:s0 tcontext=u:object_r:system_bin_file:s0 tclass=dir permissive=1
+allow sh system_bin_file:dir { open };
+#avc:  denied  { read } for  pid=1940 comm="sh" name="bin" dev="mmcblk0p6" ino=106 scontext=u:r:sh:s0 tcontext=u:object_r:system_bin_file:s0 tclass=dir permissive=1
+allow sh system_bin_file:dir { read };
+#avc:  denied  { search } for  pid=1946 comm="media_demo" name="usr" dev="mmcblk0p6" ino=2529 scontext=u:r:sh:s0 tcontext=u:object_r:system_usr_file:s0 tclass=dir permissive=1
+allow sh system_usr_file:dir { search };
+#avc:  denied  { getattr } for  pid=1946 comm="media_demo" path="/system/usr/ohos_locale_config/supported_regions.xml" dev="mmcblk0p6" ino=2536 scontext=u:r:sh:s0 tcontext=u:object_r:system_usr_file:s0 tclass=file permissive=1
+allow sh system_usr_file:file { getattr };
+#avc:  denied  { map } for  pid=1946 comm="media_demo" path="/system/usr/ohos_icu/icudt67l.dat" dev="mmcblk0p6" ino=2531 scontext=u:r:sh:s0 tcontext=u:object_r:system_usr_file:s0 tclass=file permissive=1
+allow sh system_usr_file:file { map };
+#avc:  denied  { open } for  pid=1946 comm="media_demo" path="/system/usr/ohos_locale_config/supported_regions.xml" dev="mmcblk0p6" ino=2536 scontext=u:r:sh:s0 tcontext=u:object_r:system_usr_file:s0 tclass=file permissive=1
+allow sh system_usr_file:file { open };
+#avc:  denied  { read } for  pid=1946 comm="media_demo" name="supported_regions.xml" dev="mmcblk0p6" ino=2536 scontext=u:r:sh:s0 tcontext=u:object_r:system_usr_file:s0 tclass=file permissive=1
+allow sh system_usr_file:file { read };
