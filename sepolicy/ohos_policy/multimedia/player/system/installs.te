@@ -11,5 +11,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-#avc:  denied  { getattr } for  pid=450 comm="installs" path="/data/app/el2/100/base/ohos.acts.multimedia.video.videodecoder/haps/entry/files/out_320_240_10s.h264" dev="mmcblk0p11" ino=1307095 scontext=u:r:installs:s0 tcontext=u:object_r:normal_hap_data_file:s0 tclass=file permissive=1
+#avc:  denied  { getattr } for  pid=491 comm="installs" path="/data/app/el2/100/base/ohos.acts.multimedia.video.videodecoder/haps/entry/files/out_320_240_10s.h264" dev="mmcblk0p11" ino=1307095 scontext=u:r:installs:s0 tcontext=u:object_r:normal_hap_data_file:s0 tclass=file permissive=1
 allow installs normal_hap_data_file:file { getattr };
+#avc:  denied  { getattr } for  pid=491 comm="installs" path="/data/app/el2/100/base/ohos.acts.multimedia.audio.audiodecoder/haps/entry/files/mp3.es" dev="mmcblk0p11" ino=1307242 scontext=u:r:installs:s0 tcontext=u:object_r:system_core_hap_data_file:s0 tclass=file permissive=1
+allow installs system_core_hap_data_file:file { getattr };

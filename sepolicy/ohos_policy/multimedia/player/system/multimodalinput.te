@@ -13,5 +13,6 @@
 
 #avc:  denied  { ioctl } for  pid=252 comm="mmi_service" path="/sys/devices/platform/rk-headset/input/input3/uevent" dev="sysfs" ino=32447 ioctlcmd=0x5413 scontext=u:r:multimodalinput:s0 tcontext=u:object_r:sys_file:s0 tclass=file permissive=1
 allow multimodalinput sys_file:file { ioctl };
+allowxperm multimodalinput sys_file:file ioctl { 0x5413 };
 #avc:  denied  { write } for  pid=252 comm="mmi_service" name="uevent" dev="sysfs" ino=32447 scontext=u:r:multimodalinput:s0 tcontext=u:object_r:sys_file:s0 tclass=file permissive=1
 allow multimodalinput sys_file:file { write };

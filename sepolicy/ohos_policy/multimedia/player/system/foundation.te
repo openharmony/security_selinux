@@ -11,5 +11,5 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-#avc:  denied  { search } for  pid=463 comm="audio_hdi_serve" name="log" dev="mmcblk0p11" ino=130563 scontext=u:r:audio_hdi_server_host:s0 tcontext=u:object_r:data_log:s0 tclass=dir permissive=1
-allow audio_hdi_server_host data_log:dir { search };
+#avc:  denied  { sys_ptrace } for  pid=542 comm="foundation" capability=19  scontext=u:r:foundation:s0 tcontext=u:r:foundation:s0 tclass=capability permissive=1
+allow foundation foundation:capability { sys_ptrace };
