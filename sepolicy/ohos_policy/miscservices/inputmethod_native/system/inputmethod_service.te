@@ -14,6 +14,7 @@
 type inputmethod_service, sadomain, domain;
 
 allow inputmethod_service vendor_lib_file:file { open read getattr };
+allow inputmethod_service sa_foundation_bms:samgr_class { get };
 allow inputmethod_service dev_unix_socket:dir { search };
 allow inputmethod_service dev_unix_socket:sock_file { write };
 allow inputmethod_service normal_hap:binder { call };
