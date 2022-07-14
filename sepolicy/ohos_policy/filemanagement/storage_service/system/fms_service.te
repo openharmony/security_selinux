@@ -11,7 +11,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-allow normal_hap storage_manager:binder { transfer };
-allow normal_hap sa_file_manager_service:samgr_class { get };
-allow normal_hap fms_service:binder { call };
-allow normal_hap fms_service:binder { transfer };
+allow fms_service normal_hap:fd { use };
+allow fms_service sa_accesstoken_manager_service:samgr_class { get };
+allow fms_service sa_foundation_abilityms:samgr_class { get };
+allow fms_service normal_hap:binder { call };
+allow fms_service accesstoken_service:binder { call };
