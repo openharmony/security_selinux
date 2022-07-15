@@ -186,7 +186,6 @@ allow init dscreen:process { rlimitinh siginh transition };
 allow init dslm_service:process { rlimitinh siginh transition };
 allow init edm_sa:process { rlimitinh siginh transition };
 allow init face_auth_host:process { rlimitinh siginh transition };
-allow init faceauth:process { rlimitinh siginh transition };
 allow init faultloggerd_exec:file { execute getattr read open };
 allow init faultloggerd:process { rlimitinh siginh transition };
 allow init faultloggerd_socket:sock_file { getattr relabelto };
