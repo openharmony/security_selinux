@@ -39,7 +39,7 @@ allow hdcd system_core_hap_data_file:dir { getattr write add_name };
 allow hdcd system_core_hap_data_file:dir { search };
 allow hdcd system_core_hap_data_file:dir { open };
 #avc:  denied  { open } for  pid=623 comm="hdcd" path="/data/app/el2/100/base/ohos.acts.multimedia.video.codecformat/haps/entry/files/H264_HP_720_480_30_3000000.h264" dev="mmcblk0p11" ino=1307357 scontext=u:r:hdcd:s0 tcontext=u:object_r:system_core_hap_data_file:s0 tclass=file permissive=1
-allow hdcd system_core_hap_data_file:file { open };
+allow hdcd system_core_hap_data_file:file { open create };
 #avc:  denied  { write } for  pid=623 comm="hdcd" name="S16LE.pcm" dev="mmcblk0p11" ino=1307314 scontext=u:r:hdcd:s0 tcontext=u:object_r:system_core_hap_data_file:s0 tclass=file permissive=1
 allow hdcd system_core_hap_data_file:file { write };
 #avc:  denied  { add_name } for  pid=623 comm="hdcd" name="ActsHLSPlayerJsTest.hap" scontext=u:r:hdcd:s0 tcontext=u:object_r:system_file:s0 tclass=dir permissive=1
