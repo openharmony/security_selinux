@@ -206,7 +206,6 @@ allow hiprofiler_plugins hiview:file read;
 allow hiprofiler_plugins installs:file read;
 allow hiprofiler_plugins sensors:file read;
 
-allow hiprofiler_plugins faceauth:file read;
 allow hiprofiler_plugins foundation:file read;
 allow hiprofiler_plugins hdcd:file read;
 allow hiprofiler_plugins hidumper_service:file read;
