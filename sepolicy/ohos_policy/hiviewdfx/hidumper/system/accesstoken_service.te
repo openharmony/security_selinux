@@ -14,7 +14,6 @@
 allow accessibility accesstoken_service:binder call;
 allow battery_stats accesstoken_service:binder call;
 allow distributedfiledaemon accesstoken_service:binder call;
-allow faceauth accesstoken_service:binder call;
 allow fms_service accesstoken_service:binder call;
 allow inputmethod_service accesstoken_service:binder call;
 allow memmgrservice accesstoken_service:binder call;
