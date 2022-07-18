@@ -31,7 +31,7 @@ allow hiprofiler_plugins hiprofilerd:fd { use };
 allow hiprofiler_plugins battery_stats:dir { search };
 allow hiprofiler_plugins battery_stats:file { getattr open read };
 
-allow hiprofiler_plugins domain:dir { getattr search };
+allow hiprofiler_plugins domain:dir { getattr search open read };
 allow hiprofiler_plugins domain:file { open read getattr }; 
 
 allow hiprofiler_plugins appspawn:file read;
