@@ -19,6 +19,8 @@ allow resource_schedule_service foundation:binder { call transfer };
 allow resource_schedule_service hiview:binder { call transfer };
 allow resource_schedule_service param_watcher:binder { call transfer };
 allow resource_schedule_service bgtaskmgr_service:binder { call transfer };
+allow resource_schedule_service audio_policy:binder { call };
+
 #cgroup
 allow resource_schedule_service cgroup:dir { search };
 allow resource_schedule_service cgroup:file { getattr open write };
