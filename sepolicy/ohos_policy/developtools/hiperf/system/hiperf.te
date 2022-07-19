@@ -107,5 +107,17 @@ allow hiperf dev_unix_socket:dir search;
 allow hiperf system_bin_file:dir search;
 allow hiperf data_local:dir search;
 
+allow hiperf hiprofiler_plugins:unix_stream_socket { read write };
+allow hiperf rootfs:file read;
+allow hiperf sh_exec:file { getattr map open read };
+allow hiperf sysfs_kernel_notes:file { open read };
+allow hiperf system_bin_file:file { getattr map open read };
+allow hiperf tmpfs:file { read write };
+
+allow hiperf hiprofiler_plugins:fd use;
+allow hiperf hiprofilerd:fd use;
+allow hiperf hiprofiler_plugins:fifo_file { ioctl write };
+allow hiperf watchdog_service_exec:file { getattr map open read };
+
 allow hiperf domain:dir { getattr search };
 allow hiperf domain:file { open read };

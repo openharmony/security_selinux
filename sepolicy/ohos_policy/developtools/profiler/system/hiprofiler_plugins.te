@@ -256,7 +256,5 @@ allow hiprofiler_plugins self:capability sys_admin;
 
 allow hiprofiler_plugins tracefs:file append;
 
-allow processdump vendor_bin_file:dir search;
-
 allow hiprofiler_plugins domain:dir { open read getattr search };
 allow hiprofiler_plugins domain:file { open read getattr };
