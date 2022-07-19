@@ -119,5 +119,12 @@ allow hiperf hiprofilerd:fd use;
 allow hiperf hiprofiler_plugins:fifo_file { ioctl write };
 allow hiperf watchdog_service_exec:file { getattr map open read };
 
+allow hiperf data_local_tmp:fifo_file { create open read unlink write };
+allow hiperf hdf_devmgr_exec:file { getattr map open read };
+allow hiperf proc_cpuinfo_file:file { open read };
+allow hiperf sysfs_devices_system_cpu:file { open read };
+allow hiperf uinput_inject_exec:file { getattr map open read };
+allow hiperf vendor_bin_file:dir search;
+
 allow hiperf domain:dir { getattr search };
 allow hiperf domain:file { open read };
