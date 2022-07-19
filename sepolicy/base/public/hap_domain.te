@@ -83,7 +83,7 @@ neverallow hap_domain domain:netlink_kobject_uevent_socket { write append };
 
 #no use ptrace
 neverallow hap_domain { domain -hap_domain }:process ptrace;
-neverallow { domain -hap_domain } hap_domain:process ptrace;
+neverallow { domain -hap_domain -processdump } hap_domain:process ptrace;
 
 #hap don't bother other domain.
 neverallow hap_domain { domain -hap_domain }:process { sigkill sigstop signal };
@@ -115,21 +115,21 @@ neverallow { hap_domain } *:security { compute_av check_context };
 
 neverallow { domain -hdcd -hap_domain -appspawn -installs -foundation -distributeddata } data_hap_file:dir *;
 neverallow { domain -init -hdcd -hap_domain -appspawn -installs -foundation
-             -bgtaskmgr_service -nwebspawn -storage_daemon -accessibility } data_app_el1_file:dir *;
+             -bgtaskmgr_service -nwebspawn -storage_daemon -accessibility -telephony_sa } data_app_el1_file:dir *;
 neverallow { domain -init -hdcd -hap_domain -appspawn -installs -foundation
              -distributeddata -storage_daemon -nwebspawn } data_app_el2_file:dir *;
 neverallow { domain -init -hdcd -hap_domain -appspawn -installs -foundation } data_app_el3_file:dir *;
 neverallow { domain -init -hdcd -hap_domain -appspawn -installs -foundation } data_app_el4_file:dir *;
 
 neverallow { domain -hap_domain -bgtaskmgr_service -distributeddata -foundation -installs -nwebspawn
-             -accessibility } hap_file_attr:file open;
+             -accessibility -hdcd -telephony_sa } hap_file_attr:file open;
 
 # service can't modify hap sandbox
-neverallow { domain -hap_domain -installs -init -storage_daemon -appspawn } hap_file_attr:dir_file_class_set { create unlink };
+neverallow { domain -hap_domain -installs -init -storage_daemon -appspawn -distributeddata -hdcd } hap_file_attr:dir_file_class_set { create unlink };
 
-neverallow { domain -init -hap_domain -installs -storage_daemon -appspawn -nwebspawn } hap_file_attr:dir ~read_dir_perms;
+neverallow { domain -init -hap_domain -installs -storage_daemon -appspawn -nwebspawn -distributeddata -hdcd } hap_file_attr:dir ~read_dir_perms;
 
-neverallow hap_domain { domain -hap_domain }:process transition;
+neverallow hap_domain { domain -hap_domain -processdump }:process transition;
 neverallow hap_domain { domain -hap_domain }:process dyntransition;
 
 neverallow hap_domain domain:{ netlink_tcpdiag_socket netlink_nflog_socket netlink_xfrm_socket netlink_audit_socket netlink_dnrt_socket } *;
@@ -143,7 +143,7 @@ neverallow hap_domain dev_input_file:chr_file ~getattr;
 neverallow hap_domain hdcd_socket:sock_file write;
 
 # can't execute data file unless hap.
-neverallow { domain -hap_domain -nwebspawn } data_file_attr:file { execute execute_no_trans };
+neverallow { domain -hap_domain -nwebspawn -hiprofiler_plugins } data_file_attr:file { execute execute_no_trans };
 
 neverallow hap_domain rootfs:dir_file_class_set { create write setattr relabelfrom relabelto append unlink link rename };
 
@@ -152,7 +152,7 @@ neverallow hap_domain system_file:dir_file_class_set { create write setattr rela
 # limit access to /data/(*)? first level.todo
 #neverallow hap_domain data_file:dir_file_class_set { create write setattr relabelfrom relabelto append unlink link rename };
 
-neverallow { domain -hap_domain -installs -appspawn -init -storage_daemon } hap_file_attr:dir_file_class_set { create unlink };
+neverallow { domain -hap_domain -installs -appspawn -init -storage_daemon -distributeddata -hdcd } hap_file_attr:dir_file_class_set { create unlink };
 
 neverallow { domain -installs } normal_hap_data_file:dir_file_class_set { relabelfrom relabelto };
 
