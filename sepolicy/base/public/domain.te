@@ -110,7 +110,7 @@ neverallow * { file_attr fs_attr dev_attr }:{ lnk_file fifo_file sock_file } mou
 neverallow { domain -init -hidumper_service -hiview } debugfs: { file lnk_file } never_rw_file;
 
 #ioctl cmd TIOCSTI
-neverallowxperm {domain -hiprofiler_cmd } devpts:chr_file ioctl 0x5412;
+neverallowxperm * devpts:chr_file ioctl 0x5412;
 
 neverallow { domain -udevd } dev_port:chr_file ~{ create relabelto unlink setattr getattr };
 
@@ -287,7 +287,7 @@ neverallow { domain -init } self:{ capability cap_userns } sys_rawio;
 neverallow { domain -init } self:{ capability cap_userns } sys_chroot;
 neverallow { domain -hidumper_service -init -memmgrservice -storage_daemon -hiview -faultloggerd -processdump -hiprofiler_plugins -foundation -hiperf -hiprofiler_cmd } self:{ capability cap_userns } sys_ptrace;
 neverallow * self:{ capability cap_userns } sys_pacct;
-neverallow { domain -init -storage_daemon -appspawn -nwebspawn -hdcd -hiprofiler_plugins } self:{ capability cap_userns } sys_admin;
+neverallow { domain -init -storage_daemon -appspawn -nwebspawn -hdcd } self:{ capability cap_userns } sys_admin;
 neverallow { domain -init } self:{ capability cap_userns } sys_boot;
 neverallow { domain -render_service } self:{ capability cap_userns } sys_nice;
 neverallow { domain -init -memmgrservice } self:{ capability cap_userns } sys_resource;

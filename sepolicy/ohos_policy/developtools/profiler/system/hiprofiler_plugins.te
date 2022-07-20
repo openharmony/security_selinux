@@ -252,8 +252,6 @@ allow hiprofiler_plugins tty_device:chr_file ioctl;
 allow hiprofiler_plugins proc_uptime_file:file { open read };
 allow hiprofiler_plugins tracefs:dir { open read };
 
-allow hiprofiler_plugins self:capability sys_admin;
-
 allow hiprofiler_plugins tracefs:file append;
 
 allow hiprofiler_plugins domain:dir { open read getattr search };
