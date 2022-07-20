@@ -15,3 +15,6 @@ allow normal_hap storage_manager:binder { transfer };
 allow normal_hap sa_file_manager_service:samgr_class { get };
 allow normal_hap fms_service:binder { call };
 allow normal_hap fms_service:binder { transfer };
+
+#avc:  denied  { search } for  pid=1870 comm="com.ohos.medial" scontext=u:r:normal_hap:s0 tcontext=u:r:storage_daemon:s0 tclass=key permissive=0
+allow normal_hap storage_daemon:key { search };

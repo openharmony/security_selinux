@@ -11,9 +11,5 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-allow system_basic_hap sa_distributeddata_service:samgr_class { get };
-allow system_basic_hap sa_huks_service:samgr_class { get };
-allow system_basic_hap system_core_hap:binder { call };
-
-#avc:  denied  { search } for  pid=2020 comm="com.ohos.wallpa" scontext=u:r:system_basic_hap:s0 tcontext=u:r:storage_daemon:s0 tclass=key permissive=0
-allow system_basic_hap storage_daemon:key { search };
+#avc:  denied  { search } for  pid=415 comm="installs" scontext=u:r:installs:s0 tcontext=u:r:storage_daemon:s0 tclass=key permissive=0
+allow installs storage_daemon:key { search };

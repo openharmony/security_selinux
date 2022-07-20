@@ -17,3 +17,6 @@ allow system_core_hap sa_inputmethod_service:samgr_class { get };
 allow system_core_hap sa_storage_manager_service:samgr_class { get };
 allow system_core_hap inputmethod_service:binder { call };
 allow system_core_hap system_basic_hap:binder { call };
+
+#avc:  denied  { search } for  pid=2028 comm="com.ohos.camera" scontext=u:r:system_core_hap:s0 tcontext=u:r:storage_daemon:s0 tclass=key permissive=0
+allow system_core_hap storage_daemon:key { search };
