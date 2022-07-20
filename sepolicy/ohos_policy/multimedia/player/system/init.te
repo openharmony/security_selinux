@@ -30,3 +30,5 @@ allow init privacy_service:process { transition };
 allow init data_service_el1_file:file { relabelfrom };
 allow init data_service_el1_file:sock_file { getattr };
 allow init data_udev:file { getattr };
+allow init faultloggerd_socket:sock_file { unlink };
+allow init data_udev:sock_file { getattr };
