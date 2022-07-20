@@ -14,3 +14,4 @@
 allow system_basic_hap data_app_el1_file:file { execute };
 allow system_basic_hap system_basic_hap:tcp_socket { create setopt bind };
 allow system_basic_hap normal_hap:binder { transfer };
+allow system_basic_hap port:tcp_socket { name_bind };
