@@ -70,6 +70,9 @@ allow sensors faultloggerd:fd { use };
 #avc:  denied  { use } for  pid=2011 comm="SensorAgentTest" path="socket:[39791]" dev="sockfs" ino=39791 scontext=u:r:sensors:s0 tcontext=u:r:sh:s0 tclass=fd permissive=0
 allow sensors sh:fd { use };
 
+# avc:  denied  { call } for  pid=687 comm="sensors" scontext=u:r:sensors:s0 tcontext=u:r:sh:s0 tclass=binder permissive=0
+allow sensors sh:binder { call };
+
 #avc:  denied  { write } for  pid=621 comm="sensors" scontext=u:r:sensors:s0 tcontext=u:r:system_core_hap:s0 tclass=unix_stream_socket permissive=1
 #avc:  denied  { read write } for  pid=2097 comm="jsThread-1" path="socket:[40085]" dev="sockfs" ino=40085 scontext=u:r:sensors:s0 tcontext=u:r:system_core_hap:s0 tclass=unix_stream_socket permissive=1
 allow sensors system_core_hap:unix_stream_socket { write read };
