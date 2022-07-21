@@ -11,9 +11,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-#avc:  denied  { ptrace } for  pid=20622 comm="processdump" scontext=u:r:processdump:s0 tcontext=u:r:sh:s0 tclass=process permissive=0
-allow processdump sh:process { ptrace };
-allow processdump data_user_file:file { getattr };
-allow processdump data_app_el1_file:file { open getattr read map };
-allow processdump data_app_el1_file:dir { search };
+#allow processdump data_user_file:file { getattr }; # conflict with neverallow
+#allow processdump data_app_el1_file:file { open getattr read map }; # conflict with neverallow
+#allow processdump data_app_el1_file:dir { search }; # conflict with neverallow
 allow processdump init:unix_stream_socket { connectto };
+#allow processdump processdump:capability { dac_override }; # conflict with neverallow
