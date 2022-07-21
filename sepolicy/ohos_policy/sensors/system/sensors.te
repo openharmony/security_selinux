@@ -79,3 +79,6 @@ allow sensors system_core_hap:fd { use };
 
 #avc:  denied  { call } for  pid=2022 comm="sensors" scontext=u:r:sensors:s0 tcontext=u:r:system_core_hap:s0 tclass=binder permissive=0
 allow sensors sensors:binder { call };
+
+#avc:  denied  { call } for  pid=687 comm="sensors" scontext=u:r:sensors:s0 tcontext=u:r:system_core_hap:s0 tclass=binder permissive=0
+allow sensors system_core_hap:binder { call };
