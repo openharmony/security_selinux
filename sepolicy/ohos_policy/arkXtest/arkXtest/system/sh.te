@@ -151,6 +151,7 @@ allow sh udevd:dir { getattr search };
 allow sh udevd:file { open read };
 allow sh ueventd:file { read };
 allow sh ui_service:file { open read };
+allow sh uitest_exec:file { execute_no_trans };
 allow sh updater_sa:dir { getattr search };
 allow sh updater_sa:file { open read };
 allow sh usbfnMaster_host:dir { getattr search };
