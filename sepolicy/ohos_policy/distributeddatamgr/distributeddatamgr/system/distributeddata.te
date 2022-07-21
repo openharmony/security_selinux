@@ -38,7 +38,6 @@ allow distributeddata deviceauth_service:binder { call };
 allow distributeddata dev_ashmem_file:chr_file { open };
 allow distributeddata dev_unix_socket:dir { search };
 allow distributeddata dev_unix_socket:sock_file { write };
-allow distributeddata distributeddata:capability { dac_read_search };
 allow distributeddata distributeddata:dir { search };
 allow distributeddata distributeddata:lnk_file { read };
 allow distributeddata distributedsche:binder { call transfer };
