@@ -13,5 +13,6 @@
 
 allow udevd data_service_file:dir { search };
 allow udevd data_service_el1_file:dir { search write ioctl add_name create getattr remove_name read };
-allow udevd data_service_el1_file:file { create write open };
+allow udevd data_service_el1_file:file { create write open rename ioctl };
+allowxperm udevd data_service_el1_file:file ioctl { 0x5413 };
 allow udevd data_service_el1_file:sock_file { unlink create read };
