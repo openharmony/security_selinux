@@ -12,6 +12,6 @@
 # limitations under the License.
 
 allow udevd data_service_file:dir { search };
-allow udevd data_service_el1_file:dir { search write ioctl add_name create getattr };
-allow udevd data_service_el1_file:file { create };
-allow udevd data_service_el1_file:sock_file { unlink create };
+allow udevd data_service_el1_file:dir { search write ioctl add_name create getattr remove_name read };
+allow udevd data_service_el1_file:file { create write open };
+allow udevd data_service_el1_file:sock_file { unlink create read };
