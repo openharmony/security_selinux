@@ -230,8 +230,6 @@ allow storage_daemon system_core_hap:lnk_file { read };
 
 #avc:  denied  { read } for  pid=254 comm="storage_daemon" scontext=u:r:storage_daemon:s0 tcontext=u:r:storage_daemon:s0 tclass=netlink_kobject_uevent_socket permissive=1
 allow storage_daemon storage_daemon:netlink_kobject_uevent_socket { read };
-#avc:  denied  { search } for  pid=257 comm="storage_daemon" scontext=u:r:storage_daemon:s0 tcontext=u:r:storage_daemon:s0 tclass=key permissive=1
-allow storage_daemon storage_daemon:key { search };
 
 #conflict
 #avc:  denied  { dac_read_search } for  pid=241 comm="storage_daemon" capability=2  scontext=u:r:storage_daemon:s0 tcontext=u:r:storage_daemon:s0 tclass=capability permissive=1

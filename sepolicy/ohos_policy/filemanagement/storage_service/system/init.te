@@ -35,9 +35,6 @@ allow init data_app_el1_file:dir { ioctl };
 allow init data_chipset_el1_file:dir { ioctl };
 allow init data_service_el1_file:dir { ioctl };
 
-#avc:  denied  { search } for  pid=1 comm="init" scontext=u:r:init:s0 tcontext=u:r:storage_daemon:s0 tclass=key permissive=0
-allow init storage_daemon:key { search };
-
 #avc:  denied  { module_request } for  pid=1 comm="init" kmod="crypto-cryptd(__cts-cbc-aes-ce)" scontext=u:r:init:s0 tcontext=u:r:kernel:s0 tclass=system permissive=0
 #avc:  denied  { module_request } for  pid=1 comm="init" kmod="crypto-cryptd(__cts-cbc-aes-ce)-all" scontext=u:r:init:s0 tcontext=u:r:kernel:s0 tclass=system permissive=0
 allow init kernel:system { module_request };

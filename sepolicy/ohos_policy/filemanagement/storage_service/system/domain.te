@@ -11,5 +11,5 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-#avc:  denied  { search } for  pid=415 comm="accountmgr" scontext=u:r:accountmgr:s0 tcontext=u:r:storage_daemon:s0 tclass=key permissive=0
-allow accountmgr storage_daemon:key { search };
+#avc:  denied  { search } for  pid=601 comm="foundation" scontext=u:r:foundation:s0 tcontext=u:r:storage_daemon:s0 tclass=key permissive=0
+allow domain storage_daemon:key { search };
