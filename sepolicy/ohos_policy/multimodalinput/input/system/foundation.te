@@ -11,6 +11,4 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-allow accessibility sh:binder { call };
-allow accessibility sh:binder { transfer };
-allow accessibility sh:binder { call transfer };
+allow foundation accessibility:binder { transfer };
