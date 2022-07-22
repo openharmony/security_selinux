@@ -158,6 +158,7 @@ allow usb_host hdf_usbd:hdf_devmgr_class { add };
 allow usb_host hdf_usbfn_cdcacm:hdf_devmgr_class { get };
 allow usb_host hdf_usbfn_cdcecm:hdf_devmgr_class { get };
 allow usb_host hdf_usbfn_master:hdf_devmgr_class { get };
+allow usb_host hdf_usb_interface_service:hdf_devmgr_class { add };
 allow usb_host hiview:binder { call };
 allow usb_host kernel:unix_stream_socket { connectto };
 allow usb_host paramservice_socket:sock_file { write };
@@ -179,7 +180,7 @@ allowxperm usb_host data_init_agent:file ioctl { 0x5413 };
 allowxperm usb_host dev_bus_usb_file:chr_file ioctl { 0x5500 0x550b 0x550c 0x550f 0x5510 0x550a 0x551a };
 allowxperm usb_host dev_file:chr_file ioctl { 0x6201 0x6202 0x6203 };
 allowxperm usb_host dev_hdf_kevent:chr_file ioctl { 0x6202 0x6201 0x6203 };
-allowxperm usb_host dev_hdf_usb_pnp:chr_file ioctl { 0x6201 0x6202 0x6203 };
+allowxperm usb_host dev_hdf_usb_pnp:chr_file ioctl { 0x6201 0x6202 0x6203 0x6206 };
 
 #avc:  denied  { get } for service=hdf_device_manager pid=360 scontext=u:r:usbfnMaster_host:s0 tcontext=u:object_r:hdf_device_manager:s0 tclass=hdf_devmgr_class permissive=1
 #avc:  denied  { add } for service=usb_pnp_manager pid=360 scontext=u:r:usbfnMaster_host:s0 tcontext=u:object_r:hdf_usb_pnp_manager:s0 tclass=hdf_devmgr_class permissive=1
