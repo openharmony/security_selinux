@@ -124,6 +124,7 @@ allow camera_host vendor_bin_file:file { entrypoint entrypoint execute map read 
 allow camera_host vendor_etc_file:dir { search };
 allow camera_host vendor_etc_file:file { getattr open read };
 allow camera_host vendor_file:file { execute execute getattr map open read getattr map open read };
+allow camera_host disp_gralloc_host:binder { call };
 allowxperm camera_host dev_dri_file:chr_file ioctl {  0x641f 0x642d 0x642e 0x64b2 0x64b4  };
 allowxperm camera_host dev_hdf_kevent:chr_file ioctl {  0x6201 0x6202  };
 allowxperm camera_host dev_mpp:chr_file ioctl {  0x7601  };
@@ -591,3 +592,6 @@ allow sample_host hdf_sample_driver_service:hdf_devmgr_class { add };
 allow sample_host sa_device_service_manager:samgr_class { get };
 allowxperm sample_host dev_hdf_kevent:chr_file ioctl { 0x6203 };
 # for testcase end
+
+allow sensor_host dev_hdf_sensor_mgr:chr_file { ioctl };
+allowxperm sensor_host dev_hdf_sensor_mgr:chr_file ioctl 0x6202;
