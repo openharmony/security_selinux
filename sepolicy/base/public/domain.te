@@ -307,11 +307,3 @@ neverallow { domain -power_host } self:{ capability2 cap2_userns } block_suspend
 neverallow * self:{ capability2 cap2_userns } audit_read;
 neverallow { domain -hdcd } self:{ capability2 cap2_userns } checkpoint_restore;
 neverallow { domain -hiperf } self:{ capability2 cap2_userns } perfmon;
-
-#tmp policy
-dontaudit hap_domain dev_kmsg_file:chr_file { open write };
-dontaudit hap_domain self:capability dac_override;
-dontaudit ispserver self:capability dac_override;
-dontaudit multimodalinput default_param:parameter_service set;
-dontaudit sh sh:capability dac_read_search;
-dontaudit sh labeledfs:filesystem remount;
