@@ -95,3 +95,28 @@ allow dhardware media_service:binder { call transfer };
 #avc:  denied  { map } for  pid=2507 comm="sa_main" path="/dev/__parameters__/u:object_r:distributedsche_param:s0" dev="tmpfs" ino=57 scontext=u:r:dhardware:s0 tcontext=u:object_r:distributedsche_param:s0 tclass=file permissive=1
 allow dhardware distributedsche_param:file { read open map };
 
+#avc:  denied  { get } for service=3503 pid=2451 scontext=u:r:dhardware:s0 tcontext=u:object_r:sa_accesstoken_manager_service:s0 tclass=samgr_class permissive=1
+allow dhardware sa_accesstoken_manager_service:samgr_class { get };
+
+#avc:  denied  { search } for  pid=2451 comm="dhardware" name="/" dev="mmcblk0p11" ino=2 scontext=u:r:dhardware:s0 tcontext=u:object_r:data_file:s0 tclass=dir permissive=1
+allow dhardware data_file:dir { search };
+
+#avc:  denied  { search } for  pid=2451 comm="dhardware" name="service" dev="mmcblk0p11" ino=1436161 scontext=u:r:dhardware:s0 tcontext=u:object_r:data_service_file:s0 tclass=dir permissive=1
+allow dhardware data_service_file:dir { search };
+
+#avc:  denied  { search } for  pid=2451 comm="dhardware" name="el1" dev="mmcblk0p11" ino=1436165 scontext=u:r:dhardware:s0 tcontext=u:object_r:data_service_el1_file:s0 tclass=dir permissive=1
+#avc:  denied  { write } for  pid=2451 comm="dhardware" name="dtbhardware_manager_service" dev="mmcblk0p11" ino=1436923 scontext=u:r:dhardware:s0 tcontext=u:object_r:data_service_el1_file:s0 tclass=dir permissive=1
+#avc:  denied  { add_name } for  pid=2451 comm="dhardware" name="kvdb" scontext=u:r:dhardware:s0 tcontext=u:object_r:data_service_el1_file:s0 tclass=dir permissive=1
+#avc:  denied  { create } for  pid=2451 comm="dhardware" name="kvdb" scontext=u:r:dhardware:s0 tcontext=u:object_r:data_service_el1_file:s0 tclass=dir permissive=1
+#avc:  denied  { getattr } for  pid=2451 comm="dhardware" path="/data/service/el1/public/database/dtbhardware_manager_service/kvdb" dev="mmcblk0p11" ino=1436925 scontext=u:r:dhardware:s0 tcontext=u:object_r:data_service_el1_file:s0 tclass=dir permissive=1
+allow dhardware data_service_el1_file:dir { search write add_name create getattr };
+
+#avc:  denied  { create } for  pid=2451 comm="dhardware" name="single_ver_db_incomplete.lock" scontext=u:r:dhardware:s0 tcontext=u:object_r:data_service_el1_file:s0 tclass=file permissive=1
+#avc:  denied  { write open } for  pid=2451 comm="dhardware" path="/data/service/el1/public/database/dtbhardware_manager_service/kvdb/e327e256a5e5b23fc29b7c063ce9cb13a0e8e5b2e591fd63cb5ea06070af8f77/single_ver_db_incomplete.lock" dev="mmcblk0p11" ino=1436928 scontext=u:r:dhardware:s0 tcontext=u:object_r:data_service_el1_file:s0 tclass=file permissive=1
+#avc:  denied  { read } for  pid=2451 comm="dhardware" path="/data/service/el1/public/database/dtbhardware_manager_service/kvdb/e327e256a5e5b23fc29b7c063ce9cb13a0e8e5b2e591fd63cb5ea06070af8f77/single_ver/main/gen_natural_store.db" dev="mmcblk0p11" ino=1436932 scontext=u:r:dhardware:s0 tcontext=u:object_r:data_service_el1_file:s0 tclass=file permissive=1
+#avc:  denied  { read } for  pid=2451 comm="dhardware" path="/data/service/el1/public/database/dtbhardware_manager_service/kvdb/e327e256a5e5b23fc29b7c063ce9cb13a0e8e5b2e591fd63cb5ea06070af8f77/single_ver/main/gen_natural_store.db" dev="mmcblk0p11" ino=1436932 scontext=u:r:dhardware:s0 tcontext=u:object_r:data_service_el1_file:s0 tclass=file permissive=1
+allow dhardware data_service_el1_file:file { create write open read read };
+
+#avc:  denied  { call } for  pid=2451 comm="dhardware" scontext=u:r:dhardware:s0 tcontext=u:r:accesstoken_service:s0 tclass=binder permissive=1
+allow dhardware accesstoken_service:binder { call };
+
