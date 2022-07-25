@@ -11,6 +11,5 @@
 # See the License for the specific language governing permissions and
 # limitations under the License
 
-allow appspawn appspawn:capability { dac_read_search };
 allow appspawn appspawn:unix_dgram_socket { getopt setopt };
 allow appspawn data_init_agent:dir { search };

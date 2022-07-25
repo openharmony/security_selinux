@@ -12,8 +12,6 @@
 # limitations under the License
 
 allow hidumper_service data_local_tmp:dir { add_name create open read remove_name rmdir search write };
-allow hidumper_service hidumper_service:capability { dac_read_search sys_ptrace };
-allow hidumper_service limit_domain:dir { search };
 allow hidumper_service sh:dir { search };
 allow hidumper_service sh:fd { use };
 allow hidumper_service sh:fifo_file { write };
