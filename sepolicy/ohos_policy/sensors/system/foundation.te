@@ -13,6 +13,3 @@
 
 #avc:  denied  { get } for service=3601 pid=591 scontext=u:r:foundation:s0 tcontext=u:object_r:sa_sensor_service:s0 tclass=samgr_class permissive=1
 allow foundation sa_sensor_service:samgr_class { get };
-
-#avc:  denied  { sys_ptrace } for  pid=684 comm="foundation" capability=19  scontext=u:r:foundation:s0 tcontext=u:r:foundation:s0 tclass=capability permissive=0
-allow foundation foundation:capability { sys_ptrace };
