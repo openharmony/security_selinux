@@ -15,9 +15,9 @@
 
 #include "contexts_trie.h"
 
+#include <cstdlib>
 #include <deque>
 #include <new>
-#include <cstdlib>
 #include <string>
 #include <unordered_map>
 #include <utility>

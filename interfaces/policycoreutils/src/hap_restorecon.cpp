@@ -17,13 +17,13 @@
 
 #include <cctype>
 #include <cerrno>
-#include <fstream>
-#include <istream>
 #include <climits>
 #include <clocale>
+#include <cstdlib>
+#include <fstream>
+#include <istream>
 #include <regex>
 #include <sstream>
-#include <cstdlib>
 #include <streambuf>
 #include <string>
 #include <sys/stat.h>
@@ -34,11 +34,11 @@
 
 #include <include/fts.h>
 #include <pthread.h>
+#include "selinux/context.h"
+#include "selinux/selinux.h"
 
 #include "callbacks.h"
-#include "selinux/context.h"
 #include <selinux_internal.h>
-#include "selinux/selinux.h"
 #include "selinux_error.h"
 #include "selinux_log.h"
 

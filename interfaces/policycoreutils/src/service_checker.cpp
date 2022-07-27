@@ -17,22 +17,23 @@
 
 #include <cctype>
 #include <cerrno>
+#include <cstdarg>
+#include <cstddef>
 #include <fstream>
 #include <istream>
 #include <mutex>
 #include <sstream>
-#include <cstdarg>
-#include <cstddef>
 #include <streambuf>
 #include <string>
 #include <unordered_map>
 #include <utility>
 
 #include <pthread.h>
+#include "selinux/selinux.h"
+
 #include "callbacks.h"
 #include "securec.h"
 #include <selinux_internal.h>
-#include "selinux/selinux.h"
 
 #include "selinux_error.h"
 #include "selinux_log.h"

@@ -17,23 +17,23 @@
 
 #include <cctype>
 #include <cerrno>
+#include <cstdlib>
 #include <fstream>
 #include <ios>
 #include <istream>
 #include <memory>
 #include <sstream>
-#include <cstdlib>
 #include <streambuf>
 #include <string>
 #include <unistd.h>
 
 #include <pthread.h>
 #include <sys/socket.h>
-
-#include <securec.h>
-#include "callbacks.h"
-#include <selinux_internal.h>
 #include "selinux/selinux.h"
+
+#include "callbacks.h"
+#include <securec.h>
+#include <selinux_internal.h>
 
 #include "contexts_trie.h"
 #include "selinux_error.h"

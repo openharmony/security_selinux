@@ -13,13 +13,13 @@
  * limitations under the License.
  */
 
+#include <cstdlib>
 #include <getopt.h>
 #include <iosfwd>
 #include <iostream>
 #include <istream>
 #include <memory>
 #include <ostream>
-#include <stdlib.h>
 #include <string>
 #include <unistd.h>
 
