@@ -58,3 +58,6 @@ allow memmgrservice sa_foundation_appms:samgr_class { get };
 allow memmgrservice sa_foundation_cesfwk_service:samgr_class { get };
 
 allow memmgrservice sa_foundation_abilityms:samgr_class { get };
+
+allow memmgrservice sa_foundation_bms:samgr_class { get };
+
