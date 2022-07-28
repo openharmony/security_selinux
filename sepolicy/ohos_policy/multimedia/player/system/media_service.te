@@ -44,3 +44,9 @@ allow media_service sh:fd { use };
 allow media_service system_core_hap_data_file:file { getattr read };
 allow media_service media_service:udp_socket { create };
 allow media_service foundation:binder { call transfer };
+#avc:  denied  { call } for  pid=2003 comm="media_service" scontext=u:r:media_service:s0 tcontext=u:r:codec_host:s0 tclass=binder permissive=1
+allow media_service codec_host:binder { call };
+#avc:  denied  { transfer } for  pid=2003 comm="media_service" scontext=u:r:media_service:s0 tcontext=u:r:codec_host:s0 tclass=binder permissive=1
+allow media_service codec_host:binder { transfer };
+#avc:  denied  { get } for service=codec_hdi_omx_service pid=2247 scontext=u:r:media_service:s0 tcontext=u:object_r:hdf_codec_hdi_omx_service:s0 tclass=hdf_devmgr_class permissive=0
+allow media_service hdf_codec_hdi_omx_service:hdf_devmgr_class { get };
