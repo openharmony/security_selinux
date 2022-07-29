@@ -323,7 +323,7 @@ neverallow { domain -hap_domain } self:process execmem;
 #neverallow * self:{ capability2 cap2_userns } perfmon;
 
 neverallow { domain -appspawn -init -ueventd -installs -storage_daemon -udevd -kernel } self:{ capability cap_userns } chown;
-neverallow { domain -appspawn -init -udevd -memmgrservice -blue_host -bluetooth_service -camera_host -codec_host -disp_gralloc_host
+neverallow { domain -appspawn -init -udevd -memmgrservice  -camera_host -codec_host -disp_gralloc_host
              -face_auth_host -faultloggerd -fingerprint_auth_host -hdcd -hiview -installs -location_host
              -misc -mmi_uinput_service -multimodalinput -netsysnative -pin_auth_host -power_host
              -storage_daemon -usb_host -usbfnMaster_host -user_auth_host
