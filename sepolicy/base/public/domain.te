@@ -96,9 +96,9 @@ neverallow { domain -init -appspawn -nwebspawn } proc_file:{ file dir } mounton;
 #todo audio edm hidump installs location multimodalinput netmanager normal pwer thermal..
 #neverallow { domain -init -foundation } data_file:dir { write add_name remove_name };
 
-neverallow { domain -hdcd -installs -init -hidumper_service -power_host -hiprofilerd -hiprofiler_plugins -hiperf -hiprofiler_cmd } data_local_tmp:dir never_write_dir;
+neverallow { domain -hdcd -installs -init -power_host -hiprofilerd -hiprofiler_plugins -hiperf -hiprofiler_cmd } data_local_tmp:dir never_write_dir;
 
-neverallow { domain -hdcd -hap_domain -init -installs -foundation -hidumper_service -power_host -sh -hiprofiler_plugins -hiprofiler_cmd -hiprofilerd -hiperf } data_local_tmp:dir { open search };
+neverallow { domain -hdcd -hap_domain -init -installs -foundation -power_host -sh -hiprofiler_plugins -hiprofiler_cmd -hiprofilerd -hiperf } data_local_tmp:dir { open search };
 
 neverallow { domain -samgr } *:binder set_context_mgr;
 
@@ -108,7 +108,7 @@ neverallow * hdcd:process dyntransition;
 
 neverallow * { file_attr fs_attr dev_attr }:{ lnk_file fifo_file sock_file } mounton;
 
-neverallow { domain -init -hidumper_service -hiview } debugfs: { file lnk_file } never_rw_file;
+neverallow { domain -init -hiview } debugfs: { file lnk_file } never_rw_file;
 
 #ioctl cmd TIOCSTI
 neverallowxperm * devpts:chr_file ioctl 0x5412;
@@ -229,14 +229,14 @@ neverallow domain debugfs_attr:file { execute execute_no_trans };
 
 neverallow { domain -memmgrservice } cgroup:file create;
 
-neverallow { domain -init -hidumper_service } debugfs:{ file lnk_file } never_rw_file;
+neverallow { domain -init } debugfs:{ file lnk_file } never_rw_file;
 
 neverallow { domain -init -appspawn -nwebspawn -normal_hap -sa_dialog } { system_file_attr vendor_file_attr }:dir_file_class_set mounton;
 
 neverallow { domain -init -installs -hap_domain -edm_sa -kernel -locationhub -multimodalinput
              -power_host -thermal -udevd -sh -foundation -hdcd -audio_hdi_server_host } data_file:file never_write_file;
 
-neverallow { domain -hdcd -hap_domain -hidumper_service -installs -power_host -sh -hiprofilerd -hiprofiler_plugins -hiprofiler_cmd -hiperf } data_local_tmp:file open;
+neverallow { domain -hdcd -hap_domain -installs -power_host -sh -hiprofilerd -hiprofiler_plugins -hiprofiler_cmd -hiperf } data_local_tmp:file open;
 
 #forbid root process access network;
 #
