@@ -34,7 +34,7 @@ allow installs normal_hap_data_file:file { getattr setattr };
 allow installs security:security { check_context };
 allow installs selinuxfs:dir { search };
 allow installs selinuxfs:file { open read write };
-allow installs system_basic_hap_data_file:file { getattr unlink };
+allow installs system_basic_hap_data_file:file { getattr setattr unlink };
 allow installs system_basic_hap_data_file:dir { open read relabelto search getattr setattr };
 allow installs system_core_hap_data_file:dir { getattr open read relabelfrom relabelto remove_name rmdir search setattr write };
 allow installs system_core_hap_data_file:file { getattr unlink };
