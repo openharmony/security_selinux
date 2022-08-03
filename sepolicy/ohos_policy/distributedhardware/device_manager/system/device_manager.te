@@ -13,9 +13,6 @@
 
 type device_manager, sadomain, domain;
 
-#avc:  denied  { add } for service=idl_audio_service pid=418 scontext=u:r:audio_hdi_server_host:s0 tcontext=u:object_r:default_hdf_service:s0 tclass=hdf_devmgr_class permissive=0
-allow device_manager default_hdf_service:hdf_devmgr_class { add };
-
 #avc:  denied  { get } for service=801 pid=555 scontext=u:r:foundation:s0 tcontext=u:object_r:sa_accessibleabilityms:s0 tclass=samgr_class permissive=0
 allow device_manager sa_accessibleabilityms:samgr_class { get };
 
