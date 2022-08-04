@@ -20,7 +20,7 @@ type udevd_file, file_attr, data_file_attr;
 init_daemon_domain(udevd);
 
 allow udevd data_file:dir { open search getattr rmdir };
-allow udevd data_file:file { create unlink open write };
+allow udevd data_file:file { unlink open };
 allow udevd data_service_el1_file:dir { search write add_name create getattr remove_name read open watch rmdir };
 allow udevd data_service_el1_file:file { create unlink write open ioctl read rename };
 allow udevd data_service_el1_file:sock_file { create unlink };
