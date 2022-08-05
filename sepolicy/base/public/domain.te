@@ -264,7 +264,7 @@ neverallow { domain -hdcd -sh } { rootfs system_file_attr vendor_file_attr }:dir
 neverallow { domain -hdcd -sh } { rootfs system_file_attr vendor_file_attr }:file never_write_file;
 
 #limit domain access to sh_exec
-neverallow { domain -console -init -hdcd -sh -faultloggerd -input_user_host -udevd -riladapter_host
+neverallow { domain -console -init -hdcd -sh -faultloggerd -input_user_host -riladapter_host
     -hiview -hiperf -hiprofiler_cmd -hidumper_service -hiprofiler_plugins -netsysnative
     -wifi_hal_service -usb_host -processdump } sh_exec:file *;
 
