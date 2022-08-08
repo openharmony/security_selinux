@@ -328,7 +328,7 @@ neverallow { domain -processdump -download_server -netmanager -softbus_server -w
 #neverallow * self:{ capability2 cap2_userns } mac_admin;
 #neverallow * self:{ capability2 cap2_userns } syslog;
 #neverallow { domain -time_service } self:{ capability2 cap2_userns } wake_alarm;
-#neverallow { domain -power_host } self:{ capability2 cap2_userns } block_suspend;
+neverallow { domain -power_host } self:{ capability2 cap2_userns } block_suspend;
 #neverallow * self:{ capability2 cap2_userns } audit_read;
 #neverallow { domain -hdcd } self:{ capability2 cap2_userns } checkpoint_restore;
 #neverallow * self:{ capability2 cap2_userns } perfmon;
@@ -373,7 +373,6 @@ neverallow * self:{ capability2 cap2_userns } mac_override;
 neverallow * self:{ capability2 cap2_userns } mac_admin;
 neverallow { domain -hiview } self:{ capability2 cap2_userns } syslog;
 neverallow { domain -time_service } self:{ capability2 cap2_userns } wake_alarm;
-neverallow * self:{ capability2 cap2_userns } block_suspend;
 neverallow * self:{ capability2 cap2_userns } audit_read;
 neverallow * self:{ capability2 cap2_userns } checkpoint_restore;
 neverallow { domain -hiperf } self:{ capability2 cap2_userns } perfmon;
