@@ -46,8 +46,8 @@ allow bluetooth_service vendor_file:file { execute getattr map open read };
 #avc:  denied  { get } for service=5100 pid=278 scontext=u:r:bluetooth_service:s0 tcontext=u:r:sa_device_service_manager:s0 tclass=samgr_class permissive=1
 allow bluetooth_service sa_device_service_manager:samgr_class { get };
 
-#avc:  denied  { get } for service=BtHciService pid=278 scontext=u:r:bluetooth_service:s0 tcontext=u:r:hdf_BtHciService:s0 tclass=hdf_devmgr_class permissive=1
-allow bluetooth_service hdf_BtHciService:hdf_devmgr_class { get };
+#avc:  denied  { get } for service=hci_interface_service pid=278 scontext=u:r:bluetooth_service:s0 tcontext=u:r:hdf_hci_interface_service:s0 tclass=hdf_devmgr_class permissive=1
+allow bluetooth_service hdf_hci_interface_service:hdf_devmgr_class { get };
 
 #avc:  denied  { get } for service=4010 pid=278 scontext=u:r:bluetooth_service:s0 tcontext=u:r:sa_telephony_tel_core_service:s0 tclass=samgr_class permissive=1
 allow bluetooth_service sa_telephony_tel_core_service:samgr_class { get };

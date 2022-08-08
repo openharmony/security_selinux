@@ -12,7 +12,7 @@
 # limitations under the License.
 
 hdf_device_manager                      u:object_r:hdf_device_manager:s0
-BtHciService                            u:object_r:hdf_BtHciService:s0
+hci_interface_service                   u:object_r:hdf_hci_interface_service:s0
 thermal_interface_service               u:object_r:hdf_thermal_interface_service:s0
 vibrator_interface_service              u:object_r:hdf_vibrator_interface_service:s0
 distributed_camera_provider_service     u:object_r:hdf_distributed_camera_provider_service:s0
