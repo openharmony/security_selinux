@@ -12,3 +12,4 @@
 # limitations under the License.
 
 type hdf_hci_interface_service, hdf_service_attr;
+

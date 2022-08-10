@@ -242,8 +242,8 @@ neverallow { domain -init } debugfs:{ file lnk_file } never_rw_file;
 
 neverallow { domain -init -appspawn -nwebspawn -normal_hap -sa_dialog } { system_file_attr vendor_file_attr }:dir_file_class_set mounton;
 
-neverallow { domain -init -hap_domain -kernel -locationhub 
-             -power_host -thermal -sh -foundation -hdcd -audio_hdi_server_host } data_file:file never_write_file;
+neverallow { domain -init -hap_domain -locationhub 
+             -power_host -thermal -sh -hdcd -audio_hdi_server_host } data_file:file never_write_file;
 
 neverallow { domain -hdcd -hap_domain -power_host -sh -hiprofilerd -hiprofiler_plugins -hiprofiler_cmd -hiperf } data_local_tmp:file open;
 
@@ -335,7 +335,7 @@ neverallow { domain -processdump -download_server -netmanager -softbus_server -w
 
 neverallow { domain -appspawn -init -ueventd -installs -storage_daemon -udevd } self:{ capability cap_userns } chown;
 neverallow { domain -appspawn -init -memmgrservice -disp_gralloc_host
-             -faultloggerd -hdcd -installs -location_host
+             -hdcd -installs -location_host
              -misc -mmi_uinput_service -multimodalinput -netsysnative -power_host
              -storage_daemon -usb_host
              -hiprofiler_plugins -hiprofilerd -hiperf -hiprofiler_cmd } self:{ capability cap_userns } dac_override;
