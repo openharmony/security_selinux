@@ -41,4 +41,3 @@ allow media_service node:udp_socket { node_bind };
 #avc:  denied  { write } for  pid=474 comm="task3" path="socket:[31752]" dev="sockfs" ino=31752 scontext=u:r:media_service:s0 tcontext=u:r:media_service:s0 tclass=tcp_socket permissive=1
 #avc:  denied  { read } for  pid=474 comm="task3" path="socket:[31752]" dev="sockfs" ino=31752 scontext=u:r:media_service:s0 tcontext=u:r:media_service:s0 tclass=tcp_socket permissive=1
 allow media_service media_service:tcp_socket { getattr getopt read write };
-
