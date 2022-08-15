@@ -38,7 +38,7 @@ void SetInitSelinuxLog(void);
  * @param uc contains pid, uid, gid info
  * @return 0 for success, or an error code
  */
-int SetParamCheck(const char *paraName, struct ucred *uc);
+int SetParamCheck(const char *paraName, const struct ucred *uc);
 
 #ifdef __cplusplus
 #if __cplusplus

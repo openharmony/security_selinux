@@ -20,7 +20,7 @@
 #include <unistd.h>
 #include <stdio.h>
 
-void *InitSharedMem(const char *fileName, uint32_t spaceSize, int readOnly)
+void *InitSharedMem(const char *fileName, uint32_t spaceSize, bool readOnly)
 {
     if (fileName == NULL || spaceSize == 0) {
         return NULL;
@@ -53,7 +53,7 @@ void UnmapSharedMem(char *sharedMem, uint32_t dataSize)
     munmap(sharedMem, dataSize);
 }
 
-void WriteSharedMem(char *sharedMem, char *data, uint32_t length)
+void WriteSharedMem(char *sharedMem, const char *data, uint32_t length)
 {
     if (sharedMem == NULL || data == NULL || length == 0) {
         return;

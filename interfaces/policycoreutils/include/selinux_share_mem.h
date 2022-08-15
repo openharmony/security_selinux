@@ -18,6 +18,7 @@
 
 #pragma once
 
+#include <stdbool.h>
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
@@ -34,8 +35,8 @@ typedef struct SharedMem {
     char data[0];
 } SharedMem;
 
-void *InitSharedMem(const char *fileName, uint32_t spaceSize, int readOnly);
-void WriteSharedMem(char *sharedMem, char *data, uint32_t length);
+void *InitSharedMem(const char *fileName, uint32_t spaceSize, bool readOnly);
+void WriteSharedMem(char *sharedMem, const char *data, uint32_t length);
 char *ReadSharedMem(char *sharedMem, uint32_t length);
 void UnmapSharedMem(char *sharedMem, uint32_t dataSize);
 
