@@ -26,8 +26,8 @@ extern "C" {
 #endif
 #endif // __cplusplus
 
-typedef struct HashNode_ {
-    struct HashNode_ *next;
+typedef struct HashNode {
+    struct HashNode *next;
 } HashNode;
 
 typedef struct {
@@ -40,7 +40,7 @@ typedef struct {
     HashTab *handle;
 } ParamContextsTrie;
 
-typedef struct ParamHashNode_ {
+typedef struct ParamHashNode {
     HashNode hashNode;
     ParamContextsTrie *childPtr;
     char* name;

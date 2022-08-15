@@ -16,7 +16,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-static const int32_t g_maxBucket = 32;
+static const int32_t MAX_BUCKET = 32;
 
 static int GenerateHashCode(const char *key)
 {
@@ -63,7 +63,7 @@ int32_t HashMapCreate(HashTab **handle)
         return -1;
     }
 
-    HashTab *tab = (HashTab *)calloc(1, sizeof(HashTab) + sizeof(HashNode *) * g_maxBucket);
+    HashTab *tab = (HashTab *)calloc(1, sizeof(HashTab) + sizeof(HashNode *) * MAX_BUCKET);
     if (tab == NULL) {
         return -1;
     }
@@ -102,7 +102,7 @@ int32_t HashMapAdd(HashTab *handle, HashNode *node)
     }
     int hashCode = GroupNodeGetNodeHashCode(node);
     hashCode = (hashCode < 0) ? -hashCode : hashCode;
-    hashCode = hashCode % g_maxBucket;
+    hashCode = hashCode % MAX_BUCKET;
 
     // check key exist
     HashNode *tmp = GetHashNodeByNode(handle->buckets[hashCode], node);
@@ -121,7 +121,7 @@ void HashMapRemove(HashTab *handle, const char *key)
     }
     int hashCode = GroupNodeGetKeyHashCode(key);
     hashCode = (hashCode < 0) ? -hashCode : hashCode;
-    hashCode = hashCode % g_maxBucket;
+    hashCode = hashCode % MAX_BUCKET;
 
     HashNode *node = handle->buckets[hashCode];
     HashNode *preNode = node;
@@ -147,7 +147,7 @@ HashNode *HashMapGet(HashTab *handle, const char *key)
     }
     int hashCode = GroupNodeGetKeyHashCode(key);
     hashCode = (hashCode < 0) ? -hashCode : hashCode;
-    hashCode = hashCode % g_maxBucket;
+    hashCode = hashCode % MAX_BUCKET;
 
     return GetHashNodeByKey(handle->buckets[hashCode], key);
 }
@@ -170,7 +170,7 @@ void HashMapDestroy(HashTab *handle)
     if (handle == NULL) {
         return;
     }
-    for (int i = 0; i < g_maxBucket; i++) {
+    for (int i = 0; i < MAX_BUCKET; i++) {
         HashListFree(handle->buckets[i]);
     }
     free(handle);

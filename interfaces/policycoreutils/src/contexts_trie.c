@@ -142,24 +142,24 @@ const char *SearchFromParamTrie(ParamContextsTrie *root, const char *paraName)
         ParamHashNode *childNode = GetGroupNode(root, element);
         if (childNode == NULL) {
             free(tmpName);
-            if (strcmp(root->prefixLabel, EMPTY_STRING)) {
+            if (strcmp(root->prefixLabel, EMPTY_STRING) != 0) {
                 return root->prefixLabel;
-            } else if (strcmp(updateCurLabel, EMPTY_STRING)) {
+            } else if (strcmp(updateCurLabel, EMPTY_STRING) != 0) {
                 return updateCurLabel;
             } else {
                 return DEFAULT_CONTEXT;
             }
         }
-        if (strcmp(root->prefixLabel, EMPTY_STRING))
+        if (strcmp(root->prefixLabel, EMPTY_STRING) != 0)
             updateCurLabel = root->prefixLabel;
         root = childNode->childPtr;
         element = strtok_r(NULL, ".", &rest);
     }
 
     free(tmpName);
-    if (strcmp(root->matchLabel, EMPTY_STRING)) {
+    if (strcmp(root->matchLabel, EMPTY_STRING) != 0) {
         return root->matchLabel;
-    } else if (strcmp(updateCurLabel, EMPTY_STRING)) {
+    } else if (strcmp(updateCurLabel, EMPTY_STRING) != 0) {
         return updateCurLabel;
     } else {
         return DEFAULT_CONTEXT;
@@ -202,7 +202,7 @@ static bool InsertContextsList(ParamContextsList **head, const char *param, cons
 
 bool ReadParamFromSharedMem(ParamContextsTrie **trieRoot, ParamContextsList **listHead)
 {
-    SharedMem *memPtr = (SharedMem *)InitSharedMem("/dev/__parameters__/param_selinux", SELINUX_PARAM_SPACE, 1);
+    SharedMem *memPtr = (SharedMem *)InitSharedMem("/dev/__parameters__/param_selinux", SELINUX_PARAM_SPACE, true);
     if (memPtr == NULL) {
         return false;
     }
@@ -283,7 +283,7 @@ int LoadParameterContextsToSharedMem(void)
     if (fp == NULL) {
         return -SELINUX_CONTEXTS_FILE_LOAD_ERROR;
     }
-    SharedMem *memPtr = (SharedMem *)InitSharedMem("/dev/__parameters__/param_selinux", SELINUX_PARAM_SPACE, 0);
+    SharedMem *memPtr = (SharedMem *)InitSharedMem("/dev/__parameters__/param_selinux", SELINUX_PARAM_SPACE, false);
     if (memPtr == NULL) {
         (void)fclose(fp);
         return -SELINUX_PTR_NULL;

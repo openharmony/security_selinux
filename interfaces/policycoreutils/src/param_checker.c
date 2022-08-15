@@ -109,7 +109,7 @@ void SetInitSelinuxLog(void)
     }
 }
 
-int SetParamCheck(const char *paraName, struct ucred *uc)
+int SetParamCheck(const char *paraName, const struct ucred *uc)
 {
     if (paraName == NULL || uc == NULL) {
         selinux_log(SELINUX_ERROR, "input param is null!\n");
