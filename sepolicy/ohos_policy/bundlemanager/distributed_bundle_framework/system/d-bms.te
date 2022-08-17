@@ -42,3 +42,4 @@ allow init data_udev:sock_file { relabelfrom };
 allow accountmgr d-bms:binder { call transfer };
 allow distributeddata d-bms:binder { call transfer };
 allow foundation d-bms:binder { call transfer };
+allow system_core_hap d-bms:binder { call transfer };
