@@ -14,6 +14,7 @@
 type hdf_cellular_radio1, hdf_service_attr;
 type hdf_cellular_radio_ext, hdf_service_attr;
 
+allow riladapter_host accessibility_param:file { map open read };
 allow riladapter_host bootevent_param:file { map open read };
 allow riladapter_host bootevent_samgr_param:file { map open read };
 allow riladapter_host build_version_param:file { map open read };
