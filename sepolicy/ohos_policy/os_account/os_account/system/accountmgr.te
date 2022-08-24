@@ -87,3 +87,10 @@ allow normal_hap sa_accountmgr:samgr_class { get };
 allow hiview sa_accountmgr:samgr_class { get };
 allow sh accountmgr:binder { transfer };
 allow accountmgr sh:binder { call };
+
+# add for TDD
+binder_call(sh, useriam);
+allow useriam sh:binder { call };
+binder_call(sh, pinauth);
+allow pinauth sh:binder { call };
+allow sh accessibility_param:file { read open map };
