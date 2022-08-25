@@ -1,4 +1,4 @@
-# Copyright (c) 2021-2022 Huawei Device Co., Ltd.
+# Copyright (c) 2022 Huawei Device Co., Ltd.
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -11,9 +11,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-type appspawn, domain, nativedomain;
-type appspawn_exec, system_file_attr, exec_attr, file_attr;
+#avc:  denied  { call transfer } for  pid=247 comm="param_watcher" scontext=u:r:param_watcher:s0 tcontext=u:r:power_host:s0 tclass=binder permissive=1
+allow param_watcher power_host :binder { call transfer };
 
-init_daemon_domain(appspawn);
-
-allow appspawn dev_unix_socket:sock_file unlink;
