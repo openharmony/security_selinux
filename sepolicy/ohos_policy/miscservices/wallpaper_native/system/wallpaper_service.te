@@ -29,4 +29,3 @@ allow system_core_hap wallpaper_service:binder { call transfer };
 allow system_basic_hap wallpaper_service:binder { call transfer };
 allow normal_hap wallpaper_service:binder { call transfer };
 
-
