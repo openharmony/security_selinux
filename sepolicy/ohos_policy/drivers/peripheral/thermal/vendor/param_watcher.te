@@ -11,5 +11,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-usb_interface_service                   u:object_r:hdf_usb_interface_service:s0
-partition_slot_service                  u:object_r:hdf_partition_slot_service:s0
+#avc:  denied  { call transfer } for  pid=247 comm="param_watcher" scontext=u:r:param_watcher:s0 tcontext=u:r:power_host:s0 tclass=binder permissive=1
+allow param_watcher power_host :binder { call transfer };
+
