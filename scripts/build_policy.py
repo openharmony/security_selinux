@@ -144,8 +144,6 @@ def main(args):
     public_policy = []
     vendor_policy = []
 
-    print("dir_list")
-    print(dir_list)
     for item in dir_list:
         public_policy += traverse_folder_in_dir_name(item, "public")
         system_policy += traverse_folder_in_dir_name(item, "system")
@@ -153,6 +151,8 @@ def main(args):
 
     # list of all policy folders
     folder_list =  public_policy + system_policy + vendor_policy
+    # add temp dirs base/te folders
+    folder_list.append(os.path.join(args.source_root_dir, "base/security/selinux/sepolicy/base/te"))
 
     # list of all policy files
     policy_file_list = traverse_file_in_each_type(

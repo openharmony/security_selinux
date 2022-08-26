@@ -11,11 +11,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-#for debugging
-#for debugging
+#avc:  denied  { call transfer } for  pid=247 comm="param_watcher" scontext=u:r:param_watcher:s0 tcontext=u:r:power_host:s0 tclass=binder permissive=1
+allow param_watcher power_host :binder { call transfer };
 
-neverallow hdcd self:perf_event ~{ open read write kernel };
-
-neverallow hdcd dev_input_file:chr_file never_write_file;
-
-neverallow hdcd { dev_fuse_file dev_port }:chr_file ~getattr;

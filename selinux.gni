@@ -12,5 +12,5 @@
 # limitations under the License.
 
 declare_args() {
-    selinux_build_path = "default"
+  selinux_build_path = "default"
 }

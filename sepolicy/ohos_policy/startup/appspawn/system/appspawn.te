@@ -16,4 +16,4 @@ type appspawn_exec, system_file_attr, exec_attr, file_attr;
 
 init_daemon_domain(appspawn);
 
-
+allow appspawn dev_unix_socket:sock_file unlink;
