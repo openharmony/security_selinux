@@ -34,6 +34,6 @@ allow pasteboard_service sa_foundation_wms:samgr_class { get };
 allow pasteboard_service data_service_el1_file:dir { add_name remove_name search write };
 allow pasteboard_service data_service_el1_file:file { create ioctl open unlink write write open };
 allow pasteboard_service distributeddata:binder { call transfer };
-allow pasteboard_services sa_distributeddata_service:samgr_class { get };
+allow pasteboard_service sa_distributeddata_service:samgr_class { get };
 allow distributeddata pasteboard_service:binder { call transfer };
 
