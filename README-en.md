@@ -107,7 +107,7 @@ ino=4                               # The file node No. is 4.
 scontext=u:r:hdcd:s0                # The SELinux label of the process is u:r:hdcd:s0.
 tcontext=u:object_r:selinuxfs:s0    # The SELinux label of the accessed file is u:object_r:selinuxfs:s0.
 tclass=file                         # The current alarm is about a file operation.
-permissive=1                        # The SELinux is running in permissive mode, that is, the system does not deny any operation but only logs Access Vector Cache (AVC) message for troubleshooting or debugging. If permissive is set to 0, the SELinux is running in enforcing mode and denies access based on SeLunix policy rules.  
+permissive=1                        # The SELinux is running in permissive mode, that is, the system does not deny any operation but only logs Access Vector Cache (AVC) message for troubleshooting or debugging. If permissive is set to 0, the SELinux is running in enforcing mode and denies access based on SELinux policy rules.  
 ```
 
 ### Writing a Policy Rule
