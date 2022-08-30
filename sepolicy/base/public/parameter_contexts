@@ -13,6 +13,7 @@
 
 ohos.                                   u:object_r:ohos_param:s0
 ohos.boot.                              u:object_r:ohos_boot_param:s0
+ohos.dev.                               u:object_r:ohos_dev_param:s0
 sys.                                    u:object_r:sys_param:s0
 sys.usb                                 u:object_r:sys_usb_param:s0
 net.                                    u:object_r:net_param:s0
