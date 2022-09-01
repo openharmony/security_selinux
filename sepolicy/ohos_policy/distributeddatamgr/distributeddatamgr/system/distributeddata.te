@@ -37,6 +37,7 @@ allow distributeddata data_service_el1_file:dir { add_name create getattr open r
 allow distributeddata data_service_el1_file:file { create getattr ioctl lock map open read rename setattr unlink write };
 allow distributeddata data_service_file:dir { search };
 allow distributeddata deviceauth_service:binder { call };
+allow distributeddata device_manager:binder { call transfer };
 allow distributeddata dev_ashmem_file:chr_file { open };
 allow distributeddata dev_unix_socket:dir { search };
 allow distributeddata dev_unix_socket:sock_file { write };
@@ -62,6 +63,7 @@ allow distributeddata proc_file:file { open read };
 allow distributeddata sa_accesstoken_manager_service:samgr_class { get };
 allow distributeddata sa_accountmgr:samgr_class { get };
 allow distributeddata sa_distributeddata_service:samgr_class { add get };
+allow distributeddata sa_foundation_devicemanager_service:samgr_class { get };
 allow distributeddata sa_param_watcher:samgr_class { get };
 allow distributeddata samain_exec:file { entrypoint execute read };
 allow distributeddata samgr:binder { call transfer };

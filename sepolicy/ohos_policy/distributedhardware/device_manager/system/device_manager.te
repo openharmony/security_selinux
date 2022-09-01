@@ -285,4 +285,5 @@ allow device_manager sa_accesstoken_manager_service:samgr_class { get };
 
 allow device_manager system_core_hap:binder { call transfer };
 allow device_manager pasteboard_service:binder { call transfer };
+allow device_manager distributeddata:binder { call };
 
