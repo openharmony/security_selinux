@@ -29,3 +29,7 @@ allow inputmethod_service paramservice_socket:sock_file { write };
 allow inputmethod_service sa_subsys_ace_service:samgr_class { get };
 allow inputmethod_service pasteboard_service:binder { call transfer };
 
+# add for TDD
+allow sh sa_inputmethod_service:samgr_class { get };
+allow inputmethod_service sh:binder { call transfer };
+allow sh inputmethod_service:binder { call transfer };
