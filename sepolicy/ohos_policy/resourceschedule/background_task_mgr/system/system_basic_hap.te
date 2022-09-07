@@ -15,3 +15,4 @@ allow system_basic_hap bluetooth_service:fd { use };
 allow system_basic_hap bluetooth_service:unix_stream_socket { read write };
 allow system_basic_hap softbus_server:fd { use };
 allow system_basic_hap sa_bgtaskmgr:samgr_class { get };
+allow system_core_hap sa_bgtaskmgr:samgr_class { get };
