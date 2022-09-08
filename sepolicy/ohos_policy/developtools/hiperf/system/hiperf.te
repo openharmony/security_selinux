@@ -152,7 +152,12 @@ allow hiperf ui_service:process signull;
 allow hiperf hiview:process signull;
 allow hiperf domain:process signull;
 
+allow hiperf accessibility_param:file { map open read };
+allow hiperf ohos_dev_param:file { map open read };
+
 #allow hiperf data_local_tmp:file open;
 #allow hiperf data_local_tmp:dir { add_name remove_name search write };
 #allow hiperf data_file:file { create write };
 #allow hiperf devpts:chr_file ioctl;
+
+
