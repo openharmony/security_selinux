@@ -68,7 +68,7 @@ allow hiperf proc_vmallocinfo_file:file getattr;
 allow hiperf proc_vmstat_file:file getattr;
 allow hiperf proc_zoneinfo_file:file getattr;
 allow hiperf samain_exec:file { getattr map open read };
-allow hiperf self:capability { dac_override dac_read_search ipc_lock kill sys_ptrace };
+allow hiperf self:capability { dac_override dac_read_search ipc_lock sys_ptrace };
 allow hiperf self:capability2 perfmon;
 allow hiperf sh:dir { getattr open read search };
 allow hiperf sh:fd use;
