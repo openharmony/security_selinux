@@ -48,3 +48,16 @@ allow pasteboard_service system_bin_file:dir { search };
 allow pasteboard_service sys_usb_param:file { map open read };
 allow pasteboard_service tracefs:dir { search };
 allow pasteboard_service tracefs_trace_marker_file:file { open write };
+allow pasteboard_service foundation:binder { call transfer };
+
+#avc:  denied  { get } for service=4607 pid=533 scontext=u:r:pasteboard_service:s0 tcontext=u:object_r:sa_foundation_dms:s0 tclass=samgr_class permissive=1
+allow pasteboard_service sa_foundation_dms:samgr_class { get };
+
+#avc:  denied  { get } for service=7001 pid=533 scontext=u:r:pasteboard_service:s0 tcontext=u:object_r:sa_subsys_ace_service:s0 tclass=samgr_class permissive=1
+allow pasteboard_service sa_subsys_ace_service:samgr_class { get };
+
+#avc:  denied  { call } for  pid=561 comm="pasteboard_serv" scontext=u:r:pasteboard_service:s0 tcontext=u:r:ui_service:s0 tclass=binder permissive=1
+allow pasteboard_service ui_service:binder { call transfer };
+
+#avc:  denied  { call } for  pid=640 comm="ui_service" scontext=u:r:ui_service:s0 tcontext=u:r:pasteboard_service:s0 tclass=binder permissive=1
+allow ui_service pasteboard_service:binder { call transfer };
