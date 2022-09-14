@@ -79,3 +79,6 @@ allow sa_dialog accessibility_param:file { map open read  };
 
 #avc:  denied  { read } for  pid=2147 scontext=u:r:sa_dialog:s0 tcontext=u:object_r:persist_sys_param:s0 tclass=file permissive=0
 allow sa_dialog persist_sys_param:file { map open read  };
+
+#avc:  denied  { read } for  pid=2220 comm="pasting_dialog9" name="u:object_r:hilog_param:s0" dev="tmpfs" ino=47 scontext=u:r:sa_dialog:s0 tcontext=u:object_r:hilog_param:s0 tclass=file permissive=0
+allow sa_dialog hilog_param:file { read open map };
