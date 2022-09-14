@@ -137,7 +137,6 @@ allow hiprofiler_cmd dev_unix_socket:sock_file { getattr setattr };
 allow hiprofiler_cmd data_local_tmp:dir add_name;
 
 allow hiprofiler_cmd data_local_tmp:file create;
-
 allow hiprofiler_cmd domain:process signal;
 allow hiprofiler_cmd hiview_exec:file { getattr map open read };
 allow hiprofiler_cmd self:capability kill;
