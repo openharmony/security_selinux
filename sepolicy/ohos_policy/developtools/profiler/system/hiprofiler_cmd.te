@@ -133,6 +133,7 @@ allow hiprofiler_cmd hiprofilerd:unix_stream_socket connectto;
 allow hiprofiler_cmd tmpfs:file { map read write };
 
 allow hiprofiler_cmd dev_unix_socket:sock_file create;
+allow hiprofiler_cmd dev_unix_socket:sock_file { getattr setattr };
 allow hiprofiler_cmd data_local_tmp:dir add_name;
 
 allow hiprofiler_cmd data_local_tmp:file create;
@@ -143,4 +144,6 @@ allow hiprofiler_cmd self:capability kill;
 
 allow domain hiprofiler_cmd:fd use;
 allow domain hiprofiler_cmd:unix_stream_socket connectto;
+allow hiprofiler_cmd ohos_dev_param:file { map open read };
+
 allow { domain -limit_domain } tmpfs:file { map read write };
