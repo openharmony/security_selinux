@@ -163,3 +163,6 @@ allow dscreen sa_dhardware_service:samgr_class { get };
 #avc:  denied  { map } for  pid=2839  scontext=u:r:dscreen:s0 tcontext=u:object_r:accessibility_param:s0 tclass=file permissive=1
 allow dscreen accessibility_param:file { read open map };
 
+#avc:  denied  { read } for  pid=2021  scontext=u:r:dscreen:s0 tcontext=u:object_r:ohos_dev_param:s0 tclass=file permissive=0
+allow dscreen ohos_dev_param:file { read };
+
