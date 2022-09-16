@@ -81,6 +81,8 @@ allow deviceinfoservice init:file { getattr open read };
 allow init deviceinfoservice:file { getattr open read };
 allow init deviceinfoservice:process { getattr };
 allow init deviceinfoservice:dir { getattr search open read };
+#for hidumper_service
+allow hidumper_service sa_sysparam_device_service:samgr_class { get };
 
 #for param watcher to watch, must allow read
 allow { param_watcher pin_auth_host } devinfo_private_param:file { map open read };
