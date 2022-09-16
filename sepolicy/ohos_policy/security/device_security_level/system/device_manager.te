@@ -11,6 +11,5 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-usb_interface_service                   u:object_r:hdf_usb_interface_service:s0
-partition_slot_service                  u:object_r:hdf_partition_slot_service:s0
-wlan_interface_service                  u:object_r:hdf_wlan_interface_service:s0
+#avc:  denied  { call } for  pid=251 comm="device_manager" scontext=u:r:device_manager:s0 tcontext=u:r:dslm_service:s0 tclass=binder permissive=0
+allow device_manager dslm_service:binder { call transfer };
