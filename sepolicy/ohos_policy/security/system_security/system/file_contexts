@@ -11,6 +11,4 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-allow hdcd hdcd:tcp_socket { connect name_connect getopt };
-allow hdcd port:tcp_socket { name_connect };
- 
+/data/log/sanitizer(/.*)?                 u:object_r:data_log_sanitizer_file:s0

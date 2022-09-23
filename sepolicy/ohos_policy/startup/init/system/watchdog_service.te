@@ -11,8 +11,5 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-allow hdcd dev_block_volfile:dir { search };
-allow hdcd tmpfs:dir { open read };
-allow hdcd tmpfs:file { getattr open read };
-allow hdcd vendor_file:dir { getattr };
+allowxperm watchdog_service dev_watchdog_file:chr_file ioctl { 0x5708 0x5709 };
 
