@@ -12,10 +12,4 @@
 # limitations under the License.
 
 allow init av_session:process { rlimitinh siginh transition };
-allow init av_session_data_file:dir { relabelto };
-allow init av_session_data_file:dir { read search setattr };
-allow init av_session_data_file:dir { open };
-allow init av_session_data_file:dir { write };
-allow init av_session_data_file:dir { add_name };
-allow init av_session_data_file:dir { create };
-allow init av_session_data_file:dir { getattr };
+allow init av_session_data_file:dir { open read write add_name create getattr relabelto search setattr };
