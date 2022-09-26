@@ -117,8 +117,6 @@ neverallow { domain -hap_domain -installs debug_only(`-hdcd') -distributeddata }
 
 neverallow { domain -hap_domain -installs -appspawn -nwebspawn debug_only(`-hdcd') -distributeddata -sh } normal_hap_data_file:dir *;
 
-neverallow { domain -hap_domain -installs -appspawn -nwebspawn debug_only(`-hdcd') -distributeddata } normal_hap_data_file:dir ~read_dir_perms;
-
 neverallow { domain -hap_domain -installs debug_only(`-hdcd') -distributeddata } normal_hap_data_file:file_class_set open;
 
 neverallow { domain -installs } normal_hap_data_file:dir_file_class_set { relabelfrom relabelto };
