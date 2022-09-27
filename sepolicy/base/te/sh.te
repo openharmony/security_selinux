@@ -73,7 +73,7 @@ allow sh data_chipset_file:dir { getattr };
 allow sh data_data_file:dir { getattr search };
 allow sh data_data_pulse_dir:dir { getattr open read search };
 allow sh data_data_pulse_dir:file { lock open read write };
-allow sh data_dhcp:dir { getattr };
+allow sh data_service_el1_file:dir { getattr };
 allow sh data_drm:dir { getattr };
 allow sh data_file:dir { getattr };
 dontaudit sh data_file:file { execute execute_no_trans };

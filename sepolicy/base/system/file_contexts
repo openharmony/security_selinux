@@ -198,8 +198,6 @@
 /data/cache/(.*)?                 u:object_r:data_cache:s0
 /data/data                       u:object_r:data_data_file:s0
 /data/data/(.*)?                 u:object_r:data_data_file:s0
-/data/dhcp                       u:object_r:data_dhcp:s0
-/data/dhcp/(.*)?                 u:object_r:data_dhcp:s0
 /data/drm                       u:object_r:data_drm:s0
 /data/drm/(.*)?                 u:object_r:data_drm:s0
 /data/ethernet                  u:object_r:data_ethernet:s0
