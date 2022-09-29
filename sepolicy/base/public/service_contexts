@@ -191,6 +191,7 @@
 4012	                               u:object_r:sa_telephony_data_storage_service:s0
 4014                                   u:object_r:sa_telephony_tel_ims:s0
 4100	                               u:object_r:sa_subsys_update_service:s0
+4101	                               u:object_r:sa_subsys_sys_installer_service:s0
 4200	                               u:object_r:sa_subsys_usb_service:s0
 4201                                   u:object_r:sa_usb_service:s0
 4300	                               u:object_r:sa_subsys_wearable_service:s0
