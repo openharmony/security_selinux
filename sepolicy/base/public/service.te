@@ -181,7 +181,6 @@ type sa_telephony_data_storage_service, sa_service_attr;
 type sa_distributed_bundle_mgr_service_service, sa_service_attr;
 type sa_form_mgr_service, sa_service_attr;
 type sa_subsys_update_service, sa_service_attr;
-type sa_sys_installer_service, sa_service_attr;
 type sa_subsys_usb_service, sa_service_attr;
 type sa_subsys_wearable_service, sa_service_attr;
 type sa_subsys_wearablehardware_service, sa_service_attr;
