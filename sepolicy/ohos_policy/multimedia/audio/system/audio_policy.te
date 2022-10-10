@@ -188,3 +188,6 @@ allow accesstoken_service audio_policy:binder { call transfer };
 allow audio_policy accessibility:binder { call transfer };
 allow audio_policy accessibility_param:file { map open read };
 allow audio_policy sa_accessibleabilityms:samgr_class { get };
+
+allow audio_policy privacy_service:binder { call transfer };
+allow audio_policy sa_privacy_service:samgr_class { get };
