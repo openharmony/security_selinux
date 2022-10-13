@@ -13,7 +13,6 @@
 
 allow accessibility accesstoken_service:binder call;
 allow distributedfiledaemon accesstoken_service:binder call;
-allow fms_service accesstoken_service:binder call;
 allow inputmethod_service accesstoken_service:binder call;
 allow memmgrservice accesstoken_service:binder call;
 allow netsysnative accesstoken_service:binder call;
@@ -37,9 +36,6 @@ allow download_server sa_accesstoken_manager_service:samgr_class get;
 
 #============= dslm_service ==============
 allow dslm_service sa_accesstoken_manager_service:samgr_class get;
-
-#============= fms_service ==============
-allow fms_service sa_accesstoken_manager_service:samgr_class get;
 
 #============= inputmethod_service ==============
 allow inputmethod_service sa_accesstoken_manager_service:samgr_class get;

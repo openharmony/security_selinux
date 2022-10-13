@@ -191,7 +191,6 @@ allow init faultloggerd_socket:sock_file { getattr relabelto unlink };
 allow init faultloggerd_temp_file:dir { getattr open read relabelfrom relabelto setattr };
 allow init fd_holder_socket:sock_file { getattr relabelto write };
 allow init fingerprint_auth_host:process { rlimitinh siginh transition };
-allow init fms_service:process { rlimitinh siginh transition };
 allow init foundation:dir { search };
 allow init foundation:file { open read };
 allow init foundation:process { getattr rlimitinh siginh transition };

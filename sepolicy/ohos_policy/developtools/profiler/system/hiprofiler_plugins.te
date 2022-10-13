@@ -109,7 +109,6 @@ allow hiprofiler_plugins default_param:file { map open read };
 
 allow hiprofiler_plugins accessibility:file { getattr open read };
 allow hiprofiler_plugins distributeddata:file { getattr read };
-allow hiprofiler_plugins fms_service:dir search;
 allow hiprofiler_plugins hilog_exec:file { execute execute_no_trans getattr map open read };
 allow hiprofiler_plugins init:dir { open read };
 allow hiprofiler_plugins kernel:file { getattr open };
@@ -176,7 +175,6 @@ allow hiprofiler_plugins wifi_host:file read;
 
 allow hiprofiler_plugins camera_service:file read;
 allow hiprofiler_plugins faultloggerd:file read;
-allow hiprofiler_plugins fms_service:file read;
 allow hiprofiler_plugins media_service:file read;
 allow hiprofiler_plugins render_service:file read;
 allow hiprofiler_plugins useriam:file read;

@@ -151,8 +151,6 @@ allow sh faultloggerd_temp_file:dir { add_name getattr open read search write };
 allow sh faultloggerd_temp_file:file { create getattr open read write write open };
 allow sh fingerprint_auth_host:dir { getattr search };
 allow sh fingerprint_auth_host:file { open read };
-allow sh fms_service:dir { getattr search };
-allow sh fms_service:file { open read };
 allow sh foundation:binder { call transfer };
 allow sh foundation:dir { getattr search };
 allow sh foundation:file { open read };

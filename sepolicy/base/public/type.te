@@ -36,7 +36,6 @@ type memmgrservice, sadomain, domain;
 type accessibility, sadomain, domain;
 type distributedsched, sadomain, domain;
 type distributedfile, sadomain, domain;
-type fms_service, sadomain, domain;
 type deviceinfoservice, sadomain, domain;
 type distributedhardware_fwk, sadomain, domain;
 type nwebspawn, sadomain, domain;
