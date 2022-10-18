@@ -38,6 +38,7 @@ type persist_sys_param, parameter_attr;
 type debug_param, parameter_attr;
 type default_param, parameter_attr;
 type accessibility_param, parameter_attr;
+type musl_param, parameter_attr;
 
 type build_version_param, parameter_attr;
 type startup_param, parameter_attr;
@@ -49,4 +50,5 @@ type startup_appspawn_param, parameter_attr;
 type startup_uevent_param, parameter_attr;
 type devinfo_private_param, parameter_attr;
 type devinfo_public_param, parameter_attr;
+type bootevent_wms_param, parameter_attr;
 

@@ -92,7 +92,6 @@ type sysfs_hctosys, sysfs_attr, fs_attr;
 type config_usb_gadget, fs_attr;
 
 type data_file, file_attr, data_file_attr;
-type data_hap_file, file_attr, data_file_attr,hap_file_attr;
 type data_app_file, file_attr, data_file_attr, hap_file_attr;
 type data_app_el1_file, file_attr, data_file_attr, hap_file_attr;
 type data_app_el2_file, file_attr, data_file_attr, hap_file_attr;
@@ -119,7 +118,6 @@ type data_bluetooth, file_attr, data_file_attr;
 type data_startup, file_attr, data_file_attr;
 type data_cache, file_attr, data_file_attr;
 type data_data_file, file_attr, data_file_attr;
-type data_dhcp, file_attr, data_file_attr;
 type data_drm, file_attr, data_file_attr;
 type data_ethernet, file_attr, data_file_attr;
 type data_filelog, file_attr, data_file_attr;

@@ -14,12 +14,10 @@
 allow netmanager accesstoken_service:binder { call };
 allow netmanager data_data_file:dir { search };
 allow netmanager data_data_file:file { open read };
-allow netmanager data_dhcp:dir { add_name remove_name search write create };
-allow netmanager data_dhcp:file { create getattr ioctl lock open read setattr unlink write write open };
 allow netmanager data_file:dir { remove_name rmdir search };
 allow netmanager data_init_agent:dir { search };
 allow netmanager data_init_agent:file { ioctl open read append };
-allow netmanager data_service_el1_file:dir { add_name create getattr ioctl lock open read remove_name search setattr unlink write };
+allow netmanager data_service_el1_file:dir { add_name create getattr ioctl lock open read remove_name rmdir search setattr unlink write };
 allow netmanager data_service_el1_file:file { append create getattr ioctl lock map open read setattr unlink write };
 allow netmanager data_service_file:dir { add_name create getattr ioctl lock open read remove_name search setattr unlink write };
 allow netmanager data_system:dir { add_name search write };
@@ -58,10 +56,8 @@ allow sh sa_comm_net_tethering_manager_service:samgr_class { get };
 allow sh netmanager:binder { call transfer };
 allow netmanager kernel:system { module_request };
 allow netmanager accessibility_param:file { read open map };
-allowxperm netmanager data_dhcp:file ioctl { 0x5413 };
+allowxperm netmanager data_service_el1_file:file ioctl { 0x5413 };
 allowxperm netmanager data_init_agent:file ioctl { 0x5413 };
 allowxperm netmanager netmanager:udp_socket ioctl { 0x8915 0x8916 0x891b 0x891c 0x8933 };
 allowxperm netmanager netmanager:unix_dgram_socket ioctl { 0x8910 };
 allow netsysnative netmanager:fd { use };
-allow netsysnative netmanager:tcp_socket { read write bind getopt setopt connect };
-

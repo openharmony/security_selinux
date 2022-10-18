@@ -27,6 +27,7 @@ persist.init.               u:object_r:startup_init_param:s0
 startup.appspawn.           u:object_r:startup_appspawn_param:s0
 startup.uevent.             u:object_r:startup_uevent_param:s0
 ohos.boot.sn                u:object_r:devinfo_private_param:s0
+const.product.udid          u:object_r:devinfo_private_param:s0
 persist.appspawn.           u:object_r:startup_appspawn_param:s0
 
 sys.                                    u:object_r:sys_param:s0
@@ -45,3 +46,6 @@ persist.sys.                            u:object_r:persist_sys_param:s0
 persist.sys.hilog.                      u:object_r:hilog_param:s0
 debug.                                  u:object_r:debug_param:s0
 accessibility.config.ready              u:object_r:accessibility_param:s0
+musl.                                   u:object_r:musl_param:s0
+bootevent.wms.                          u:object_r:bootevent_wms_param:s0
+
