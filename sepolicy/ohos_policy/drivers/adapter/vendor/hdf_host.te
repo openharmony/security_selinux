@@ -64,6 +64,7 @@ allow power_host sa_device_service_manager:samgr_class { get };
 #avc:  denied  { read write } for  pid=2059 comm="dcamera_host" name="renderD128" dev="tmpfs" ino=92 scontext=u:r:dcamera_host:s0 tcontext=u:object_r:dev_dri_file:s0 tclass=chr_file permissive=1
 #avc:  denied  { open } for  pid=2059 comm="dcamera_host" path="/dev/dri/renderD128" dev="tmpfs" ino=92 scontext=u:r:dcamera_host:s0 tcontext=u:object_r:dev_dri_file:s0 tclass=chr_file permissive=1
 #avc:  denied  { ioctl } for  pid=2059 comm="dcamera_host" path="/dev/dri/renderD128" dev="tmpfs" ino=92 ioctlcmd=0x641f scontext=u:r:dcamera_host:s0 tcontext=u:object_r:dev_dri_file:s0 tclass=chr_file permissive=1
+#avc:  denied  { read write } for  pid=2541 comm="hdf_devhost" path="/dev/console" dev="tmpfs" ino=19 scontext=u:r:dcamera_host:s0 tcontext=u:object_r:dev_console_file:s0 tclass=chr_file permissive=0
 #avc:  denied  { search } for  pid=2059 comm="dcamera_host" name="dri" dev="tmpfs" ino=91 scontext=u:r:dcamera_host:s0 tcontext=u:object_r:dev_dri_file:s0 tclass=dir permissive=1
 #avc:  denied  { search } for  pid=2057 comm="dcamera_host" name="socket" dev="tmpfs" ino=40 scontext=u:r:dcamera_host:s0 tcontext=u:object_r:dev_unix_socket:s0 tclass=dir permissive=1
 #avc:  denied  { get } for service=hdf_device_manager pid=342 scontext=u:r:dcamera_host:s0 tcontext=u:object_r:hdf_device_manager:s0 tclass=hdf_devmgr_class permissive=1
@@ -86,6 +87,7 @@ allow power_host sa_device_service_manager:samgr_class { get };
 #avc:  denied  { read } for  pid=2047 comm="hdf_devhost" name="u:object_r:ohos_dev_param:s0" dev="tmpfs" ino=30 scontext=u:r:dcamera_host:s0 tcontext=u:object_r:ohos_dev_param:s0 tclass=file permissive=0
 allow dcamera_host camera_service:binder { call transfer };
 allow dcamera_host dcamera:binder { call };
+allow dcamera_host dev_console_file:chr_file { read write };
 allow dcamera_host dev_dri_file:chr_file { getattr read write open ioctl };
 allow dcamera_host dev_dri_file:dir { search };
 allow dcamera_host dev_unix_socket:dir { search };
