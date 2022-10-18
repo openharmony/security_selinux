@@ -279,7 +279,7 @@ neverallow { domain -init -ueventd -installs -storage_daemon } self:{ capability
 neverallow { domain -appspawn -init -ueventd -storage_daemon } self:{ capability cap_userns } fsetid;
 neverallow { domain -init -memmgrservice -appspawn -faultloggerd -foundation } self:{ capability cap_userns } kill;
 neverallow { domain -init -appspawn -nwebspawn -storage_daemon debug_only(`-hdcd') } self:{ capability cap_userns } setuid;
-neverallow { domain -init -ueventd -appspawn -nwebspawn -storage_daemon debug_only(`-hdcd') -hiperf } self:{ capability cap_userns } setgid;
+neverallow { domain -init -ueventd -appspawn -nwebspawn -storage_daemon debug_only(`-hdcd -hiperf') } self:{ capability cap_userns } setgid;
 neverallow { domain -init } self:{ capability cap_userns } setpcap;
 neverallow * self:{ capability cap_userns } linux_immutable;
 neverallow { domain -wifi_manager_service -netsysnative } self:{ capability cap_userns } net_bind_service;
