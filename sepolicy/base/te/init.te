@@ -180,6 +180,8 @@ allow init dev_media_file:chr_file { setattr };
 allow init dev_video_file:chr_file { setattr };
 allow init dhardware:process { rlimitinh siginh transition };
 allow init disp_gralloc_host:process { rlimitinh siginh transition };
+allow init allocator_host:process { rlimitinh siginh transition };
+allow init display_composer_host:process { rlimitinh siginh transition };
 allow init distributeddata:process { rlimitinh siginh transition };
 allow init distributedfiledaemon:process { rlimitinh siginh transition };
 allow init distributedsche_param:file { map open read relabelto };

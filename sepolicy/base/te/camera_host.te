@@ -53,5 +53,8 @@ allow camera_host system_bin_file:dir { search };
 allow camera_host sys_usb_param:file { map open read };
 allow camera_host vendor_etc_file:dir { search };
 allow camera_host vendor_etc_file:file { getattr open read };
+allow camera_host allocator_host:binder { call };
+allow camera_host allocator_host:fd { use };
+allow camera_host hdf_allocator_service:hdf_devmgr_class { get };
 allowxperm camera_host dev_hdf_kevent:chr_file ioctl { 0x6201 0x6202 0x6203 };
 allowxperm camera_host dev_video_file:chr_file ioctl { 0x5600 };
