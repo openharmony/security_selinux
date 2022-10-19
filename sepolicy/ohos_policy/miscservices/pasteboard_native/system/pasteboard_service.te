@@ -79,3 +79,4 @@ allow pasteboard_service sa_foundation_abilityms:samgr_class { get };
 
 #avc:  denied  { read open } for  pid=2041 comm="PasteboardFrame" path="/data/test/resource/pasteboardTest.txt" dev="mmcblk0p11" ino=3680 scontext=u:r:storage_daemon:s0 tcontext=u:object_r:data_file:s0 tclass=file permissive=0
 allow storage_daemon data_file:file { read open };
+
