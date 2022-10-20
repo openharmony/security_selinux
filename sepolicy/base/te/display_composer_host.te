@@ -59,6 +59,7 @@ allow display_composer_host proc_boot_id:file { open read };
 allow display_composer_host render_service:binder { call };
 allow display_composer_host render_service:fd { use };
 allow display_composer_host sa_device_service_manager:samgr_class { get };
+allow display_composer_host sa_dialog:fd { use };
 allow display_composer_host samgr:binder { call };
 allow display_composer_host security_param:file { map open read };
 allow display_composer_host startup_param:file { map open read };
