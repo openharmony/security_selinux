@@ -35,7 +35,6 @@ allow device_manager hilog_param:file { read open map };
 #avc:  denied  { set } for parameter=persist.distributed_hardware.device_manager.discover_status pid=506 uid=3062 gid=1000 scontext=u:r:device_manager:s0 tcontext=u:object_r:persist_param:s0 tclass=parameter_service permissive=1
 allow device_manager persist_param:parameter_service { set };
 
-
 #avc:  denied  { read } for  pid=675 comm="sa_main" name="u:object_r:persist_param:s0" dev="tmpfs" ino=47 scontext=u:r:device_manager:s0 tcontext=u:object_r:persist_param:s0 tclass=file permissive=0
 #avc:  denied  { open } for  pid=496 comm="sa_main" path="/dev/__parameters__/u:object_r:persist_param:s0" dev="tmpfs" ino=47 scontext=u:r:device_manager:s0 tcontext=u:object_r:persist_param:s0 tclass=file permissive=0
 #avc:  denied  { map } for  pid=647 comm="sa_main" path="/dev/__parameters__/u:object_r:persist_param:s0" dev="tmpfs" ino=47 scontext=u:r:device_manager:s0 tcontext=u:object_r:persist_param:s0 tclass=file permissive=0
