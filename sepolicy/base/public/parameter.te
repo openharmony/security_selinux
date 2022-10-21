@@ -51,6 +51,7 @@ type startup_uevent_param, parameter_attr;
 type devinfo_private_param, parameter_attr;
 type devinfo_public_param, parameter_attr;
 type bootevent_wms_param, parameter_attr;
+type dhardware_dm_param, parameter_attr;
 
 allow init parameter_attr:file relabelto;
 allow parameter_attr tmpfs:filesystem associate;
