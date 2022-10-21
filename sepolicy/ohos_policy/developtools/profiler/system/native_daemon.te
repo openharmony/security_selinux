@@ -9,13 +9,12 @@
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
-# limitations under the License.
+# limitations under the License
 
-allow hidumper data_log:file { write };
-allow hidumper dev_bbox:chr_file { read };
-allow hidumper distributedsche_param:file { map open read };
-allow hidumper faultloggerd:fifo_file { read };
-allow hidumper hiview:fd { use };
-allow hidumper hiview:fifo_file { read write };
-allow hidumper hiview_file:file { read write };
-allow hidumper hiview:unix_dgram_socket { read write };
+allow native_daemon self:capability setgid;
+
+debug_only(`
+	allow native_daemon data_local_tmp:file { create read open write };
+	allow native_daemon data_local_tmp:dir { search add_name write };
+')
+
