@@ -251,4 +251,8 @@ debug_only(`
 allow hiprofiler_plugins domain:dir { open read getattr search };
 allow hiprofiler_plugins domain:file { open read getattr };
 
+allow hiprofiler_plugins data_local_tmp:file ioctl;
+allow hiprofiler_plugins hilogd:unix_stream_socket connectto;
+allow hiprofiler_plugins musl_param:file { open read };
+
 neverallow hiprofiler_plugins domain:process ptrace;
