@@ -48,3 +48,4 @@ allow system_basic_hap wallpaper_service:fd { use };
 allow system_core_hap wallpaper_service:fd { use };
 allow normal_hap wallpaper_service:fd { use };
 allow sh sa_wallpaper_manager_service:samgr_class { get };
+allow sh accesstoken_data_file:file { getattr open read };
