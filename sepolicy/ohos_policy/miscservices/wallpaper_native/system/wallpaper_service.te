@@ -47,3 +47,4 @@ allow wallpaper_service dev_console_file:chr_file { read write };
 allow system_basic_hap wallpaper_service:fd { use };
 allow system_core_hap wallpaper_service:fd { use };
 allow normal_hap wallpaper_service:fd { use };
+allow sh sa_wallpaper_manager_service:samgr_class { get };
