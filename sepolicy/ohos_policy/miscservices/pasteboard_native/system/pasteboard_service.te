@@ -47,6 +47,7 @@ allow pasteboard_service pasteboard_service:unix_dgram_socket { getopt setopt };
 allow pasteboard_service kernel:unix_stream_socket { connectto };
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 allow pasteboard_service pasteboard_param:parameter_service { set };
 allow { domain -limit_domain } pasteboard_param:file { map open read };
 =======
@@ -57,6 +58,10 @@ allow { domain -limit_domain } distributedPasteboardEnabled_param:file { map ope
 allow pasteboard_service pasteboard_param:parameter_service { set };
 allow { domain -limit_domain } pasteboard_param:file { map open read };
 >>>>>>> fb6c0ee0 (简化参数)
+=======
+allow pasteboard_service pasteboard_param:parameter_service { set };
+allow { domain -limit_domain } pasteboard_param:file { map open read };
+>>>>>>> 725d249c60c873b7c456ea09ae7088257a4ba6ac
 allow pasteboard_service sa_inputmethod_service:samgr_class { get };
 allow pasteboard_service inputmethod_service:binder { call transfer };
 allow pasteboard_service hmdfs:file { read open write getattr };
