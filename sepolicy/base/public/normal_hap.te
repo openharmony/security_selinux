@@ -65,6 +65,3 @@ neverallow normal_hap debugfs_attr:{ file lnk_file } read;
 neverallow normal_hap domain:netlink_socket *;
 
 neverallow normal_hap domain:netlink_kobject_uevent_socket *;
-
-#normal_hap should be forbidden to set parameters.
-neverallow normal_hap init:unix_stream_socket connectto;
