@@ -50,3 +50,4 @@ type startup_uevent_param, parameter_attr;
 type devinfo_private_param, parameter_attr;
 type devinfo_public_param, parameter_attr;
 
+type persist_audio_param, parameter_attr;

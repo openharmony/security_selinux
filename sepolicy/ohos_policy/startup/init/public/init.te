@@ -21,6 +21,9 @@ allow init proc_diskstats_file:file { read open };
 allow init kernel:file { read open };
 allow init kernel:dir { search };
 
+allow persist_audio_param tmpfs:filesystem associate;
+allow init persist_audio_param:file { map open read relabelto relabelfrom };
+
 #for bootchart to read
 allow init { domain }:file { open read };
 allow init { domain }:dir { search };
