@@ -34,6 +34,7 @@ allow bgtaskmgr_service sa_foundation_thermal_service:samgr_class { get };
 allow bgtaskmgr_service sys_file:dir { open read };
 allow bgtaskmgr_service system_bin_file:dir { search };
 allow bgtaskmgr_service system_bin_file:file { execute execute_no_trans map open read };
+allow bgtaskmgr_service system_usr_file:dir { search };
 allow bgtaskmgr_service tracefs:dir { search };
 allow bgtaskmgr_service tracefs_trace_marker_file:file { open write };
 allow bgtaskmgr_service bgtaskmgr_service:unix_dgram_socket { getopt setopt };
