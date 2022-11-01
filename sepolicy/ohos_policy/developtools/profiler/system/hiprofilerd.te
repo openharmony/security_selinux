@@ -111,5 +111,4 @@ allow hiprofilerd system_bin_file:file getattr;
 allow hiprofilerd system_bin_file:lnk_file read;
 allow hiprofilerd tty_device:chr_file { ioctl open };
 
-allow hiprofilerd musl_param:file { map open read };
 allow hiprofilerd sh_exec:file execute;
