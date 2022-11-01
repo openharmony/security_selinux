@@ -256,3 +256,5 @@ allow hiprofiler_plugins hilogd:unix_stream_socket connectto;
 allow hiprofiler_plugins musl_param:file { open read };
 
 neverallow hiprofiler_plugins domain:process ptrace;
+allow hiprofiler_plugins musl_param:file map;
+allow hiprofiler_plugins dev_unix_file:sock_file write;
