@@ -1,0 +1,1 @@
+allow appspawn musl_param:file { read };
