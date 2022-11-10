@@ -27,17 +27,23 @@ allow resource_schedule_service locationhub:binder { call };
 allow pulseaudio resource_schedule_service:binder { call transfer };
 allow audio_policy resource_schedule_service:binder { call transfer };
 allow msdp_sa resource_schedule_service:binder { call transfer };
+allow render_service resource_schedule_service:binder { call };
 
-
+#appspawn_exec
+allow resource_schedule_service appspawn_exec:file { open read };
 #cgroup
-allow resource_schedule_service cgroup:dir { search };
+allow resource_schedule_service cgroup:dir { add_name write search };
 allow resource_schedule_service cgroup:file { append getattr ioctl open read write };
 #chip_prod_file
 allow resource_schedule_service chip_prod_file:dir { search };
 #data_service_el1_file
-allow resource_schedule_service data_service_el1_file:dir { add_name getattr open read write };
+allow resource_schedule_service data_service_el1_file:dir { add_name create getattr open read remove_name rmdir search write };
+allow resource_schedule_service data_service_el1_file:file { create getattr ioctl lock open read unlink write };
 #data_service_file
 allow resource_schedule_service data_service_file:dir { search };
+#hiview
+allow hiview resource_schedule_service:dir { getattr };
+allow hiview resource_schedule_service:file { getattr };
 #vendor
 allow resource_schedule_service vendor_lib_file:dir { search };
 allow resource_schedule_service vendor_lib_file:file { execute getattr map open read };
@@ -47,10 +53,14 @@ allow resource_schedule_service vendor_etc_file:dir { search };
 allow resource_schedule_service vendor_etc_file:file { getattr map open read };
 #system
 allow resource_schedule_service system_basic_hap:dir { open read search };
+allow resource_schedule_service system_basic_hap:file { getattr open read };
 allow resource_schedule_service system_basic_hap:process { setsched };
 allow resource_schedule_service system_bin_file:dir { search };
 allow resource_schedule_service system_bin_file:file { execute read open };
+allow resource_schedule_service system_core_hap:dir { open read search };
+allow resource_schedule_service system_core_hap:file { getattr open read };
 allow resource_schedule_service system_core_hap:process { setsched };
+allow resource_schedule_service system_fonts_file:dir { open read search };
 allow resource_schedule_service system_usr_file:dir { search map };
 allow resource_schedule_service system_usr_file:file { getattr read };
 allow resource_schedule_service system_lib_file:dir { search };
@@ -67,7 +77,7 @@ allow resource_schedule_service dev_unix_socket:sock_file { write };
 #ui_service
 allow resource_schedule_service ui_service:process { setsched };
 #normal_hap
-allow resource_schedule_service normal_hap:dir { search };
+allow resource_schedule_service normal_hap:dir { open read search };
 allow resource_schedule_service normal_hap:file { getattr open read };
 allow resource_schedule_service normal_hap:process { setsched };
 #unix_dgram_socket
@@ -102,7 +112,7 @@ allowxperm resource_schedule_service cgroup:file ioctl { 0x5413 };
 allowxperm resource_schedule_service sys_file:file ioctl { 0x5413 };
 
 #conflict
-#allow resource_schedule_service resource_schedule_service:capability { dac_override dac_read_search sys_ptrace };
+#allow resource_schedule_service resource_schedule_service:capability { dac_override dac_read_search setuid sys_ptrace };
 
 #sa_pulseaudio_audio_service
 allow resource_schedule_service sa_pulseaudio_audio_service:samgr_class { get };
