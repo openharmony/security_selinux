@@ -97,3 +97,9 @@ allow sensors accessibility_param:file { read };
 
 allow sensors vendor_etc_file:dir { search };
 allow sensors vendor_etc_file:file { getattr open read };
+
+#avc:  denied  { call } for  pid=440 comm="sensors" scontext=u:r:sensors:s0 tcontext=u:r:light_host:s0 tclass=binder permissive=1
+allow sensors light_host:binder { call };
+
+#avc:  denied  { read } for  pid=508 comm="sensors" name="u:object_r:musl_param:s0" dev="tmpfs" ino=55 scontext=u:r:sensors:s0 tcontext=u:object_r:musl_param:s0 tclass=file permissive=0
+allow sensors musl_param:file { read };
