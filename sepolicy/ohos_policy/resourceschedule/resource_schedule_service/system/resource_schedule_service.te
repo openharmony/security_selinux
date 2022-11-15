@@ -30,7 +30,7 @@ allow telephony_sa resource_schedule_service:binder { call };
 
 #cgroup
 allow resource_schedule_service cgroup:dir { add_name search write };
-allow resource_schedule_service cgroup:file { append create getattr ioctl open read write };
+allow resource_schedule_service cgroup:file { append getattr ioctl open read write };
 #appspawn_exec
 allow resource_schedule_service appspawn_exec:file { open read };
 #chip_prod_file
@@ -88,8 +88,6 @@ allow resource_schedule_service data_service_file:dir { search };
 #data_service_el1_file
 allow resource_schedule_service data_service_el1_file:dir { add_name create getattr open read remove_name rmdir search write };
 allow resource_schedule_service data_service_el1_file:file { create getattr ioctl lock open read unlink write };
-#dev_file
-allow resource_schedule_service dev_file:chr_file { ioctl };
 #faultloggerd
 allow resource_schedule_service faultloggerd:fd { use };
 allow resource_schedule_service faultloggerd:unix_stream_socket { connectto };
