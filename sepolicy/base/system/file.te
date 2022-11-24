@@ -261,6 +261,7 @@ type dev_gpiochip, dev_attr;
 type dev_hdf_audio_capture, dev_attr;
 type dev_hdf_audio_codec_dev, dev_attr;
 type dev_hdf_audio_codec_primary, dev_attr;
+type dev_hdf_audio_codec_hdmi, dev_attr;
 type dev_hdf_audio_control, dev_attr;
 type dev_hdf_audio_render, dev_attr;
 type dev_hdf_audio_smartpa, dev_attr;
