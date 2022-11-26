@@ -12,3 +12,5 @@
 # limitations under the License.
 
 allow foundation system_basic_hap:unix_stream_socket { read write };
+
+allow foundation musl_param:file { read };
