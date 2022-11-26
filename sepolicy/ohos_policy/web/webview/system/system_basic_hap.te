@@ -54,7 +54,6 @@ allow foundation data_service_el0_file:file { getattr };
 allow foundation musl_param:file { read };
 allow nwebspawn system_core_hap_data_file:dir { mounton };
 allow foundation storage_manager:file { read };
-allow nwebspawn nwebspawn:capability { kill };
 allow system_core_hap port:tcp_socket { name_connect };
 allow system_core_hap system_core_hap:tcp_socket { connect };
 allow system_core_hap system_core_hap:tcp_socket { getopt };
