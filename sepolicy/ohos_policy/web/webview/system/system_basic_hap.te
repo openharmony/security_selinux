@@ -35,3 +35,7 @@ allow system_core_hap proc_max_user_watches:file { read };
 allow system_core_hap system_core_hap:tcp_socket { setopt };
 allow system_core_hap system_etc_file:dir { watch };
 allow system_core_hap tmpfs:lnk_file { getattr };
+allow system_core_hap dev_mali:chr_file { ioctl };
+allow system_core_hap proc_max_user_watches:file { open };
+allow system_core_hap system_core_hap:tcp_socket { bind };
+allowxperm system_core_hap dev_mali:chr_file ioctl 0x800c;
