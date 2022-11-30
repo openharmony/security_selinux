@@ -1,0 +1,2 @@
+allow foundation distributeddata:fd { use };
+allow foundation musl_param:file { open };

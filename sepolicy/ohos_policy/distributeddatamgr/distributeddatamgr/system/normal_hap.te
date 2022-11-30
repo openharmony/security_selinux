@@ -13,3 +13,5 @@
 
 allow normal_hap distributeddata:fd { use };
 allow normal_hap musl_param:file { open map read };
+allow normal_hap musl_param:file { read };
+

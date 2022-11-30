@@ -1,0 +1,2 @@
+allow init appspawn:file { getattr };
+allow init init:capability { sys_ptrace };
