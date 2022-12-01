@@ -12,4 +12,3 @@
 # limitations under the License.
 
 type sa_huks_service, sa_service_attr;
-
