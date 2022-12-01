@@ -11,5 +11,5 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-allow normal_hap distributeddata:fd { use };
-allow normal_hap musl_param:file { open map read };
+allow foundation distributeddata:fd { use };
+allow foundation musl_param:file { open };
