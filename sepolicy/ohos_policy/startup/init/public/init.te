@@ -40,6 +40,12 @@ allow pasteboard_param tmpfs:filesystem associate;
 allow init pasteboard_param:file { map open read relabelto relabelfrom };
 allow time_param tmpfs:filesystem associate;
 allow init time_param:file { map open read relabelto relabelfrom };
+allow accesstoken_perm_param tmpfs:filesystem associate;
+allow init accesstoken_perm_param:file { map open read relabelto relabelfrom };
+
+allow attest_auth_result_param tmpfs:filesystem associate;
+allow init attest_auth_result_param:file { map open read relabelto relabelfrom };
+allow init attest_auth_result_param:parameter_service { set };
 
 #for bootchart to read
 allow init { domain }:file { open read };
