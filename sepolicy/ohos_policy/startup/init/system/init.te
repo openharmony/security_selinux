@@ -101,3 +101,5 @@ allow { param_watcher } accessibility_param:file { map open read };
 #for fs size
 allowxperm init dev_block_file:blk_file ioctl { 0x1268 0x2285 };
 
+#for sysrq
+allow init proc_sysrq_trigger_file:file { getattr open write ioctl };
