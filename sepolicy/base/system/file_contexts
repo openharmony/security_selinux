@@ -53,7 +53,7 @@
 /dev/unix/socket/native         u:object_r:native_socket:s0
 /dev/unix/socket/paramservice   u:object_r:paramservice_socket:s0
 /dev/v4l(/.*)?                u:object_r:dev_v_file:s0
-/dev/v4l-subdev[0-3]          u:object_r:dev_v_file:s0  
+/dev/v4l-subdev[0-9]*         u:object_r:dev_v_file:s0
 /dev/tty[0-9]*                u:object_r:tty_device:s0
 /dev/ttyFIQ0                  u:object_r:tty_device:s0
 /dev/ttyS[0-9]*               u:object_r:tty_device:s0
@@ -73,7 +73,7 @@
 /dev/iio:device0          u:object_r:dev_iio_file:s0
 /dev/kmsg          u:object_r:dev_kmsg_file:s0
 /dev/loop-control          u:object_r:dev_loop_control_file:s0
-/dev/media0          u:object_r:dev_media_file:s0
+/dev/media[0-9]*          u:object_r:dev_media_file:s0
 /dev/mmcblk0rpmb          u:object_r:dev_rpmb_file:s0
 /dev/null                 u:object_r:dev_null_file:s0
 /dev/random          u:object_r:dev_random_file:s0
@@ -105,7 +105,7 @@
 /dev/bus                            u:object_r:dev_bus:s0
 /dev/cec0                           u:object_r:dev_dev_cec0:s0
 /dev/full                           u:object_r:dev_full:s0
-/dev/gpiochip[0-9]                  u:object_r:dev_gpiochip:s0
+/dev/gpiochip[0-9]*                 u:object_r:dev_gpiochip:s0
 /dev/hdf_audio_capture              u:object_r:dev_hdf_audio_capture:s0
 /dev/hdf_audio_codec_dev0           u:object_r:dev_hdf_audio_codec_dev:s0
 /dev/hdf_audio_codec_primary_dev0   u:object_r:dev_hdf_audio_codec_primary:s0
