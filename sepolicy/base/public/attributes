@@ -105,3 +105,31 @@ attribute sadomain;
 # i.e. appspawn,
 #      media
 attribute nativedomain;
+
+#define some violator attribute for neverallows.
+attribute cap_violator_chown;
+attribute cap_violator_dacoverride;
+attribute cap_violator_dacreadsearch;
+attribute cap_violator_fowner;
+attribute cap_violator_fsetid;
+attribute cap_violator_kill;
+attribute cap_violator_setuid;
+attribute cap_violator_setgid;
+attribute cap_violator_netbindservice;
+attribute cap_violator_netadmin;
+attribute cap_violator_netraw;
+attribute cap_violator_sysptrace;
+attribute cap_violator_sysadmin;
+attribute cap_violator_wakealarm;
+attribute cap_violator_sysnice;
+attribute cap_violator_perfmon;
+attribute cap_violator_sysmodule;
+attribute cap_violator_syslog;
+
+attribute proc_violator;
+attribute sh_exec_violator;
+attribute proc_sys_writer;
+
+attribute hdf_public_domain;
+
+attribute modem_file_attr;

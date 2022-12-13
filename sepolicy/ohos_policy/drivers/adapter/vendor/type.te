@@ -14,16 +14,12 @@
 type blue_host, hdfdomain, domain;
 type a2dp_host, hdfdomain, domain;
 type sample_host, hdfdomain, domain;
-type usb_host, hdfdomain, domain;
+
 type power_host, hdfdomain, domain;
 type wifi_host, hdfdomain, domain;
-type audio_host, hdfdomain, domain;
-type camera_host, hdfdomain, domain;
-type input_user_host, hdfdomain, domain;
+
 type display_gralloc_host, hdfdomain, domain;
-type codec_host, hdfdomain, domain;
-type riladapter_host, hdfdomain, domain;
-type sensor_host, hdfdomain, domain;
+
 type location_host, hdfdomain, domain;
 type vibrator_host, hdfdomain, domain;
 type light_host, hdfdomain, domain;
@@ -33,7 +29,7 @@ type face_auth_host, hdfdomain, domain;
 type pin_auth_host, hdfdomain, domain;
 type user_auth_host, hdfdomain, domain;
 type fingerprint_auth_host, hdfdomain, domain;
-type motion_host, hdfdomain, domain;
+
 type partitionslot_host, hdfdomain, domain;
 type dev_usbfn_file, dev_attr, file_attr;
 type dev_functionfs_file, dev_attr, file_attr;
