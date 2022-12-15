@@ -11,5 +11,4 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-allow init devattest_service:process { rlimitinh siginh transition };
-allow init data_device_attest:dir { getattr open read relabelto search setattr add_name create write };
+type data_device_attest, file_attr, data_file_attr;

@@ -11,4 +11,4 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-type attest_auth_result_param, parameter_attr;
+type xts_devattest_authresult_param, parameter_attr;

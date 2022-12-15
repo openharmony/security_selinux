@@ -49,9 +49,13 @@ allow resource_schedule_service data_service_el1_file:dir { add_name create geta
 allow resource_schedule_service data_service_el1_file:file { create getattr ioctl lock open read unlink write };
 #data_service_file
 allow resource_schedule_service data_service_file:dir { search };
+#device_manager
+allow resource_schedule_service device_manager:file { read };
+#hdf_devmgr
+allow resource_schedule_service hdf_devmgr:file { read };
 #hiview
 allow hiview resource_schedule_service:dir { getattr };
-allow hiview resource_schedule_service:file { getattr };
+allow hiview resource_schedule_service:file { getattr read };
 #hilogd
 allow resource_schedule_service hilogd:file { read };
 #vendor
@@ -104,9 +108,12 @@ allow resource_schedule_service faultloggerd:fd { use };
 allow resource_schedule_service faultloggerd:unix_stream_socket { connectto };
 #init 
 allow resource_schedule_service init:dir { search };
-allow resource_schedule_service init:file { read }; 
+allow resource_schedule_service init:file { getattr open read }; 
+#limit_domain
+allow resource_schedule_service limit_domain:file { getattr read };
 #kernel
-allow resource_schedule_service kernel:file { open read };
+allow resource_schedule_service kernel:dir { search };
+allow resource_schedule_service kernel:file { getattr open read };
 allow resource_schedule_service kernel:key { search };
 #lib_file
 allow resource_schedule_service lib_file:lnk_file { read };
@@ -116,6 +123,8 @@ allow resource_schedule_service musl_param:file { open read map };
 allow resource_schedule_service resource_schedule_service:netlink_socket { read };
 #proc_file
 allow resource_schedule_service proc_file:file { read open };
+#param_watcher
+allow resource_schedule_service param_watcher:file { read };
 #sh_exec
 allow resource_schedule_service sh_exec:file { execute_no_trans map open read };
 #sys_file
@@ -125,9 +134,14 @@ allow resource_schedule_service sys_file:dir { open read search };
 allow resource_schedule_service system_file:file { open read };
 #sys_prod_file
 allow resource_schedule_service sys_prod_file:dir { search };
+allow resource_schedule_service sys_prod_file:file { open read };
 #sysfs_devices_system_cpu
 allow resource_schedule_service sysfs_devices_system_cpu:file { getattr write open ioctl create read };
 allow resource_schedule_service sysfs_devices_system_cpu:dir { open read search };
+#storage_daemon
+allow resource_schedule_service storage_daemon:file { read };
+#storage_manager
+allow resource_schedule_service storage_manager:file { read };
 #tty_device
 allow resource_schedule_service tty_device:chr_file { open read write };
 #frame_aware_scha
@@ -144,6 +158,8 @@ allowxperm resource_schedule_service data_service_el1_file:file ioctl { 0x5413 0
 allow resource_schedule_service sa_pulseaudio_audio_service:samgr_class { get };
 #sa_audio_policy_service
 allow resource_schedule_service sa_audio_policy_service:samgr_class { get };
+#samgr
+allow resource_schedule_service samgr:file { read };
 #ueventd
 allow resource_schedule_service ueventd:dir { search };
 allow resource_schedule_service ueventd:file { getattr open read };
