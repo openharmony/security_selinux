@@ -47,3 +47,5 @@ allow hap_domain data_user_file:file create_file_perms;
 allow normal_hap privacy_service:binder call;
 allow hap_domain epfs:dir create_dir_perms;
 allow hap_domain epfs:{file lnk_file} create_file_perms;
+
+allow normal_hap system_etc_filemanagement_mime_file:file read_file_perms;
