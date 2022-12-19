@@ -47,6 +47,9 @@ allow resource_schedule_service chip_prod_file:dir { search };
 #data_service_el1_file
 allow resource_schedule_service data_service_el1_file:dir { add_name create getattr open read remove_name rmdir search write };
 allow resource_schedule_service data_service_el1_file:file { create getattr ioctl lock open read unlink write };
+#data_service_el2
+allow resource_schedule_service data_service_el2_file:dir { search };
+allow resource_schedule_service data_service_el2_hmdfs:dir { search };
 #data_service_file
 allow resource_schedule_service data_service_file:dir { search };
 #device_manager
@@ -128,6 +131,7 @@ allow resource_schedule_service proc_file:file { read open };
 allow resource_schedule_service param_watcher:file { read };
 #sh
 allow resource_schedule_service sh:dir { search };
+allow resource_schedule_service sh:file { open };
 #sh_exec
 allow resource_schedule_service sh_exec:file { execute_no_trans map open read };
 #sys_file
