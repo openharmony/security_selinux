@@ -80,10 +80,6 @@ allow media_service normal_hap_data_file:file { read getattr };
 
 allow media_service musl_param:file { open map read };
 
-allow media_service gralloc_host:fd { use };
-
-allow media_service gralloc_host:binder { call };
-
 allow media_service dnsproxy_service:sock_file { write };
 
 allow media_service render_service:fd { use };
