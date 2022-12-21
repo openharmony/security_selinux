@@ -71,7 +71,7 @@ allow resource_schedule_service vendor_etc_file:file { getattr map open read };
 #system
 allow resource_schedule_service system_basic_hap:dir { open read search };
 allow resource_schedule_service system_basic_hap:file { getattr open read };
-allow resource_schedule_service system_basic_hap:process { setsched };
+allow resource_schedule_service system_basic_hap:process { setsched sigkill };
 allow resource_schedule_service system_bin_file:dir { search };
 allow resource_schedule_service system_bin_file:file { execute execute_no_trans getattr map read open };
 allow resource_schedule_service system_bin_file:lnk_file { read };
