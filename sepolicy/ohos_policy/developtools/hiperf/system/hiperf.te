@@ -168,7 +168,6 @@ allow hiperf normal_hap:lnk_file read;
 
 allow hiperf chip_prod_file:dir search;
 allow hiperf chip_prod_file:file { getattr map open read };
-allow hiperf devpts:chr_file ioctl;
 allow hiperf proc_getslice:file getattr;
 allow hiperf proc_gpu_memory:file getattr;
 allow hiperf proc_key:file getattr;
