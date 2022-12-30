@@ -43,6 +43,7 @@
 # avc:  denied  { search } for  pid=455 comm="IPC_2_1071" name="el1" dev="mmcblk0p11" ino=11 scontext=u:r:usb_host:s0 tcontext=u:object_r:data_service_el1_file:s0 tclass=dir permissive=1
 allow console dev_usbfn_file:chr_file { getattr };
 allow console hdf_usb_interface_service:hdf_devmgr_class { get };
+allow console hdf_usbfn_mtp_interface_service:hdf_devmgr_class { get };
 allow console hdf_usbfn_cdcacm:hdf_devmgr_class { get };
 allow console sa_usb_service:samgr_class { get };
 allow console sys_usb_param:file { map open read };
