@@ -39,4 +39,4 @@ allow concurrent_task_service dev_auth_ctrl:chr_file { ioctl open read write };
 allow concurrent_task_service dev_unix_socket:dir { search };
 allow concurrent_task_service dev_unix_socket:sock_file { write };
 allow concurrent_task_service hilog_param:file { map open read };
-
+allow concurrent_task_service debug_param:file { map open read };
