@@ -57,3 +57,12 @@ allow msdp_sa dev_file:dir { getattr };
 
 #avc:  denied  { search } for  pid=1771 comm="device_status_s" name="etc" dev="mmcblk0p8" ino=17 scontext=u:r:msdp_sa:s0 tcontext=u:object_r:vendor_etc_file:s0 tclass=dir permissive=1
 allow msdp_sa vendor_etc_file:dir { search };
+
+#avc:  denied  { get } for service=2903 pid=889 scontext=u:r:msdp_sa:s0 tcontext=u:object_r:sa_msdp_movement_service:s0 tclass=samgr_class permissive=0
+allow msdp_sa sa_msdp_movement_service:samgr_class { get };
+
+#avc:  denied  { get } for service=3001 pid=889 scontext=u:r:msdp_sa:s0 tcontext=u:object_r:sa_pulseaudio_audio_service:s0 tclass=samgr_class permissive=0
+allow msdp_sa sa_pulseaudio_audio_service:samgr_class { get };
+
+#avc:  denied  { get } for service=3009 pid=889 scontext=u:r:msdp_sa:s0 tcontext=u:object_r:sa_audio_policy_service:s0 tclass=samgr_class permissive=0
+allow msdp_sa sa_audio_policy_service:samgr_class { get };
