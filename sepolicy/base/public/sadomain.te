@@ -17,6 +17,12 @@ allow sadomain samgr:binder { call transfer };
 
 allow sadomain system_profile_file:file read_file_perms;
 
+# add mmap permission for sa
+allow sadomain system_file:file { map open read getattr};
+allow sadomain sys_prod_file:file { map open read getattr};
+allow sadomain vendor_file:file { map open read getattr};
+allow sadomain chip_prod_file:file { map open read getattr};
+allow sadomain data_app_el1_file:file { map open read getattr};
 
 # neverallow
 # only samgr can be the mgr for binder.
