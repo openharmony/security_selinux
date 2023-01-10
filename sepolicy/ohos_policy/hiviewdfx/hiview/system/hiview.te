@@ -38,7 +38,7 @@ allow hiview init:unix_dgram_socket { getattr getopt read write setopt };
 allow hiview init:unix_stream_socket { connectto };
 allow hiview faultloggerd:unix_stream_socket { connectto };
 
-allow hiview hiview_file:dir { search getattr read open write add_name remove_name };
+allow hiview hiview_file:dir { search getattr read open write add_name remove_name rmdir };
 allow hiview hiview_file:file { append ioctl unlink map read write getattr open lock };
 
 allow hiview data_file:dir { search };
@@ -64,6 +64,7 @@ allow hiview system_basic_hap:dir { search };
 allow hiview system_basic_hap:file { getattr read open };
 allow hiview system_core_hap:file { getattr read open };
 allow hiview usage_report_exec:file { getattr read open execute_no_trans map execute };
+allow hiview vendor_bin_file:dir { search };
 
 allow hiview data_init_agent:dir { search };
 allow hiview data_init_agent:file { ioctl open read append };
