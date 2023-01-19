@@ -179,3 +179,5 @@ allow hidumper_service sa_dscreen_sink_service:samgr_class { get };
 #avc:  denied  { open } for  pid=2381    ino=55 scontext=u:r:dscreen:s0 tcontext=u:object_r:musl_param:s0 tclass=file permissive=0
 allow dscreen musl_param:file { read open };
 
+#avc:  denied  { search } for  pid=3351  scontext=u:r:dscreen:s0 tcontext=u:object_r:vendor_bin_file:s0 tclass=dir permissive=0
+allow dscreen vendor_bin_file:dir { search };
