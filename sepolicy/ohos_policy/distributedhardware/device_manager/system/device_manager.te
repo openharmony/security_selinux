@@ -294,3 +294,14 @@ allow device_manager devinfo_private_param:file { map open read};
 
 allow device_manager dhardware_dm_param:parameter_service { set };
 allow { domain -limit_domain } dhardware_dm_param:file { map open read };
+
+allow device_manager msdp_sa:binder { call };
+allow device_manager multimodalinput:binder { call };
+
+#avc:  denied  { read write } for  pid=242 comm="sa_main" path="/dev/console" dev="tmpfs" ino=21 scontext=u:r:device_manager:s0 tcontext=u:object_r:dev_console_file:s0 tclass=chr_file permissive=0
+allow device_manager dev_console_file:chr_file { read write };
+
+#avc:  denied  { read } for  pid=242 comm="IPC_1_300" name="u:object_r:musl_param:s0" dev="tmpfs" ino=56 scontext=u:r:device_manager:s0 tcontext=u:object_r:musl_param:s0 tclass=file permissive=0
+#avc:  denied  { open } for  pid=249 comm="device_manager" path="/dev/__parameters__/u:object_r:musl_param:s0" dev="tmpfs" ino=56 scontext=u:r:device_manager:s0 tcontext=u:object_r:musl_param:s0 tclass=file permissive=0
+#avc:  denied  { map } for  pid=248 comm="IPC_1_281" path="/dev/__parameters__/u:object_r:musl_param:s0" dev="tmpfs" ino=56 scontext=u:r:device_manager:s0 tcontext=u:object_r:musl_param:s0 tclass=file permissive=0
+allow device_manager musl_param:file { read open map };
