@@ -15,4 +15,4 @@
 #avc:  denied  { read } for  pid=1 comm="init" name="msdp" dev="sdd78" ino=3059 scontext=u:r:init:s0 tcontext=u:object_r:msdp_data_file:s0 tclass=dir permissive=1
 #avc:  denied  { open } for  pid=1 comm="init" path="/data/service/el1/public/msdp" dev="sdd78" ino=3059 scontext=u:r:init:s0 tcontext=u:object_r:msdp_data_file:s0 tclass=dir permissive=1
 #avc:  denied  { setattr } for  pid=1 comm="init" name="msdp" dev="sdd78" ino=3059 scontext=u:r:init:s0 tcontext=u:object_r:msdp_data_file:s0 tclass=dir permissive=1
-allow init msdp_data_file:file { relabelto read open setattr };
+allow init msdp_data_file:dir { relabelto read open setattr };
