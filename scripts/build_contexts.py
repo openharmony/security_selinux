@@ -24,7 +24,7 @@ import shutil
 from collections import defaultdict
 
 
-def parse_args(): 
+def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument(
         '--dst-dir', help='the output dest path', required=True)
@@ -159,10 +159,6 @@ def check_sehap_contexts(args, contexts_file, domain):
                 continue
             match = pattern.match(line_)
             if match:
-                if match.group(1) == 'normal' and match.group(2) != None:
-                    print(contexts_file + ":" +
-                          str(line_index) + " name cannot be set while apl=normal")
-                    err = 1
                 if domain:
                     line = match.group(1) + " u:r:" + match.group(3) + ":s0\n"
                 else:

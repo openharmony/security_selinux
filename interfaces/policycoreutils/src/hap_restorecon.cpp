@@ -201,7 +201,7 @@ int HapContext::HapContextsLookup(bool isDomain, const std::string &apl, const s
     }
 
     auto iter = sehapContextsBuff.find(std::string(apl) + std::string(packageName));
-    if (iter != sehapContextsBuff.end() && apl != "normal") {
+    if (iter != sehapContextsBuff.end()) {
         return TypeSet(iter, isDomain, con);
     } else {
         iter = sehapContextsBuff.find(std::string(apl));
