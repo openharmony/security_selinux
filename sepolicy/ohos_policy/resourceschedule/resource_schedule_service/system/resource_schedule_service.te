@@ -174,4 +174,4 @@ allow resource_schedule_service ueventd:file { getattr open read };
 allow resource_schedule_service watchdog_service:dir { search };
 allow resource_schedule_service watchdog_service:file { getattr open read };
 #sadomain
-allow resource_schedule_service sadomain:process { kill };
+allow resource_schedule_service sadomain:process { sigkill };
