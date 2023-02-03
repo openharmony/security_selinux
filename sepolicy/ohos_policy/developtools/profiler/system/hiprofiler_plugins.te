@@ -43,7 +43,6 @@ allow hiprofiler_plugins persist_sys_param:file read;
 allow hiprofiler_plugins proc_stat_file:file { getattr open read };
 allow hiprofiler_plugins samgr:file read;
 allow hiprofiler_plugins security_param:file { map open read };
-allow hiprofiler_plugins sh_exec:file execute;
 allow hiprofiler_plugins storage_manager:file read;
 allow hiprofiler_plugins sys_param:file { map open read };
 allow hiprofiler_plugins sys_usb_param:file read;
@@ -163,7 +162,6 @@ allow hiprofiler_plugins sensor_host:file read;
 allow hiprofiler_plugins user_auth_host:file read;
 allow hiprofiler_plugins vibrator_host:file read;
 
-allow hiprofiler_plugins audio_hdi_server_host:file read;
 allow hiprofiler_plugins blue_host:file read;
 allow hiprofiler_plugins camera_host:file read;
 allow hiprofiler_plugins disp_gralloc_host:file read;
@@ -262,3 +260,6 @@ allow hiprofiler_plugins hisysevent_exec:file { open read execute execute_no_tra
 allow hiprofiler_plugins samgr:binder call;
 allow hiprofiler_plugins sa_sys_event_service:samgr_class get;
 allow hiprofiler_plugins hiview:binder { call transfer };
+allow hiprofiler_plugins dev_console_file:chr_file { read write };
+allow hiprofiler_plugins proc_diskstats_file:file getattr;
+allow hiprofiler_plugins proc_uptime_file:file getattr;
