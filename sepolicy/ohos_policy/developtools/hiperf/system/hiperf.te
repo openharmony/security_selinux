@@ -203,7 +203,6 @@ allow hiperf sa_param_watcher:samgr_class get;
 allow hiperf foundation:binder call;
 allow hiperf samgr:binder { call };
 
-allow hiperf devpts:chr_file ioctl;
 allow hiperf param_watcher:binder { call transfer };
 allow hiperf tracefs_trace_marker_file:file { open write };
 
