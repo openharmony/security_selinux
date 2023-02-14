@@ -238,7 +238,7 @@ allow hiprofiler_plugins tracefs:dir { open read };
 
 allow hiprofiler_plugins tracefs:file append;
 
-allow hiprofiler_plugins data_local_tmp:dir { getattr read watch watch_reads add_name write open search };
+allow hiprofiler_plugins data_local_tmp:dir { getattr read watch watch_reads add_name write open search remove_name };
 allow hiprofiler_plugins data_local_tmp:file { create read open write lock };
 allow hiprofiler_plugins self:capability { sys_ptrace dac_read_search };
 
@@ -262,3 +262,11 @@ allow hiprofiler_plugins hisysevent_exec:file { open read execute execute_no_tra
 allow hiprofiler_plugins samgr:binder call;
 allow hiprofiler_plugins sa_sys_event_service:samgr_class get;
 allow hiprofiler_plugins hiview:binder { call transfer };
+
+allow hiprofiler_plugins appspawn_exec:file read;
+allow hiprofiler_plugins data_local_tmp:fifo_file { open read unlink write };
+allow hiprofiler_plugins hiview_exec:file { getattr map open read };
+allow hiprofiler_plugins self:perf_event write;
+allow hiprofiler_plugins storage_daemon_exec:file { getattr map open read };
+allow hiprofiler_plugins vendor_bin_file:file { getattr map open read };
+allow hiprofiler_plugins vendor_bin_file:dir search;
