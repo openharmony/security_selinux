@@ -188,5 +188,11 @@ allow hiperf self:capability2 { perfmon syslog };
 allow hiperf self:capability { sys_ptrace ipc_lock };
 allow hiperf self:perf_event { open read write kernel };
 
+allow hiperf param_watcher:binder { call transfer };
+allow hiperf tracefs_trace_marker_file:file { open write };
+allow hiperf hilog_exec:file { getattr map open read };
+allow hiperf rootfs:file { ioctl };
+allow hiperf ueventd_exec:file { getattr map open };
+
 neverallow hiperf *:process ptrace;
 neverallow { domain -hiperf } self:perf_event ~{ open read write kernel };
