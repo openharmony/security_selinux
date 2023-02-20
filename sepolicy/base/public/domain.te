@@ -275,7 +275,7 @@ neverallow { domain -processdump -hap_domain } domain:process ptrace;
 neverallow { domain -appspawn -init -ueventd -installs -storage_daemon -cap_violator_chown } self:{ capability cap_userns } chown;
 neverallow { domain -appspawn -init -ueventd -memmgrservice
              debug_only(`-hdcd') -installs
-             -storage_daemon -usb_host -cap_violator_dacoverride } self:{ capability cap_userns } dac_override;
+             -storage_daemon -usb_host -cap_violator_dacoverride -partitionslot_host } self:{ capability cap_userns } dac_override;
 neverallow { domain -appspawn -init -hidumper_service -storage_daemon -hiprofiler_plugins debug_only(`-hdcd  -hiperf') -cap_violator_dacreadsearch } self:{ capability cap_userns } dac_read_search;
 neverallow { domain -init -ueventd -installs -storage_daemon -cap_violator_fowner } self:{ capability cap_userns } fowner;
 neverallow { domain -appspawn -init -ueventd -storage_daemon -cap_violator_fsetid } self:{ capability cap_userns } fsetid;
