@@ -22,3 +22,6 @@ allow appspawn bootevent_param:parameter_service { set };
 allow appspawn paramservice_socket:sock_file { write };
 allow appspawn kernel:unix_stream_socket { connectto };
 allow appspawn dev_unix_socket:sock_file write;
+allow appspawn sharefs:dir { create_dir_perms mounton };
+allow appspawn sharefs:filesystem { mount };
+allow appspawn data_service_el2_share:dir { create_dir_perms mounton };
