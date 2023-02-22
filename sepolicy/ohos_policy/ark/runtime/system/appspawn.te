@@ -17,4 +17,3 @@ allow appspawn persist_sys_param:parameter_service { set };
 allow appspawn arkui_param:parameter_service { set };
 allow system_basic_hap appspawn:unix_stream_socket { write };
 allow system_basic_hap appspawn:unix_stream_socket { read };
-allow init appspawn:file { getattr };
