@@ -22,3 +22,6 @@ allow sh msdp_sa:binder { transfer call };
 #avc:  denied  { get } for service=2902 pid=1807 scontext=u:r:sh:s0 tcontext=u:object_r:sa_msdp_devicestatus_service:s0 tclass=samgr_class permissive=1
 allow sh sa_msdp_devicestatus_service:samgr_class { get };
 
+allow sh msdp_sa:fd { use };
+
+allow sh msdp_sa:unix_stream_socket { read write };
