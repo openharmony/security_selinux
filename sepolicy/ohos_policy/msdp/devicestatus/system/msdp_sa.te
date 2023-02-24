@@ -78,9 +78,8 @@ allow msdp_sa sensors:binder { transfer };
 #avc:  denied  { get } for service=3101 pid=445 scontext=u:r:msdp_sa:s0 tcontext=u:object_r:sa_multimodalinput_service:s0 tclass=samgr_class permissive=0
 allow msdp_sa sa_multimodalinput_service:samgr_class { get };
 
-#avc:  denied  { use } for  pid=1794 comm="InteractionMana" path="/dev/ashmem" dev="tmpfs" ino=197 scontext=u:r:msdp_sa:s0 tcontext=u:r:sh:s0 tclass=fd permissive=0
-allow msdp_sa sh:fd { use };
-
 debug_only(`
     allow msdp_sa data_file:file { getattr open read};
+    #avc:  denied  { use } for  pid=1794 comm="InteractionMana" path="/dev/ashmem" dev="tmpfs" ino=197 scontext=u:r:msdp_sa:s0 tcontext=u:r:sh:s0 tclass=fd permissive=0
+    allow msdp_sa sh:fd { use };
 ')
