@@ -26,6 +26,7 @@
 401                                    u:object_r:sa_foundation_bms:s0
 402	                                   u:object_r:sa_distributed_bundle_mgr_service_service:s0
 403	                                   u:object_r:sa_form_mgr_service:s0
+404	                                   u:object_r:sa_service_router_mgr_service:s0
 500	                                   u:object_r:sa_subsys_applications_service:s0
 501                                    u:object_r:sa_foundation_appms:s0
 511	                                   u:object_r:sa_installd_service:s0
