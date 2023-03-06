@@ -11,4 +11,5 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-type data_updater_file, file_attr, data_file_attr;
+type udevadm, domain, nativedomain;
+type udevadm_exec, exec_attr, file_attr, system_file_attr;

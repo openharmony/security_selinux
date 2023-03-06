@@ -1,0 +1,4 @@
+type abc;
+type bdc;
+type sid_test_type;
+allow abc bdc : process transition;
