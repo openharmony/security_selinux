@@ -510,7 +510,6 @@ HWTEST_F(SelinuxUnitTest, HapFileRestorecon010, TestSize.Level1)
  */
 HWTEST_F(SelinuxUnitTest, HapFileRestorecon011, TestSize.Level1)
 {
-
     int ret = test.HapFileRestorecon("", TEST_APL, TEST_NAME, 1);
     ASSERT_EQ(-SELINUX_ARG_INVALID, ret);
 
@@ -523,23 +522,20 @@ HWTEST_F(SelinuxUnitTest, HapFileRestorecon011, TestSize.Level1)
 
 /**
  * @tc.name: HapFileRestorecon012
- * @tc.desc: HapFileRestorecon selinux not enbaled.
+ * @tc.desc: HapFileRestorecon selinux not enabled.
  * @tc.type: FUNC
  * @tc.require:
  */
 HWTEST_F(SelinuxUnitTest, HapFileRestorecon012, TestSize.Level1)
 {
-    RunCommand("setenforce 0");
-
     ASSERT_EQ(true, CreateFile(TEST_SUB_PATH_1_FILE_1));
     ASSERT_EQ(true, CreateFile(TEST_SUB_PATH_1_FILE_2));
-
     std::vector<std::string> tmp;
     tmp.emplace_back(TEST_SUB_PATH_1);
 
+    RunCommand("setenforce 0");
     int ret = test.HapFileRestorecon(tmp, TEST_APL, TEST_NAME, 1);
-    ASSERT_EQ(SELINUX_SUCC, ret);
-
+    EXPECT_EQ(SELINUX_SUCC, ret);
     RunCommand("setenforce 1");
 }
 
