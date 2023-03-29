@@ -132,6 +132,9 @@ attribute cap_violator_perfmon;
 attribute cap_violator_sysmodule;
 attribute cap_violator_syslog;
 
+attribute data_user_file_dir_violator;
+attribute data_user_file_file_violator;
+
 attribute dev_fuse_file_violator;
 
 attribute proc_violator;
