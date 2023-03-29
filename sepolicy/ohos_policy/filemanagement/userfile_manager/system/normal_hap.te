@@ -17,6 +17,7 @@ neverallow {
     -hap_domain
     -media_service
     -hdcd
+    -data_user_file_dir_violator
 } data_user_file:dir {
     create_dir_perms
     never_write_dir
@@ -28,6 +29,7 @@ neverallow {
     -hap_domain
     -media_service
     -hdcd
+    -data_user_file_file_violator
 } data_user_file:{ file lnk_file } {
     create_file_perms
     never_rw_file
