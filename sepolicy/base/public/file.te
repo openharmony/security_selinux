@@ -1,4 +1,4 @@
-# Copyright (c) 2021-2022 Huawei Device Co., Ltd.
+# Copyright (c) 2021-2023 Huawei Device Co., Ltd.
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -304,3 +304,10 @@ type debugfs_transaction_log, fs_attr, debugfs_attr;
 type debugfs_used, fs_attr, debugfs_attr;
 type debugfs_state, fs_attr, debugfs_attr;
 type debugfs_stats, fs_attr, debugfs_attr;
+
+type module_update_file, module_update_file_attr, file_attr;
+type module_update_bin_file, module_update_file_attr, file_attr;
+type module_update_lib_file, module_update_file_attr, file_attr;
+type data_module_update, file_attr, data_file_attr;
+type data_module_update_package, file_attr, data_file_attr;
+type system_module_update_file, system_file_attr, file_attr;
