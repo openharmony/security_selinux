@@ -12,7 +12,7 @@
 # limitations under the License.
 
 type  push_manager_service, sadomain, domain;
--
+
 allow push_manager_service accessibility_param:file { read open map };
 allow push_manager_service accesstoken_service:binder { call };
 allow push_manager_service bootevent_param:file { read open map };
