@@ -20,6 +20,7 @@ allow distributedsche sa_accesstoken_manager_service:samgr_class { get };
 allow distributedsche sa_foundation_bms:samgr_class { get };
 allow distributedsche sa_accountmgr:samgr_class { get };
 allow distributedsche sa_foundation_abilityms:samgr_class { get };
+allow distributedsche sa_foundation_appms:samgr_class { get };
 allow distributedsche accessibility_param:file { map open read };
 allow distributedsche accesstoken_service:binder { call };
 allow distributedsche accountmgr:binder { call };
