@@ -13,6 +13,7 @@
  * limitations under the License.
  */
 
+#include <fcntl.h>
 #include <fstream>
 #include <string>
 #include <sys/mman.h>
