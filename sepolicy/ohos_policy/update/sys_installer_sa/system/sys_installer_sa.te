@@ -68,4 +68,6 @@ allow sys_installer_sa sh:binder { call };
 allow sys_installer_sa tmpfs:chr_file { read };
 allow sys_installer_sa update_firmware_file:dir { add_name search write remove_name getattr };
 allow sys_installer_sa update_firmware_file:dir { append ioctl open read };
+allowxperm sys_installer_sa update_firmware_file:dir ioctl { 0x5413 };
 allow sys_installer_sa update_firmware_file:file { append create ioctl open read write rename unlink getattr setattr };
+allowxperm sys_installer_sa update_firmware_file:file ioctl { 0x5413 };
