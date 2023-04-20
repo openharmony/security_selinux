@@ -42,7 +42,7 @@ constexpr const char PRECOMPILED_POLICY[] = "/vendor/etc/selinux/prebuild_sepoli
 static void InitSelinuxLog(void)
 {
     // set selinux log callback
-    SetSelinuxKmsgLevel(SELINUX_KERROR);
+    SetSelinuxKmsgLevel(SELINUX_KWARN);
     union selinux_callback cb;
     cb.func_log = SelinuxKmsg;
     selinux_set_callback(SELINUX_CB_LOG, cb);
@@ -275,7 +275,7 @@ static bool GetPolicyFile(std::string &policyFile)
 {
     if (access(SYSTEM_CIL, R_OK) != 0) { // no system.cil file
         policyFile = DEFAULT_POLICY;
-        selinux_log(SELINUX_INFO, "No cil file found, load default policy\n");
+        selinux_log(SELINUX_WARNING, "No cil file found, load default policy\n");
         return true;
     }
 
@@ -284,14 +284,14 @@ static bool GetPolicyFile(std::string &policyFile)
         bool res = CompareHash(PRECOMPILED_POLICY_SYSTEM_CIL_HASH, SYSTEM_CIL_HASH);
         if (res) {
             policyFile = PRECOMPILED_POLICY;
-            selinux_log(SELINUX_INFO, "Found precompiled policy, load it\n");
+            selinux_log(SELINUX_WARNING, "Found precompiled policy, load it\n");
             return true;
         }
         // hash did not same, goto compile
     }
 
     // no precompiled policy, compile from cil
-    selinux_log(SELINUX_INFO, "No precompiled policy found, compile it\n");
+    selinux_log(SELINUX_WARNING, "No precompiled policy found, compile it\n");
     if (CompilePolicy()) {
         policyFile = COMPILE_OUTPUT_POLICY;
         return true;
