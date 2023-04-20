@@ -64,7 +64,7 @@ def traverse_folder_in_type(search_dir_list, file_suffix):
                 file_name = os.path.basename(each_file)
                 if file_name == file_suffix:
                     file_list_path = os.path.join(root, each_file)
-                    flag |= check_empty_row(file_list_path)
+                    flag |= check_contexts_file(file_list_path)
                     policy_file_list.append(file_list_path)
     if flag:
         raise Exception(flag)
@@ -72,20 +72,26 @@ def traverse_folder_in_type(search_dir_list, file_suffix):
     return " ".join(str(x) for x in policy_file_list)
 
 
-def check_empty_row(contexts_file):
+def check_contexts_file(contexts_file):
     """
-    Check whether the last line of te is empty.
+    Check the format of contexts file.
     :param contexts_file: list of te file
     :return:
     """
     err = 0
-    with open(contexts_file, 'r') as fp:
-        lines = fp.readlines()
-        if len(lines) != 0:
-            last_line = lines[-1]
-            if '\n' not in last_line:
-                print(contexts_file + " :" + " need an empty line at end \n")
-                err = 1
+    fp = open(contexts_file, 'rb')
+    lines = fp.readlines()
+    if len(lines) == 0:
+        return 0
+    last_line = lines[-1]
+    if b'\n' not in last_line:
+        print("".join((contexts_file, " : need an empty line at end \n")))
+        err = 1
+    for line in lines:
+        if line.endswith(b'\r\n') or line.endswith(b'\r'):
+            print("".join((contexts_file, " : must be unix format\n")))
+            err = 1
+            break
     return err
 
 
@@ -299,17 +305,21 @@ def main(args):
         system_policy += traverse_folder_in_dir_name(item, "system")
         vendor_policy += traverse_folder_in_dir_name(item, "vendor")
 
+    system_folder_list = public_policy + system_policy
+    vendor_folder_list = public_policy + vendor_policy
     all_folder_list = public_policy + system_policy + vendor_policy
 
-    folder_list = []
+    if args.components == "system":
+        build_file_contexts(args, output_path, system_folder_list)
+    elif args.components == "vendor":
+        build_file_contexts(args, output_path, vendor_folder_list)
+    else:
+        build_file_contexts(args, output_path, all_folder_list)
 
-    folder_list = all_folder_list
-
-    build_file_contexts(args, output_path, folder_list)
-    build_common_contexts(args, output_path, "service_contexts", folder_list)
-    build_common_contexts(args, output_path, "hdf_service_contexts", folder_list)
-    build_common_contexts(args, output_path, "parameter_contexts", folder_list)
-    build_sehap_contexts(args, output_path, folder_list)
+    build_common_contexts(args, output_path, "service_contexts", all_folder_list)
+    build_common_contexts(args, output_path, "hdf_service_contexts", all_folder_list)
+    build_common_contexts(args, output_path, "parameter_contexts", all_folder_list)
+    build_sehap_contexts(args, output_path, all_folder_list)
 
 
 if __name__ == "__main__":
