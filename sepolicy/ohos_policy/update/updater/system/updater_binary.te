@@ -11,6 +11,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+allow updater_binary data_updater_file:file { execute execute_no_trans };
+
 updater_only(`
 
 #avc: denied { search } for pid=281 comm="updater" name="/" dev="rootfs" ino=1 scontext=u:object_r:updater_binary:s0 tcontext=u:object_r:rootfs:s0 tclass=dir permissive=1
