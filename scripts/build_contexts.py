@@ -79,8 +79,9 @@ def check_contexts_file(contexts_file):
     :return:
     """
     err = 0
-    fp = open(contexts_file, 'rb')
-    lines = fp.readlines()
+    lines = []
+    with open(contexts_file, 'rb') as fp:
+        lines = fp.readlines()
     if len(lines) == 0:
         return 0
     last_line = lines[-1]
