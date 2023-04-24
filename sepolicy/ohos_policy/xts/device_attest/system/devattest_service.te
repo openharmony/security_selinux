@@ -53,7 +53,10 @@ allow devattest_service system_bin_file:dir { search };
 allow devattest_service system_bin_file:file { execute execute_no_trans map read open };
 allow devattest_service tracefs:dir { getattr open read relabelto search setattr add_name create write remove_name };
 allow devattest_service tracefs:file { create ioctl open read append relabelto rename unlink write map getattr setattr lock };
+<<<<<<< HEAD
 allow devattest_service tracefs_trace_marker_file:file { map open read write };
+=======
+>>>>>>> 7818f5b886e97d542e771e3d5b4a33821d83dcdb
 
 allow devattest_service node:udp_socket { node_bind };
 allow devattest_service port:udp_socket { name_bind };
@@ -80,8 +83,12 @@ allow devattest_service sa_net_conn_manager:samgr_class { get };
 allow devattest_service sa_device_service_manager:samgr_class { get };
 allow devattest_service sa_accesstoken_manager_service:samgr_class { add get };
 allow devattest_service sa_foundation_bms:samgr_class { get };
+<<<<<<< HEAD
 allow devattest_service sa_foundation_ans:samgr_class { add get };
 allow devattest_service sa_foundation_abilityms:samgr_class { add get };
+=======
+allow devattest_service sa_foundation_ans:samgr_class { get };
+>>>>>>> 7818f5b886e97d542e771e3d5b4a33821d83dcdb
 
 allow devattest_service devinfo_private_param:file { map open read };
 
