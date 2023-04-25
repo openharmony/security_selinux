@@ -170,9 +170,8 @@ allowxperm updater rootfs:chr_file ioctl { 0x5413 };
 #avc: denied { ioctl } for pid=226 comm="updater" path="/dev/dri/card0" dev="tmpfs" ino=91 ioctlcmd=0x64b8 scontext=u:r:updater:s0 tcontext=u:object_r:dev_dri_file:s0 tclass=chr_file permissive=1
 #avc: denied { ioctl } for pid=226 comm="updater" path="/dev/dri/card0" dev="tmpfs" ino=91 ioctlcmd=0x64a2 scontext=u:r:updater:s0 tcontext=u:object_r:dev_dri_file:s0 tclass=chr_file permissive=1
 #avc: denied { ioctl } for pid=226 comm="updater" path="/dev/dri/card0" dev="tmpfs" ino=91 ioctlcmd=0x64b3 scontext=u:r:updater:s0 tcontext=u:object_r:dev_dri_file:s0 tclass=chr_file permissive=1
-
 allow updater dev_dri_file:chr_file { ioctl read write open map };
-allowxperm updater dev_dri_file:chr_file ioctl { 0x640c };
+allowxperm updater dev_dri_file:chr_file ioctl { 0x640c 0x64a0 0x64a7 0x64a6 0x64a1 0x64b2 0x64b8 0x64a2 0x64b3 };
 
 #avc: denied { search } for pid=229 comm="updater" name="dri" dev="tmpfs" ino=89 scontext=u:r:updater:s0 tcontext=u:object_r:dev_dri_file:s0 tclass=dir permissive=1
 allow updater dev_dri_file:dir { search };
