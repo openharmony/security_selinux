@@ -204,7 +204,8 @@ allow updater kernel:unix_stream_socket { connectto };
 #avc: denied { open } for pid=226 comm="updater" path="/etc/ld-musl-namespace-arm.ini" dev="rootfs" ino=16682 scontext=u:r:updater:s0 tcontext=u:object_r:rootfs:s0 tclass=file permissive=1
 #avc: denied { getattr } for pid=227 comm="updater" path="/etc/ld-musl-namespace-arm.ini" dev="rootfs" ino=16679 scontext=u:r:updater:s0 tcontext=u:object_r:rootfs:s0 tclass=file permissive=1
 #avc: denied { write } for pid=221 comm="hilogd.control" path="/data/log/hilog/.persisterInfo_2.info" dev="rootfs" ino=20796 scontext=u:r:hilogd:s0 tcontext=u:object_r:rootfs:s0 tclass=file permissive=1
-allow updater rootfs:file { entrypoint  map read execute open getattr write };
+# avc:  denied  { setattr } for  pid=231 comm="updater" name="updater_binary" dev="rootfs" ino=19417 scontext=u:r:updater:s0 tcontext=u:object_r:rootfs:s0 tclass=file permissive=0
+allow updater rootfs:file { entrypoint  map read execute open getattr write setattr };
 
 #avc: denied { read write } for pid=226 comm="updater" path="socket:[17326]" dev="sockfs" ino=17326 scontext=u:r:updater:s0 tcontext=u:r:ueventd:s0 tclass=netlink_kobject_uevent_socket permissive=1
 allow updater ueventd:netlink_kobject_uevent_socket { read write};
@@ -277,9 +278,6 @@ allow updater vfat:file { create read open getattr write ioctl };
 
 # avc:  denied  { ioctl } for  pid=230 comm="updater" path="/sdcard/updater/build_tools.zip.tmp" dev="mmcblk1p1" ino=102 ioctlcmd=0x5413 scontext=u:r:updater:s0 tcontext=u:object_r:vfat:s0 tclass=file permissive=0
 allowxperm updater vfat:file ioctl { 0x5413 };
-
-# avc:  denied  { setattr } for  pid=231 comm="updater" name="updater_binary" dev="rootfs" ino=19417 scontext=u:r:updater:s0 tcontext=u:object_r:rootfs:s0 tclass=file permissive=0
-allow updater rootfs:file { setattr read write add_name search };
 
 # avc:  denied  { open } for  pid=235 comm="updater" path="/sdcard/updater" dev="mmcblk1p1" ino=99 scontext=u:r:updater:s0 tcontext=u:object_r:vfat:s0 tclass=dir permissive=0
 allow updater vfat:dir { open };
