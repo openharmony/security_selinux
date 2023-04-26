@@ -11,7 +11,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-type updater_sa, sadomain, domain;
 
 allow updater_sa dev_unix_socket:dir { search };
 allow updater_sa port:tcp_socket { name_connect };
@@ -30,3 +29,26 @@ allow updater_sa huks_service:binder { call };
 allow updater_sa foundation:binder { call };
 allow updater_sa sa_foundation_battery_service:samgr_class { get };
 allow updater_sa sa_foundation_abilityms:samgr_class { get };
+allow updater_sa data_service_file:dir { search };
+allow updater_sa data_service_el1_file:dir { search write add_name remove_name read open getattr };
+allow updater_sa data_service_el1_file:file { create getattr read write open lock ioctl unlink map setattr rename };
+allow updater_sa dev_ashmem_file:chr_file { open };
+allow updater_sa musl_param:file { read open map };
+allow updater_sa sa_net_conn_manager:samgr_class { get };
+allow updater_sa netmanager:binder { call transfer };
+allow updater_sa normal_hap_attr:binder { call };
+allow updater_sa update_firmware_file:dir { search read open write getattr add_name remove_name };
+allow updater_sa update_firmware_file:file {create read append open getattr unlink setattr ioctl write };
+allowxperm updater_sa update_firmware_file:file ioctl { 0x5413 };
+allow updater_sa data_file:dir { read open write getattr setattr add_name remove_name };
+allow updater_sa tmpfs:dir { read open };
+allow updater_sa data_updater_file:dir { search };
+allow updater_sa data_updater_file:file { read open getattr };
+allow updater_sa dev_console_file:chr_file { read write };
+allow updater_sa sysfs_devices_system_cpu:file { read write open getattr };
+allow updater_sa dev_file:dir { getattr };
+allow updater_sa update_firmware_file:dir { create rmdir setattr };
+allow updater_sa update_dupdate_engine_file:dir { add_name create getattr open read remove_name rmdir search setattr write };
+allow updater_sa update_dupdate_engine_file:file { create getattr ioctl lock map open read rename setattr unlink write };
+allowxperm updater_sa update_dupdate_engine_file:file ioctl { 0x5413 0xf50c };
+allow updater_sa servicectrl_param:parameter_service { set };

@@ -83,7 +83,7 @@ static int SelinuxAuditCallback(void *data, security_class_t cls, char *buf, siz
 
 static void SelinuxSetCallback(void)
 {
-    SetSelinuxKmsgLevel(SELINUX_KERROR);
+    SetSelinuxKmsgLevel(SELINUX_KWARN);
     union selinux_callback cb;
     cb.func_log = SelinuxKmsg;
     selinux_set_callback(SELINUX_CB_LOG, cb);

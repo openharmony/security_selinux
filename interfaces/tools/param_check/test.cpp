@@ -33,7 +33,7 @@
 #include "selinux_parameter.h"
 #include "param_checker.h"
 
-using namespace selinux;
+using namespace Selinux;
 
 #ifdef TIME_DISPLAY
 const static long USEC_PER_SEC = 1000000L;
@@ -270,7 +270,7 @@ int main(int argc, char *argv[])
         PrintUsage();
         exit(0);
     }
-    InitParamSelinux();
+    InitParamSelinux(0);
     testInput testCmd;
     SetOptions(argc, argv, options, testCmd);
     Test(testCmd);

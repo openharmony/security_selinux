@@ -109,6 +109,7 @@
 1907	                               u:object_r:sa_device_usage_statistics_service:s0
 1909	                               u:object_r:sa_memory_manager_service:s0
 1912	                               u:object_r:sa_concurrent_task_service:s0
+1914                                   u:object_r:sa_device_standby:s0
 2000	                               u:object_r:sa_subsyse_service:s0
 2100	                               u:object_r:sa_subsys_intelliaccessories_service:s0
 2200	                               u:object_r:sa_subsys_intellispeaker_service:s0
@@ -234,10 +235,13 @@
 5202	                               u:object_r:sa_filemanagement_distributed_file_service_service:s0
 5203	                               u:object_r:sa_filemanagement_backup_service_service:s0
 5204                                   u:object_r:sa_filemanagement_cloud_sync_service:s0
+5205                                   u:object_r:sa_filemanagement_cloud_daemon_service:s0
 5501	                               u:object_r:sa_devattest_service:s0
 6001	                               u:object_r:sa_device_profile_service:s0
 6100                                   u:object_r:sa_instance_id:s0
+6103                                   u:object_r:sa_push_manager_service:s0
 6101                                   u:object_r:sa_oaid_service:s0
 7001	                               u:object_r:sa_subsys_ace_service:s0
+7002	                               u:object_r:sa_ui_appearance:s0
 8001	                               u:object_r:sa_ca_daemon_service:s0
 

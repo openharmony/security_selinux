@@ -11,8 +11,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-type resource_schedule_service, sadomain, domain;
-
 #service_binder
 allow resource_schedule_service accesstoken_service:binder { call };
 allow resource_schedule_service foundation:binder { call transfer };
@@ -110,9 +108,9 @@ allow resource_schedule_service data_log:file { read write };
 #faultloggerd
 allow resource_schedule_service faultloggerd:fd { use };
 allow resource_schedule_service faultloggerd:unix_stream_socket { connectto };
-#init 
+#init
 allow resource_schedule_service init:dir { search };
-allow resource_schedule_service init:file { getattr open read }; 
+allow resource_schedule_service init:file { getattr open read };
 #limit_domain
 allow resource_schedule_service limit_domain:dir { search };
 allow resource_schedule_service limit_domain:file { getattr open read };
@@ -182,3 +180,19 @@ allow resource_schedule_service sa_locationhub_lbsservice_gnss:samgr_class { get
 allow resource_schedule_service sa_locationhub_lbsservice_network:samgr_class { get };
 allow resource_schedule_service sa_locationhub_lbsservice_passive:samgr_class { get };
 allow resource_schedule_service sa_location_geo_convert_service:samgr_class { get };
+
+allow resource_schedule_service sa_device_standby:samgr_class { add get };
+allow resource_schedule_service sensors:binder { call };
+allow resource_schedule_service sa_sensor_service:samgr_class { get };
+allow sensors resource_schedule_service:fd { use };
+allow resource_schedule_service sa_foundation_battery_service:samgr_class { get };
+allow sh resource_schedule_service:binder { call };
+allow resource_schedule_service sh:binder { call };
+allow resource_schedule_service sa_foundation_powermgr_service:samgr_class { get };
+allow resource_schedule_service sa_time_service:samgr_class { get };
+allow resource_schedule_service sa_time_service:binder { transfer };
+allow time_service resource_schedule_service:binder { call };
+allow resource_schedule_service sa_foundation_bms:samgr_class { get };
+allow sensors resource_schedule_service:unix_stream_socket { read write };
+allow resource_schedule_service sensors:binder {transfer};
+allow sensors resource_schedule_service:binder {call};

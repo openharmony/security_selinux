@@ -20,6 +20,7 @@ allow init hisysevent_socket:sock_file { unlink setattr };
 allow init system_core_hap:file { read open };
 allow init system_core_hap:dir { search };
 allow init system_core_hap:process { getattr };
+allow init system_lib_file:dir { open read };
 
 allow init accessibility_param:file { map open read relabelto relabelfrom };
 allow init const_postinstall_param:file { map open read relabelto relabelfrom };
@@ -107,3 +108,8 @@ allowxperm init dev_block_file:blk_file ioctl { 0x1268 0x2285 };
 
 #for sysrq
 allow init proc_sysrq_trigger_file:file { getattr open write ioctl };
+
+#for init trace
+allow init tracefs_trace_marker_file:file { getattr write open read ioctl };
+allow init tracefs:file { getattr ioctl open read write };
+allow init tracefs:filesystem { mount };
