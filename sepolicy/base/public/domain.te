@@ -211,7 +211,7 @@ neverallow { domain -init } *:filesystem relabelto;
 neverallow { domain -storage_daemon } *:filesystem quotaget;
 neverallow { domain -storage_daemon } *:filesystem quotamod;
 
-neverallow { domain updater_only(`-updater -updater_binary')} rootfs:file { create write setattr relabelto append unlink link rename };
+neverallow { domain updater_only(`-updater -updater_binary -init')} rootfs:file { create write setattr relabelto append unlink link rename };
 
 neverallow { domain -init -proc_sys_writer } { proc_attr sysfs_attr }:dir { add_name create link rename remove_name reparent rmdir write };
 
@@ -293,7 +293,7 @@ neverallow { domain -wifi_hal_service -wifi_manager_service -netmanager -netsysn
 neverallow { domain -hiperf } self:{ capability cap_userns } ipc_lock;
 neverallow * self:{ capability cap_userns } ipc_owner;
 neverallow { domain -cap_violator_sysmodule } self:{ capability cap_userns } sys_module;
-neverallow { domain -init } self:{ capability cap_userns } sys_rawio;
+neverallow { domain -init -cap_violator_sysrawio} self:{ capability cap_userns } sys_rawio;
 neverallow { domain -init } self:{ capability cap_userns } sys_chroot;
 neverallow { domain -hiview -hidumper_service -memmgrservice -storage_daemon -hiprofiler_cmd -hiprofiler_plugins -native_daemon -hiperf
     -foundation -cap_violator_sysptrace debug_only(`-hiebpf') } self:{ capability cap_userns } sys_ptrace;
