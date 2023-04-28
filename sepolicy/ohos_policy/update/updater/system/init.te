@@ -148,13 +148,12 @@ allow init exfat:dir { mounton };
 #avc: denied { execute_no_trans } for pid=234 comm="init" path="/bin/hilog" dev="rootfs" ino=19711 scontext=u:r:init:s0 tcontext=u:object_r:rootfs:s0 tclass=file permissive=1
 allow init rootfs:file { execute_no_trans };
 
-#avc: denied { read } for pid=1 comm="init" name="param" dev="rootfs" ino=17264 scontext=u:r:init:s0 tcontext=u:object_r:rootfs:s0 tclass=dir permissive=1
-#avc: denied { open } for pid=1 comm="init" path="/etc/param" dev="rootfs" ino=17264 scontext=u:r:init:s0 tcontext=u:object_r:rootfs:s0 tclass=dir permissive=1
-#avc: denied { relabelfrom } for pid=1 comm="init" name="system" dev="rootfs" ino=17234 scontext=u:r:init:s0 tcontext=u:object_r:rootfs:s0 tclass=dir permissive=1
-#avc: denied { write } for pid=1 comm="init" name="/" dev="rootfs" ino=1 scontext=u:r:init:s0 tcontext=u:object_r:rootfs:s0 tclass=dir permissive=1
-#avc: denied { add_name } for pid=1 comm="init" name="vendor" scontext=u:r:init:s0 tcontext=u:object_r:rootfs:s0 tclass=dir permissive=1
-#avc: denied { create } for pid=1 comm="init" name="vendor" scontext=u:r:init:s0 tcontext=u:object_r:rootfs:s0 tclass=dir permissive=1
-#avc: denied { setattr } for pid=1 comm="init" name="param" dev="rootfs" ino=17987 scontext=u:r:init:s0 tcontext=u:object_r:rootfs:s0 tclass=dir permissive=1
-allow init rootfs:file { read open relabelfrom write add_name create setattr };
+#avc: denied { relabelfrom } for pid=237 comm="init" name=".persisterInfo_2" dev="rootfs" ino=20763 scontext=u:r:init:s0 tcontext=u:object_r:rootfs:s0 tclass=file permissive=1
+#avc: denied { map } for pid=235 comm="hilog" path="/bin/hilog" dev="rootfs" ino=2707 scontext=u:r:init:s0 tcontext=u:object_r:rootfs:s0 tclass=file permissive=1
+#avc: denied { open } for pid=1 comm="init" path="/etc/selinux/targeted/contexts/file_contexts" dev="rootfs" ino=18433 scontext=u:r:init:s0 tcontext=u:object_r:rootfs:s0 tclass=file permissive=1
+#avc: denied { execute } for pid=1 comm="init" name="updater" dev="rootfs" ino=18818 scontext=u:r:init:s0 tcontext=u:object_r:rootfs:s0 tclass=file permissive=1
+#avc: denied { getattr } for pid=1 comm="init" path="/etc/selinux/targeted/contexts/file_contexts" dev="rootfs" ino=18433 scontext=u:r:init:s0 tcontext=u:object_r:rootfs:s0 tclass=file permissive=1
+#avc: denied { read } for pid=1 comm="init" name="file_contexts" dev="rootfs" ino=18433 scontext=u:r:init:s0 tcontext=u:object_r:rootfs:s0 tclass=file permissive=1
+allow init rootfs:file { map read open relabelfrom setattr getattr };
 
 ')
