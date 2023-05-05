@@ -156,4 +156,8 @@ allow init rootfs:file { execute_no_trans };
 #avc: denied { read } for pid=1 comm="init" name="file_contexts" dev="rootfs" ino=18433 scontext=u:r:init:s0 tcontext=u:object_r:rootfs:s0 tclass=file permissive=1
 allow init rootfs:file { map read open relabelfrom setattr getattr };
 
+allow init data_hilogd_file:file { relabelto };
+allow init rootfs:file { execute_no_trans };
+allow init rootfs:file { relabelfrom };
+allow init updater:file { getattr };
 ')
