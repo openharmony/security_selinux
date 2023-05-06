@@ -173,7 +173,7 @@ allow updater_binary data_updater_file:dir { open create setattr add_name search
 # avc:  denied  { rename } for  pid=268 comm="updater_binary" name="vendor" dev="mmcblk0p12" ino=1006 scontext=u:r:updater:s0 tcontext=u:object_r:data_updater_file:s0 tclass=file permissive=0
 # avc:  denied  { setattr } for  pid=268 comm="updater_binary" name="vendor_retry" dev="mmcblk0p12" ino=4748 scontext=u:r:updater_binary:s0 tcontext=u:object_r:data_updater_file:s0 tclass=file permissive=0
 # avc:  denied  { unlink } for  pid=269 comm="updater_binary" name="deaf4cd35457797973b4e888888560b4794df92865f14d616ae99853a484605b" dev="mmcblk0p12" ino=1918 scontext=u:r:updater_binary:s0 tcontext=u:object_r:data_updater_file:s0 tclass=file permissive=0
-allow updater_binary data_updater_file:file { read open getattr write create ioctl rename setattr unlink };
+allow updater_binary data_updater_file:file { read open getattr write create ioctl rename setattr unlink map};
 allowxperm updater_binary data_updater_file:file ioctl { 0x5413 };
 
 # avc: denied { read } for pid=279 comm="processdump" name="u:object_r:hilog_param:s0" dev="tmpfs" ino=34 scontext=u:r:updater_binary:s0 tcontext=u:object_r:hilog_param:s0 tclass=file permissive=0
