@@ -37,8 +37,7 @@
 #include "selinux/context.h"
 #include "selinux/selinux.h"
 
-#include "callbacks.h"
-#include <selinux_internal.h>
+#include "src/callbacks.h"
 #include "selinux_error.h"
 #include "selinux_log.h"
 
