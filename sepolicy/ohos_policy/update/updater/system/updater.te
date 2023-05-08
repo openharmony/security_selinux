@@ -88,6 +88,7 @@ allow updater sys_file:file { read getattr open };
 #avc: denied { create } for pid=231 comm="updater" name="log" scontext=u:r:updater:s0 tcontext=u:object_r:data_updater_file:s0 tclass=dir permissive=0
 # avc:  denied  { rmdir } for  pid=231 comm="updater" name="update_tmp" dev="mmcblk0p12" ino=3277 scontext=u:r:updater:s0 tcontext=u:object_r:data_updater_file:s0 tclass=dir permissive=0
 allow updater data_updater_file:dir { read getattr add_name search write open remove_name create rmdir };
+allow updater update_firmware_file:dir { read getattr add_name search write open remove_name create rmdir };
 
 #avc: denied { create } for pid=238 comm="updater" name="updater_log" scontext=u:r:updater:s0 tcontext=u:object_r:data_updater_file:s0 tclass=file permissive=1
 #avc: denied { append } for pid=238 comm="updater" name="updater_log" dev="mmcblk0p12" ino=1037 scontext=u:r:updater:s0 tcontext=u:object_r:data_updater_file:s0 tclass=file permissive=1
@@ -100,6 +101,9 @@ allow updater data_updater_file:dir { read getattr add_name search write open re
 #avc: denied { write } for pid=235 comm="updater" path="/data/updater/update.bin.tmp" dev="mmcblk0p12" ino=3186 scontext=u:r:updater:s0 tcontext=u:object_r:data_updater_file:s0 tclass=file permissive=1
 allow updater data_updater_file:file { create open append getattr ioctl read setattr unlink write };
 allowxperm updater data_updater_file:file ioctl { 0x5413 };
+
+allow updater update_firmware_file:file { create open append getattr ioctl read setattr unlink write };
+allowxperm updater update_firmware_file:file ioctl { 0x5413 };
 
 #avc: denied { search } for pid=228 comm="updater" name="block" dev="tmpfs" ino=99 scontext=u:r:updater:s0 tcontext=u:object_r:dev_block_volfile:s0 tclass=dir permissive=1
 allow updater dev_block_volfile:dir { search };
