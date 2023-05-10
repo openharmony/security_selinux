@@ -16,10 +16,12 @@ allow screenlock_server system_core_hap:binder { call transfer };
 allow screenlock_server system_basic_hap:binder { call transfer };
 allow screenlock_server normal_hap_attr:binder { call transfer };
 allow screenlock_server system_usr_file:file { map };
-allow screenlock_server sh:binder { call transfer };
 allow screenlock_server sa_foundation_abilityms:samgr_class { get };
 allow screenlock_server sa_useriam_useridm_service:samgr_class { get };
 allow screenlock_server sa_telephony_tel_core_service:samgr_class { get };
 allow screenlock_server sa_foundation_cesfwk_service:samgr_class { get };
 allow screenlock_server useriam:binder { call };
 allow screenlock_server useriam:binder { transfer };
+debug_only(`
+    allow screenlock_server sh:binder { call transfer };
+')
