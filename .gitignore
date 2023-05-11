@@ -37,13 +37,3 @@
 
 # Dirs
 sepolicy/hx*
-
-.idea/
-.DS_Store
-*.iml
-._*
-CMakeLists.txt
-cmake-build-debug
-.clang-format
-.vscode/
-.gitignore
