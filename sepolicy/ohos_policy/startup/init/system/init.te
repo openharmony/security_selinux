@@ -27,9 +27,6 @@ allow init const_postinstall_param:file { map open read relabelto relabelfrom };
 allow init hilog_param:file { map open read relabelto relabelfrom };
 
 allow accessibility_param tmpfs:filesystem associate;
-allow init sh:file { map open read relabelto relabelfrom };
-allow init sh:dir { search };
-allow init sh:process { getattr };
 allow init data_service_file:file { ioctl rename relabelfrom };
 allow init data_service_file:dir { remove_name };
 allow init dev_console_file:chr_file { relabelto };
@@ -113,3 +110,9 @@ allow init proc_sysrq_trigger_file:file { getattr open write ioctl };
 allow init tracefs_trace_marker_file:file { getattr write open read ioctl };
 allow init tracefs:file { getattr ioctl open read write };
 allow init tracefs:filesystem { mount };
+
+debug_only(`
+    allow init sh:file { map open read relabelto relabelfrom };
+    allow init sh:dir { search };
+    allow init sh:process { getattr };
+')
