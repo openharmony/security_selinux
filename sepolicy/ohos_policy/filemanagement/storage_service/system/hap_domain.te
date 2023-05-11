@@ -1,4 +1,4 @@
-# Copyright (c) 2022 Huawei Device Co., Ltd.
+# Copyright (c) 2023 Huawei Device Co., Ltd.
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -11,7 +11,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-debug_only(`
-    allow sh sa_storage_manager_daemon:samgr_class { get };
-    allow sh sa_storage_manager_service:samgr_class { get };
-')
+#avc:  denied  { get } for service=5003 pid=1550 scontext=u:r:system_basic_hap:s0 tcontext=u:object_r:sa_storage_manager_service:s0 tclass=samgr_class permissive=0
+allow hap_domain sa_storage_manager_service:samgr_class { get };
+#avc:  denied  { call } for  pid=1550 comm="e.volumemanager" scontext=u:r:system_basic_hap:s0 tcontext=u:r:storage_manager:s0 tclass=binderpermissive=1
+allow hap_domain storage_manager:binder { call };
