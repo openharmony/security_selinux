@@ -31,6 +31,7 @@ allow param_watcher const_postinstall_fstab_param:file { map open read };
 allow param_watcher const_postinstall_param:file { map open read };
 allow param_watcher const_product_param:file { map open read };
 allow param_watcher d-bms:binder { call };
+allow param_watcher daudio:binder { call };
 allow param_watcher dcamera:binder { call };
 allow param_watcher debug_param:file { map open read };
 allow param_watcher default_param:file { map open read };

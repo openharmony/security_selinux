@@ -22,6 +22,7 @@ allow audio_policy const_param:file { map open read };
 allow audio_policy const_postinstall_fstab_param:file { map open read };
 allow audio_policy const_postinstall_param:file { map open read };
 allow audio_policy const_product_param:file { map open read };
+allow audio_policy daudio:binder { call };
 allow audio_policy debug_param:file { map open read };
 allow audio_policy default_param:file { map open read };
 allow audio_policy dev_kmsg_file:chr_file { open write };

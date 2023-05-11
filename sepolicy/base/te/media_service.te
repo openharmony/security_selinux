@@ -29,6 +29,7 @@ allow media_service data_data_file:dir { search };
 allow media_service data_file:dir { search };
 allow media_service data_media:dir { search };
 allow media_service data_service_el2_hmdfs:file { getattr read write };
+allow media_service daudio:binder { transfer call };
 allow media_service debug_param:file { map open read };
 allow media_service default_param:file { map open read };
 allow media_service dev_ashmem_file:chr_file { open };
