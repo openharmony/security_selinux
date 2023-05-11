@@ -42,5 +42,5 @@ debug_only(`
     allow wallpaper_service sh:fd { use };
     allow wallpaper_service sh:fifo_file { read };
     allow wallpaper_service sh:binder { call };
-	allow wallpaper_service dev_console_file:chr_file { read write };
+    allow wallpaper_service dev_console_file:chr_file { read write };
 ')
