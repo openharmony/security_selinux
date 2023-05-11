@@ -34,7 +34,6 @@ allow init cgroup:dir { add_name create open read search setattr write };
 allow init cgroup:file { getattr open setattr };
 allow init cgroup:filesystem { mount };
 allow init cgroup:file { write };
-allow init codec_host:process { rlimitinh siginh transition };
 allow init config_file:dir { mounton };
 allow init configfs:dir { add_name create mounton open read search setattr write };
 allow init configfs:file { create getattr open };

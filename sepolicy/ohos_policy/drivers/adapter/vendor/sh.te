@@ -11,11 +11,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-allow sh hdf_codec_hdi_omx_service:hdf_devmgr_class { get };
-allow sh hdf_codec_component_manager_service:hdf_devmgr_class { get };
-allow sh hdf_codec_hdi_service:hdf_devmgr_class { get };
-allow sh hdf_codec_image_jpeg_service:hdf_devmgr_class { get };
-allow sh codec_host:binder { transfer };
 allow sh proc_boot_id:file { read open };
 allow sh disp_gralloc_host:binder { call };
 allow sh disp_gralloc_host:fd { use };
