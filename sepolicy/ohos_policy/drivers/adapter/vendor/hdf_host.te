@@ -11,46 +11,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-#avc:  denied  { get } for service=hdf_device_manager pid=343 scontext=u:r:codec_host:s0 tcontext=u:object_r:hdf_device_manager:s0 tclass=hdf_devmgr_class
-#avc:  denied  { add } for service=codec_hdi_omx_service pid=343 scontext=u:r:codec_host:s0 tcontext=u:object_r:hdf_codec_hdi_omx_service:s0 tclass=hdf_devmgr_class
-#avc:  denied  { add } for service=codec_hdi_service pid=354 scontext=u:r:codec_host:s0 tcontext=u:object_r:hdf_codec_hdi_service:s0 tclass=hdf_devmgr_class
-#avc:  denied  { read } for  pid=496 comm="IPC_1_599" name="u:object_r:musl_param:s0" dev="tmpfs" ino=56 scontext=u:r:codec_host:s0 tcontext=u:object_r:musl_param:s0 tclass=file permissive=0
-#avc:  denied  { open } for  pid=497 comm="IPC_2_1294" path="/dev/ashmem" dev="tmpfs" ino=190 scontext=u:r:codec_host:s0 tcontext=u:object_r:dev_ashmem_file:s0 tclass=chr_file permissive=0
-#avc:  denied  { getattr } for  pid=497 comm="omx_msg_hdl" path="/proc/version" dev="proc" ino=4026532114 scontext=u:r:codec_host:s0 tcontext=u:object_r:proc_version_file:s0 tclass=file permissive=0
-allow codec_host musl_param:file { open map read };
-allow codec_host dev_ashmem_file:chr_file { open };
-allow codec_host hdf_device_manager:hdf_devmgr_class { get };
-allow codec_host hdf_codec_hdi_omx_service:hdf_devmgr_class { add get };
-allow codec_host hdf_codec_image_jpeg_service:hdf_devmgr_class { add get };
-allow codec_host hdf_codec_component_manager_service:hdf_devmgr_class { add get };
-allow codec_host hdf_codec_hdi_service:hdf_devmgr_class { add get };
-allow codec_host sa_device_service_manager:samgr_class { get };
-allow codec_host dev_dri_file:dir { search read write };
-allow codec_host sh:binder { transfer call };
-allow codec_host sh:fd { use };
-allow codec_host disp_gralloc_host:fd { use };
-allow codec_host allocator_host:fd { use };
-allow codec_host dev_dri_file:chr_file { read write open ioctl };
-allow codec_host dev_mpp:chr_file { read write open ioctl };
-allow codec_host proc_version_file:file { read open getattr };
-allow codec_host sys_file:file { read open };
-allow codec_host dev_rga:chr_file { read write open ioctl };
-allowxperm codec_host dev_mpp:chr_file ioctl 0x7601;
-allowxperm codec_host dev_rga:chr_file ioctl { 0x64b2 0x642d 0x641f 0x642e 0x64b4 0x601b 0x5017 };
-allowxperm codec_host dev_dri_file:chr_file ioctl { 0x64b2 0x642d 0x641f 0x642e 0x64b4 };
-allow codec_host hdcd:fd { use };
-allow codec_host devpts:chr_file { read write };
-
-#avc:  denied  { get } for service=hdf_device_manager pid=344 scontext=u:r:light_host:s0 tcontext=u:object_r:hdf_device_manager:s0 tclass=hdf_devmgr_class
-#avc:  denied  { add } for service=light_interface_service pid=344 scontext=u:r:light_host:s0 tcontext=u:object_r:hdf_light_interface_service:s0 tclass=hdf_devmgr_class
-allow light_host hdf_device_manager:hdf_devmgr_class { get };
-allow light_host hdf_light_interface_service:hdf_devmgr_class { add };
-
-#avc:  denied  { get } for service=hdf_device_manager pid=346 scontext=u:r:sensor_host:s0 tcontext=u:object_r:hdf_device_manager:s0 tclass=hdf_devmgr_class
-#avc:  denied  { add } for service=sensor_interface_service pid=346 scontext=u:r:sensor_host:s0 tcontext=u:object_r:hdf_sensor_interface_service:s0 tclass=hdf_devmgr_class
-allow sensor_host hdf_device_manager:hdf_devmgr_class { get };
-allow sensor_host hdf_sensor_interface_service:hdf_devmgr_class { add };
-
 #avc:  denied  { get } for service=hdf_device_manager pid=359 scontext=u:r:power_host:s0 tcontext=u:object_r:hdf_device_manager:s0 tclass=hdf_devmgr_class
 #avc:  denied  { add } for service=thermal_interface_service pid=359 scontext=u:r:power_host:s0 tcontext=u:object_r:hdf_thermal_interface_service:s0 tclass=hdf_devmgr_class
 #avc:  denied  { add } for service=battery_interface_service pid=359 scontext=u:r:power_host:s0 tcontext=u:object_r:hdf_battery_interface_service:s0 tclass=hdf_devmgr_class
@@ -134,11 +94,6 @@ allow dcamera_host media_service:binder { call };
 allow dcamera_host vendor_bin_file:dir { search };
 allow dcamera_host param_watcher:binder { call transfer };
 allow param_watcher dcamera_host:binder { call transfer };
-
-#avc:  denied  { get } for service=hdf_device_manager pid=345 scontext=u:r:vibrator_host:s0 tcontext=u:object_r:hdf_device_manager:s0 tclass=hdf_devmgr_class permissive=1
-#avc:  denied  { add } for service=vibrator_interface_service pid=345 scontext=u:r:vibrator_host:s0 tcontext=u:object_r:hdf_vibrator_interface_service:s0 tclass=hdf_devmgr_class permissive=1
-allow vibrator_host hdf_device_manager:hdf_devmgr_class { get };
-allow vibrator_host hdf_vibrator_interface_service:hdf_devmgr_class { add };
 
 #avc:  denied  { get } for service=hdf_device_manager pid=361 scontext=u:r:usb_host:s0 tcontext=u:object_r:hdf_device_manager:s0 tclass=hdf_devmgr_class permissive=1
 #avc:  denied  { add } for service=usbd pid=361 scontext=u:r:usb_host:s0 tcontext=u:object_r:hdf_usbd:s0 tclass=hdf_devmgr_class permissive=1
@@ -356,105 +311,17 @@ allow fingerprint_auth_host hdf_device_manager:hdf_devmgr_class { get };
 allow fingerprint_auth_host hdf_fingerprint_auth_interface_service:hdf_devmgr_class { add };
 allow fingerprint_auth_host sa_device_service_manager:samgr_class { get };
 
-#avc:  denied  { get } for service=hdf_device_manager pid=346 scontext=u:r:motion_host:s0 tcontext=u:object_r:hdf_device_manager:s0 tclass=hdf_devmgr_class
-#avc:  denied  { add } for service=motion_interface_service pid=346 scontext=u:r:motion_host:s0 tcontext=u:object_r:hdf_motion_interface_service:s0 tclass=hdf_devmgr_class
-allow motion_host hdf_device_manager:hdf_devmgr_class { get };
-allow motion_host hdf_motion_interface_service:hdf_devmgr_class { add };
-
-allow sh hdf_sensor_interface_service:hdf_devmgr_class { get };
 allow sh sa_device_service_manager:samgr_class { get };
-
-allow sensor_host sa_device_service_manager:samgr_class { get };
-
-allow sensors sa_miscdevice_service:samgr_class { add };
-allow sensors sa_param_watcher:samgr_class { get };
-
-allow light_host sa_device_service_manager:samgr_class { get };
-
-allow vibrator_host sa_device_service_manager:samgr_class { get };
-
-allow motion_host sa_device_service_manager:samgr_class { get };
-
-allow sh hdf_light_interface_service:hdf_devmgr_class { get };
-allow sh hdf_vibrator_interface_service:hdf_devmgr_class { get };
-
-allow sensor_host dev_unix_socket:dir { search };
-
-allow light_host dev_unix_socket:dir { search };
-allow light_host vendor_bin_file:file { entrypoint };
-dontaudit init light_host:process noatsecure;
-dontaudit init light_host:process rlimitinh;
-dontaudit init light_host:process siginh;
-dontaudit init light_host:process transition;
-
-allow vibrator_host dev_unix_socket:dir { search };
 
 allow rootfs labeledfs:filesystem { associate };
 
-allow init dev_hdf_misc_vibrator:chr_file { setattr };
-allow init dev_hdf_sensor_mgr:chr_file { setattr };
 allow init dev_hdfwifi:chr_file { setattr };
-
-allow light_host dev_hdf_light:chr_file { getattr };
-allow light_host dev_hdf_light:chr_file { ioctl };
-allow light_host dev_hdf_light:chr_file { open };
-allow light_host dev_hdf_light:chr_file { read write };
-allowxperm light_host dev_hdf_light:chr_file ioctl 0x6201;
-
-allow vibrator_host dev_hdf_misc_vibrator:chr_file { getattr };
-allow vibrator_host dev_hdf_misc_vibrator:chr_file { ioctl };
-allow vibrator_host dev_hdf_misc_vibrator:chr_file { open };
-allow vibrator_host dev_hdf_misc_vibrator:chr_file { read write };
-allowxperm vibrator_host dev_hdf_misc_vibrator:chr_file ioctl 0x6201;
 
 #avc:  denied  { relabelto } for  pid=222 comm="ueventd" name="hdfwifi" dev="tmpfs" ino=192 scontext=u:r:ueventd:s0 tcontext=u:object_r:dev_hdfwifi:s0 tclass=chr_file permissive=0
 allow ueventd dev_hdfwifi:chr_file { relabelto };
-
-allow sensor_host dev_hdf_sensor_mgr:chr_file { ioctl };
-allowxperm sensor_host dev_hdf_sensor_mgr:chr_file ioctl 0x6202;
-
-#avc:  denied  { ioctl } for  pid=468 comm="sensor_host" path="/dev/hdf_sensor_manager_ap" dev="tmpfs" ino=195 ioctlcmd=0x6206 scontext=u:r:sensor_host:s0 tcontext=u:object_r:dev_hdf_sensor_mgr:s0 tclass=chr_file permissive=0
-allow sensor_host dev_hdf_sensor_mgr:chr_file { ioctl };
-allowxperm sensor_host dev_hdf_sensor_mgr:chr_file ioctl 0x6206;
-
-#avc:  denied  { call } for  pid=502 comm="sensor_host" scontext=u:r:sensor_host:s0 tcontext=u:r:sh:s0 tclass=binder permissive=0
-allow sensor_host sh:binder { call };
-
-#avc:  denied  { get } for service=3901 pid=522 scontext=u:r:sensor_host:s0 tcontext=u:object_r:sa_param_watcher:s0 tclass=samgr_class permissive=1
-allow sensor_host sa_param_watcher:samgr_class { get };
-
-#avc:  denied  { call } for  pid=522 comm="IPC_1_621" scontext=u:r:sensor_host:s0 tcontext=u:r:param_watcher:s0 tclass=binder permissive=1
-#avc:  denied  { transfer } for  pid=522 comm="IPC_1_621" scontext=u:r:sensor_host:s0 tcontext=u:r:param_watcher:s0 tclass=binder permissive=1
-allow sensor_host param_watcher:binder { call transfer };
-
-#avc:  denied  { write } for  pid=522 comm="IPC_1_621" name="trace_marker" dev="tracefs" ino=17434 scontext=u:r:sensor_host:s0 tcontext=u:object_r:tracefs_trace_marker_file:s0 tclass=file permissive=1
-#avc:  denied  { open } for  pid=522 comm="IPC_1_621" path="/sys/kernel/debug/tracing/trace_marker" dev="tracefs" ino=17434 scontext=u:r:sensor_host:s0 tcontext=u:object_r:tracefs_trace_marker_file:s0 tclass=file permissive=1
-allow sensor_host tracefs_trace_marker_file:file { write open };
-
-#avc:  denied  { call } for  pid=258 comm="param_watcher" scontext=u:r:param_watcher:s0 tcontext=u:r:sensor_host:s0 tclass=binder permissive=1
-allow param_watcher sensor_host:binder { call };
-
-#avc:  denied  { search } for  pid=504 comm="IPC_1_628" name="/" dev="tracefs" ino=1 scontext=u:r:sensor_host:s0 tcontext=u:object_r:tracefs:s0 tclass=dir permissive=1
-allow sensor_host tracefs:dir { search };
 
 #avc: denied { get } for service=hdf_device_manager pid=379 scontext=u:r:partitionslot_host:s0 tcontext=u:object_r:hdf_device_manager:s0 tclass=hdf_devmgr_class permissive=1
 #avc: denied { add } for service=partition_slot_service pid=379 scontext=u:r:partitionslot_host:s0 tcontext=u:object_r:hdf_partition_slot_service:s0 tclass=hdf_devmgr_class permissive=1
 allow partitionslot_host hdf_device_manager:hdf_devmgr_class { get };
 allow partitionslot_host hdf_partition_slot_service:hdf_devmgr_class { add };
 allow partitionslot_host sa_device_service_manager:samgr_class { get };
-
-#avc:  denied  { search } for  pid=466 comm="IPC_1_527" name="/" dev="tracefs" ino=1 scontext=u:r:light_host:s0 tcontext=u:object_r:tracefs:s0 tclass=dir permissive=0
-allow light_host tracefs:dir { search };
-
-#avc:  denied  { write } for  pid=507 comm="IPC_1_587" name="trace_marker" dev="tracefs" ino=19169 scontext=u:r:light_host:s0 tcontext=u:object_r:tracefs_trace_marker_file:s0 tclass=file permissive=0
-#avc:  denied  { open } for  pid=530 comm="IPC_1_591" path="/sys/kernel/debug/tracing/trace_marker" dev="tracefs" ino=18461 scontext=u:r:light_host:s0 tcontext=u:object_r:tracefs_trace_marker_file:s0 tclass=file permissive=1
-allow light_host tracefs_trace_marker_file:file { write open };
-
-#avc:  denied  { call } for  pid=530 comm="IPC_1_591" scontext=u:r:light_host:s0 tcontext=u:r:param_watcher:s0 tclass=binder permissive=1
-#avc:  denied  { transfer } for  pid=530 comm="IPC_1_591" scontext=u:r:light_host:s0 tcontext=u:r:param_watcher:s0 tclass=binder permissive=1
-#avc:  denied  { call } for  pid=252 comm="IPC_3_1578" scontext=u:r:param_watcher:s0 tcontext=u:r:light_host:s0 tclass=binder permissive=1
-allow light_host param_watcher:binder { call transfer };
-allow param_watcher light_host:binder { call };
-
-#avc:  denied  { get } for service=3901 pid=523 scontext=u:r:light_host:s0 tcontext=u:object_r:sa_param_watcher:s0 tclass=samgr_class permissive=1
-allow light_host sa_param_watcher:samgr_class { get };
