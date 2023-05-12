@@ -30,7 +30,6 @@ allow softbus_server data_log:file { read write };
 allow softbus_server data_service_el1_file:dir { add_name search write };
 allow softbus_server data_service_el1_file:file { create read write open };
 allow softbus_server data_service_file:dir { search };
-allow softbus_server daudio:binder { call };
 allow softbus_server debug_param:file { map open read };
 allow softbus_server default_param:file { map open read };
 allow softbus_server dev_file:sock_file { write };

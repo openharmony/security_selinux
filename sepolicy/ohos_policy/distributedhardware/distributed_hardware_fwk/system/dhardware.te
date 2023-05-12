@@ -23,10 +23,6 @@ allow dhardware sa_dcamera_source_service:samgr_class { get };
 #avc:  denied  { get } for service=4804 pid=1966 scontext=u:r:dhardware:s0 tcontext=u:object_r:sa_dcamera_sink_service:s0 tclass=samgr_class permissive=1
 allow dhardware sa_dcamera_sink_service:samgr_class { get };
 
-allow dhardware sa_distributed_hardware_audio_source_service:samgr_class { get };
-
-allow dhardware sa_distributed_hardware_audio_sink_service:samgr_class { get };
-
 #avc:  denied  { get } for service=3901 pid=1881 scontext=u:r:dhardware:s0 tcontext=u:object_r:sa_param_watcher:s0 tclass=samgr_class permissive=1
 allow dhardware sa_param_watcher:samgr_class { get };
 
@@ -56,10 +52,6 @@ allow dhardware dcamera:binder { call };
 
 #avc:  denied  { transfer } for  pid=2315 comm="dhardware" scontext=u:r:dhardware:s0 tcontext=u:r:dcamera:s0 tclass=binder permissive=1
 allow dhardware dcamera:binder { transfer };
-
-allow dhardware daudio:binder { call transfer };
-
-allow dhardware audio_policy:binder { call transfer };
 
 #avc:  denied  { get } for service=3002 pid=2447 scontext=u:r:dhardware:s0 tcontext=u:object_r:sa_media_service:s0 tclass=samgr_class permissive=1
 allow dhardware sa_media_service:samgr_class { get };

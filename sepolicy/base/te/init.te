@@ -117,8 +117,6 @@ allow init data_vendor_ce:dir { getattr open read relabelto setattr };
 allow init data_vendor_de:dir { getattr open read relabelto setattr };
 allow init data_vendor:dir { add_name create getattr open read relabelto search setattr write };
 allow init d-bms:process { rlimitinh siginh sigkill transition };
-allow init daudio:process { transition rlimitinh siginh };
-allow init daudio_host:process { rlimitinh siginh sigkill transition };
 allow init dcamera_host:process { rlimitinh siginh sigkill transition };
 allow init dcamera:process { rlimitinh siginh transition };
 allow init debugfs:dir { mounton };
