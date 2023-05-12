@@ -347,12 +347,4 @@ allow updater dev_ptmx:chr_file { ioctl open };
 # avc: denied { ioctl } for pid=241 comm="updater" path="/dev/ptmx" dev="tmpfs" ino=245 ioctlcmd=0x5431 scontext=u:r:updater:s0 tcontext=u:object_r:dev_ptmx:s0 tclass=chr_file permissive=1
 allowxperm updater dev_ptmx:chr_file ioctl { 0x5431 0x5430 };
 
-# avc: denied { search } for pid=241 comm="updater" name="tmp" dev="mmcblk0p12" ino=100 scontext=u:r:updater:s0 tcontext=u:object_r:data_local_tmp:s0 tclass=dir permissive=1
-allow updater data_local_tmp:dir { search };
-
-# avc: denied { getattr } for pid=241 comm="updater" path="/data/local/tmp/hdc.log" dev="mmcblk0p12" ino=485 scontext=u:r:updater:s0 tcontext=u:object_r:data_local_tmp:s0 tclass=file permissive=1
-# avc: denied { open } for pid=241 comm="updater" path="/data/local/tmp/hdc.log" dev="mmcblk0p12" ino=485 scontext=u:r:updater:s0 tcontext=u:object_r:data_local_tmp:s0 tclass=file permissive=1
-# avc: denied { read append } for pid=241 comm="updater" name="hdc.log" dev="mmcblk0p12" ino=485 scontext=u:r:updater:s0 tcontext=u:object_r:data_local_tmp:s0 tclass=file permissive=1
-allow updater data_local_tmp:file { getattr open read append };
-
 ')
