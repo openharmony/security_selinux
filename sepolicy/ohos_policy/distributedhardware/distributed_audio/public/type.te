@@ -11,9 +11,10 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
+
+type daudio, sadomain, domain;
 type daudio_host, hdfdomain, domain;
+type sa_distributed_hardware_audio_source_service, sa_service_attr;
+type sa_distributed_hardware_audio_sink_service, sa_service_attr;
 type hdf_daudio_ext, hdf_service_attr;
 type hdf_daudio_primary, hdf_service_attr;
-
-daudio_ext_service                      u:object_r:hdf_daudio_ext:s0
-daudio_primary_service                  u:object_r:hdf_daudio_primary:s0
