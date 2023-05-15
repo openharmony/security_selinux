@@ -49,7 +49,6 @@ allow accountmgr inputmethod_service:binder { transfer };
 #avc:  denied  { read } for  pid=1607 comm="SaInit0" name="ime_cfg.json" dev="mmcblk0p12" ino=2292 scontext=u:r:inputmethod_service:s0 tcontext=u:object_r:data_service_el1_file:s0 tclass=file permissive=0
 #avc:  denied  { write } for  pid=634 comm="SaInit0" name="ime_cfg.json" dev="mmcblk0p12" ino=2310 scontext=u:r:inputmethod_service:s0 tcontext=u:object_r:data_service_el1_file:s0 tclass=file permissive=0
 #avc:  denied  { open } for  pid=621 comm="SaInit2" path="/data/service/el1/public/imf/ime_cfg/ime_cfg.json" dev="mmcblk0p12" ino=2310 scontext=u:r:inputmethod_service:s0 tcontext=u:object_r:data_service_el1_file:s0 tclass=file permissive=0
-
 allow inputmethod_service dev_console_file:chr_file { read write };
 allow inputmethod_service musl_param:file { read open map };
 allow inputmethod_service data_service_file:dir { search };
