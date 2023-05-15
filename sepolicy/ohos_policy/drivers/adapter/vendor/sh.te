@@ -31,10 +31,6 @@ debug_only(`
     allow sh hdf_codec_image_jpeg_service:hdf_devmgr_class { get };
     allow sh codec_host:binder { transfer };
     allow sh proc_boot_id:file { read open };
-    allow sh disp_gralloc_host:binder { call };
-    allow sh disp_gralloc_host:fd { use };
-    allow sh allocator_host:binder { call };
-    allow sh allocator_host:fd { use };
     allow sh hdf_audio_manager_service:binder { call };
     allow sh hdf_effect_model_service:binder { call };
     allow sh dev_ashmem_file:chr_file { open read write};
