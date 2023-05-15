@@ -30,13 +30,8 @@ allow download_server foundation:binder { call transfer };
 allow download_server sysfs_hctosys:file { open read };
 allow download_server sysfs_rtc:dir { open read };
 allow download_server sa_foundation_ans:samgr_class { get };
-allow system_core_hap sa_download_service:samgr_class { get };
 # avc:  denied  { read write } for  pid=2360 comm="sa_main" path="/dev/console" dev="tmpfs" ino=19 scontext=u:r:download_server:s0 tcontext=u:object_r:dev_console_file:s0 tclass=chr_file permissive=0
 allow download_server dev_console_file:chr_file { read write };
-# avc:  denied  { call } for  pid=2093 comm="1.ui" scontext=u:r:system_core_hap:s0 tcontext=u:r:download_server:s0 tclass=binder permissive=0
-allow system_core_hap download_server:binder { call transfer };
-# avc:  denied  { call } for  pid=2094 comm="1.ui" scontext=u:r:system_basic_hap:s0 tcontext=u:r:download_server:s0 tclass=binder permissive=0
-allow system_basic_hap download_server:binder { call transfer };
 #avc:  denied  { call } for  pid=2168 comm="download_server" scontext=u:r:download_server:s0 tcontext=u:r:system_core_hap:s0 tclass=binder permissive=0
 allow download_server system_core_hap:binder { call };
 #avc:  denied  { use } for  pid=2588 comm="download_server" scontext=u:r:download_server:s0 tcontext=u:r:system_core_hap:s0 tclass=fd permissive=0
@@ -45,15 +40,29 @@ allow download_server system_core_hap:fd { use };
 allow download_server system_basic_hap:binder { call };
 #avc:  denied  { use } for  pid=2568 comm="download_server" scontext=u:r:download_server:s0 tcontext=u:r:system_basic_hap:s0 tclass=fd permissive=0
 allow download_server system_basic_hap:fd { use };
-# avc:  denied  { get } for service=3706 pid=4299 scontext=u:r:system_basic_hap:s0 tcontext=u:object_r:sa_download_server:s0 tclass=samgr_class permissive=0
-allow system_basic_hap sa_download_service:samgr_class { get };
 #avc:  denied  { get } for service=501 pid=1640 scontext=u:r:download_server:s0 tcontext=u:object_r:sa_foundation_appms:s0 tclass=samgr_class permissive=0
 allow download_server sa_foundation_appms:samgr_class { get };
 #avc:  denied  { search } for  pid=1640 comm="SaInit0" name="/" dev="mmcblk0p12" ino=3 scontext=u:r:download_server:s0 tcontext=u:object_r:data_file:s0 tclass=dir permissive=0
 allow download_server data_file:dir { search };
 #avc:  denied  { open read map } for  pid=1640 comm="SaInit0" name="u:object_r:musl_param:s0" dev="tmpfs" ino=55 scontext=u:r:download_server:s0 tcontext=u:object_r:musl_param:s0 tclass=file permissive=0
 allow download_server musl_param:file { open read map };
-#avc:  denied  { call transfer } for  pid=1615 comm="IPC_8_1739" scontext=u:r:foundation:s0 tcontext=u:r:download_server:s0 tclass=binder permissive=0
-allow foundation download_server:binder { call transfer };
 #avc:  denied  { write } for  pid=1689 comm="SaInit0" name="dnsproxyd" dev="mmcblk0p12" ino=3397 scontext=u:r:download_server:s0 tcontext=u:object_r:dnsproxy_service:s0 tclass=sock_file permissive=0
 allow download_server dnsproxy_service:sock_file { write };
+#avc:  denied  { getattr } for  pid=1612 comm="sa_main" path="/dev" dev="tmpfs" ino=1 scontext=u:r:download_server:s0 tcontext=u:object_r:dev_file:s0 tclass=dir permissive=0
+allow download_server dev_file:dir { getattr };
+#avc:  denied  { search } for  pid=1612 comm="download_server" name="usr" dev="mmcblk0p7" ino=2983 scontext=u:r:download_server:s0 tcontext=u:object_r:system_usr_file:s0 tclass=dir permissive=0
+allow download_server system_usr_file:dir { search };
+#avc: denied  { getattr } for  pid=1587 comm="download_server" path="/system/usr/ohos_locale_config/supported_regions.xml" dev="mmcblk0p7" ino=2990 scontext=u:r:download_server:s0 tcontext=u:object_r:system_usr_file:s0 tclass=file permissive=0
+allow download_server system_usr_file:file { getattr open read map };
+#avc:  denied  { read } for  pid=1435 comm="download_server" name="online" dev="sysfs" ino=4917 scontext=u:r:download_server:s0 tcontext=u:object_r:sysfs_devices_system_cpu:s0 tclass=file permissive=0
+allow download_server sysfs_devices_system_cpu:file { getattr open read map };
+#avc:  denied  { getattr } for  pid=1439 comm="IPC_0_1440" path="/data/storage/el2/base/haps/entry/cache/cacert.pem" dev="mmcblk0p12" ino=1331 scontext=u:r:download_server:s0 tcontext=u:object_r:normal_hap_data_file:s0 tclass=file permissive=0
+allow download_server normal_hap_data_file:file { getattr };
+#avc:  denied  { search } for  pid=1424 comm="tokio-runtime-w" name="data" dev="mmcblk0p12" ino=89 scontext=u:r:download_server:s0 tcontext=u:object_r:data_data_file:s0 tclass=dir permissive=0
+allow download_server data_data_file:dir { search };
+#avc:  denied  { get } for service=180 pid=1535 scontext=u:r:download_server:s0 tcontext=u:object_r:sa_foundation_abilityms:s0 tclass=samgr_class permissive=0
+allow download_server sa_foundation_abilityms:samgr_class { get };
+#avc:  denied  { getattr } for  pid=1782 comm="IPC_2_1869" path="/data/storage/el2/base/haps/entry/cache/cacert.pem" dev="mmcblk0p12" ino=2874 scontext=u:r:download_server:s0 tcontext=u:object_r:system_basic_hap_data_file:s0 tclass=file permissive=0
+allow download_server system_basic_hap_data_file:file { getattr };
+#avc:  denied  { getattr } for  pid=1584 comm="IPC_3_1733" path="/data/storage/el2/base/haps/entry/cache/cacert.pem" dev="mmcblk0p12" ino=2862 scontext=u:r:download_server:s0 tcontext=u:object_r:system_core_hap_data_file:s0 tclass=file permissive=0
+allow download_server system_core_hap_data_file:file { getattr };
