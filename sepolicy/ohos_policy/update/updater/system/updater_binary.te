@@ -239,9 +239,6 @@ allow updater_binary tmpfs:dir { read write add_name };
 # avc:  denied  { read } for  pid=272 comm="updater_binary" name="u:object_r:debug_param:s0" dev="tmpfs" ino=38 scontext=u:r:updater_binary:s0 tcontext=u:object_r:debug_param:s0 tclass=file permissive=1
 allow updater_binary debug_param:file { map open read };
 
-# avc:  denied  { execute_no_trans } for  pid=272 comm="updater" path="/tmp/updater_binary" dev="tmpfs" ino=5 scontext=u:r:updater_binary:s0 tcontext=u:object_r:updater_binary_exec:s0 tclass=file permissive=1
-allow updater_binary updater_binary_exec:file { execute_no_trans };
-
 allow updater_binary data_file:file { setattr write create };
 
 ')
