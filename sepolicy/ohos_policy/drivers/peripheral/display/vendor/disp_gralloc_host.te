@@ -52,6 +52,8 @@ allow disp_gralloc_host system_bin_file:dir { search };
 allow disp_gralloc_host sys_usb_param:file { map open read };
 allow disp_gralloc_host vendor_etc_file:dir { search };
 allow disp_gralloc_host vendor_etc_file:file { getattr open read };
+allow disp_gralloc_host hdf_device_manager:hdf_devmgr_class { get };
+allow disp_gralloc_host hdf_hdi_display_gralloc_service:hdf_devmgr_class { add };
 allowxperm disp_gralloc_host dev_dri_file:chr_file ioctl { 0x641f 0x642d 0x64b2 0x64b4 };
 allowxperm disp_gralloc_host dev_hdf_kevent:chr_file ioctl { 0x6201 0x6202 0x6203 };
 
