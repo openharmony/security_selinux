@@ -45,7 +45,6 @@ allow distributedsche system_core_hap:binder { call transfer };
 allow distributedsche paramservice_socket:sock_file { write };
 allow distributedsche proc_cpuinfo_file:file { open read };
 allow distributedsche proc_file:file { open read };
-allow distributedsche sh:binder { call };
 allow distributedsche softbus_server:binder { call transfer };
 allow distributedsche softbus_server:fd { use };
 allow distributedsche softbus_server:tcp_socket { read setopt shutdown write };
@@ -54,8 +53,6 @@ allow accountmgr distributedsche:binder { transfer };
 allow init distributedsche:dir { search };
 allow init distributedsche:file { open read };
 allow init distributedsche:process { getattr };
-allow sh distributedsche:binder { call transfer };
-allow sh distributedsche:process { sigkill };
 allow softbus_server distributedsche:binder { call };
 allow distributedsche sa_foundation_devicemanager_service:samgr_class { get };
 allow distributedsche devinfo_private_param:file { map open read};
@@ -67,6 +64,9 @@ allow foundation musl_param:file { open };
 allow foundation sa_foundation_continuation_manager_service:samgr_class { add };
 allow hidumper_service sa_foundation_continuation_manager_service:samgr_class { get };
 debug_only(`
+    allow distributedsche sh:binder { call };
+    allow sh distributedsche:binder { call transfer };
+    allow sh distributedsche:process { sigkill };
     allow sh sa_foundation_continuation_manager_service:samgr_class { get };
 ')
 
