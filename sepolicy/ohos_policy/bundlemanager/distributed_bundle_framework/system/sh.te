@@ -55,5 +55,4 @@ debug_only(`
     allow sh watchdog_service:file { open read };
     allowxperm sh data_file:file ioctl { 0x5413 };
     allowxperm sh data_service_el1_file:file ioctl { 0x5413 };
-    allow watchdog_service dev_unix_socket:dir { search };
 ')
