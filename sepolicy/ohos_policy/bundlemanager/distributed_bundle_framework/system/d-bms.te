@@ -32,7 +32,7 @@ allow d-bms sa_foundation_cesfwk_service:samgr_class { get };
 allow d-bms sa_param_watcher:samgr_class { get };
 allow d-bms sa_softbus_service:samgr_class { get };
 allow d-bms softbus_server:binder { call transfer };
-allow d-bms sysfs_devices_system_cpu:file { read };
+allow d-bms sysfs_devices_system_cpu:file { read open };
 allow d-bms system_basic_hap:binder { call transfer };
 allow d-bms softbus_server:fd { use };
 allow d-bms softbus_server:tcp_socket { read write setopt shutdown };
