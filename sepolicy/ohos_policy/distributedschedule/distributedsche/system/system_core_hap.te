@@ -11,6 +11,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-allow init dev_hdf_misc_vibrator:chr_file { setattr };
-allow init vibrator_host:process { rlimitinh siginh transition };
-allow init dev_hdf_misc_vibrator:chr_file { setattr };
+allow system_core_hap distributedsche:binder { call transfer };
+allow system_core_hap distributedsche:fd { use };
+allow system_core_hap sa_distributeschedule:samgr_class { get };
+allow system_core_hap sa_softbus_service:samgr_class { get };
+allow system_core_hap softbus_server:tcp_socket { read setopt write };
+allow system_core_hap sa_foundation_continuation_manager_service:samgr_class { get };

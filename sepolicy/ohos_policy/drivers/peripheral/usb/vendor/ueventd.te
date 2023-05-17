@@ -11,6 +11,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-allow init dev_hdf_misc_vibrator:chr_file { setattr };
-allow init vibrator_host:process { rlimitinh siginh transition };
-allow init dev_hdf_misc_vibrator:chr_file { setattr };
+allow ueventd dev_console_file:chr_file { getattr read write setattr };
+allow ueventd dev_console_file:dir { search };
+allow ueventd dev_functionfs_file:chr_file { relabelto create unlink };
+allow ueventd dev_functionfs_file:dir { relabelto getattr search write add_name remove_name };
+allow ueventd dev_usbfn_file:chr_file { getattr relabelto setattr unlink };

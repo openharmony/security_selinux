@@ -11,6 +11,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-allow init dev_hdf_misc_vibrator:chr_file { setattr };
-allow init vibrator_host:process { rlimitinh siginh transition };
-allow init dev_hdf_misc_vibrator:chr_file { setattr };
+debug_only(`
+    allow sh distributedsche:binder { call transfer };
+    allow sh distributedsche:process { sigkill };
+    allow sh sa_foundation_continuation_manager_service:samgr_class { get };
+')
