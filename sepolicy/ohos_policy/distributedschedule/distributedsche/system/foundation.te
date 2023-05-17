@@ -15,7 +15,6 @@ allow foundation dev_console_file:chr_file { read write };
 allow foundation distributedsche_param:parameter_service { set };
 allow foundation musl_param:file { open };
 allow foundation sa_foundation_continuation_manager_service:samgr_class { add };
-allow hidumper_service sa_foundation_continuation_manager_service:samgr_class { get };
 
 #avc:  denied  { read open } for  pid=551 comm="foundation" scontext=u:r:foundation:s0 tcontext=u:r:distributedsche:s0 tclass=file permissive=1
 allow foundation distributedsche:file { read open };
