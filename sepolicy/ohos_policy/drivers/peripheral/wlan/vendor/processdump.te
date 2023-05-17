@@ -11,5 +11,5 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-allow init wifi_host:process { rlimitinh siginh transition };
-allow init dev_hdfwifi:chr_file { setattr };
+#avc:  denied  { read } for  pid=1836 comm="processdump" name="u:object_r:accessibility_param:s0" dev="tmpfs" ino=53 scontext=u:r:processdump:s0 tcontext=u:object_r:accessibility_param:s0 tclass=file permissive=0
+allow processdump accessibility_param:file { read };

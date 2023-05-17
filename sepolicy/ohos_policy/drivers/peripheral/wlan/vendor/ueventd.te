@@ -11,5 +11,5 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-allow init wifi_host:process { rlimitinh siginh transition };
-allow init dev_hdfwifi:chr_file { setattr };
+#avc:  denied  { relabelto } for  pid=222 comm="ueventd" name="hdfwifi" dev="tmpfs" ino=192 scontext=u:r:ueventd:s0 tcontext=u:object_r:dev_hdfwifi:s0 tclass=chr_file permissive=0
+allow ueventd dev_hdfwifi:chr_file { relabelto };
