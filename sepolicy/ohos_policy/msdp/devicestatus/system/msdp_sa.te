@@ -191,3 +191,4 @@ allow msdp_sa system_fonts_file:file { getattr map open read };
 #avc:  denied  { read } for  pid=450 comm="device_status_s" name="fonts" dev="mmcblk0p7" ino=1671 scontext=u:r:msdp_sa:s0 tcontext=u:object_r:system_fonts_file:s0 tclass=dir permissive=0
 #avc:  denied  { search } for  pid=424 comm="device_status_s" name="fonts" dev="mmcblk0p7" ino=1671 scontext=u:r:msdp_sa:s0 tcontext=u:object_r:system_fonts_file:s0 tclass=dir permissive=0
 allow msdp_sa system_fonts_file:dir { open read search };
+
