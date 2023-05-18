@@ -11,12 +11,5 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-#avc:  denied  { use } for  pid=3255 comm="msdp" path="socket:[49878]" dev="sockfs" ino=49878 scontext=u:r:debug_hap:s0 tcontext=u:r:msdp_sa:s0 tclass=fd permissive=1
-debug_only(`
-allow debug_hap msdp_sa:fd { use };
-')
-
-#avc:  denied  { read write } for  pid=3255 comm="msdp" path="socket:[49878]" dev="sockfs" ino=49878 scontext=u:r:debug_hap:s0 tcontext=u:r:msdp_sa:s0 tclass=unix_stream_socket permissive=1
-debug_only(`
-allow debug_hap msdp_sa:unix_stream_socket { read write };
-')
+#acv: denied  { transfer } for pid=1176 comm="distributeddata" scontext=u:r:distributeddata:s0 tcontext+u:r:msdp_sa:s0 tclass=binder permissive=1
+allow distributeddata msdp_sa:binder { transfer };
