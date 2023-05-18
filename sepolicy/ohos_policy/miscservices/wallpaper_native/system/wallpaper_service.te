@@ -38,6 +38,7 @@ allow wallpaper_service musl_param:file { read open map };
 allow wallpaper_service dev_file:dir { getattr };
 allow wallpaper_service sysfs_devices_system_cpu:file { getattr open read };
 allow wallpaper_service sa_foundation_wms:samgr_class { get };
+allow wallpaper_service dev_ashmem_file:chr_file { open };
 debug_only(`
     allow wallpaper_service sh:fd { use };
     allow wallpaper_service sh:fifo_file { read };
