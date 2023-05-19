@@ -53,7 +53,7 @@ allow system_core_hap ffrt_param:file { read open map };
 allow foundation ffrt_param:file { read open map };
 allow foundation sa_concurrent_task_service:samgr_class { get };
 #sh
-debug_only{'
+debug_only{`
     allow sh concurrent_task_service:file { read open };
     allow sh concurrent_task_service:dir { getattr search };
     allow sh concurrent_task_service:binder { call };
