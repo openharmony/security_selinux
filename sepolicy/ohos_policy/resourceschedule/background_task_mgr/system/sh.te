@@ -11,7 +11,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-debug_only{`
+debug_only(`
     allow sh bgtaskmgr_service:dir { getattr search };
     allow sh bgtaskmgr_service:file { open read };
     allow sh bgtaskmgr_service:process { sigkill };
@@ -23,4 +23,4 @@ debug_only{`
     allow sh work_scheduler_service:dir { getattr search };
     allow sh work_scheduler_service:file { open read };
     allow sh work_scheduler_service:process { sigkill };
-'}
+')
