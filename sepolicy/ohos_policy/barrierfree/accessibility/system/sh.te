@@ -13,10 +13,6 @@
 
 debug_only(`
     allow sh accessibility:process { signal };
-')
-debug_only(`
     allow sh accessibility:dir { getattr search };
-')
-debug_only(`
     allow sh accessibility:file { open read };
 ')
