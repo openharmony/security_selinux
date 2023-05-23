@@ -44,7 +44,12 @@
 using namespace Selinux;
 
 namespace {
+#ifdef SELINUX_TEST
+static const std::string SEHAP_CONTEXTS_FILE = "/data/test/sehap_contexts";
+#else
 static const std::string SEHAP_CONTEXTS_FILE = "/system/etc/selinux/targeted/contexts/sehap_contexts";
+#endif // STARTUP_INIT_TEST
+
 static const std::string APL_PREFIX = "apl=";
 static const std::string NAME_PREFIX = "name=";
 static const std::string DOMAIN_PREFIX = "domain=";

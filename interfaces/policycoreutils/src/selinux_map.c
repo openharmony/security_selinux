@@ -40,11 +40,6 @@ static int GroupNodeKeyCompare(const HashNode *node1, const char *key)
     return strncmp(groupNode1->name, key, groupNode1->nameLen);
 }
 
-static int GroupNodeGetKeyHashCode(const char *key, uint32_t len)
-{
-    return GenerateHashCode(key, len);
-}
-
 static int GroupNodeGetNodeHashCode(const HashNode *node)
 {
     ParamHashNode *groupNode = HASHMAP_ENTRY(node, ParamHashNode, hashNode);
@@ -114,32 +109,6 @@ int32_t HashMapAdd(HashTab *handle, HashNode *node)
     return 0;
 }
 
-void HashMapRemove(HashTab *handle, const char *key)
-{
-    if (handle == NULL || key == NULL) {
-        return;
-    }
-    int hashCode = GroupNodeGetKeyHashCode(key, strlen(key));
-    hashCode = (hashCode < 0) ? -hashCode : hashCode;
-    hashCode = hashCode % MAX_BUCKET;
-
-    HashNode *node = handle->buckets[hashCode];
-    HashNode *preNode = node;
-    while (node != NULL) {
-        int ret = GroupNodeKeyCompare(node, key);
-        if (ret == 0) {
-            if (node == handle->buckets[hashCode]) {
-                handle->buckets[hashCode] = node->next;
-            } else {
-                preNode->next = node->next;
-            }
-            return;
-        }
-        preNode = node;
-        node = node->next;
-    }
-}
-
 HashNode *HashMapGet(HashTab *handle, const char *key, uint32_t len)
 {
     int hashCode = GenerateHashCode(key, len);
@@ -171,12 +140,4 @@ void HashMapDestroy(HashTab *handle)
         HashListFree(handle->buckets[i]);
     }
     free(handle);
-}
-
-HashNode *HashMapFind(HashTab *handle, int hashCode, const char *key)
-{
-    if (handle == NULL || key == NULL) {
-        return NULL;
-    }
-    return GetHashNodeByKey(handle->buckets[hashCode], key);
 }
