@@ -75,6 +75,10 @@ allow memmgrservice vendor_etc_file:file { getattr map open read };
 allow memmgrservice chip_prod_file:dir { search };
 allow memmgrservice chip_prod_file:file { getattr map open read };
 
+# sys
+allow memmgrservice sys_prod_file:dir { search };
+allow memmgrservice sys_prod_file:file { getattr map open read };
+
 # host
 allow memmgrservice user_auth_host:file { getattr };
 allow memmgrservice pin_auth_host:file { getattr };
