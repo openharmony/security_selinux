@@ -14,6 +14,7 @@
  */
 
 #include "unit_test.h"
+#include <string>
 #include <thread>
 #include <selinux/selinux.h>
 #include "selinux_error.h"
@@ -25,14 +26,14 @@ using namespace Selinux;
 const static int SLEEP_SECOND = 2;
 const static std::string BASE_PATH = "/data/app/el1/0/base/";
 const static std::string ACCOUNT_PATH = "/data/accounts/account_0/appdata/";
-const static std::string TEST_PATH = BASE_PATH + "com.ohos.selftest/";
+const static std::string TEST_HAP_PATH = BASE_PATH + "com.ohos.selftest/";
 const static std::string TEST_ACCOUNT_PATH = ACCOUNT_PATH + "com.ohos.selftest/";
 const static std::string TEST_ACCOUNT_SUB_PATH_1_FILE_1 = TEST_ACCOUNT_PATH + "file1.txt";
 
-const static std::string TEST_SUB_PATH_1 = TEST_PATH + "subpath1/";
-const static std::string TEST_SUB_PATH_2 = TEST_PATH + "subpath2/";
-const static std::string TEST_SUB_PATH_3 = TEST_PATH + "subpath3/";
-const static std::string TEST_SUB_PATH_4 = TEST_PATH + "subpath4/";
+const static std::string TEST_SUB_PATH_1 = TEST_HAP_PATH + "subpath1/";
+const static std::string TEST_SUB_PATH_2 = TEST_HAP_PATH + "subpath2/";
+const static std::string TEST_SUB_PATH_3 = TEST_HAP_PATH + "subpath3/";
+const static std::string TEST_SUB_PATH_4 = TEST_HAP_PATH + "subpath4/";
 
 const static std::string TEST_SUB_PATH_1_FILE_1 = TEST_SUB_PATH_1 + "file1.txt";
 const static std::string TEST_SUB_PATH_1_FILE_2 = TEST_SUB_PATH_1 + "file2.txt";
@@ -51,123 +52,139 @@ const static std::string EMPTY_STRING = "";
 const static std::string SYSTEM_CORE_APL = "system_core";
 const static std::string NORMAL_APL = "normal";
 const static std::string INVALID_APL = "invalid_apl";
-const static std::string TEST_BUNDLE_NAME_1 = "com.hap.selftest";
-const static std::string TEST_BUNDLE_NAME_2 = "com.ohos.test";
-const static std::string DEST_LABEL = "u:object_r:selftest_hap_data_file:s0";
-const static std::string DEST_DOMAIN = "u:r:selftest:s0";
-const static std::string DEST_NORMAL_DOMAIN = "u:r:normal_hap:s0";
 
-const static std::string SEHAP_CONTEXTS_FILE = "/system/etc/selinux/targeted/contexts/sehap_contexts";
+const static std::string TEST_HAP_BUNDLE_NAME = "com.hap.selftest";
+const static std::string TEST_HAP_BUNDLE_NAME_WITH_NO_CONTEXTS = "com.ohos.test";
+const static std::string TEST_HAP_BUNDLE_NAME_FOR_INVALID_CONTEXTS = "com.hap.selftest_invalid";
 
-HapFileInfo g_hapFileInfo1 = {
-    .pathNameOrig = {TEST_PATH},
-    .apl = "",
-    .packageName = TEST_BUNDLE_NAME_1,
-    .flags = 0,
-    .hapFlags = 1,
-};
+const static std::string TEST_HAP_DATA_FILE_LABEL = "u:object_r:selftest_hap_data_file:s0";
 
-HapFileInfo g_hapFileInfo2 = {
-    .pathNameOrig = {},
-    .apl = SYSTEM_CORE_APL,
-    .packageName = TEST_BUNDLE_NAME_1,
-    .flags = 0,
-    .hapFlags = 1,
-};
+const static std::string TEST_HAP_DOMAIN = "u:r:selftest:s0";
 
-HapFileInfo g_hapFileInfo3 = {
-    .pathNameOrig = {TEST_PATH},
-    .apl = INVALID_APL,
-    .packageName = TEST_BUNDLE_NAME_1,
-    .flags = 0,
-    .hapFlags = 1,
-};
+const static std::string SEHAP_CONTEXTS_FILE = "/data/test/sehap_contexts";
 
-HapFileInfo g_hapFileInfo4 = {
+HapFileInfo g_hapFileInfoWithoutFlags = {
     .pathNameOrig = {TEST_SUB_PATH_1},
     .apl = SYSTEM_CORE_APL,
-    .packageName = TEST_BUNDLE_NAME_1,
+    .packageName = TEST_HAP_BUNDLE_NAME,
     .flags = 0,
     .hapFlags = 1,
 };
 
-HapFileInfo g_hapFileInfo5 = {
-    .pathNameOrig = {TEST_PATH},
+HapFileInfo g_hapFileInfoWithFlags = {
+    .pathNameOrig = {TEST_HAP_PATH},
     .apl = SYSTEM_CORE_APL,
-    .packageName = TEST_BUNDLE_NAME_1,
+    .packageName = TEST_HAP_BUNDLE_NAME,
     .flags = 1,
     .hapFlags = 1,
 };
 
-HapFileInfo g_hapFileInfo6 = {
-    .pathNameOrig = {TEST_PATH},
-    .apl = SYSTEM_CORE_APL,
-    .packageName = TEST_BUNDLE_NAME_2,
-    .flags = 0,
-    .hapFlags = 1,
-};
-
-HapFileInfo g_hapFileInfo7 = {
-    .pathNameOrig = {TEST_SUB_PATH_1},
-    .apl = SYSTEM_CORE_APL,
-    .packageName = TEST_BUNDLE_NAME_1,
-    .flags = 0,
-    .hapFlags = 1,
-};
-
-HapFileInfo g_hapFileInfo8 = {
-    .pathNameOrig = {TEST_SUB_PATH_1},
-    .apl = SYSTEM_CORE_APL,
-    .packageName = TEST_BUNDLE_NAME_1,
-    .flags = 0,
-    .hapFlags = 0,
-};
-
-HapDomainInfo g_hapDomainInfo1{
+HapFileInfo g_hapFileInfoWithAplEmpty = {
+    .pathNameOrig = {TEST_HAP_PATH},
     .apl = "",
-    .packageName = TEST_BUNDLE_NAME_1,
+    .packageName = TEST_HAP_BUNDLE_NAME,
+    .flags = 0,
     .hapFlags = 1,
 };
 
-HapDomainInfo g_hapDomainInfo2{
-    .apl = INVALID_APL,
-    .packageName = TEST_BUNDLE_NAME_1,
-    .hapFlags = 1,
-};
-
-HapDomainInfo g_hapDomainInfo3{
+HapFileInfo g_hapFileInfoWithPathEmpty = {
+    .pathNameOrig = {},
     .apl = SYSTEM_CORE_APL,
-    .packageName = TEST_BUNDLE_NAME_1,
+    .packageName = TEST_HAP_BUNDLE_NAME,
+    .flags = 0,
     .hapFlags = 1,
 };
 
-HapDomainInfo g_hapDomainInfo4{
-    .apl = NORMAL_APL,
-    .packageName = TEST_BUNDLE_NAME_1,
+HapFileInfo g_hapFileInfoWithAplInvalid = {
+    .pathNameOrig = {TEST_HAP_PATH},
+    .apl = INVALID_APL,
+    .packageName = TEST_HAP_BUNDLE_NAME,
+    .flags = 0,
+    .hapFlags = 1,
+};
+
+HapFileInfo g_hapFileInfoWithCannotFindContexts = {
+    .pathNameOrig = {TEST_HAP_PATH},
+    .apl = SYSTEM_CORE_APL,
+    .packageName = TEST_HAP_BUNDLE_NAME_WITH_NO_CONTEXTS,
+    .flags = 0,
+    .hapFlags = 1,
+};
+
+HapFileInfo g_hapFileInfoForRepeatLabel = {
+    .pathNameOrig = {TEST_SUB_PATH_1},
+    .apl = SYSTEM_CORE_APL,
+    .packageName = TEST_HAP_BUNDLE_NAME,
+    .flags = 0,
+    .hapFlags = 1,
+};
+
+HapFileInfo g_hapFileInfoWithPreinstallHap = {
+    .pathNameOrig = {TEST_SUB_PATH_1},
+    .apl = SYSTEM_CORE_APL,
+    .packageName = TEST_HAP_BUNDLE_NAME,
+    .flags = 0,
     .hapFlags = 0,
 };
 
-HapDomainInfo g_hapDomainInfo5{
+HapFileInfo g_hapFileInfoWithInvalidPath = {
+    .pathNameOrig = {TEST_SUB_PATH_1, INVALID_PATH},
+    .apl = SYSTEM_CORE_APL,
+    .packageName = TEST_HAP_BUNDLE_NAME,
+    .flags = 0,
+    .hapFlags = 1,
+};
+
+HapFileInfo g_hapFileInfoForInvalidContexts = {
+    .pathNameOrig = {TEST_HAP_PATH},
     .apl = NORMAL_APL,
-    .packageName = TEST_BUNDLE_NAME_1,
+    .packageName = TEST_HAP_BUNDLE_NAME_FOR_INVALID_CONTEXTS,
+    .flags = 0,
+    .hapFlags = 1,
+};
+
+HapDomainInfo g_hapDomainInfoWithAplEmpty{
+    .apl = "",
+    .packageName = TEST_HAP_BUNDLE_NAME,
+    .hapFlags = 1,
+};
+
+HapDomainInfo g_hapDomainInfoWithInvalidApl{
+    .apl = INVALID_APL,
+    .packageName = TEST_HAP_BUNDLE_NAME,
+    .hapFlags = 1,
+};
+
+HapDomainInfo g_hapDomainInfo{
+    .apl = SYSTEM_CORE_APL,
+    .packageName = TEST_HAP_BUNDLE_NAME,
+    .hapFlags = 1,
+};
+
+HapDomainInfo g_hapDomainInfoForInvalidContexts{
+    .apl = NORMAL_APL,
+    .packageName = TEST_HAP_BUNDLE_NAME_FOR_INVALID_CONTEXTS,
     .hapFlags = 1,
 };
 
 static void GenerateTestFile()
 {
-    RunCommand("mount -o rw,remount /");
-    ASSERT_EQ(true, CopyFile(SEHAP_CONTEXTS_FILE, SEHAP_CONTEXTS_FILE + "_bk"));
     std::vector<std::string> sehapInfo = {
+        "apl=system_core domain=system_core_hap type=system_core_hap_data_file",
+        "apl=system_basic domain=system_basic_hap type=system_basic_hap_data_file",
+        "apl=normal domain=normal_hap type=normal_hap_data_file",
+        "apl=normal debuggable=true domain=debug_hap type=debug_hap_data_file",
         "apl=system_core name=com.ohos.test domain= type=",
         "apl=system_core domain=selftest type=selftest_hap_data_file",
         "apl=system_core name=com.hap.selftest domain=selftest type=selftest_hap_data_file",
-        "apl=normal name=com.hap.selftest domain=selftest type=normal_hap_data_file"};
+        "apl=normal name=com.hap.selftest domain=selftest type=normal_hap_data_file",
+        "apl=normal name=com.hap.selftest_invalid domain=selftest_invalid type=selftest_invalid_hap_data_file"};
     ASSERT_EQ(true, WriteFile(SEHAP_CONTEXTS_FILE, sehapInfo));
 }
 
 static void RemoveTestFile()
 {
-    ASSERT_EQ(0, RenameFile(SEHAP_CONTEXTS_FILE + "_bk", SEHAP_CONTEXTS_FILE));
+    unlink(SEHAP_CONTEXTS_FILE.c_str());
 }
 
 void SelinuxUnitTest::SetUpTestCase()
@@ -195,18 +212,15 @@ void SelinuxUnitTest::CreateDataFile() const {}
  */
 HWTEST_F(SelinuxUnitTest, HapFileRestorecon001, TestSize.Level1)
 {
-    ASSERT_EQ(true, CreateDirectory(TEST_PATH));
+    ASSERT_EQ(true, CreateDirectory(TEST_HAP_PATH));
 
-    int ret = test.HapFileRestorecon(g_hapFileInfo1);
-    EXPECT_EQ(-SELINUX_ARG_INVALID, ret);
+    EXPECT_EQ(-SELINUX_ARG_INVALID, test.HapFileRestorecon(g_hapFileInfoWithAplEmpty));
 
-    ret = test.HapFileRestorecon(g_hapFileInfo2);
-    EXPECT_EQ(-SELINUX_ARG_INVALID, ret);
+    EXPECT_EQ(-SELINUX_ARG_INVALID, test.HapFileRestorecon(g_hapFileInfoWithPathEmpty));
 
-    ret = test.HapFileRestorecon(g_hapFileInfo3);
-    EXPECT_EQ(-SELINUX_ARG_INVALID, ret);
+    EXPECT_EQ(-SELINUX_ARG_INVALID, test.HapFileRestorecon(g_hapFileInfoWithAplInvalid));
 
-    ASSERT_EQ(true, RemoveDirectory(TEST_PATH));
+    ASSERT_EQ(true, RemoveDirectory(TEST_HAP_PATH));
 }
 
 /**
@@ -222,23 +236,21 @@ HWTEST_F(SelinuxUnitTest, HapFileRestorecon002, TestSize.Level1)
     char *secontextOld = nullptr;
     getfilecon(TEST_SUB_PATH_1_FILE_1.c_str(), &secontextOld);
 
-    int ret = test.HapFileRestorecon(g_hapFileInfo4);
+    int ret = test.HapFileRestorecon(g_hapFileInfoWithoutFlags);
     ASSERT_EQ(SELINUX_SUCC, ret);
 
     char *secontextNew = nullptr;
     getfilecon(TEST_SUB_PATH_1.c_str(), &secontextNew);
-    ret = strcmp(DEST_LABEL.c_str(), secontextNew);
-    EXPECT_EQ(SELINUX_SUCC, ret);
+    EXPECT_STREQ(TEST_HAP_DATA_FILE_LABEL.c_str(), secontextNew);
     freecon(secontextNew);
     secontextNew = nullptr;
 
     getfilecon(TEST_SUB_PATH_1_FILE_1.c_str(), &secontextNew);
-    ret = strcmp(secontextOld, secontextNew);
-    EXPECT_EQ(SELINUX_SUCC, ret);
+    EXPECT_STREQ(secontextOld, secontextNew);
     freecon(secontextNew);
     secontextNew = nullptr;
 
-    ASSERT_EQ(true, RemoveDirectory(TEST_PATH));
+    ASSERT_EQ(true, RemoveDirectory(TEST_HAP_PATH));
 }
 
 /**
@@ -254,47 +266,41 @@ HWTEST_F(SelinuxUnitTest, HapFileRestorecon003, TestSize.Level1)
     ASSERT_EQ(true, CreateFile(TEST_SUB_PATH_2_FILE_1));
     ASSERT_EQ(true, CreateFile(TEST_SUB_PATH_2_FILE_2));
 
-    int ret = test.HapFileRestorecon(g_hapFileInfo5);
+    int ret = test.HapFileRestorecon(g_hapFileInfoWithFlags);
     ASSERT_EQ(SELINUX_SUCC, ret);
 
     char *secontext = nullptr;
     getfilecon(TEST_SUB_PATH_1.c_str(), &secontext);
-    ret = strcmp(DEST_LABEL.c_str(), secontext);
-    EXPECT_EQ(SELINUX_SUCC, ret);
+    EXPECT_STREQ(TEST_HAP_DATA_FILE_LABEL.c_str(), secontext);
     freecon(secontext);
     secontext = nullptr;
 
     getfilecon(TEST_SUB_PATH_2.c_str(), &secontext);
-    ret = strcmp(DEST_LABEL.c_str(), secontext);
-    EXPECT_EQ(SELINUX_SUCC, ret);
+    EXPECT_STREQ(TEST_HAP_DATA_FILE_LABEL.c_str(), secontext);
     freecon(secontext);
     secontext = nullptr;
 
     getfilecon(TEST_SUB_PATH_1_FILE_1.c_str(), &secontext);
-    ret = strcmp(DEST_LABEL.c_str(), secontext);
-    EXPECT_EQ(SELINUX_SUCC, ret);
+    EXPECT_STREQ(TEST_HAP_DATA_FILE_LABEL.c_str(), secontext);
     freecon(secontext);
     secontext = nullptr;
 
     getfilecon(TEST_SUB_PATH_1_FILE_2.c_str(), &secontext);
-    ret = strcmp(DEST_LABEL.c_str(), secontext);
-    EXPECT_EQ(SELINUX_SUCC, ret);
+    EXPECT_STREQ(TEST_HAP_DATA_FILE_LABEL.c_str(), secontext);
     freecon(secontext);
     secontext = nullptr;
 
     getfilecon(TEST_SUB_PATH_2_FILE_1.c_str(), &secontext);
-    ret = strcmp(DEST_LABEL.c_str(), secontext);
-    EXPECT_EQ(SELINUX_SUCC, ret);
+    EXPECT_STREQ(TEST_HAP_DATA_FILE_LABEL.c_str(), secontext);
     freecon(secontext);
     secontext = nullptr;
 
     getfilecon(TEST_SUB_PATH_2_FILE_2.c_str(), &secontext);
-    ret = strcmp(DEST_LABEL.c_str(), secontext);
-    EXPECT_EQ(SELINUX_SUCC, ret);
+    EXPECT_STREQ(TEST_HAP_DATA_FILE_LABEL.c_str(), secontext);
     freecon(secontext);
     secontext = nullptr;
 
-    ASSERT_EQ(true, RemoveDirectory(TEST_PATH));
+    ASSERT_EQ(true, RemoveDirectory(TEST_HAP_PATH));
 }
 
 /**
@@ -305,23 +311,22 @@ HWTEST_F(SelinuxUnitTest, HapFileRestorecon003, TestSize.Level1)
  */
 HWTEST_F(SelinuxUnitTest, HapFileRestorecon004, TestSize.Level1)
 {
-    ASSERT_EQ(true, CreateDirectory(TEST_PATH));
+    ASSERT_EQ(true, CreateDirectory(TEST_HAP_PATH));
 
-    int ret = test.HapFileRestorecon(TEST_PATH, g_hapFileInfo1);
-    EXPECT_EQ(-SELINUX_ARG_INVALID, ret);
+    EXPECT_EQ(-SELINUX_ARG_INVALID, test.HapFileRestorecon(TEST_HAP_PATH, g_hapFileInfoWithAplEmpty));
 
-    ret = test.HapFileRestorecon(EMPTY_STRING, g_hapFileInfo2);
-    EXPECT_EQ(-SELINUX_ARG_INVALID, ret);
+    EXPECT_EQ(-SELINUX_ARG_INVALID, test.HapFileRestorecon(EMPTY_STRING, g_hapFileInfoWithPathEmpty));
 
-    ret = test.HapFileRestorecon(TEST_PATH, g_hapFileInfo3);
-    EXPECT_EQ(-SELINUX_ARG_INVALID, ret);
+    EXPECT_EQ(-SELINUX_ARG_INVALID, test.HapFileRestorecon(TEST_HAP_PATH, g_hapFileInfoWithAplInvalid));
 
-    ASSERT_EQ(true, RemoveDirectory(TEST_PATH));
+    EXPECT_EQ(-SELINUX_CHECK_CONTEXT_ERROR, test.HapFileRestorecon(TEST_HAP_PATH, g_hapFileInfoForInvalidContexts));
+
+    ASSERT_EQ(true, RemoveDirectory(TEST_HAP_PATH));
 }
 
 /**
  * @tc.name: HapFileRestorecon005
- * @tc.desc: test HapFileRestorecon with single path selinux not enabled.
+ * @tc.desc: test HapFileRestorecon with no recurce.
  * @tc.type: FUNC
  * @tc.require: AR000GJSDQ
  */
@@ -329,13 +334,9 @@ HWTEST_F(SelinuxUnitTest, HapFileRestorecon005, TestSize.Level1)
 {
     ASSERT_EQ(true, CreateFile(TEST_SUB_PATH_1_FILE_1));
 
-    RunCommand("setenforce 0");
-    int ret = test.HapFileRestorecon(TEST_PATH, g_hapFileInfo4);
-    EXPECT_EQ(SELINUX_SUCC, ret);
+    EXPECT_EQ(SELINUX_SUCC, test.HapFileRestorecon(TEST_HAP_PATH, g_hapFileInfoWithoutFlags));
 
-    RunCommand("setenforce 1");
-
-    ASSERT_EQ(true, RemoveDirectory(TEST_PATH));
+    ASSERT_EQ(true, RemoveDirectory(TEST_HAP_PATH));
 }
 
 /**
@@ -348,10 +349,9 @@ HWTEST_F(SelinuxUnitTest, HapFileRestorecon006, TestSize.Level1)
 {
     ASSERT_EQ(true, CreateFile(TEST_SUB_PATH_1_FILE_1));
 
-    int ret = test.HapFileRestorecon(INVALID_PATH, g_hapFileInfo4);
-    EXPECT_EQ(-SELINUX_PATH_INVAILD, ret);
+    EXPECT_EQ(-SELINUX_PATH_INVAILD, test.HapFileRestorecon(INVALID_PATH, g_hapFileInfoWithoutFlags));
 
-    ASSERT_EQ(true, RemoveDirectory(TEST_PATH));
+    ASSERT_EQ(true, RemoveDirectory(TEST_HAP_PATH));
 }
 
 /**
@@ -364,8 +364,7 @@ HWTEST_F(SelinuxUnitTest, HapFileRestorecon007, TestSize.Level1)
 {
     ASSERT_EQ(true, CreateFile(TEST_ACCOUNT_SUB_PATH_1_FILE_1));
 
-    int ret = test.HapFileRestorecon(TEST_ACCOUNT_SUB_PATH_1_FILE_1, g_hapFileInfo4);
-    EXPECT_EQ(SELINUX_SUCC, ret);
+    EXPECT_EQ(SELINUX_SUCC, test.HapFileRestorecon(TEST_ACCOUNT_SUB_PATH_1_FILE_1, g_hapFileInfoWithoutFlags));
 
     ASSERT_EQ(true, RemoveDirectory(ACCOUNT_PATH));
 }
@@ -378,11 +377,11 @@ HWTEST_F(SelinuxUnitTest, HapFileRestorecon007, TestSize.Level1)
  */
 HWTEST_F(SelinuxUnitTest, HapFileRestorecon008, TestSize.Level1)
 {
-    ASSERT_EQ(true, CreateDirectory(TEST_PATH));
-    int ret = test.HapFileRestorecon(TEST_PATH, g_hapFileInfo6);
-    EXPECT_EQ(-SELINUX_KEY_NOT_FOUND, ret);
+    ASSERT_EQ(true, CreateDirectory(TEST_HAP_PATH));
 
-    ASSERT_EQ(true, RemoveDirectory(TEST_PATH));
+    EXPECT_EQ(-SELINUX_KEY_NOT_FOUND, test.HapFileRestorecon(TEST_HAP_PATH, g_hapFileInfoWithCannotFindContexts));
+
+    ASSERT_EQ(true, RemoveDirectory(TEST_HAP_PATH));
 }
 
 /**
@@ -413,60 +412,52 @@ HWTEST_F(SelinuxUnitTest, HapFileRestorecon009, TestSize.Level1)
     HapFileInfo hapFileInfo = {
         .pathNameOrig = tmp,
         .apl = SYSTEM_CORE_APL,
-        .packageName = TEST_BUNDLE_NAME_1,
+        .packageName = TEST_HAP_BUNDLE_NAME,
         .flags = 0,
         .hapFlags = 1,
     };
     int ret = test.HapFileRestorecon(hapFileInfo);
     ASSERT_EQ(SELINUX_SUCC, ret);
 
-
     char *secontext = nullptr;
     getfilecon(TEST_SUB_PATH_1.c_str(), &secontext);
-    ret = strcmp(DEST_LABEL.c_str(), secontext);
-    ASSERT_EQ(SELINUX_SUCC, ret);
+    EXPECT_STREQ(TEST_HAP_DATA_FILE_LABEL.c_str(), secontext);
     freecon(secontext);
     secontext = nullptr;
 
     getfilecon(TEST_SUB_PATH_2.c_str(), &secontext);
-    ret = strcmp(DEST_LABEL.c_str(), secontext);
-    ASSERT_EQ(SELINUX_SUCC, ret);
+    EXPECT_STREQ(TEST_HAP_DATA_FILE_LABEL.c_str(), secontext);
     freecon(secontext);
     secontext = nullptr;
 
     getfilecon(TEST_SUB_PATH_1_FILE_1.c_str(), &secontext);
-    ret = strcmp(DEST_LABEL.c_str(), secontext);
-    ASSERT_EQ(SELINUX_SUCC, ret);
+    EXPECT_STREQ(TEST_HAP_DATA_FILE_LABEL.c_str(), secontext);
     freecon(secontext);
     secontext = nullptr;
 
     getfilecon(TEST_SUB_PATH_1_FILE_2.c_str(), &secontext);
-    ret = strcmp(DEST_LABEL.c_str(), secontext);
-    ASSERT_EQ(SELINUX_SUCC, ret);
+    EXPECT_STREQ(TEST_HAP_DATA_FILE_LABEL.c_str(), secontext);
     freecon(secontext);
     secontext = nullptr;
 
     getfilecon(TEST_SUB_PATH_2_FILE_1.c_str(), &secontext); // this file should not be restorecon
-    ret = strcmp(secontextOld, secontext);
-    ASSERT_EQ(SELINUX_SUCC, ret);
+    EXPECT_STREQ(secontextOld, secontext);
     freecon(secontext);
     freecon(secontextOld);
     secontext = nullptr;
     secontextOld = nullptr;
 
     getfilecon(TEST_SUB_PATH_3_FILE_1.c_str(), &secontext);
-    ret = strcmp(DEST_LABEL.c_str(), secontext);
-    ASSERT_EQ(SELINUX_SUCC, ret);
+    EXPECT_STREQ(TEST_HAP_DATA_FILE_LABEL.c_str(), secontext);
     freecon(secontext);
     secontext = nullptr;
 
     getfilecon(TEST_SUB_PATH_4.c_str(), &secontext);
-    ret = strcmp(DEST_LABEL.c_str(), secontext);
-    ASSERT_EQ(SELINUX_SUCC, ret);
+    EXPECT_STREQ(TEST_HAP_DATA_FILE_LABEL.c_str(), secontext);
     freecon(secontext);
     secontext = nullptr;
 
-    ASSERT_EQ(true, RemoveDirectory(TEST_PATH));
+    ASSERT_EQ(true, RemoveDirectory(TEST_HAP_PATH));
 }
 
 /**
@@ -498,84 +489,72 @@ HWTEST_F(SelinuxUnitTest, HapFileRestorecon010, TestSize.Level1)
     HapFileInfo hapFileInfo = {
         .pathNameOrig = tmp,
         .apl = SYSTEM_CORE_APL,
-        .packageName = TEST_BUNDLE_NAME_1,
+        .packageName = TEST_HAP_BUNDLE_NAME,
         .flags = 1,
         .hapFlags = 1,
     };
     int ret = test.HapFileRestorecon(hapFileInfo);
     ASSERT_EQ(SELINUX_SUCC, ret);
 
-
     char *secontext = nullptr;
     getfilecon(TEST_SUB_PATH_1.c_str(), &secontext);
-    ret = strcmp(DEST_LABEL.c_str(), secontext);
-    ASSERT_EQ(SELINUX_SUCC, ret);
+    EXPECT_STREQ(TEST_HAP_DATA_FILE_LABEL.c_str(), secontext);
     freecon(secontext);
     secontext = nullptr;
 
     getfilecon(TEST_SUB_PATH_2.c_str(), &secontext);
-    ret = strcmp(DEST_LABEL.c_str(), secontext);
-    ASSERT_EQ(SELINUX_SUCC, ret);
+    EXPECT_STREQ(TEST_HAP_DATA_FILE_LABEL.c_str(), secontext);
     freecon(secontext);
     secontext = nullptr;
 
     getfilecon(TEST_SUB_PATH_4.c_str(), &secontext);
-    ret = strcmp(DEST_LABEL.c_str(), secontext);
-    ASSERT_EQ(SELINUX_SUCC, ret);
+    EXPECT_STREQ(TEST_HAP_DATA_FILE_LABEL.c_str(), secontext);
     freecon(secontext);
     secontext = nullptr;
 
     getfilecon(TEST_SUB_PATH_1_FILE_1.c_str(), &secontext);
-    ret = strcmp(DEST_LABEL.c_str(), secontext);
-    ASSERT_EQ(SELINUX_SUCC, ret);
+    EXPECT_STREQ(TEST_HAP_DATA_FILE_LABEL.c_str(), secontext);
     freecon(secontext);
     secontext = nullptr;
 
     getfilecon(TEST_SUB_PATH_1_FILE_2.c_str(), &secontext);
-    ret = strcmp(DEST_LABEL.c_str(), secontext);
-    ASSERT_EQ(SELINUX_SUCC, ret);
+    EXPECT_STREQ(TEST_HAP_DATA_FILE_LABEL.c_str(), secontext);
     freecon(secontext);
     secontext = nullptr;
 
     getfilecon(TEST_SUB_PATH_2_FILE_1.c_str(), &secontext);
-    ret = strcmp(DEST_LABEL.c_str(), secontext);
-    ASSERT_EQ(SELINUX_SUCC, ret);
+    EXPECT_STREQ(TEST_HAP_DATA_FILE_LABEL.c_str(), secontext);
     freecon(secontext);
     secontext = nullptr;
 
     getfilecon(TEST_SUB_PATH_2_FILE_2.c_str(), &secontext);
-    ret = strcmp(DEST_LABEL.c_str(), secontext);
-    ASSERT_EQ(SELINUX_SUCC, ret);
+    EXPECT_STREQ(TEST_HAP_DATA_FILE_LABEL.c_str(), secontext);
     freecon(secontext);
     secontext = nullptr;
 
     getfilecon(TEST_SUB_PATH_4_FILE_1.c_str(), &secontext);
-    ret = strcmp(DEST_LABEL.c_str(), secontext);
-    ASSERT_EQ(SELINUX_SUCC, ret);
+    EXPECT_STREQ(TEST_HAP_DATA_FILE_LABEL.c_str(), secontext);
     freecon(secontext);
     secontext = nullptr;
 
     getfilecon(TEST_SUB_PATH_4_FILE_2.c_str(), &secontext);
-    ret = strcmp(DEST_LABEL.c_str(), secontext);
-    ASSERT_EQ(SELINUX_SUCC, ret);
+    EXPECT_STREQ(TEST_HAP_DATA_FILE_LABEL.c_str(), secontext);
     freecon(secontext);
     secontext = nullptr;
 
     getfilecon(TEST_SUB_PATH_3_FILE_1.c_str(), &secontext);
-    ret = strcmp(DEST_LABEL.c_str(), secontext);
-    ASSERT_EQ(SELINUX_SUCC, ret);
+    EXPECT_STREQ(TEST_HAP_DATA_FILE_LABEL.c_str(), secontext);
     freecon(secontext);
     secontext = nullptr;
 
     getfilecon(TEST_SUB_PATH_3_FILE_2.c_str(), &secontext);
-    ret = strcmp(secontextOld, secontext);
-    ASSERT_EQ(SELINUX_SUCC, ret);
+    EXPECT_STREQ(secontextOld, secontext);
     freecon(secontext);
     freecon(secontextOld);
     secontext = nullptr;
     secontextOld = nullptr;
 
-    ASSERT_EQ(true, RemoveDirectory(TEST_PATH));
+    ASSERT_EQ(true, RemoveDirectory(TEST_HAP_PATH));
 }
 
 /**
@@ -587,31 +566,29 @@ HWTEST_F(SelinuxUnitTest, HapFileRestorecon010, TestSize.Level1)
 HWTEST_F(SelinuxUnitTest, HapFileRestorecon011, TestSize.Level1)
 {
     ASSERT_EQ(true, CreateDirectory(TEST_SUB_PATH_1));
-    int ret = test.HapFileRestorecon(g_hapFileInfo7);
+    int ret = test.HapFileRestorecon(g_hapFileInfoForRepeatLabel);
     ASSERT_EQ(SELINUX_SUCC, ret);
 
     char *secontext = nullptr;
     getfilecon(TEST_SUB_PATH_1.c_str(), &secontext);
-    ret = strcmp(DEST_LABEL.c_str(), secontext);
-    ASSERT_EQ(SELINUX_SUCC, ret);
+    EXPECT_STREQ(TEST_HAP_DATA_FILE_LABEL.c_str(), secontext);
     freecon(secontext);
     secontext = nullptr;
 
     char *secontextOld = nullptr;
     getfilecon(TEST_SUB_PATH_1.c_str(), &secontextOld);
 
-    ret = test.HapFileRestorecon(g_hapFileInfo7);; // double restorcon
+    ret = test.HapFileRestorecon(g_hapFileInfoForRepeatLabel); // double restorcon
     ASSERT_EQ(SELINUX_SUCC, ret);
 
     getfilecon(TEST_SUB_PATH_1.c_str(), &secontext);
-    ret = strcmp(secontextOld, secontext);
-    ASSERT_EQ(SELINUX_SUCC, ret);
+    EXPECT_STREQ(secontextOld, secontext);
     freecon(secontext);
     freecon(secontextOld);
     secontext = nullptr;
     secontextOld = nullptr;
 
-    ASSERT_EQ(true, RemoveDirectory(TEST_PATH));
+    ASSERT_EQ(true, RemoveDirectory(TEST_HAP_PATH));
 }
 
 /**
@@ -624,17 +601,33 @@ HWTEST_F(SelinuxUnitTest, HapFileRestorecon012, TestSize.Level1)
 {
     ASSERT_EQ(true, CreateFile(TEST_SUB_PATH_1_FILE_1));
 
-    int ret = test.HapFileRestorecon(g_hapFileInfo8);
+    int ret = test.HapFileRestorecon(g_hapFileInfoWithPreinstallHap);
     ASSERT_EQ(SELINUX_SUCC, ret);
 
     char *secontextNew = nullptr;
     getfilecon(TEST_SUB_PATH_1.c_str(), &secontextNew);
-    ret = strcmp(DEST_LABEL.c_str(), secontextNew);
-    EXPECT_EQ(SELINUX_SUCC, ret);
+    EXPECT_STREQ(TEST_HAP_DATA_FILE_LABEL.c_str(), secontextNew);
     freecon(secontextNew);
     secontextNew = nullptr;
 
-    ASSERT_EQ(true, RemoveDirectory(TEST_PATH));
+    ASSERT_EQ(true, RemoveDirectory(TEST_HAP_PATH));
+}
+
+/**
+ * @tc.name: HapFileRestorecon013
+ * @tc.desc: test HapFileRestorecon with multi path failed.
+ * @tc.type: FUNC
+ * @tc.require:
+ */
+HWTEST_F(SelinuxUnitTest, HapFileRestorecon013, TestSize.Level1)
+{
+    ASSERT_EQ(true, CreateFile(TEST_SUB_PATH_1_FILE_1));
+    ASSERT_EQ(true, CreateFile(INVALID_PATH));
+
+    ASSERT_EQ(-SELINUX_RESTORECON_ERROR, test.HapFileRestorecon(g_hapFileInfoWithInvalidPath));
+
+    ASSERT_EQ(true, RemoveDirectory(TEST_HAP_PATH));
+    ASSERT_EQ(true, RemoveDirectory(INVALID_PATH));
 }
 
 /**
@@ -645,7 +638,7 @@ HWTEST_F(SelinuxUnitTest, HapFileRestorecon012, TestSize.Level1)
  */
 HWTEST_F(SelinuxUnitTest, HapFileRecurseRestorecon001, TestSize.Level1)
 {
-    int ret = test.HapFileRecurseRestorecon(nullptr, g_hapFileInfo6);
+    int ret = test.HapFileRecurseRestorecon(nullptr, g_hapFileInfoWithCannotFindContexts);
     ASSERT_EQ(-SELINUX_FTS_OPEN_ERROR, ret);
 }
 
@@ -658,31 +651,20 @@ HWTEST_F(SelinuxUnitTest, HapFileRecurseRestorecon001, TestSize.Level1)
 HWTEST_F(SelinuxUnitTest, RestoreconSb001, TestSize.Level1)
 {
     ASSERT_EQ(true, CreateDirectory(TEST_SUB_PATH_1));
-    int ret = test.RestoreconSb(TEST_SUB_PATH_1, g_hapFileInfo7);
-    ASSERT_EQ(SELINUX_SUCC, ret);
 
-    char *secontext = nullptr;
-    getfilecon(TEST_SUB_PATH_1.c_str(), &secontext);
-    ret = strcmp(DEST_LABEL.c_str(), secontext);
-    ASSERT_EQ(SELINUX_SUCC, ret);
-    freecon(secontext);
-    secontext = nullptr;
-
+    ASSERT_EQ(SELINUX_SUCC, test.RestoreconSb(TEST_SUB_PATH_1, g_hapFileInfoForRepeatLabel));
     char *secontextOld = nullptr;
     getfilecon(TEST_SUB_PATH_1.c_str(), &secontextOld);
-
-    ret = test.RestoreconSb(TEST_SUB_PATH_1, g_hapFileInfo7);; // double restorcon
-    ASSERT_EQ(SELINUX_SUCC, ret);
-
-    getfilecon(TEST_SUB_PATH_1.c_str(), &secontext);
-    ret = strcmp(secontextOld, secontext);
-    ASSERT_EQ(SELINUX_SUCC, ret);
-    freecon(secontext);
+    EXPECT_STREQ(secontextOld, TEST_HAP_DATA_FILE_LABEL.c_str());
     freecon(secontextOld);
-    secontext = nullptr;
-    secontextOld = nullptr;
 
-    ASSERT_EQ(true, RemoveDirectory(TEST_PATH));
+    ASSERT_EQ(SELINUX_SUCC, test.RestoreconSb(TEST_SUB_PATH_1, g_hapFileInfoForRepeatLabel)); // double restorcon
+    char *secontextNew = nullptr;
+    getfilecon(TEST_SUB_PATH_1.c_str(), &secontextNew);
+    EXPECT_STREQ(secontextNew, TEST_HAP_DATA_FILE_LABEL.c_str());
+    freecon(secontextNew);
+
+    ASSERT_EQ(true, RemoveDirectory(TEST_HAP_PATH));
 }
 
 /**
@@ -693,20 +675,17 @@ HWTEST_F(SelinuxUnitTest, RestoreconSb001, TestSize.Level1)
  */
 HWTEST_F(SelinuxUnitTest, HapDomainSetcontext001, TestSize.Level1)
 {
-    ASSERT_EQ(true, CreateDirectory(TEST_PATH));
+    ASSERT_EQ(true, CreateDirectory(TEST_HAP_PATH));
 
-    int ret = test.HapDomainSetcontext(g_hapDomainInfo1);
-    EXPECT_EQ(-SELINUX_ARG_INVALID, ret);
+    EXPECT_EQ(-SELINUX_ARG_INVALID, test.HapDomainSetcontext(g_hapDomainInfoWithAplEmpty));
+    EXPECT_EQ(-SELINUX_ARG_INVALID, test.HapDomainSetcontext(g_hapDomainInfoWithInvalidApl));
 
-    ret = test.HapDomainSetcontext(g_hapDomainInfo2);
-    EXPECT_EQ(-SELINUX_ARG_INVALID, ret);
-
-    ASSERT_EQ(true, RemoveDirectory(TEST_PATH));
+    ASSERT_EQ(true, RemoveDirectory(TEST_HAP_PATH));
 }
 
 /**
  * @tc.name: HapDomainSetcontext002
- * @tc.desc: test HapDomainSetcontext selinux not enabled.
+ * @tc.desc: test HapDomainSetcontext must succeed
  * @tc.type: FUNC
  * @tc.require: issueI6JV34
  */
@@ -714,63 +693,33 @@ HWTEST_F(SelinuxUnitTest, HapDomainSetcontext002, TestSize.Level1)
 {
     pid_t pid = fork();
     ASSERT_TRUE(pid >= 0);
-    if (pid < 0) {
-        return;
-    } else if (pid == 0) {
-        RunCommand("setenforce 0");
-        int ret = test.HapDomainSetcontext(g_hapDomainInfo3);
-        EXPECT_EQ(SELINUX_SUCC, ret);
-        sleep(SLEEP_SECOND);
-        RunCommand("setenforce 1");
+    if (pid == 0) {
+        EXPECT_EQ(SELINUX_SUCC, test.HapDomainSetcontext(g_hapDomainInfo));
+        usleep(200000); // sleep 200ms
         exit(0);
     } else {
-        std::string cmdRes = RunCommand("ps -efZ | grep hap_restorecon_unittest | grep -v grep");
-        ASSERT_TRUE(cmdRes.find(DEST_DOMAIN) != std::string::npos);
+        usleep(150000); // sleep 150ms
+        char *con = nullptr;
+        ASSERT_EQ(0, getpidcon(pid, &con));
+        EXPECT_STREQ(con, TEST_HAP_DOMAIN.c_str());
+        freecon(con);
     }
-    ASSERT_EQ(true, RemoveDirectory(TEST_PATH));
 }
 
 /**
  * @tc.name: HapDomainSetcontext003
- * @tc.desc: HapDomainSetcontext domain fork test.
+ * @tc.desc: test HapDomainSetcontext setcon normal_hap.
  * @tc.type: FUNC
- * @tc.require: AR000GJSDQ
+ * @tc.require: issueI6JV34
  */
 HWTEST_F(SelinuxUnitTest, HapDomainSetcontext003, TestSize.Level1)
 {
     pid_t pid = fork();
     ASSERT_TRUE(pid >= 0);
-    if (pid < 0) {
-        return;
-    } else if (pid == 0) {
-        int ret = test.HapDomainSetcontext(g_hapDomainInfo3);
-        ASSERT_EQ(SELINUX_SUCC, ret);
-        sleep(SLEEP_SECOND);
+    if (pid == 0) {
+        EXPECT_EQ(-SELINUX_CHECK_CONTEXT_ERROR, test.HapDomainSetcontext(g_hapDomainInfoForInvalidContexts));
         exit(0);
-    } else {
-        std::string cmdRes = RunCommand("ps -efZ | grep hap_restorecon_unittest | grep -v grep");
-        ASSERT_TRUE(cmdRes.find(DEST_DOMAIN) != std::string::npos);
     }
-}
-
-/**
- * @tc.name: HapDomainSetcontext004
- * @tc.desc: test HapDomainSetcontext normal function.
- * @tc.type: FUNC
- * @tc.require: issueI6JV34
- */
-HWTEST_F(SelinuxUnitTest, HapDomainSetcontext004, TestSize.Level1)
-{
-    int ret = test.HapDomainSetcontext(g_hapDomainInfo4);
-    ASSERT_EQ(SELINUX_SUCC, ret);
-
-    std::string cmdRes = RunCommand("ps -efZ | grep hap_restorecon_unittest | grep -v grep");
-    ASSERT_TRUE(cmdRes.find(DEST_NORMAL_DOMAIN) != std::string::npos);
-
-    ret = test.HapDomainSetcontext(g_hapDomainInfo5);
-    ASSERT_EQ(SELINUX_SUCC, ret);
-    cmdRes = RunCommand("ps -efZ | grep hap_restorecon_unittest | grep -v grep");
-    ASSERT_TRUE(cmdRes.find(DEST_DOMAIN) != std::string::npos);
 }
 
 /**

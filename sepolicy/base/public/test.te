@@ -12,5 +12,7 @@
 # limitations under the License.
 
 # for test
+debug_only(`
 type selftest, domain;
 type selftest_hap_data_file, file_attr, system_file_attr;
+')

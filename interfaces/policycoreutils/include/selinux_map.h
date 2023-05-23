@@ -58,9 +58,7 @@ typedef struct ParamHashNode {
 int32_t HashMapCreate(HashTab **handle);
 void HashMapDestroy(HashTab *handle);
 int32_t HashMapAdd(HashTab *handle, HashNode *hashNode);
-void HashMapRemove(HashTab *handle, const char *key);
 HashNode *HashMapGet(HashTab *handle, const char *key, uint32_t len);
-HashNode *HashMapFind(HashTab *handle, int hashCode, const char *key);
 #ifdef __cplusplus
 #if __cplusplus
 }

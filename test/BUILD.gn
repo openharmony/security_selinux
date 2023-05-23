@@ -34,14 +34,18 @@ ohos_unittest("hap_restorecon_unittest") {
   module_out_path = part_name + "/" + part_name
   public_configs = [ ":selinux_unittest_config" ]
   sources = [
+    "../interfaces/policycoreutils/src/hap_restorecon.cpp",
+    "../interfaces/policycoreutils/src/sehap_contexts_trie.cpp",
     "unittest/common/test_common.cpp",
     "unittest/hap_restorecon/unit_test.cpp",
   ]
-  deps = [ "$THIRD_PARTY_DIR/selinux:libselinux" ]
-  external_deps = [
-    "c_utils:utils",
-    "selinux:libhap_restorecon",
+  deps = [
+    "$THIRD_PARTY_DIR/selinux:libselinux",
+    "../:libselinux_error_static",
+    "../:libselinux_hilog_static",
   ]
+  cflags = [ "-DSELINUX_TEST" ]
+  external_deps = [ "c_utils:utils" ]
 }
 
 ohos_unittest("paraperm_checker_unittest") {
@@ -99,7 +103,11 @@ ohos_unittest("selinux_common_unittest") {
     "unittest/common/test_common.cpp",
     "unittest/selinux_common_test/unit_test.cpp",
   ]
-  deps = [ "//third_party/selinux:libselinux" ]
+  deps = [
+    "../:libselinux_hilog_static",
+    "../:libselinux_klog_static",
+    "//third_party/selinux:libselinux",
+  ]
 }
 
 group("unittest") {
