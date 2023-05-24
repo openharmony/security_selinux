@@ -40,7 +40,6 @@ allow foundation dhardware:binder { call };
 allow foundation allocator_host:binder { call };
 allow foundation distributedfiledaemon:binder { call };
 allow foundation distributedsche_param:file { map open read };
-allow foundation edm_sa:binder { call };
 allow foundation foundation:capability { kill };
 allow foundation hdf_devmgr:binder { call transfer };
 allow foundation hdf_allocator_service:hdf_devmgr_class { get };
