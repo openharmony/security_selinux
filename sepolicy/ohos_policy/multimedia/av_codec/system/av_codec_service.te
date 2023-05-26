@@ -12,6 +12,7 @@
 # limitations under the License.
 
 type av_codec_service, sadomain, domain;
+type sa_av_codec_service, sa_service_attr;
 
 # avc:  denied  { getopt } for  pid=1651 comm="av_codec_servic" scontext=u:r:av_codec_service:s0 tcontext=u:r:av_codec_service:s0 tclass=unix_dgram_socket permissive=1
 # avc:  denied  { setopt } for  pid=1651 comm="av_codec_servic" scontext=u:r:av_codec_service:s0 tcontext=u:r:av_codec_service:s0 tclass=unix_dgram_socket permissive=1
