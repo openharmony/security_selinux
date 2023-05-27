@@ -16,4 +16,3 @@ debug_only(`
 allow sh sh:udp_socket { read };
 allow sh system_basic_hap_data_file:dir { search }
 ')
-
