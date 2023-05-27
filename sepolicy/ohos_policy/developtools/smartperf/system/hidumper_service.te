@@ -12,7 +12,6 @@
 # limitations under the License
 
 debug_only(`
-allow hidumper_service sh:dir { search };
 allow hidumper_service sh:fd { use };
 allow hidumper_service sh:fifo_file { write };
 allow hidumper_service sh:file { open read };
