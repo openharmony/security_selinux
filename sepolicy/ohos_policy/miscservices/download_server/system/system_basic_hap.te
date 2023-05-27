@@ -1,4 +1,4 @@
-# Copyright (c) 2022-2023 Huawei Device Co., Ltd.
+# Copyright (c) 2023 Huawei Device Co., Ltd.
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -11,6 +11,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-debug_only(`
-    allow sh download_server:file { read };
-')
+# avc:  denied  { call } for  pid=2094 comm="1.ui" scontext=u:r:system_basic_hap:s0 tcontext=u:r:download_server:s0 tclass=binder permissive=0
+allow system_basic_hap download_server:binder { call transfer };
+# avc:  denied  { get } for service=3706 pid=4299 scontext=u:r:system_basic_hap:s0 tcontext=u:object_r:sa_download_server:s0 tclass=samgr_class permissive=0
+allow system_basic_hap sa_download_service:samgr_class { get };
