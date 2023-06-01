@@ -165,7 +165,6 @@ allow hiprofiler_plugins vibrator_host:file read;
 allow hiprofiler_plugins audio_host:file read;
 allow hiprofiler_plugins blue_host:file read;
 allow hiprofiler_plugins camera_host:file read;
-allow hiprofiler_plugins disp_gralloc_host:file read;
 allow hiprofiler_plugins allocator_host:file read;
 allow hiprofiler_plugins input_user_host:file read;
 allow hiprofiler_plugins power_host:file read;
@@ -239,7 +238,7 @@ allow hiprofiler_plugins tracefs:dir { open read };
 allow hiprofiler_plugins tracefs:file append;
 
 allow hiprofiler_plugins data_local_tmp:dir { getattr read watch watch_reads add_name write open search remove_name };
-allow hiprofiler_plugins data_local_tmp:file { create read open write lock };
+allow hiprofiler_plugins data_local_tmp:file { create read open write lock getattr unlink };
 allow hiprofiler_plugins self:capability { sys_ptrace dac_read_search };
 
 debug_only(`

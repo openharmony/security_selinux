@@ -25,12 +25,15 @@
 
 #define SELINUX_HAP_RESTORECON_RECURSE 1    // whether the data directory need recurse
 #define SELINUX_HAP_RESTORECON_PREINSTALLED_APP 1   // whether it is a pre-built app
+#define SELINUX_HAP_DEBUGGABLE 2 // whether it is a debuggable hap
+
 // parameters of each SehapInfo in file sehap_contexts
 struct SehapInfo {
     std::string apl = "";
     std::string name = "";
     std::string domain = "";
     std::string type = "";
+    bool debuggable = false;
 };
 
 struct HapFileInfo {
@@ -57,7 +60,7 @@ public:
 
 protected:
     int HapFileRestorecon(const std::string &pathNameOrig, HapFileInfo& hapFileInfo);
-    int HapFileRecurseRestorecon(char *realPath, HapFileInfo& hapFileInfo);
+    int HapFileRecurseRestorecon(const std::string &realPath, HapFileInfo& hapFileInfo);
     int RestoreconSb(const std::string &pathNameOrig, HapFileInfo& hapFileInfo);
     int GetSecontext(HapFileInfo& hapFileInfo, const std::string &pathNameOrig,
         char **newSecontext, char **oldSecontext);

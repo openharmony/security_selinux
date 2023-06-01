@@ -159,7 +159,6 @@ allow audio_policy vendor_etc_file:file { getattr open read };
 
 #avc:  denied  { getattr } for  pid=490 comm="audio_policy" path="/vendor/lib64/libhdi.z.so" dev="mmcblk0p7" ino=98 scontext=u:r:audio_policy:s0 tcontext=u:object_r:vendor_file:s0 tclass=file permissive=1
 #avc:  denied  { open } for  pid=490 comm="audio_policy" path="/vendor/lib64/libhdi.z.so" dev="mmcblk0p7" ino=98 scontext=u:r:audio_policy:s0 tcontext=u:object_r:vendor_file:s0 tclass=file permissive=1
-#avc:  denied  { read } for  pid=521 comm="audio_policy" path="/vendor/lib64/libhdi_display_gralloc_client.z.so" dev="mmcblk0p7" ino=108 scontext=u:r:audio_policy:s0 tcontext=u:object_r:vendor_file:s0 tclass=file permissive=1
 allow audio_policy vendor_file:file { getattr open read };
 
 #avc:  denied  { search } for  pid=359 comm="audio_policy" name="lib" dev="mmcblk0p6" ino=44 scontext=u:r:audio_policy:s0 tcontext=u:object_r:vendor_lib_file:s0 tclass=dir permissive=1
@@ -183,7 +182,6 @@ allow audio_policy data_service_el1_file:dir { add_name create getattr open read
 allow audio_policy data_service_el1_file:file { create getattr ioctl lock map open read rename setattr unlink write };
 
 allow audio_policy accesstoken_service:binder { call transfer };
-allow accesstoken_service audio_policy:binder { call transfer };
 
 allow audio_policy accessibility:binder { call transfer };
 allow audio_policy accessibility_param:file { map open read };
@@ -206,3 +204,16 @@ allow audio_policy sa_foundation_devicemanager_service:samgr_class { get };
 
 allow audio_policy device_manager:binder { call };
 
+allow audio_policy musl_param:file { open map read };
+
+allow audio_policy distributeddata:fd { use };
+
+allow audio_policy sa_dataobs_mgr_service_service:samgr_class { get };
+
+allow audio_policy sa_foundation_abilityms:samgr_class { get };
+
+allow audio_policy foundation:binder { call transfer };
+
+debug_only(`
+    allow audio_policy sh:binder { call };
+')

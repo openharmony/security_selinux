@@ -14,7 +14,6 @@
 allow system_core_hap faultloggerd:fifo_file { write };
 allow system_core_hap faultloggerd_temp_file:file { read write };
 allow system_core_hap normal_hap_attr:binder { call transfer };
-allow system_core_hap sh:binder { call transfer };
 allow system_core_hap sysfs_rtc:dir { open read };
 allow system_core_hap system_core_hap:binder { call transfer };
 allow system_core_hap time_service:binder { call };
@@ -28,3 +27,7 @@ allow system_core_hap sa_quick_fix_mgr_service:samgr_class { get };
 allow system_core_hap quick_fix:binder { call };
 allow system_core_hap system_file:file { map };
 allow system_core_hap data_service_el1_file:file { map };
+
+debug_only(`
+    allow system_core_hap sh:binder { call transfer };
+')

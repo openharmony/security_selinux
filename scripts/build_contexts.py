@@ -64,7 +64,7 @@ def traverse_folder_in_type(search_dir_list, file_suffix):
                 file_name = os.path.basename(each_file)
                 if file_name == file_suffix:
                     file_list_path = os.path.join(root, each_file)
-                    flag |= check_empty_row(file_list_path)
+                    flag |= check_contexts_file(file_list_path)
                     policy_file_list.append(file_list_path)
     if flag:
         raise Exception(flag)
@@ -72,20 +72,27 @@ def traverse_folder_in_type(search_dir_list, file_suffix):
     return " ".join(str(x) for x in policy_file_list)
 
 
-def check_empty_row(contexts_file):
+def check_contexts_file(contexts_file):
     """
-    Check whether the last line of te is empty.
+    Check the format of contexts file.
     :param contexts_file: list of te file
     :return:
     """
     err = 0
-    with open(contexts_file, 'r') as fp:
+    lines = []
+    with open(contexts_file, 'rb') as fp:
         lines = fp.readlines()
-        if len(lines) != 0:
-            last_line = lines[-1]
-            if '\n' not in last_line:
-                print(contexts_file + " :" + " need an empty line at end \n")
-                err = 1
+    if len(lines) == 0:
+        return 0
+    last_line = lines[-1]
+    if b'\n' not in last_line:
+        print("".join((contexts_file, " : need an empty line at end \n")))
+        err = 1
+    for line in lines:
+        if line.endswith(b'\r\n') or line.endswith(b'\r'):
+            print("".join((contexts_file, " : must be unix format\n")))
+            err = 1
+            break
     return err
 
 
@@ -173,7 +180,7 @@ def check_sehap_contexts(args, contexts_file, domain):
     err = 0
     with open(contexts_file + "_bk", 'r') as contexts_read, open(contexts_file, 'w') as contexts_write:
         pattern = re.compile(
-            r'apl=(system_core|system_basic|normal)\s+(name=\S+\s+)?domain=(\S+)\s+type=(\S+)\s*\n')
+            r'apl=(system_core|system_basic|normal)\s+((name|debuggable)=\S+\s+)?domain=(\S+)\s+type=(\S+)\s*\n')
         line_index = 0
         for line in contexts_read:
             line_ = line.lstrip()
@@ -184,10 +191,10 @@ def check_sehap_contexts(args, contexts_file, domain):
             match = pattern.match(line_)
             if match:
                 if domain:
-                    line = match.group(1) + " u:r:" + match.group(3) + ":s0\n"
+                    line = match.group(1) + " u:r:" + match.group(4) + ":s0\n"
                 else:
                     line = match.group(1) + " u:object_r:" + \
-                        match.group(4) + ":s0\n"
+                        match.group(5) + ":s0\n"
                 contexts_write.write(line)
             else:
                 print(contexts_file + ":" +
@@ -285,6 +292,25 @@ def traverse_folder_in_dir_name(search_dir, folder_suffix):
     return folder_list
 
 
+def build_all_file_contexts_bin(args, output_path, policy_path):
+    file_contexts_list = traverse_folder_in_type(
+        policy_path, "file_contexts")
+
+    combined_file_contexts = os.path.join(output_path, "all_file_contexts")
+    combine_contexts_file(file_contexts_list, combined_file_contexts)
+
+    build_tmp_cmd = ["m4",
+                     "--fatal-warnings",
+                     "-s", combined_file_contexts, ">", os.path.join(output_path, "all_file_contexts.tmp")]
+    run_command(build_tmp_cmd)
+
+    build_bin_cmd = [os.path.join(args.tool_path, "sefcontext_compile"),
+                     "-o", os.path.join(args.dst_dir, "file_contexts.bin"),
+                     "-p", args.policy_file,
+                     os.path.join(output_path, "all_file_contexts.tmp")]
+    run_command(build_bin_cmd)
+
+
 def main(args):
     output_path = args.dst_dir
     policy_path = []
@@ -299,17 +325,23 @@ def main(args):
         system_policy += traverse_folder_in_dir_name(item, "system")
         vendor_policy += traverse_folder_in_dir_name(item, "vendor")
 
+    system_folder_list = public_policy + system_policy
+    vendor_folder_list = public_policy + vendor_policy
     all_folder_list = public_policy + system_policy + vendor_policy
 
-    folder_list = []
+    if args.components == "system":
+        build_file_contexts(args, output_path, system_folder_list)
+        build_all_file_contexts_bin(args, output_path, all_folder_list)
+    elif args.components == "vendor":
+        build_file_contexts(args, output_path, vendor_folder_list)
+        build_all_file_contexts_bin(args, output_path, all_folder_list)
+    else:
+        build_file_contexts(args, output_path, all_folder_list)
 
-    folder_list = all_folder_list
-
-    build_file_contexts(args, output_path, folder_list)
-    build_common_contexts(args, output_path, "service_contexts", folder_list)
-    build_common_contexts(args, output_path, "hdf_service_contexts", folder_list)
-    build_common_contexts(args, output_path, "parameter_contexts", folder_list)
-    build_sehap_contexts(args, output_path, folder_list)
+    build_common_contexts(args, output_path, "service_contexts", all_folder_list)
+    build_common_contexts(args, output_path, "hdf_service_contexts", all_folder_list)
+    build_common_contexts(args, output_path, "parameter_contexts", all_folder_list)
+    build_sehap_contexts(args, output_path, all_folder_list)
 
 
 if __name__ == "__main__":

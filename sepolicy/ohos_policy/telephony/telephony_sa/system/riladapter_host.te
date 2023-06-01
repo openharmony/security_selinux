@@ -60,7 +60,9 @@ allow riladapter_host sa_foundation_powermgr_service:samgr_class get;
 allow riladapter_host security_param:file { open read map };
 allow riladapter_host self:capability net_admin;
 allow riladapter_host self:udp_socket { create ioctl };
-allow riladapter_host sh:binder call;
+debug_only(`
+    allow riladapter_host sh:binder call;
+')
 allow riladapter_host sh_exec:file { execute execute_no_trans map open read };
 allow riladapter_host startup_param:file { map open read };
 allow riladapter_host sys_file:dir { open read };
@@ -74,4 +76,6 @@ allow riladapter_host telephony_sa:binder call;
 allow riladapter_host tty_device:chr_file { open read write };
 allow riladapter_host vendor_etc_file:dir search;
 allow riladapter_host vendor_etc_file:file { getattr open read };
-
+allow riladapter_host data_file:dir search;
+allow riladapter_host data_local:dir search;
+allow riladapter_host dev_console_file:chr_file { read write };

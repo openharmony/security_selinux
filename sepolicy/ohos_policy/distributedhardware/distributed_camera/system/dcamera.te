@@ -59,11 +59,7 @@ allow dcamera dev_dri_file:dir { search };
 #avc:  denied  { call } for  pid=2464 comm="dcamera" scontext=u:r:dcamera:s0 tcontext=u:r:dhardware:s0 tclass=binder permissive=1
 allow dcamera dhardware:binder { call };
 
-#avc:  denied  { call } for  pid=2061 comm="dcamera" scontext=u:r:dcamera:s0 tcontext=u:r:disp_gralloc_host:s0 tclass=binder permissive=1
-allow dcamera disp_gralloc_host:binder { call };
 
-#avc:  denied  { use } for  pid=2033 comm="dcamera" path="/dmabuf:" dev="dmabuf" ino=29931 ioctlcmd=0x6200 scontext=u:r:dcamera:s0 tcontext=u:r:disp_gralloc_host:s0 tclass=fd permissive=1
-allow dcamera disp_gralloc_host:fd { use };
 
 #avc:  denied  { call } for  pid=2061 comm="dcamera" scontext=u:r:dcamera:s0 tcontext=u:r:allocator_host:s0 tclass=binder permissive=1
 allow dcamera allocator_host:binder { call };
@@ -80,10 +76,7 @@ allow dcamera hdf_device_manager:hdf_devmgr_class { get };
 #avc:  denied  { get } for service=distributed_camera_provider_service pid=2053 scontext=u:r:dcamera:s0 tcontext=u:object_r:hdf_distributed_camera_provider_service:s0 tclass=hdf_devmgr_class permissive=1
 allow dcamera hdf_distributed_camera_provider_service:hdf_devmgr_class { get };
 
-#avc:  denied  { get } for service=hdi_display_gralloc_service pid=2053 scontext=u:r:dcamera:s0 tcontext=u:object_r:hdf_hdi_display_gralloc_service:s0 tclass=hdf_devmgr_class permissive=1
-allow dcamera hdf_hdi_display_gralloc_service:hdf_devmgr_class { get };
 
-#avc:  denied  { get } for service=hdi_display_gralloc_service pid=2053 scontext=u:r:dcamera:s0 tcontext=u:object_r:hdf_allocator_service:s0 tclass=hdf_devmgr_class permissive=1
 allow dcamera hdf_allocator_service:hdf_devmgr_class { get };
 
 #avc:  denied  { call } for  pid=2040 comm="DHEventbusHandl" scontext=u:r:dcamera:s0 tcontext=u:r:hdf_devmgr:s0 tclass=binder permissive=1
@@ -147,7 +140,9 @@ allow dcamera sa_accesstoken_manager_service:samgr_class { get };
 #avc:  denied  { node_bind } for  pid=2166 comm="Fillp_core_210" scontext=u:r:dcamera:s0 tcontext=u:object_r:node:s0 tclass=udp_socket permissive=1
 allow dcamera node:udp_socket { node_bind };
 allow dcamera init:binder { call transfer };
-allow dcamera sh:binder { call transfer };
+debug_only(`
+    allow dcamera sh:binder { call transfer };
+')
 
 #avc:  denied  { get } for service=4803 pid=560 scontext=u:r:hidumper_service:s0 tcontext=u:object_r:sa_dcamera_source_service:s0 tclass=samgr_class permissive=0
 # avc:  denied  { get } for service=4804 pid=560 scontext=u:r:hidumper_service:s0 tcontext=u:object_r:sa_dcamera_sink_service:s0 tclass=samgr_class permissive=0
@@ -162,3 +157,43 @@ allow dcamera vendor_bin_file:dir { search };
 
 #avc:  denied  { call } for  pid=571 comm="msdp" scontext=u:r:dcamera:s0 tcontext=u:r:accesstoken_service:s0 tclass=binder permissive=1
 allow dcamera accesstoken_service:binder { call };
+
+#avc:  denied  { get } for service=4802 pid=3227 scontext=u:r:dcamera:s0 tcontext=u:object_r:sa_foundation_devicemanager_service:s0 tclass=samgr_class permissive=1
+allow dcamera sa_foundation_devicemanager_service:samgr_class { get };
+
+allow dcamera bootevent_param:file { map open read };
+allow dcamera bootevent_samgr_param:file { map open read };
+allow dcamera build_version_param:file { map open read };
+allow dcamera const_allow_mock_param:file { map open read };
+allow dcamera const_allow_param:file { map open read };
+allow dcamera const_build_param:file { map open read };
+allow dcamera const_display_brightness_param:file { map open read };
+allow dcamera const_param:file { map open read };
+allow dcamera const_postinstall_fstab_param:file { map open read };
+allow dcamera const_postinstall_param:file { map open read };
+allow dcamera const_product_param:file { map open read };
+allow dcamera dcamera_host:binder { transfer };
+allow dcamera debug_param:file { map open read };
+allow dcamera default_param:file { map open read };
+allow dcamera distributedsche_param:file { map open read };
+allow dcamera hilog_param:file { map open read };
+allow dcamera hw_sc_build_os_param:file { map open read };
+allow dcamera hw_sc_build_param:file { map open read };
+allow dcamera hw_sc_param:file { map open read };
+allow dcamera init_param:file { map open read };
+allow dcamera init_svc_param:file { map open read };
+allow dcamera input_pointer_device_param:file { map open read };
+allow dcamera net_param:file { map open read };
+allow dcamera net_tcp_param:file { map open read };
+allow dcamera ohos_boot_param:file { map open read };
+allow dcamera ohos_param:file { map open read };
+allow dcamera param_watcher:binder { call transfer };
+allow dcamera persist_param:file { map open read };
+allow dcamera persist_sys_param:file { map open read };
+allow dcamera security_param:file { map open read };
+allow dcamera startup_param:file { map open read };
+allow dcamera sys_param:file { map open read };
+allow dcamera system_bin_file:dir { search };
+allow dcamera sys_usb_param:file { map open read };
+allow dcamera tracefs:dir { search };
+allow dcamera tracefs_trace_marker_file:file { open write };

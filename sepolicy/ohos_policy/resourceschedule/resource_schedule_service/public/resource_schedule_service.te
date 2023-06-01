@@ -12,3 +12,4 @@
 # limitations under the License.
 
 type resource_schedule_service, sadomain, domain;
+type sa_task_heartbeat_mgr, sa_service_attr;

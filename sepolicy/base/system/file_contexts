@@ -33,6 +33,7 @@
 /dev(/.*)?       u:object_r:dev_file:s0
 /dev/__parameters__(/.*)?         u:object_r:dev_parameters_file:s0
 /dev/block(/.*)?                u:object_r:dev_block_file:s0
+/dev/block/zram0                u:object_r:zram_device:s0
 /dev/bus(/.*)?                u:object_r:dev_bus_file:s0
 /dev/bus/usb(/.*)?                u:object_r:dev_bus_usb_file:s0
 /dev/char(/.*)?                u:object_r:dev_char_file:s0
@@ -141,6 +142,7 @@
 /dev/uinput                         u:object_r:dev_uinput:s0
 
 /dev/hdmi_hdcp1x                    u:object_r:dev_hdmi_hdcp1x:s0
+/dev/xpm                            u:object_r:dev_xpm:s0
 
 
 /etc(/.*)?       u:object_r:etc_file:s0
@@ -161,6 +163,17 @@
 /sys_prod(/.*)?      u:object_r:sys_prod_file:s0
 
 /chip_prod(/.*)?     u:object_r:chip_prod_file:s0
+
+/eng_system(/.*)?           u:object_r:system_file:s0
+/eng_system/etc(/.*)?       u:object_r:system_etc_file:s0
+/eng_system/lib(/.*)?       u:object_r:system_lib_file:s0
+/eng_system/bin(/.*)?       u:object_r:system_bin_file:s0
+
+/eng_chipset(/.*)?           u:object_r:vendor_file:s0
+/eng_chipset/bin(/.*)?       u:object_r:vendor_bin_file:s0
+/eng_chipset/lib(/.*)?       u:object_r:vendor_lib_file:s0
+/eng_chipset/lib64(/.*)?     u:object_r:vendor_lib_file:s0
+/eng_chipset/etc(/.*)?       u:object_r:vendor_etc_file:s0
 
 /data(/.*)?                   u:object_r:data_file:s0
 /data/app                     u:object_r:data_app_file:s0
@@ -214,6 +227,7 @@
 /data/local/(.*)?                 u:object_r:data_local:s0
 /data/local/traces(/.*)?                 u:object_r:data_local_traces:s0
 /data/local/tmp(/.*)?                 u:object_r:data_local_tmp:s0
+/data/local/ark-cache(/.*)?                 u:object_r:data_local_arkcache:s0
 /data/log                       u:object_r:data_log:s0
 /data/log/(.*)?                 u:object_r:data_log:s0
 /data/media                       u:object_r:data_media:s0

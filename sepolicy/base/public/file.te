@@ -128,6 +128,7 @@ type data_libinput, file_attr, data_file_attr;
 type data_local, file_attr, data_file_attr;
 type data_local_traces, file_attr, data_file_attr;
 type data_local_tmp, file_attr, data_file_attr;
+type data_local_arkcache, file_attr, data_file_attr;
 type data_log, file_attr, data_file_attr;
 type data_media, file_attr, data_file_attr;
 type data_mediadrm, file_attr, data_file_attr;
@@ -295,6 +296,7 @@ type dev_sw_sync, dev_attr;
 type dev_usb_ffs, dev_attr;
 type dev_uinput, dev_attr;
 type dev_hdmi_hdcp1x, dev_attr;
+type dev_xpm, dev_attr;
 
 type debugfs_kprobes, fs_attr, debugfs_attr;
 type debugfs_wakeup_sources, fs_attr, debugfs_attr;
@@ -311,3 +313,6 @@ type module_update_lib_file, module_update_file_attr, file_attr;
 type data_module_update, file_attr, data_file_attr;
 type data_module_update_package, file_attr, data_file_attr;
 type system_module_update_file, system_file_attr, file_attr;
+
+# for hyperhold
+type zram_device, dev_attr;

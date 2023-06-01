@@ -41,7 +41,6 @@ type distributedhardware_fwk, sadomain, domain;
 type nwebspawn, sadomain, domain;
 type upms, sadomain, domain;
 type mmi_uinput_service, sadomain, domain;
-type edm_sa, sadomain, domain;
 type download_server, sadomain, domain;
 type msdp_sa, sadomain, domain;
 type misc, sadomain, domain;
@@ -84,20 +83,5 @@ type sh_exec, exec_attr, file_attr, system_file_attr;
 type hdcd, nativedomain, domain;
 type hdcd_exec, exec_attr, file_attr, system_file_attr;
 #domain_auto_transition_pattern(init, hdcd_exec, hdcd);
-
-type audio_host, hdfdomain, domain;
-type camera_host, hdfdomain, domain;
-type codec_host, hdfdomain, domain;
-type input_user_host, hdfdomain, domain;
-
-type motion_host, hdfdomain, domain;
-type riladapter_host, hdfdomain, domain;
-
-type sensor_host, hdfdomain, domain;
-type usb_host, hdfdomain, domain;
-type vibrator_host, hdfdomain, domain;
-type power_host, hdfdomain, domain;
-type location_host, hdfdomain, domain;
-type wifi_host, hdfdomain, domain;
 
 type updater, nativedomain, domain;
