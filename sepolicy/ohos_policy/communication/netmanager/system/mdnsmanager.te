@@ -40,7 +40,6 @@ allow mdnsmanager accesstoken_service:binder { call };
 
 allow mdnsmanager sa_net_conn_manager:samgr_class { get };
 allow mdnsmanager netmanager:binder { call };
-allow mdnsmanager sysfs_devices_system_cpu:file { open read getattr };
 
 allow mdnsmanager mdnsmanager:udp_socket { create getopt setopt bind name_bind ioctl read write };
 allow mdnsmanager node:udp_socket { node_bind };
