@@ -63,3 +63,7 @@ allow hitrace const_postinstall_fstab_param:file { map open read };
 allow hitrace const_postinstall_param:file { map open read };
 
 allow hitrace proc_file:file { read open };
+
+debug_only(`
+	allow hitrace sh:fifo_file { read write };
+')
