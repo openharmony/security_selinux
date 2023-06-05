@@ -138,7 +138,6 @@ allow hiprofiler_plugins pasteboard_service:file read;
 allow hiprofiler_plugins pulseaudio:file read;
 
 allow hiprofiler_plugins audio_policy:file read;
-allow hiprofiler_plugins console:file read;
 allow hiprofiler_plugins download_server:file read;
 allow hiprofiler_plugins edm_sa:file read;
 allow hiprofiler_plugins msdp_sa:file read;
@@ -245,6 +244,7 @@ debug_only(`
 	allow hiprofiler_plugins sh:fd use;
 	allow hiprofiler_plugins sh:dir { open read };
 	allow hiprofiler_plugins sh:file { getattr open };
+	allow hiprofiler_plugins console:file read;
 ')
 
 allow hiprofiler_plugins domain:dir { open read getattr search };
