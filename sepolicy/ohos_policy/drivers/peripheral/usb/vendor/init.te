@@ -18,3 +18,4 @@ allow init usb_host:file { open read };
 allow init usb_host:process { rlimitinh siginh transition getattr };
 allow init data_service_el1_file:dir { relabelto getattr search write add_name remove_name read open setattr };
 allow init data_service_el1_file:file { create write open getattr };
+allow init configfs:file { setattr };

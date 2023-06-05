@@ -129,9 +129,9 @@ neverallow * self:memprotect mmap_zero;
 # only execute file with exec_attr & system_bin_file & vendor_bin_file ToDo delete vendor_file
 neverallow * { file_attr -lib_file -system_bin_file -system_lib_file -vendor_bin_file -vendor_lib_file
     -vendor_file -exec_attr -hap_file_attr -data_local_tmp -chip_prod_file -module_update_lib_file
-    -module_update_bin_file -data_updater_file -data_local_arkcache}:file { execute execute_no_trans entrypoint };
-neverallow { domain -hdcd} data_local_arkcache:file { write };
-neverallow { domain -hdcd} data_local_arkcache:dir { write };
+    -module_update_bin_file -data_updater_file -data_local_arkcache -system_file}:file { execute execute_no_trans entrypoint };
+neverallow { domain -installs } data_local_arkcache:file { write };
+neverallow { domain -installs } data_local_arkcache:dir { write };
 
 neverallow * { file_attr -exec_attr -system_bin_file -vendor_bin_file }:file entrypoint;
 
@@ -176,7 +176,7 @@ neverallow limit_domain *:file *;
 neverallow domain limit_domain:binder *;
 
 # every file should have a label. The unlabeled file shouldn't be accessed.
-neverallow { domain -init -kernel } unlabeled:dir_file_class_set *;
+neverallow { domain -init -kernel updater_only(`-updater') } unlabeled:dir_file_class_set *;
 
 # keep selinuxfs safe.
 neverallow * kernel:security { load_policy setenforce setbool };
@@ -291,7 +291,7 @@ neverallow * self:{ capability cap_userns } linux_immutable;
 neverallow { domain -wifi_manager_service -netsysnative } self:{ capability cap_userns } net_bind_service;
 neverallow * self:{ capability cap_userns } net_broadcast;
 neverallow { domain -init -chipset_init -ueventd -wifi_hal_service -wifi_manager_service -softbus_server -netsysnative -storage_daemon -udevd -blue_host -netmanager -riladapter_host -bluetooth_service -cap_violator_netadmin } self:{ capability cap_userns } net_admin;
-neverallow { domain -wifi_hal_service -wifi_manager_service -netmanager -netsysnative } self:{ capability cap_userns } net_raw;
+neverallow { domain -wifi_hal_service -wifi_manager_service -netmanager -netsysnative -cap_violator_netraw } self:{ capability cap_userns } net_raw;
 neverallow { domain -hiperf } self:{ capability cap_userns } ipc_lock;
 neverallow * self:{ capability cap_userns } ipc_owner;
 neverallow { domain -cap_violator_sysmodule } self:{ capability cap_userns } sys_module;
