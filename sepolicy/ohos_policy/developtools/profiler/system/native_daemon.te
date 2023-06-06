@@ -18,7 +18,6 @@ debug_only(`
         allow native_daemon sh_exec:file execute;
         allow native_daemon sh:fd use;
         allow native_daemon sh:file read;
-        allow native_daemon sh:fd use;
 ')
 allow domain hiprofiler_socket:sock_file { getattr write unlink };
 allow init hiprofiler_socket:sock_file { relabelto };
