@@ -38,6 +38,7 @@ constexpr const char PRECOMPILED_POLICY_SYSTEM_CIL_HASH[] = "/vendor/etc/selinux
 constexpr const char COMPILE_OUTPUT_POLICY[] = "/dev/policy.31";
 constexpr const char DEFAULT_POLICY[] = "/system/etc/selinux/targeted/policy/policy.31";
 constexpr const char PRECOMPILED_POLICY[] = "/vendor/etc/selinux/prebuild_sepolicy/policy.31";
+constexpr const char BACKUP_PRECOMPILED_POLICY[] = "/system/etc/selinux/policy.31";
 constexpr const char VERSION_POLICY_PATH[] = "/vendor/etc/selinux/version";
 constexpr const char COMPATIBLE_CIL_PATH[] = "/system/etc/selinux/compatible/";
 } // namespace
@@ -344,15 +345,18 @@ static bool GetPolicyFile(std::string &policyFile)
         return true;
     }
 
-    if (access(PRECOMPILED_POLICY, R_OK) == 0) {
-        // find precompiled policy, check hash
-        bool res = CompareHash(PRECOMPILED_POLICY_SYSTEM_CIL_HASH, SYSTEM_CIL_HASH);
-        if (res) {
+    // check precompiled policy
+    if (CompareHash(PRECOMPILED_POLICY_SYSTEM_CIL_HASH, SYSTEM_CIL_HASH)) {
+        if (access(PRECOMPILED_POLICY, R_OK) == 0) {
             policyFile = PRECOMPILED_POLICY;
-            selinux_log(SELINUX_WARNING, "Found precompiled policy, load it\n");
+            selinux_log(SELINUX_WARNING, "Found precompiled policy, load %s\n", policyFile.c_str());
             return true;
         }
-        // hash did not same, goto compile
+        if (access(BACKUP_PRECOMPILED_POLICY, R_OK) == 0) {
+            policyFile = BACKUP_PRECOMPILED_POLICY;
+            selinux_log(SELINUX_WARNING, "Found precompiled policy, load %s\n", policyFile.c_str());
+            return true;
+        }
     }
 
     // no precompiled policy, compile from cil
