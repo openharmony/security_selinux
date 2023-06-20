@@ -361,4 +361,31 @@ allow updater vfat:file { map };
 allow updater data_file:dir { setattr relabelto };
 allow updater unlabeled:dir { getattr relabelfrom };
 
+# avc: denied { relabelto } for pid=235 comm="updater" name="/" dev="mmcblk0p12" ino=3 scontext=u:r:updater:s0 tcontext=u:object_r:data_file:s0 tclass=dir permissive=1
+# avc: denied { setattr } for pid=235 comm="updater" name="updater" dev="mmcblk0p12" ino=7 scontext=u:r:updater:s0 tcontext=u:object_r:data_file:s0 tclass=dir permissive=1
+allow updater data_file:dir { relabelto setattr };
+
+# avc: denied { append } for pid=235 comm="updater" path="/data/updater/log/updater_log" dev="mmcblk0p12" ino=9 scontext=u:r:updater:s0 tcontext=u:object_r:data_file:s0 tclass=file permissive=1
+allow updater data_file:file { append };
+
+# avc: denied { getattr } for pid=235 comm="updater" path="/data" dev="mmcblk0p12" ino=3 scontext=u:r:updater:s0 tcontext=u:object_r:unlabeled:s0 tclass=dir permissive=1
+# avc: denied { relabelfrom } for pid=235 comm="updater" name="/" dev="mmcblk0p12" ino=3 scontext=u:r:updater:s0 tcontext=u:object_r:unlabeled:s0 tclass=dir permissive=1
+allow updater unlabeled:dir { getattr relabelfrom };
+
+# avc: denied { setattr } for pid=249 comm="updater" name="updater" dev="mmcblk0p12" ino=144 scontext=u:r:updater:s0 tcontext=u:object_r:data_updater_file:s0 tclass=dir permissive=1
+allow updater data_updater_file:dir { setattr };
+
+# avc: denied { ioctl } for pid=233 comm="updater" path="/dev/dri/card0" dev="tmpfs" ino=93 ioctlcmd=0x6409 scontext=u:r:updater:s0 tcontext=u:object_r:dev_dri_file:s0 tclass=chr_file permissive=1
+# avc: denied { ioctl } for pid=233 comm="updater" path="/dev/dri/card0" dev="tmpfs" ino=93 ioctlcmd=0x64af scontext=u:r:updater:s0 tcontext=u:object_r:dev_dri_file:s0 tclass=chr_file permissive=1
+allowxperm updater dev_dri_file:chr_file ioctl { 0x6409 0x64af };
+
+# avc: denied { relabelto } for pid=232 comm="updater" name="updater_binary" dev="tmpfs" ino=5 scontext=u:r:updater:s0 tcontext=u:object_r:updater_binary_exec:s0 tclass=file permissive=1
+allow updater updater_binary_exec:file { relabelto };
+
+# avc: denied { ioctl } for pid=239 comm="updater" path="/dev/block/mmcblk0p14" dev="tmpfs" ino=151 ioctlcmd=0x1277 scontext=u:r:updater:s0 tcontext=u:object_r:dev_block_file:s0 tclass=blk_file permissive=0
+allow updater dev_block_file:blk_file { ioctl };
+
+# avc: denied { ioctl } for pid=239 comm="updater" path="/dev/block/mmcblk0p14" dev="tmpfs" ino=151 ioctlcmd=0x1277 scontext=u:r:updater:s0 tcontext=u:object_r:dev_block_file:s0 tclass=blk_file permissive=0
+allowxperm updater dev_block_file:blk_file ioctl { 0x1277 };
+
 ')
