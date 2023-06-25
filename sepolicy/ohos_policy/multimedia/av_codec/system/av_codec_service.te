@@ -77,3 +77,13 @@ allow av_codec_service node:udp_socket { node_bind };
 
 # avc:  denied  { name_connect } for  pid=546 comm="av_codec_servic" dest=443 scontext=u:r:av_codec_service:s0 tcontext=u:object_r:port:s0 tclass=tcp_socket permissive=1
 allow av_codec_service port:tcp_socket { name_connect };
+
+# avc:  denied  { call } for  pid=1648 comm="av_codec_servic" scontext=u:r:av_codec_service:s0 tcontext=u:r:codec_host:s0 tclass=binder permissive=1
+# avc:  denied  { transfer } for  pid=1648 comm="IPC_3_1816" scontext=u:r:av_codec_service:s0 tcontext=u:r:codec_host:s0 tclass=binder permissive=1
+allow av_codec_service codec_host:binder { call transfer };
+
+# avc:  denied  { search } for  pid=1648 comm="IPC_3_1816" name="/" dev="mmcblk0p14" ino=3 scontext=u:r:av_codec_service:s0 tcontext=u:object_r:data_file:s0 tclass=dir permissive=1
+allow av_codec_service data_file:dir { search };
+
+# avc:  denied  { get } for service=codec_component_manager_service pid=2561 scontext=u:r:av_codec_service:s0 tcontext=u:object_r:hdf_codec_component_manager_service:s0 tclass=hdf_devmgr_class permissive=0
+allow av_codec_service hdf_codec_component_manager_service:hdf_devmgr_class { get };
