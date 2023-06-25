@@ -41,8 +41,6 @@ allow netmanager netmanager:udp_socket { bind connect create getattr ioctl read 
 allow netmanager netmanager:unix_dgram_socket { ioctl };
 allow netmanager netsysnative:binder { call };
 allow netmanager node:udp_socket { node_bind };
-allow netmanager paramservice_socket:sock_file write;
-allow netmanager persist_param:parameter_service set;
 allow netmanager port:tcp_socket { name_connect };
 allow netmanager port:udp_socket { name_bind };
 allow netmanager system_bin_file:dir { search };
