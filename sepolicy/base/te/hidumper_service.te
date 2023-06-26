@@ -55,3 +55,8 @@ allow hidumper_service system_core_hap:file { open read };
 allow hidumper_service sys_usb_param:file { map open read };
 allow hidumper_service tracefs:dir { search };
 allow hidumper_service tracefs_trace_marker_file:file { open write };
+
+debug_only(`
+    allow hidumper_service sh:dir { search };
+    allow hidumper_service sh:file { getattr open read };
+')
