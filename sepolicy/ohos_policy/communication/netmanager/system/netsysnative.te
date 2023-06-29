@@ -51,6 +51,11 @@ allow netsysnative normal_hap_attr:unix_stream_socket { read write getopt setopt
 allow init dev_unix_file:sock_file { unlink };
 allowxperm netsysnative netsysnative:unix_dgram_socket ioctl { 0x8933 };
 
+allow netsysnative system_basic_hap:fd { use };
+allow netsysnative system_basic_hap:tcp_socket { read write getopt setopt };
+allow netsysnative dev_tun_file:chr_file { open read write ioctl };
+allow netsysnative netsysnative:tun_socket { create relabelfrom relabelto };
+
 allowxperm netsysnative netsysnative:unix_dgram_socket ioctl { 0x8927 0x8954 };
 
 allow netsysnative iptables_exec:file { execute read open execute_no_trans map };

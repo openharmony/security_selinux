@@ -75,6 +75,12 @@ allow netsysnative netmanager:tcp_socket { read write bind getopt setopt connect
 allow netmanager data_service_el1_file:file { rename };
 allow netmanager sa_foundation_appms:samgr_class { get };
 
+allow netmanager sa_comm_vpn_manager_service:samgr_class { add };
+allow netmanager dev_console_file:chr_file { read write };
+allow netmanager sa_accountmgr:samgr_class { get };
+allow netmanager accountmgr:binder { call };
+allow accountmgr netmanager:binder { transfer };
+
 debug_only(`
     allow sh sa_comm_ethernet_manager_service:samgr_class { add get };
     allow netmanager sh:binder { call };
